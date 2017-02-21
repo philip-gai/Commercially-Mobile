@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>{F10F408C-2B2E-4464-B4D3-9C66FF09F714}</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Commercially</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\User.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\Request.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\Role.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\Status.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\FlicButton.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)APIs\UserApi.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\HttpRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\Validator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\Emailer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\GlobalConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\Hasher.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\HttpRequestMethodType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\Localizable.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Exceptions\ConnectionException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Exceptions\EmailAlreadySentException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Exceptions\EmailSendingException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Exceptions\ErrorResponseException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Exceptions\ObjectExistsException.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Entities\" />
+    <Folder Include="$(MSBuildThisFileDirectory)APIs\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Utilities\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Exceptions\" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,4 @@
+Commercially.Droid.MainActivity, Commercially.Droid;md573a1dc52520e31c9c4b83799fdebb2de.MainActivity
+Commercially.Droid.MainActivity, Commercially.Droid, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md573a1dc52520e31c9c4b83799fdebb2de.MainActivity
+Commercially.Droid.MainActivity;md573a1dc52520e31c9c4b83799fdebb2de.MainActivity
+commercially.droid.MainActivity;md573a1dc52520e31c9c4b83799fdebb2de.MainActivity
