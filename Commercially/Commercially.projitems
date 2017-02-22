@@ -19,7 +19,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\Validator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\Emailer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\GlobalConstants.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Utilities\Hasher.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\HttpRequestMethodType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\Localizable.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Exceptions\ConnectionException.cs" />
@@ -27,6 +26,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Exceptions\EmailSendingException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Exceptions\ErrorResponseException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Exceptions\ObjectExistsException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\OAuthResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SessionData.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Entities\" />

@@ -10,6 +10,7 @@ namespace Commercially {
 		 * - Ends with . and 3 chars
 		 */
 		public static bool Email(string email) {
+			return true;
 			if (string.IsNullOrEmpty(email)) {
 				return false;
 			}
@@ -34,6 +35,7 @@ namespace Commercially {
 		 * - Must have no bad characters
 		 */
 		public static bool Password(string password) {
+			return true;
 			const int length = 8;
 			if (string.IsNullOrEmpty(password)) {
 				return false;

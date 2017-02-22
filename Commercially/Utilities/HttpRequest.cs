@@ -8,14 +8,16 @@ namespace Commercially {
 			return GlobalConstants.ServerUrl + ":" + GlobalConstants.ServerPort + Endpoint;
 		}
 
-		public static string MakeRequest(HttpRequestMethodType Type, string url, string body = "") {
+		public static string MakeRequest(HttpRequestMethodType Type, string url, string body = "", string authHeader = "") {
 			var request = WebRequest.Create(url);
+			request.Headers.Add("Authorization", authHeader);
 			switch (Type) {
 				case HttpRequestMethodType.GET:
 					request.Method = WebRequestMethods.Http.Get;
 					break;
 				case HttpRequestMethodType.POST:
 					request.Method = WebRequestMethods.Http.Post;
+					request.ContentType = @"application/x-www-form-urlencoded";
 					break;
 				case HttpRequestMethodType.PUT:
 					request.Method = WebRequestMethods.Http.Put;
@@ -33,7 +35,7 @@ namespace Commercially {
 					var encoding = new UTF8Encoding();
 					byte[] byteArray = encoding.GetBytes(body);
 					request.ContentLength = byteArray.Length;
-					request.ContentType = @"application/json";
+					//request.ContentType = @"application/json";
 					using (Stream dataStream = request.GetRequestStream()) {
 						dataStream.Write(byteArray, 0, byteArray.Length);
 					}

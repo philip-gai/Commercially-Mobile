@@ -1,7 +1,9 @@
 using Foundation;
 using System;
+using System.Net;
 using UIKit;
 using Commercially.iOS.Extensions;
+using Newtonsoft.Json;
 
 namespace Commercially.iOS {
 	public partial class LoginController : FieldListController {
@@ -44,8 +46,18 @@ namespace Commercially.iOS {
 
 		public override void ButtonTouchUpInside(object sender, EventArgs events) {
 			if (CheckIfFieldsValid()) {
+				try
+				{
+					string response = HttpRequest.MakeRequest(HttpRequestMethodType.POST, "http://" + GlobalConstants.ServerUrl + ":" + GlobalConstants.ServerPort + "/user/token", "grant_type=password&username=" + WebUtility.UrlEncode(EmailField.Text) + "&password=" + WebUtility.UrlEncode(PasswordField.Text) + "&client_id=MobileApp&client_secret=null");
+					SessionData.Token = new OAuthResponse(response);
+					NavigationController.GetAndActOnViewController(GlobalConstants.Screens.Home);
+				}
+				catch (Exception e) {
+					NavigationController.ShowPrompt(e.Message);
+				}
+					//UserApi.MakeUserRequest(HttpRequestMethodType.POST, ):
 				// Check if user exists in DB
-				// Grab user information and cache / store in Session Data
+				// Grab user information and cache / store in Session Dat
 			} else {
 				if (!EmailField.IsValidInput()) {
 					NavigationController.ShowPrompt(GlobalConstants.Prompts.InvalidEmail);

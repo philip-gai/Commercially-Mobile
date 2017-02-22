@@ -239,6 +239,10 @@
     <Compile Include="Controllers\PromptController.designer.cs" />
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Controllers\MainController.designer.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\DashboardController.designer.cs">
+      <DependentUpon>DashboardController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="json.net">

@@ -10,7 +10,7 @@ namespace Commercially {
 			this.email = email.Trim().ToLower();
 		}
 		public User(string email, string password) : this(email) {
-			this.password = Hasher.HashAndSalt(password);
+			this.password = password;
 		}
 		public string id { get; set; }
 		public string email { get; set; }
