@@ -1,47 +1,21 @@
 ﻿<Properties StartupConfiguration="{B9BD7A31-A665-492A-8207-AAB835D1C7CC}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Commercially/Entities/OAuthResponse.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="iOS/Controllers/DashboardController.cs">
     <Files>
-      <File FileName="Droid/MainActivity.cs" Line="15" Column="32" />
-      <File FileName="Droid/Resources/values/Strings.xml" Line="4" Column="42" />
-      <File FileName="iOS/Controllers/LoginController.cs" Line="52" Column="43" />
-      <File FileName="Commercially/Utilities/GlobalConstants.cs" Line="4" Column="23" />
-      <File FileName="iOS/Controllers/DashboardController.cs" Line="20" Column="2" />
-      <File FileName="Commercially/Entities/User.cs" Line="4" Column="1" />
-      <File FileName="Commercially/APIs/UserApi.cs" Line="2" Column="1" />
-      <File FileName="Commercially/Utilities/HttpRequest.cs" Line="43" Column="1" />
-      <File FileName="Commercially/Utilities/Validator.cs" Line="38" Column="16" />
-      <File FileName="iOS/Main.cs" Line="17" Column="1" />
-      <File FileName="Commercially/Entities/OAuthResponse.cs" Line="10" Column="29" />
-      <File FileName="Commercially/SessionData.cs" Line="8" Column="3" />
+      <File FileName="iOS/Controllers/DashboardController.cs" Line="15" Column="4" />
+      <File FileName="iOS/Custom Classes/Cells/RequestCell.cs" Line="12" Column="3" />
+      <File FileName="iOS/Custom Classes/Navigation/BackBarItem.cs" Line="12" Column="47" />
+      <File FileName="iOS/Custom Classes/Navigation/ClearNavigationBar.cs" Line="20" Column="4" />
     </Files>
-    <Pads>
-      <Pad Id="ProjectPad">
-        <State name="__root__">
-          <Node name="Commercially" expanded="True">
-            <Node name="Commercially" expanded="True">
-              <Node name="APIs" expanded="True" />
-              <Node name="Entities" expanded="True">
-                <Node name="OAuthResponse.cs" selected="True" />
-              </Node>
-              <Node name="Utilities" expanded="True" />
-            </Node>
-            <Node name="Commercially.Droid" expanded="True" />
-            <Node name="Commercially.iOS" expanded="True">
-              <Node name="Controllers" expanded="True" />
-              <Node name="Extensions" expanded="True" />
-            </Node>
-          </Node>
-        </State>
-      </Pad>
-    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/philipgai/Developer/Commercially-Mobile/Commercially/Utilities/HttpRequest.cs" line="16" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches>
     <Watch file="../../Pocketutors-Mobile/Pocketutors/APIs/UserApi.cs" line="37" offsetX="566" offsetY="540" expression="response" liveUpdate="False" />
   </MonoDevelop.Ide.DebuggingService.PinnedWatches>
-  <MonoDevelop.Ide.ItemProperties.Commercially.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.9295062A-80B7-459B-9871-CE4613161765" />
+  <MonoDevelop.Ide.ItemProperties.Commercially.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.88935735-E0CC-4973-BFC2-053EBCD75D86" />
   <MonoDevelop.Ide.ItemProperties.Commercially.Droid AndroidDesignerPreferredDevice="Nexus 4" PreferredExecutionTarget="Android.Android_Accelerated_x86" />
 </Properties>

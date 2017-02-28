@@ -33,5 +33,8 @@
         <image name="Logo-Blue" width="170.666672" height="170.666672"/>
         <image name="Logo-Red" width="170.666672" height="170.666672"/>
         <image name="Logo-Green" width="170.666672" height="170.666672"/>
+        <image name="user" width="20" height="22"/>
+        <image name="error" width="139" height="122"/>
+        <image name="dashboard" width="25" height="25"/>
     </resources>
 </document>

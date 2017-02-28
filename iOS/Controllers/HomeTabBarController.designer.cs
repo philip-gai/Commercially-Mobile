@@ -7,11 +7,12 @@
 using Foundation;
 using System;
 using System.CodeDom.Compiler;
+using UIKit;
 
 namespace Commercially.iOS
 {
-    [Register ("RequestCell")]
-    partial class RequestCell
+    [Register ("HomeTabBarController")]
+    partial class HomeTabBarController
     {
         void ReleaseDesignerOutlets ()
         {

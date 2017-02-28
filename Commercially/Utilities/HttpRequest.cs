@@ -2,13 +2,17 @@
 using System.IO;
 using System.Text;
 
-namespace Commercially {
-	public static class HttpRequest {
-		public static string GetRequestUrl(string Endpoint) {
+namespace Commercially
+{
+	public static class HttpRequest
+	{
+		public static string GetRequestUrl(string Endpoint)
+		{
 			return GlobalConstants.ServerUrl + ":" + GlobalConstants.ServerPort + Endpoint;
 		}
 
-		public static string MakeRequest(HttpRequestMethodType Type, string url, string body = "", string authHeader = "") {
+		public static string MakeRequest(HttpRequestMethodType Type, string url, string body = "", string authHeader = "")
+		{
 			var request = WebRequest.Create(url);
 			request.Headers.Add("Authorization", authHeader);
 			switch (Type) {
