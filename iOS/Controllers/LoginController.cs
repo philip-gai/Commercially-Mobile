@@ -1,9 +1,6 @@
-using Foundation;
 using System;
-using System.Net;
 using UIKit;
 using Commercially.iOS.Extensions;
-using Newtonsoft.Json;
 
 namespace Commercially.iOS
 {
@@ -30,13 +27,13 @@ namespace Commercially.iOS
 		}
 		public override UIView[] UnderlineViews {
 			get {
-				return null;
+				return new UIView[] { EmailField, PasswordField };
 			}
 		}
 
 		public override UIView ViewForUnderlines {
 			get {
-				return null;
+				return KeyboardScrollView;
 			}
 		}
 
@@ -48,17 +45,16 @@ namespace Commercially.iOS
 
 		public override void ButtonTouchUpInside(object sender, EventArgs events)
 		{
+			// MUST REMOVE THIS LATER. FOR TESTING ONLY
 			NavigationController.GetAndActOnViewController(GlobalConstants.Screens.Home);
-			return;
 			if (CheckIfFieldsValid()) {
 				try {
-					string response = HttpRequest.MakeRequest(HttpRequestMethodType.POST, "http://" + GlobalConstants.ServerUrl + ":" + GlobalConstants.ServerPort + "/user/token", "grant_type=password&username=" + WebUtility.UrlEncode(EmailField.Text) + "&password=" + WebUtility.UrlEncode(PasswordField.Text) + "&client_id=MobileApp&client_secret=null");
+					var response = UserApi.LoginUser(EmailField.Text, PasswordField.Text);
 					SessionData.OAuth = new OAuthResponse(response);
 					NavigationController.GetAndActOnViewController(GlobalConstants.Screens.Home);
 				} catch (Exception e) {
-					NavigationController.ShowPrompt(e.Message);
+					NavigationController.ShowPrompt(e.Message.Substring(0, 20) + "...");
 				}
-				//UserApi.MakeUserRequest(HttpRequestMethodType.POST, ):
 				// Check if user exists in DB
 				// Grab user information and cache / store in Session Dat
 			} else {

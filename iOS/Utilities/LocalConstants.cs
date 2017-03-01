@@ -18,6 +18,9 @@ namespace Commercially.iOS {
 		public struct Selectors {
 			public const string PopAction = "PopAction";
 		}
+		public struct ReuseIdentifiers {
+			public const string RequestCell = "RequestCell";
+		}
 		public static nfloat LineHeight = 2;
 		public static UIColor LineColor = UIColor.White.ColorWithAlpha((nfloat)0.25);
 		public static UIColor LineIncompleteColor = UIColor.FromRGB(255, 110, 110);

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Foundation;
+﻿using System.Net;
 using UIKit;
 
 namespace Commercially.iOS
@@ -14,6 +10,10 @@ namespace Commercially.iOS
 		{
 			// if you want to use a different Application Delegate class from "AppDelegate"
 			// you can specify it here.
+			ServicePointManager.ServerCertificateValidationCallback = delegate
+			{
+				return true;
+			};
 			UIApplication.Main(args, null, "AppDelegate");
 		}
 	}

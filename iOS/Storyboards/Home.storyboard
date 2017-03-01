@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Eqa-vA-1sP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Eqa-vA-1sP">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Tab Bar Controller-->
+        <!--Home Tab Bar Controller-->
         <scene sceneID="A1l-PA-uLF">
             <objects>
-                <tabBarController id="Eqa-vA-1sP" sceneMemberID="viewController" customClass="HomeTabBarController">
+                <tabBarController id="Eqa-vA-1sP" customClass="HomeTabBarController" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="ocK-Mc-g1m">
                         <rect key="frame" x="0.0" y="551" width="600" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -20,6 +20,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="SdG-ZK-UUN" kind="relationship" relationship="viewControllers" id="chE-8X-FNk"/>
+                        <segue destination="06g-9e-cxr" kind="relationship" relationship="viewControllers" id="fpk-ma-Skg"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ECx-2D-KRn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -36,6 +37,16 @@
             </objects>
             <point key="canvasLocation" x="319" y="-7"/>
         </scene>
+        <!--RequestList-->
+        <scene sceneID="cNI-fC-e0d">
+            <objects>
+                <viewControllerPlaceholder storyboardName="RequestList" id="06g-9e-cxr" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="G72-6V-qQg"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="h2n-yG-Nb4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="368" y="76"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Logo-White" width="170.666672" height="170.666672"/>
@@ -46,5 +57,8 @@
         <image name="user" width="20" height="22"/>
         <image name="error" width="139" height="122"/>
         <image name="dashboard" width="25" height="25"/>
+        <image name="notification" width="22" height="22"/>
+        <image name="list-TabBar" width="25" height="25"/>
+        <image name="list" width="25" height="25"/>
     </resources>
 </document>

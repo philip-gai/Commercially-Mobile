@@ -10,14 +10,5 @@ namespace Commercially.iOS
 		public DashboardController(IntPtr handle) : base(handle)
 		{
 		}
-
-		public override void ViewDidLoad()
-		{
-			base.ViewDidLoad();
-			NavigationItem.LeftItemsSupplementBackButton = false;
-			NavigationItem.HidesBackButton = true;
-			NavigationItem.SetHidesBackButton(true, true);
-			NavigationItem.SetTitleImage("Logo-Red", NavigationController.NavigationBar);
-		}
 	}
 }

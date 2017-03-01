@@ -15,7 +15,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Lqb-QP-ZXD" sceneMemberID="viewController" customClass="MainController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ecn-sX-M7f">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ecn-sX-M7f" customClass="ClearNavigationBar">
                         <rect key="frame" x="0.0" y="20" width="600" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -36,5 +36,12 @@
         <image name="user" width="20" height="22"/>
         <image name="error" width="139" height="122"/>
         <image name="dashboard" width="25" height="25"/>
+        <image name="notification" width="22" height="22"/>
+        <image name="list-TabBar" width="25" height="25"/>
+        <image name="list" width="25" height="25"/>
+        <image name="blurredBg-1" width="360" height="640"/>
+        <image name="blurredBg-2" width="360" height="640"/>
+        <image name="blurredBg-3" width="245.333328" height="436"/>
+        <image name="blurredBg-4" width="360" height="640"/>
     </resources>
 </document>

@@ -11,8 +11,8 @@ using UIKit;
 
 namespace Commercially.iOS
 {
-    [Register ("RequestListTableViewController")]
-    partial class RequestListTableViewController
+    [Register ("RequestListController")]
+    partial class RequestListController
     {
         void ReleaseDesignerOutlets ()
         {

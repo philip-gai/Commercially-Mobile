@@ -1,7 +1,7 @@
 ﻿namespace Commercially {
 	public struct GlobalConstants {
 		public const string ServerUrl = "192.168.3.126";
-		public const string ServerPort = "8080";
+		public const string ServerPort = "8443";
 		public struct Screens {
 			public const string Home = "Home";
 			public const string Login = "Login";

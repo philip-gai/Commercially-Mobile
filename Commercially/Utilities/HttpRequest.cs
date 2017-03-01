@@ -8,12 +8,12 @@ namespace Commercially
 	{
 		public static string GetRequestUrl(string Endpoint)
 		{
-			return GlobalConstants.ServerUrl + ":" + GlobalConstants.ServerPort + Endpoint;
+			return "https://" + GlobalConstants.ServerUrl + ":" + GlobalConstants.ServerPort + Endpoint;
 		}
 
 		public static string MakeRequest(HttpRequestMethodType Type, string url, string body = "", string authHeader = "")
 		{
-			var request = WebRequest.Create(url);
+			var request = (HttpWebRequest)WebRequest.Create(url);
 			request.Headers.Add("Authorization", authHeader);
 			switch (Type) {
 				case HttpRequestMethodType.GET:
@@ -37,14 +37,14 @@ namespace Commercially
 			try {
 				if (Type == HttpRequestMethodType.POST || Type == HttpRequestMethodType.PUT || Type == HttpRequestMethodType.PATCH) {
 					var encoding = new UTF8Encoding();
-					byte[] byteArray = encoding.GetBytes(body);
+					var byteArray = encoding.GetBytes(body);
 					request.ContentLength = byteArray.Length;
 					//request.ContentType = @"application/json";
 					using (Stream dataStream = request.GetRequestStream()) {
 						dataStream.Write(byteArray, 0, byteArray.Length);
 					}
 				}
-				WebResponse response = request.GetResponse();
+				var response = request.GetResponse();
 				using (Stream responseStream = response.GetResponseStream()) {
 					var reader = new StreamReader(responseStream, Encoding.UTF8);
 					string json = reader.ReadToEnd();
@@ -52,10 +52,16 @@ namespace Commercially
 				}
 			} catch (WebException ex) {
 				WebResponse errorResponse = ex.Response;
-				if (errorResponse == null) throw new ConnectionException(Localizable.ExceptionMessages.CannotConnectServer);
+				if (errorResponse == null)
+				{
+					if (ex != null) { 
+						throw new ConnectionException(ex.Message);
+					}
+					throw new ConnectionException(Localizable.ExceptionMessages.CannotConnectServer);
+				}
 				using (Stream responseStream = errorResponse.GetResponseStream()) {
 					var reader = new StreamReader(responseStream, Encoding.GetEncoding("utf-8"));
-					string errorText = reader.ReadToEnd();
+					var errorText = reader.ReadToEnd();
 					throw new ErrorResponseException(errorText);
 				}
 			}

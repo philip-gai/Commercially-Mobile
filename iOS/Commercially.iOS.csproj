@@ -159,8 +159,6 @@
     <ImageAsset Include="Assets.xcassets\error.imageset\error100.png" />
     <ImageAsset Include="Assets.xcassets\error.imageset\error100%402x.png" />
     <ImageAsset Include="Assets.xcassets\error.imageset\error100%403x.png" />
-    <ImageAsset Include="Assets.xcassets\list.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\list.imageset\solutionsIcon.pdf" />
     <ImageAsset Include="Assets.xcassets\dashboard.imageset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\dashboard.imageset\dashboard~universal%401x.png" />
     <ImageAsset Include="Assets.xcassets\dashboard.imageset\dashboard~universal%402x.png" />
@@ -169,6 +167,30 @@
     <ImageAsset Include="Assets.xcassets\notification.imageset\bell~universal%401x.png" />
     <ImageAsset Include="Assets.xcassets\notification.imageset\bell~universal%402x.png" />
     <ImageAsset Include="Assets.xcassets\notification.imageset\bell~universal%403x.png" />
+    <ImageAsset Include="Assets.xcassets\list-TabBar.imageset\001-list-items-hand-drawn-symbol-outlines~universal%401x.png" />
+    <ImageAsset Include="Assets.xcassets\list-TabBar.imageset\001-list-items-hand-drawn-symbol-outlines~universal%402x.png" />
+    <ImageAsset Include="Assets.xcassets\list-TabBar.imageset\001-list-items-hand-drawn-symbol-outlines~universal%403x.png" />
+    <ImageAsset Include="Assets.xcassets\list-TabBar.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\list.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\list.imageset\001-list-items-hand-drawn-symbol-outlines~universal%401x.png" />
+    <ImageAsset Include="Assets.xcassets\list.imageset\001-list-items-hand-drawn-symbol-outlines~universal%402x.png" />
+    <ImageAsset Include="Assets.xcassets\list.imageset\001-list-items-hand-drawn-symbol-outlines~universal%403x.png" />
+    <ImageAsset Include="Assets.xcassets\blurredBg-1.imageset\Blurred Background HD Mobile Wallpaper31~universal%401x.png" />
+    <ImageAsset Include="Assets.xcassets\blurredBg-1.imageset\Blurred Background HD Mobile Wallpaper31~universal%402x.png" />
+    <ImageAsset Include="Assets.xcassets\blurredBg-1.imageset\Blurred Background HD Mobile Wallpaper31~universal%403x.png" />
+    <ImageAsset Include="Assets.xcassets\blurredBg-1.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\blurredBg-2.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\blurredBg-2.imageset\Blurred Background HD Mobile Wallpaper43~universal%401x.png" />
+    <ImageAsset Include="Assets.xcassets\blurredBg-2.imageset\Blurred Background HD Mobile Wallpaper43~universal%402x.png" />
+    <ImageAsset Include="Assets.xcassets\blurredBg-2.imageset\Blurred Background HD Mobile Wallpaper43~universal%403x.png" />
+    <ImageAsset Include="Assets.xcassets\blurredBg-3.imageset\866259fa5bb064f0e5c866e5edb41819~universal%401x.png" />
+    <ImageAsset Include="Assets.xcassets\blurredBg-3.imageset\866259fa5bb064f0e5c866e5edb41819~universal%402x.png" />
+    <ImageAsset Include="Assets.xcassets\blurredBg-3.imageset\866259fa5bb064f0e5c866e5edb41819~universal%403x.png" />
+    <ImageAsset Include="Assets.xcassets\blurredBg-3.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\blurredBg-4.imageset\Blurred Grainy Background HD Mobile Wallpaper22~universal%401x.png" />
+    <ImageAsset Include="Assets.xcassets\blurredBg-4.imageset\Blurred Grainy Background HD Mobile Wallpaper22~universal%402x.png" />
+    <ImageAsset Include="Assets.xcassets\blurredBg-4.imageset\Blurred Grainy Background HD Mobile Wallpaper22~universal%403x.png" />
+    <ImageAsset Include="Assets.xcassets\blurredBg-4.imageset\Contents.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
@@ -190,10 +212,18 @@
     <Folder Include="Custom Classes\Buttons\" />
     <Folder Include="Assets.xcassets\user.imageset\" />
     <Folder Include="Assets.xcassets\error.imageset\" />
-    <Folder Include="Assets.xcassets\list.imageset\" />
     <Folder Include="Assets.xcassets\dashboard.imageset\" />
     <Folder Include="Custom Classes\Navigation\" />
     <Folder Include="Assets.xcassets\notification.imageset\" />
+    <Folder Include="Assets.xcassets\list-TabBar.imageset\" />
+    <Folder Include="Assets.xcassets\list.imageset\" />
+    <Folder Include="Assets.xcassets\blurredBg-1.imageset\" />
+    <Folder Include="Assets.xcassets\blurredBg-2.imageset\" />
+    <Folder Include="Assets.xcassets\blurredBg-3.imageset\" />
+    <Folder Include="Assets.xcassets\blurredBg-4.imageset\" />
+    <Folder Include="Assets.xcassets\blurredBg-6.imageset\" />
+    <Folder Include="Assets.xcassets\blurredBg-3.imageset\" />
+    <Folder Include="Assets.xcassets\blurredBg-4.imageset\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Storyboards\RequestList.storyboard" />
@@ -213,10 +243,6 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
-    <Compile Include="Controllers\RequestListTableViewController.cs" />
-    <Compile Include="Controllers\RequestListTableViewController.designer.cs">
-      <DependentUpon>RequestListTableViewController.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\LoginController.designer.cs">
       <DependentUpon>LoginController.cs</DependentUpon>
@@ -229,7 +255,7 @@
     <Compile Include="Custom Classes\Controllers\NavigationBarTableViewController.cs" />
     <Compile Include="Custom Classes\Controllers\NavigationBarViewController.cs" />
     <Compile Include="Custom Classes\Controllers\FieldListController.cs" />
-    <Compile Include="Custom Classes\Delegates\RequestListTableViewDelegate.cs" />
+    <Compile Include="Custom Classes\Delegates\RequestListDelegate.cs" />
     <Compile Include="Custom Classes\Delegates\UnderlineFieldDelegate.cs" />
     <Compile Include="Custom Classes\Controllers\UnderlineViewController.cs" />
     <Compile Include="Extensions\UIActivityIndicatorViewExtensions.cs" />
@@ -271,6 +297,11 @@
     <Compile Include="Controllers\HomeTabBarController.designer.cs">
       <DependentUpon>HomeTabBarController.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\RequestListController.cs" />
+    <Compile Include="Controllers\RequestListController.designer.cs">
+      <DependentUpon>RequestListController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Custom Classes\Data Sources\RequestListDataSource.cs" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="json.net">

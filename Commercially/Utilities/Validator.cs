@@ -13,7 +13,6 @@ namespace Commercially
 		 */
         public static bool Email(string email)
         {
-            return true;
             if (string.IsNullOrEmpty(email))
             {
                 return false;
@@ -43,7 +42,6 @@ namespace Commercially
 		 */
         public static bool Password(string password)
         {
-            return true;
             const int length = 8;
             if (string.IsNullOrEmpty(password))
             {

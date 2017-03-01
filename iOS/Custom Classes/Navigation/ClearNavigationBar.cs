@@ -9,7 +9,7 @@ namespace Commercially.iOS {
 		public override void AwakeFromNib() {
 			base.AwakeFromNib();
 			SetBackgroundImage(new UIImage(), UIBarMetrics.Default);
-			SetTitleAttributes();
+			//SetTitleAttributes();
 		}
 
 		// Gets rid of black line at bottom of bar

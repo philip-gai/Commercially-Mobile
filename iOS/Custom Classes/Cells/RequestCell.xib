@@ -1,23 +1,103 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="44" id="cxk-wN-pdQ" customClass="RequestCell">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="142" id="cxk-wN-pdQ" customClass="RequestCell">
+            <rect key="frame" x="0.0" y="0.0" width="415" height="142"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cxk-wN-pdQ" id="YTl-1W-gDM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <rect key="frame" x="0.0" y="0.0" width="415" height="141"/>
                 <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="zvY-u2-ViW" misplaced="YES">
+                        <rect key="frame" x="0.0" y="0.0" width="382" height="141.5"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="jBL-WO-2qe" fixedFrame="YES">
+                                <rect key="frame" x="0.0" y="0.0" width="382" height="71"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Room" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="amV-Wk-TLq" misplaced="YES">
+                                        <rect key="frame" x="0.0" y="0.0" width="44.5" height="71"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10:00PM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nH3-bM-tWf" misplaced="YES">
+                                        <rect key="frame" x="64.5" y="0.0" width="68.5" height="71"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Open" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kh9-68-HWV" misplaced="YES">
+                                        <rect key="frame" x="153" y="0.0" width="70" height="71"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="error" translatesAutoresizingMaskIntoConstraints="NO" id="2du-NO-vFE" misplaced="YES">
+                                        <rect key="frame" x="243" y="0.0" width="139" height="71"/>
+                                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="2du-NO-vFE" secondAttribute="height" multiplier="49:41" id="qwF-0C-UGx"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="Kh9-68-HWV" firstAttribute="width" secondItem="amV-Wk-TLq" secondAttribute="width" id="8K6-iW-yrf"/>
+                                    <constraint firstItem="nH3-bM-tWf" firstAttribute="width" secondItem="amV-Wk-TLq" secondAttribute="width" id="Y7F-f7-kN2"/>
+                                </constraints>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change the Toilet Paper" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mh7-gZ-nYF" misplaced="YES">
+                                <rect key="frame" x="0.0" y="71" width="382" height="70.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="mh7-gZ-nYF" firstAttribute="leading" secondItem="zvY-u2-ViW" secondAttribute="leading" id="N0x-im-j1t"/>
+                            <constraint firstAttribute="trailing" secondItem="mh7-gZ-nYF" secondAttribute="trailing" id="j4s-aT-DeI"/>
+                        </constraints>
+                    </stackView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="zvY-u2-ViW" secondAttribute="bottom" id="Q3I-UT-xyw"/>
+                    <constraint firstAttribute="trailing" secondItem="zvY-u2-ViW" secondAttribute="trailing" id="qhZ-7B-Ucw"/>
+                    <constraint firstItem="zvY-u2-ViW" firstAttribute="top" secondItem="YTl-1W-gDM" secondAttribute="top" id="tTg-BQ-rty"/>
+                    <constraint firstItem="zvY-u2-ViW" firstAttribute="leading" secondItem="YTl-1W-gDM" secondAttribute="leading" id="uCj-gm-OQm"/>
+                </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="RoomLabel" destination="amV-Wk-TLq" id="name-outlet-amV-Wk-TLq"/>
+                <outlet property="StatusLabel" destination="Kh9-68-HWV" id="name-outlet-Kh9-68-HWV"/>
+                <outlet property="TimeLabel" destination="nH3-bM-tWf" id="name-outlet-nH3-bM-tWf"/>
+                <outlet property="UrgentIndicator" destination="2du-NO-vFE" id="name-outlet-2du-NO-vFE"/>
+                <outlet property="Message" destination="mh7-gZ-nYF" id="name-outlet-mh7-gZ-nYF"/>
+            </connections>
+            <point key="canvasLocation" x="72.5" y="101"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="error" width="139" height="122"/>
+        <image name="Logo-White" width="170.666672" height="170.666672"/>
+        <image name="Logo-Black" width="170.666672" height="170.666672"/>
+        <image name="Logo-Blue" width="170.666672" height="170.666672"/>
+        <image name="Logo-Red" width="170.666672" height="170.666672"/>
+        <image name="Logo-Green" width="170.666672" height="170.666672"/>
+        <image name="user" width="20" height="22"/>
+        <image name="dashboard" width="25" height="25"/>
+        <image name="notification" width="22" height="22"/>
+        <image name="list-TabBar" width="25" height="25"/>
+        <image name="list" width="25" height="25"/>
+    </resources>
 </document>
