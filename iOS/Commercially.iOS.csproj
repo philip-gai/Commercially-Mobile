@@ -229,16 +229,16 @@
     <InterfaceDefinition Include="Storyboards\RequestList.storyboard" />
     <InterfaceDefinition Include="Storyboards\Main.storyboard" />
     <InterfaceDefinition Include="Storyboards\Login.storyboard" />
-    <InterfaceDefinition Include="Storyboards\LaunchScreen.storyboard" />
     <InterfaceDefinition Include="Storyboards\Prompt.storyboard" />
     <InterfaceDefinition Include="Storyboards\Dashboard.storyboard" />
     <InterfaceDefinition Include="Storyboards\Home.storyboard" />
     <InterfaceDefinition Include="Custom Classes\Cells\RequestCell.xib" />
+    <InterfaceDefinition Include="LaunchScreen.storyboard" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Info.plist" />
     <None Include="Entitlements.plist" />
     <None Include="packages.config" />
+    <None Include="Info.plist" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />

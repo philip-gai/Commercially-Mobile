@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="pGw-RO-KPZ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="pGw-RO-KPZ">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -27,14 +27,11 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gfg-pC-qDE">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blurredBg-1" translatesAutoresizingMaskIntoConstraints="NO" id="Ye2-Eu-Leq">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                    </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k3n-Y3-jiQ">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Dh9-n0-5Qk">
-                                                <rect key="frame" x="20" y="267" width="343" height="231.5"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="Dh9-n0-5Qk">
+                                                <rect key="frame" x="20" y="267" width="343" height="241"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="orS-E6-Agi">
                                                         <rect key="frame" x="0.0" y="0.0" width="343" height="70.5"/>
@@ -58,7 +55,7 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Fzg-aa-YYv">
-                                                        <rect key="frame" x="0.0" y="80.5" width="343" height="70.5"/>
+                                                        <rect key="frame" x="0.0" y="95.5" width="343" height="70.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fa1-pY-22K">
                                                                 <rect key="frame" x="0.0" y="0.0" width="343" height="20.5"/>
@@ -76,7 +73,10 @@
                                                         </subviews>
                                                     </stackView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iPZ-Ob-Uh3" customClass="RoundedUIButton">
-                                                        <rect key="frame" x="0.0" y="161" width="343" height="70.5"/>
+                                                        <rect key="frame" x="0.0" y="191" width="343" height="50"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="50" id="xxY-GY-4gu"/>
+                                                        </constraints>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                         <state key="normal" title="Login">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -85,6 +85,7 @@
                                                     </button>
                                                 </subviews>
                                                 <constraints>
+                                                    <constraint firstItem="8mg-ee-0GN" firstAttribute="height" secondItem="XL1-da-sMQ" secondAttribute="height" id="9ag-Ml-axE"/>
                                                     <constraint firstAttribute="trailing" secondItem="iPZ-Ob-Uh3" secondAttribute="trailing" id="mJR-SN-obu"/>
                                                     <constraint firstItem="iPZ-Ob-Uh3" firstAttribute="leading" secondItem="Dh9-n0-5Qk" secondAttribute="leading" id="vYX-b0-GPJ"/>
                                                 </constraints>
@@ -102,6 +103,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </imageView>
                                         </subviews>
+                                        <color key="backgroundColor" red="0.3529411764705882" green="0.78431372549019607" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstItem="Dh9-n0-5Qk" firstAttribute="top" secondItem="fdQ-bh-xly" secondAttribute="bottom" constant="50" id="EDF-rZ-bqF"/>
                                             <constraint firstAttribute="trailing" secondItem="Dh9-n0-5Qk" secondAttribute="trailing" constant="12" id="R72-f4-96K"/>
@@ -113,12 +115,8 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="k3n-Y3-jiQ" secondAttribute="bottom" id="3go-lN-x6Z"/>
-                                    <constraint firstAttribute="bottom" secondItem="Ye2-Eu-Leq" secondAttribute="bottom" id="7gw-7J-3hw"/>
                                     <constraint firstAttribute="trailing" secondItem="k3n-Y3-jiQ" secondAttribute="trailing" id="7wT-iD-I9z"/>
                                     <constraint firstItem="k3n-Y3-jiQ" firstAttribute="leading" secondItem="gfg-pC-qDE" secondAttribute="leading" id="Dgt-kx-Dce"/>
-                                    <constraint firstItem="Ye2-Eu-Leq" firstAttribute="top" secondItem="gfg-pC-qDE" secondAttribute="top" id="GTB-eD-kKb"/>
-                                    <constraint firstAttribute="trailing" secondItem="Ye2-Eu-Leq" secondAttribute="trailing" id="Rtl-os-vUb"/>
-                                    <constraint firstItem="Ye2-Eu-Leq" firstAttribute="leading" secondItem="gfg-pC-qDE" secondAttribute="leading" id="VM8-bX-wJS"/>
                                     <constraint firstItem="k3n-Y3-jiQ" firstAttribute="width" secondItem="gfg-pC-qDE" secondAttribute="width" id="ahL-2b-GSu"/>
                                     <constraint firstItem="k3n-Y3-jiQ" firstAttribute="top" secondItem="gfg-pC-qDE" secondAttribute="top" id="fZu-Wm-QcC"/>
                                 </constraints>
@@ -147,6 +145,5 @@
     </scenes>
     <resources>
         <image name="Logo-White" width="171" height="171"/>
-        <image name="blurredBg-1" width="360" height="640"/>
     </resources>
 </document>
