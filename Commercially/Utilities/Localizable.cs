@@ -9,6 +9,8 @@
 			public const string PasswordReset = "Password successfully reset!";
 			public const string EmailSent = "Email successfully sent!";
 			public const string PasswordRequirements = "Password Requirements:\n- At least 8 characters long\n- At least one lowercase letter\n- At least one uppercase letter\n- At least one number\n- No spaces at beginning or end\n- One special character";
+			public const string InvalidEmail = "Check that your email is valid.";
+			public const string InvalidPassword = "Check that your password is valid.";
 		}
 		public struct ExceptionMessages {
 			public const string CannotConnectServer = "Cannot connect to server";
@@ -17,7 +19,7 @@
 			public const string UserExists = "User already exists";
 			public const string NoConstraint = "No Constraint Matches the given attribute";
 		}
-		public struct EmailMessage {
+		public struct EmailMessages {
 			public const string Hello = "Hello ";
 			public const string WelcomeToPT = "Welcome to Commercially.";
 			public const string ActivationCode = " Your activation code is: ";
@@ -27,6 +29,11 @@
 			public const string ActivationEmailSubject = "Commercially Account Activation Code";
 			public const string ResetPasswordSubject = "Commercially: Reset Password";
 			public const string ResetCode = "Your reset password code for your Commercially account is: ";
+		}
+		public struct Labels {
+			public const string ToDo = "To Do";
+			public const string Complete = "Complete";
+			public const string InProgress = "In Progress";
 		}
 	}
 }

@@ -6,7 +6,6 @@ namespace Commercially.iOS
 	public class RequestListDelegate : UITableViewDelegate
 	{
 		RequestListController Controller;
-
 		public RequestListDelegate(IntPtr handle) : base(handle)
 		{
 		}

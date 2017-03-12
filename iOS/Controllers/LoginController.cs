@@ -59,9 +59,9 @@ namespace Commercially.iOS
 				// Grab user information and cache / store in Session Dat
 			} else {
 				if (!EmailField.IsValidInput()) {
-					NavigationController.ShowPrompt(GlobalConstants.Prompts.InvalidEmail);
+					NavigationController.ShowPrompt(Localizable.PromptMessages.InvalidEmail);
 				} else if (!PasswordField.IsValidInput()) {
-					NavigationController.ShowPrompt(GlobalConstants.Prompts.InvalidPassword);
+					NavigationController.ShowPrompt(Localizable.PromptMessages.InvalidPassword);
 				}
 			}
 		}

@@ -28,6 +28,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Exceptions\ObjectExistsException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\OAuthResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SessionData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\Color.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Entities\" />

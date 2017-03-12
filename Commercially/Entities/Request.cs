@@ -20,5 +20,11 @@ namespace Commercially
 		public Status Status { get; set; }
 		public FlicButton Button { get; set; }
 		public bool Urgent { get; set; }
+
+		static int num = 1;
+		static char Ch = 'a';
+		public static Request GetDummyRequest() {
+			return new Request("Room " + num, new FlicButton("Change " + Ch++, num++.ToString()));
+		}
 	}
 }

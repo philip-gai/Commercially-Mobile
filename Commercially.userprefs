@@ -1,9 +1,15 @@
 ﻿<Properties StartupConfiguration="{B9BD7A31-A665-492A-8207-AAB835D1C7CC}|Default">
-  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workbench ActiveDocument="iOS/Controllers/DashboardController.cs">
+    <Files>
+      <File FileName="iOS/Controllers/DashboardController.cs" Line="13" Column="124" />
+      <File FileName="Commercially/Entities/Request.cs" Line="28" Column="4" />
+      <File FileName="Commercially/Utilities/GlobalConstants.cs" Line="11" Column="53" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="/Users/philipgai/Developer/Commercially-Mobile/Commercially/Utilities/HttpRequest.cs" relfile="Commercially/Utilities/HttpRequest.cs" line="16" column="1" />
+      <Breakpoint file="/Users/philipgai/Developer/Commercially-Mobile/iOS/Controllers/DashboardController.cs" relfile="iOS/Controllers/DashboardController.cs" line="49" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches>

@@ -230,10 +230,10 @@
     <InterfaceDefinition Include="Storyboards\Main.storyboard" />
     <InterfaceDefinition Include="Storyboards\Login.storyboard" />
     <InterfaceDefinition Include="Storyboards\Prompt.storyboard" />
-    <InterfaceDefinition Include="Storyboards\Dashboard.storyboard" />
     <InterfaceDefinition Include="Storyboards\Home.storyboard" />
     <InterfaceDefinition Include="Custom Classes\Cells\RequestCell.xib" />
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
+    <InterfaceDefinition Include="Storyboards\Dashboard.storyboard" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Entitlements.plist" />
@@ -255,7 +255,6 @@
     <Compile Include="Custom Classes\Controllers\NavigationBarTableViewController.cs" />
     <Compile Include="Custom Classes\Controllers\NavigationBarViewController.cs" />
     <Compile Include="Custom Classes\Controllers\FieldListController.cs" />
-    <Compile Include="Custom Classes\Delegates\RequestListDelegate.cs" />
     <Compile Include="Custom Classes\Delegates\UnderlineFieldDelegate.cs" />
     <Compile Include="Custom Classes\Controllers\UnderlineViewController.cs" />
     <Compile Include="Extensions\UIActivityIndicatorViewExtensions.cs" />
@@ -281,10 +280,6 @@
     <Compile Include="Controllers\PromptController.designer.cs" />
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Controllers\MainController.designer.cs" />
-    <Compile Include="Controllers\DashboardController.cs" />
-    <Compile Include="Controllers\DashboardController.designer.cs">
-      <DependentUpon>DashboardController.cs</DependentUpon>
-    </Compile>
     <Compile Include="Custom Classes\Cells\RequestCell.cs" />
     <Compile Include="Custom Classes\Cells\RequestCell.designer.cs">
       <DependentUpon>RequestCell.cs</DependentUpon>
@@ -297,11 +292,15 @@
     <Compile Include="Controllers\HomeTabBarController.designer.cs">
       <DependentUpon>HomeTabBarController.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controllers\RequestListController.cs" />
-    <Compile Include="Controllers\RequestListController.designer.cs">
-      <DependentUpon>RequestListController.cs</DependentUpon>
+    <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\DashboardController.designer.cs">
+      <DependentUpon>DashboardController.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\RequestListController.cs" />
+    <Compile Include="Controllers\RequestListController.designer.cs" />
     <Compile Include="Custom Classes\Data Sources\RequestListDataSource.cs" />
+    <Compile Include="Custom Classes\Delegates\RequestListDelegate.cs" />
+    <Compile Include="Extensions\ColorExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="json.net">
