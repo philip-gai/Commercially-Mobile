@@ -24,9 +24,8 @@ namespace Commercially
 		public static Request[] GetRequests() {
 			Console.WriteLine(Url);
 			Console.WriteLine("Bearer " + SessionData.OAuth.access_token);
-			string resp = HttpRequest.MakeRequest(HttpRequestMethodType.GET, Url, "", "Bearer " + SessionData.OAuth.access_token);
-			Console.WriteLine(resp);
-			return null;
+			var resp = HttpRequest.MakeRequest(HttpRequestMethodType.GET, Url, "", "Bearer " + SessionData.OAuth.access_token);
+			return JsonConvert.DeserializeObject<Request[]>(resp);
 		}
 	}
 }

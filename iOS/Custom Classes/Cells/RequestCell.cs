@@ -14,11 +14,11 @@ namespace Commercially.iOS
 		public Request Request {
 			set {
 				_Request = value;
-				RoomLabel.Text = value.Room;
-				TimeLabel.Text = value.Received.ToShortTimeString();
+				RoomLabel.Text = value.room;
+				TimeLabel.Text = value.time_received.ToShortTimeString();
 				SetStatusLabel(value);
-				UrgentIndicator.Hidden = !value.Urgent;
-				Message.Text = value.Button.Message;
+				UrgentIndicator.Hidden = !value.urgent;
+				Message.Text = value.description;
 			}
 		}
 

@@ -10,7 +10,7 @@ namespace Commercially.iOS
 		public Request[] Requests {
 			get {
 				if (_Requests != null) return _Requests;
-				_Requests = new Request[] { new Request("Room 101", new FlicButton("Change Toilets", "101")) };
+				_Requests = new Request[] { new Request("Room 101") };
 				return _Requests;
 				// Get requests from API and store them
 			}
