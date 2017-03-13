@@ -17,6 +17,7 @@ namespace Commercially.iOS
 			NavigationItem.HidesBackButton = true;
 			NavigationItem.SetTitleImage("Logo-Red", NavigationController.NavigationBar);
 			NavigationItem.RightBarButtonItem = new UIBarButtonItem(UIImage.FromBundle("notification"), UIBarButtonItemStyle.Bordered, (sender, e) => { });
+			NavigationItem.RightBarButtonItem.TintColor = GlobalConstants.DefaultColors.Red.GetUIColor();
 		}
     }
 }

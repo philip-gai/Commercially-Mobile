@@ -7,6 +7,7 @@ namespace Commercially.iOS {
 		public abstract UIView[] UnderlineViews { get; }
 		public abstract UIView ViewForUnderlines { get; }
 		public abstract bool ShowNavigationBar { get; }
+		public abstract UIColor UnderlineColor { get; }
 
 		static int IsDoneLayoutSubviews = 1;
 		int LayoutCount = 0;
@@ -38,19 +39,19 @@ namespace Commercially.iOS {
 		void SetLines() {
 			if (UnderlineViews == null) return;
 			foreach (UIView view in UnderlineViews) {
-				UIView lineView = ViewForUnderlines.AddUnderlineView(view, LocalConstants.LineColor);
+				UIView lineView = ViewForUnderlines.AddUnderlineView(view, UnderlineColor);
 				if (view is UnderlineField) {
 					var field = view as UnderlineField;
 					if (field.GetUnderlineView() != null && field.GetUnderlineView().IsDescendantOfView(View)) {
 						field.GetUnderlineView().RemoveFromSuperview();
 					}
-					field.SetUnderlineView(lineView);
+					field.SetUnderlineView(lineView, UnderlineColor);
 				} else if (view is UnderlineButton) {
 					var button = view as UnderlineButton;
 					if (button.GetUnderlineView() != null && button.GetUnderlineView().IsDescendantOfView(View)) {
 						button.GetUnderlineView().RemoveFromSuperview();
 					}
-					button.SetUnderlineView(lineView);
+					button.SetUnderlineView(lineView, UnderlineColor);
 				}
 			}
 		}

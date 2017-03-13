@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Lqb-QP-ZXD">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Lqb-QP-ZXD">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -9,39 +9,24 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Login-->
-        <!--Navigation Controller-->
+        <!--Main Controller-->
         <scene sceneID="OLg-cs-fi6">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Lqb-QP-ZXD" sceneMemberID="viewController" customClass="MainController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" hidesBarsWhenKeyboardAppears="YES" id="Lqb-QP-ZXD" customClass="MainController" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ecn-sX-M7f" customClass="ClearNavigationBar">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="ecn-sX-M7f">
                         <rect key="frame" x="0.0" y="20" width="600" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
-                    <connections/>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hXT-7y-wud" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="223.2" y="46.32684"/>
+            <point key="canvasLocation" x="223.19999999999999" y="46.326839999999997"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="Logo-White" width="170.666672" height="170.666672"/>
-        <image name="Logo-Black" width="170.666672" height="170.666672"/>
-        <image name="Logo-Blue" width="170.666672" height="170.666672"/>
-        <image name="Logo-Red" width="170.666672" height="170.666672"/>
-        <image name="Logo-Green" width="170.666672" height="170.666672"/>
-        <image name="user" width="20" height="22"/>
-        <image name="error" width="139" height="122"/>
-        <image name="dashboard" width="25" height="25"/>
-        <image name="notification" width="22" height="22"/>
-        <image name="list-TabBar" width="25" height="25"/>
-        <image name="list" width="25" height="25"/>
-        <image name="blurredBg-1" width="360" height="640"/>
-        <image name="blurredBg-2" width="360" height="640"/>
-        <image name="blurredBg-3" width="245.333328" height="436"/>
-        <image name="blurredBg-4" width="360" height="640"/>
-    </resources>
 </document>

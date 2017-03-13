@@ -4,11 +4,13 @@ using UIKit;
 namespace Commercially.iOS {
 	public partial class UnderlineField : AbstractField {
 		UIView UnderlineView;
+		UIColor UnderlineColor;
 
 		public UnderlineField(IntPtr handle) : base(handle) { }
 
-		public void SetUnderlineView(UIView view) {
+		public void SetUnderlineView(UIView view, UIColor UnderlineColor) {
 			UnderlineView = view;
+			this.UnderlineColor = UnderlineColor;
 		}
 
 		public UIView GetUnderlineView() {
@@ -22,7 +24,7 @@ namespace Commercially.iOS {
 		public void SetLineColor(bool valid) {
 			if (UnderlineView == null) return;
 			if (valid) {
-				UnderlineView.BackgroundColor = LocalConstants.LineColor;
+				UnderlineView.BackgroundColor = UnderlineColor;
 			} else {
 				UnderlineView.BackgroundColor = LocalConstants.LineIncompleteColor;
 			}

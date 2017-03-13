@@ -1,16 +1,12 @@
 ﻿<Properties StartupConfiguration="{B9BD7A31-A665-492A-8207-AAB835D1C7CC}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="iOS/Controllers/DashboardController.cs">
+  <MonoDevelop.Ide.Workbench>
     <Files>
-      <File FileName="iOS/Controllers/DashboardController.cs" Line="13" Column="124" />
-      <File FileName="Commercially/Entities/Request.cs" Line="28" Column="4" />
-      <File FileName="Commercially/Utilities/GlobalConstants.cs" Line="11" Column="53" />
+      <File FileName="iOS/Controllers/LoginController.cs" Line="16" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint file="/Users/philipgai/Developer/Commercially-Mobile/iOS/Controllers/DashboardController.cs" relfile="iOS/Controllers/DashboardController.cs" line="49" column="1" />
-    </BreakpointStore>
+    <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches>
     <Watch file="../../Pocketutors-Mobile/Pocketutors/APIs/UserApi.cs" line="37" offsetX="566" offsetY="540" expression="response" liveUpdate="False" />

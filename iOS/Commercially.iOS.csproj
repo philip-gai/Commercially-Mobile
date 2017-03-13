@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
@@ -141,16 +140,7 @@
     <ImageAsset Include="Assets.xcassets\Logo-Black.imageset\capital-letter-c-with-a-chevron-arrow-on-top %282%29~universal%401x.png" />
     <ImageAsset Include="Assets.xcassets\Logo-Black.imageset\capital-letter-c-with-a-chevron-arrow-on-top %282%29~universal%402x.png" />
     <ImageAsset Include="Assets.xcassets\Logo-Black.imageset\capital-letter-c-with-a-chevron-arrow-on-top %282%29~universal%403x.png" />
-    <ImageAsset Include="Assets.xcassets\Logo-Blue.imageset\capital-letter-c-with-a-chevron-arrow-on-top %283%29~universal%401x.png" />
-    <ImageAsset Include="Assets.xcassets\Logo-Blue.imageset\capital-letter-c-with-a-chevron-arrow-on-top %283%29~universal%402x.png" />
-    <ImageAsset Include="Assets.xcassets\Logo-Blue.imageset\capital-letter-c-with-a-chevron-arrow-on-top %283%29~universal%403x.png" />
     <ImageAsset Include="Assets.xcassets\Logo-Green.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\Logo-Red.imageset\capital-letter-c-with-a-chevron-arrow-on-top %281%29~universal%401x.png" />
-    <ImageAsset Include="Assets.xcassets\Logo-Red.imageset\capital-letter-c-with-a-chevron-arrow-on-top %281%29~universal%402x.png" />
-    <ImageAsset Include="Assets.xcassets\Logo-Red.imageset\capital-letter-c-with-a-chevron-arrow-on-top %281%29~universal%403x.png" />
-    <ImageAsset Include="Assets.xcassets\Logo-Green.imageset\capital-letter-c-with-a-chevron-arrow-on-top~universal%401x.png" />
-    <ImageAsset Include="Assets.xcassets\Logo-Green.imageset\capital-letter-c-with-a-chevron-arrow-on-top~universal%402x.png" />
-    <ImageAsset Include="Assets.xcassets\Logo-Green.imageset\capital-letter-c-with-a-chevron-arrow-on-top~universal%403x.png" />
     <ImageAsset Include="Assets.xcassets\user.imageset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\user.imageset\genderNeutralUser100.png" />
     <ImageAsset Include="Assets.xcassets\user.imageset\genderNeutralUser100%402x.png" />
@@ -175,22 +165,35 @@
     <ImageAsset Include="Assets.xcassets\list.imageset\001-list-items-hand-drawn-symbol-outlines~universal%401x.png" />
     <ImageAsset Include="Assets.xcassets\list.imageset\001-list-items-hand-drawn-symbol-outlines~universal%402x.png" />
     <ImageAsset Include="Assets.xcassets\list.imageset\001-list-items-hand-drawn-symbol-outlines~universal%403x.png" />
-    <ImageAsset Include="Assets.xcassets\blurredBg-1.imageset\Blurred Background HD Mobile Wallpaper31~universal%401x.png" />
-    <ImageAsset Include="Assets.xcassets\blurredBg-1.imageset\Blurred Background HD Mobile Wallpaper31~universal%402x.png" />
-    <ImageAsset Include="Assets.xcassets\blurredBg-1.imageset\Blurred Background HD Mobile Wallpaper31~universal%403x.png" />
-    <ImageAsset Include="Assets.xcassets\blurredBg-1.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\blurredBg-2.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\blurredBg-2.imageset\Blurred Background HD Mobile Wallpaper43~universal%401x.png" />
-    <ImageAsset Include="Assets.xcassets\blurredBg-2.imageset\Blurred Background HD Mobile Wallpaper43~universal%402x.png" />
-    <ImageAsset Include="Assets.xcassets\blurredBg-2.imageset\Blurred Background HD Mobile Wallpaper43~universal%403x.png" />
-    <ImageAsset Include="Assets.xcassets\blurredBg-3.imageset\866259fa5bb064f0e5c866e5edb41819~universal%401x.png" />
-    <ImageAsset Include="Assets.xcassets\blurredBg-3.imageset\866259fa5bb064f0e5c866e5edb41819~universal%402x.png" />
-    <ImageAsset Include="Assets.xcassets\blurredBg-3.imageset\866259fa5bb064f0e5c866e5edb41819~universal%403x.png" />
-    <ImageAsset Include="Assets.xcassets\blurredBg-3.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\blurredBg-4.imageset\Blurred Grainy Background HD Mobile Wallpaper22~universal%401x.png" />
-    <ImageAsset Include="Assets.xcassets\blurredBg-4.imageset\Blurred Grainy Background HD Mobile Wallpaper22~universal%402x.png" />
-    <ImageAsset Include="Assets.xcassets\blurredBg-4.imageset\Blurred Grainy Background HD Mobile Wallpaper22~universal%403x.png" />
-    <ImageAsset Include="Assets.xcassets\blurredBg-4.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\Logo-Pink.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\Logo-Orange.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\Logo-Orange.imageset\capital-letter-c-with-a-chevron-arrow-on-top %281%29~universal%401x.png" />
+    <ImageAsset Include="Assets.xcassets\Logo-Orange.imageset\capital-letter-c-with-a-chevron-arrow-on-top %281%29~universal%402x.png" />
+    <ImageAsset Include="Assets.xcassets\Logo-Orange.imageset\capital-letter-c-with-a-chevron-arrow-on-top %281%29~universal%403x.png" />
+    <ImageAsset Include="Assets.xcassets\Logo-Yellow.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\Logo-Yellow.imageset\capital-letter-c-with-a-chevron-arrow-on-top %282%29~universal%401x.png" />
+    <ImageAsset Include="Assets.xcassets\Logo-Yellow.imageset\capital-letter-c-with-a-chevron-arrow-on-top %282%29~universal%402x.png" />
+    <ImageAsset Include="Assets.xcassets\Logo-Yellow.imageset\capital-letter-c-with-a-chevron-arrow-on-top %282%29~universal%403x.png" />
+    <ImageAsset Include="Assets.xcassets\Logo-Green.imageset\capital-letter-c-with-a-chevron-arrow-on-top %283%29~universal%401x.png" />
+    <ImageAsset Include="Assets.xcassets\Logo-Green.imageset\capital-letter-c-with-a-chevron-arrow-on-top %283%29~universal%402x.png" />
+    <ImageAsset Include="Assets.xcassets\Logo-Green.imageset\capital-letter-c-with-a-chevron-arrow-on-top %283%29~universal%403x.png" />
+    <ImageAsset Include="Assets.xcassets\Logo-TealBlue.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\Logo-TealBlue.imageset\capital-letter-c-with-a-chevron-arrow-on-top %284%29~universal%401x.png" />
+    <ImageAsset Include="Assets.xcassets\Logo-TealBlue.imageset\capital-letter-c-with-a-chevron-arrow-on-top %284%29~universal%402x.png" />
+    <ImageAsset Include="Assets.xcassets\Logo-TealBlue.imageset\capital-letter-c-with-a-chevron-arrow-on-top %284%29~universal%403x.png" />
+    <ImageAsset Include="Assets.xcassets\Logo-Blue.imageset\capital-letter-c-with-a-chevron-arrow-on-top %285%29~universal%401x.png" />
+    <ImageAsset Include="Assets.xcassets\Logo-Blue.imageset\capital-letter-c-with-a-chevron-arrow-on-top %285%29~universal%402x.png" />
+    <ImageAsset Include="Assets.xcassets\Logo-Blue.imageset\capital-letter-c-with-a-chevron-arrow-on-top %285%29~universal%403x.png" />
+    <ImageAsset Include="Assets.xcassets\Logo-Purple.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\Logo-Purple.imageset\capital-letter-c-with-a-chevron-arrow-on-top %286%29~universal%401x.png" />
+    <ImageAsset Include="Assets.xcassets\Logo-Purple.imageset\capital-letter-c-with-a-chevron-arrow-on-top %286%29~universal%402x.png" />
+    <ImageAsset Include="Assets.xcassets\Logo-Purple.imageset\capital-letter-c-with-a-chevron-arrow-on-top %286%29~universal%403x.png" />
+    <ImageAsset Include="Assets.xcassets\Logo-Pink.imageset\capital-letter-c-with-a-chevron-arrow-on-top %287%29~universal%401x.png" />
+    <ImageAsset Include="Assets.xcassets\Logo-Pink.imageset\capital-letter-c-with-a-chevron-arrow-on-top %287%29~universal%402x.png" />
+    <ImageAsset Include="Assets.xcassets\Logo-Pink.imageset\capital-letter-c-with-a-chevron-arrow-on-top %287%29~universal%403x.png" />
+    <ImageAsset Include="Assets.xcassets\Logo-Red.imageset\capital-letter-c-with-a-chevron-arrow-on-top~universal%401x.png" />
+    <ImageAsset Include="Assets.xcassets\Logo-Red.imageset\capital-letter-c-with-a-chevron-arrow-on-top~universal%402x.png" />
+    <ImageAsset Include="Assets.xcassets\Logo-Red.imageset\capital-letter-c-with-a-chevron-arrow-on-top~universal%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
@@ -224,6 +227,11 @@
     <Folder Include="Assets.xcassets\blurredBg-6.imageset\" />
     <Folder Include="Assets.xcassets\blurredBg-3.imageset\" />
     <Folder Include="Assets.xcassets\blurredBg-4.imageset\" />
+    <Folder Include="Assets.xcassets\Logo-Pink.imageset\" />
+    <Folder Include="Assets.xcassets\Logo-Orange.imageset\" />
+    <Folder Include="Assets.xcassets\Logo-Yellow.imageset\" />
+    <Folder Include="Assets.xcassets\Logo-TealBlue.imageset\" />
+    <Folder Include="Assets.xcassets\Logo-Purple.imageset\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Storyboards\RequestList.storyboard" />

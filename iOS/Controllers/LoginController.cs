@@ -43,6 +43,12 @@ namespace Commercially.iOS
 			}
 		}
 
+		public override UIColor UnderlineColor {
+			get {
+				return GlobalConstants.DefaultColors.Red.GetUIColor().ColorWithAlpha((nfloat)0.25);
+			}
+		}
+
 		public override void ButtonTouchUpInside(object sender, EventArgs events)
 		{
 			// MUST REMOVE THIS LATER. FOR TESTING ONLY
@@ -64,6 +70,18 @@ namespace Commercially.iOS
 					NavigationController.ShowPrompt(Localizable.PromptMessages.InvalidPassword);
 				}
 			}
+		}
+
+		public override void ViewWillAppear(bool animated)
+		{
+			base.ViewWillAppear(animated);
+			NavigationController.SetNavigationBarHidden(true, false);
+		}
+
+		public override void ViewWillDisappear(bool animated)
+		{
+			base.ViewWillDisappear(animated);
+			NavigationController.SetNavigationBarHidden(false, false);
 		}
 	}
 }

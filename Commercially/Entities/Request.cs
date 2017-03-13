@@ -22,7 +22,7 @@ namespace Commercially
 		public bool Urgent { get; set; }
 
 		static int num = 1;
-		static char Ch = 'a';
+		static char Ch = 'A';
 		public static Request GetDummyRequest() {
 			return new Request("Room " + num, new FlicButton("Change " + Ch++, num++.ToString()));
 		}

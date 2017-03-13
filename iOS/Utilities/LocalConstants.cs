@@ -1,5 +1,6 @@
 ﻿using System;
 using UIKit;
+using Commercially.iOS.Extensions;
 
 namespace Commercially.iOS {
 	public struct LocalConstants {
@@ -22,7 +23,7 @@ namespace Commercially.iOS {
 			public const string RequestCell = "RequestCell";
 		}
 		public static nfloat LineHeight = 2;
-		public static UIColor LineColor = UIColor.White.ColorWithAlpha((nfloat)0.25);
-		public static UIColor LineIncompleteColor = UIColor.FromRGB(255, 110, 110);
+		//public static UIColor LineColor = UIColor.White.ColorWithAlpha((nfloat)0.25);
+		public static UIColor LineIncompleteColor = GlobalConstants.DefaultColors.Red.GetUIColor();
 	}
 }

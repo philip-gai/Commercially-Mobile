@@ -4,7 +4,7 @@ using UIKit;
 
 namespace Commercially.iOS
 {
-	public partial class RequestListController : NavigationBarTableViewController
+	public partial class RequestListController : UITableViewController
 	{
 		Request[] _Requests;
 		public Request[] Requests {

@@ -1,6 +1,7 @@
 using Foundation;
 using System;
 using UIKit;
+using CoreGraphics;
 using Commercially.iOS.Extensions;
 
 namespace Commercially.iOS {
@@ -11,6 +12,7 @@ namespace Commercially.iOS {
 
 		public override void ViewDidLoad() {
 			base.ViewDidLoad();
+			//NavigationBar.Frame = new CGRect(0, 0, NavigationBar.Frame.Width, 100);
 			pushToken = NotificationHelper.ObserveNotification(LocalConstants.Notifications.PushViewController.Name, HandlePushViewController);
 			popToken = NotificationHelper.ObserveNotification(LocalConstants.Notifications.PopViewController, HandlePopViewController);
 			hidePromptToken = NotificationHelper.ObserveNotification(LocalConstants.Notifications.HidePrompt, HandleHidePrompt);
