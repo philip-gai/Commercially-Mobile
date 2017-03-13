@@ -29,6 +29,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Entities\OAuthResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SessionData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\Color.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)APIs\RequestApi.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RequestType.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Entities\" />

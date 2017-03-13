@@ -10,20 +10,20 @@ namespace Commercially
 		public OAuthResponse() { }
 
 		public OAuthResponse(string jsonResponse) {
-			OAuthResponse tmpToken = JsonConvert.DeserializeObject<OAuthResponse>(jsonResponse);
-			this.tokenType = tmpToken.tokenType;
-			this.accessToken = tmpToken.accessToken;
-			this.refreshToken = tmpToken.refreshToken;
+			var tmpToken = JsonConvert.DeserializeObject<OAuthResponse>(jsonResponse);
+			token_type = tmpToken.token_type;
+			access_token = tmpToken.access_token;
+			refresh_token = tmpToken.refresh_token;
 		}
 
 		public OAuthResponse(string tokenType, string accessToken, string refreshToken) {
-			this.tokenType = tokenType;
-			this.accessToken = accessToken;
-			this.refreshToken = refreshToken;
+			token_type = tokenType;
+			access_token = accessToken;
+			refresh_token = refreshToken;
 		}
 
-		string tokenType { get; }
-		string accessToken { get; }
-		string refreshToken { get; }
+		public string token_type { get; set; }
+		public string access_token { get; set; }
+		public string refresh_token { get; set; }
 	}
 }

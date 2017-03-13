@@ -8,7 +8,7 @@ namespace Commercially
 	public static class UserApi
 	{
 		const string Endpoint = "/user/token";
-		static string Url = HttpRequest.GetRequestUrl(Endpoint);
+		readonly static string Url = HttpRequest.GetRequestUrl(Endpoint);
 
 		public static string LoginUser(string email, string password)
 		{

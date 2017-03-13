@@ -39,7 +39,7 @@ namespace Commercially.iOS
 
 		public override bool ShowNavigationBar {
 			get {
-				return true;
+				return false;
 			}
 		}
 
@@ -52,7 +52,7 @@ namespace Commercially.iOS
 		public override void ButtonTouchUpInside(object sender, EventArgs events)
 		{
 			// MUST REMOVE THIS LATER. FOR TESTING ONLY
-			NavigationController.GetAndActOnViewController(GlobalConstants.Screens.Home);
+			//NavigationController.GetAndActOnViewController(GlobalConstants.Screens.Home);
 			if (CheckIfFieldsValid()) {
 				try {
 					var response = UserApi.LoginUser(EmailField.Text, PasswordField.Text);
@@ -61,8 +61,6 @@ namespace Commercially.iOS
 				} catch (Exception e) {
 					NavigationController.ShowPrompt(e.Message.Substring(0, 20) + "...");
 				}
-				// Check if user exists in DB
-				// Grab user information and cache / store in Session Dat
 			} else {
 				if (!EmailField.IsValidInput()) {
 					NavigationController.ShowPrompt(Localizable.PromptMessages.InvalidEmail);
@@ -70,18 +68,6 @@ namespace Commercially.iOS
 					NavigationController.ShowPrompt(Localizable.PromptMessages.InvalidPassword);
 				}
 			}
-		}
-
-		public override void ViewWillAppear(bool animated)
-		{
-			base.ViewWillAppear(animated);
-			NavigationController.SetNavigationBarHidden(true, false);
-		}
-
-		public override void ViewWillDisappear(bool animated)
-		{
-			base.ViewWillDisappear(animated);
-			NavigationController.SetNavigationBarHidden(false, false);
 		}
 	}
 }

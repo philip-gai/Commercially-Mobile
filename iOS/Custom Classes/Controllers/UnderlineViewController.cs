@@ -16,16 +16,12 @@ namespace Commercially.iOS {
 
 		public override void ViewWillAppear(bool animated) {
 			base.ViewWillAppear(animated);
-			if (ShowNavigationBar) {
-				NavigationController.SetNavigationBarHidden(false, false);
-			}
+			NavigationController.SetNavigationBarHidden(!ShowNavigationBar, false);
 		}
 
 		public override void ViewWillDisappear(bool animated) {
 			base.ViewWillDisappear(animated);
-			if (ShowNavigationBar) {
-				NavigationController.SetNavigationBarHidden(true, false);
-			}
+			NavigationController.SetNavigationBarHidden(false, false);
 		}
 
 		public override void ViewDidLayoutSubviews() {

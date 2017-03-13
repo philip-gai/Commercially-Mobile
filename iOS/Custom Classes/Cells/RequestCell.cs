@@ -10,6 +10,18 @@ namespace Commercially.iOS
 		public static readonly NSString Key = new NSString(LocalConstants.ReuseIdentifiers.RequestCell);
 		public static readonly UINib Nib;
 
+		Request _Request;
+		public Request Request {
+			set {
+				_Request = value;
+				RoomLabel.Text = value.Room;
+				TimeLabel.Text = value.Received.ToShortTimeString();
+				SetStatusLabel(value);
+				UrgentIndicator.Hidden = !value.Urgent;
+				Message.Text = value.Button.Message;
+			}
+		}
+
 		static RequestCell()
 		{
 			Nib = UINib.FromName(LocalConstants.ReuseIdentifiers.RequestCell, NSBundle.MainBundle);
@@ -20,12 +32,28 @@ namespace Commercially.iOS
 			// Note: this .ctor should not contain any initialization logic.
 		}
 
-		public void InitializeWithRequest(Request request) {
-			RoomLabel.Text = request.Room;
-			TimeLabel.Text = request.Received.ToShortTimeString();
-			StatusLabel.Text = request.Status.ToString();
-			UrgentIndicator.Hidden = !request.Urgent;
-			Message.Text = request.Button.Message;
+		public void SetStatusLabelIsHidden(bool isHidden)
+		{
+			if (isHidden) {
+				StatusLabel.Text = "";
+			} else {
+				SetStatusLabel(_Request);
+			}
+		}
+
+		void SetStatusLabel(Request request)
+		{
+			switch (request.Status) {
+				case Status.ToDo:
+					StatusLabel.Text = Localizable.Labels.ToDo;
+					break;
+				case Status.InProgress:
+					StatusLabel.Text = Localizable.Labels.InProgress;
+					break;
+				case Status.Complete:
+					StatusLabel.Text = Localizable.Labels.Complete;
+					break;
+			}
 		}
 	}
 }

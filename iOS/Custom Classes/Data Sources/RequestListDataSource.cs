@@ -19,7 +19,7 @@ namespace Commercially.iOS
 		{
 			var cell = tableView.DequeueReusableCell(LocalConstants.ReuseIdentifiers.RequestCell, indexPath) as RequestCell;
 			int row = indexPath.Row;
-			cell.InitializeWithRequest(Controller.Requests[row]);
+			cell.Request = Controller.Requests[row];
 			return cell;
 		}
 

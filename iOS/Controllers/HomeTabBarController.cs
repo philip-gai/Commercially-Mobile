@@ -1,5 +1,5 @@
-using Foundation;
 using System;
+using System.Threading.Tasks;
 using UIKit;
 using Commercially.iOS.Extensions;
 
@@ -16,8 +16,16 @@ namespace Commercially.iOS
 			base.ViewDidLoad();
 			NavigationItem.HidesBackButton = true;
 			NavigationItem.SetTitleImage("Logo-Red", NavigationController.NavigationBar);
-			NavigationItem.RightBarButtonItem = new UIBarButtonItem(UIImage.FromBundle("notification"), UIBarButtonItemStyle.Bordered, (sender, e) => { });
+			NavigationItem.RightBarButtonItem = new UIBarButtonItem(UIImage.FromBundle("notification"), UIBarButtonItemStyle.Plain, (sender, e) => { });
 			NavigationItem.RightBarButtonItem.TintColor = GlobalConstants.DefaultColors.Red.GetUIColor();
+
+			new TaskFactory().StartNew(delegate {
+				try {
+					SessionData.Requests = RequestApi.GetRequests();
+				} catch (Exception e) {
+					Console.WriteLine(e.Message);
+				}
+			});
 		}
     }
 }
