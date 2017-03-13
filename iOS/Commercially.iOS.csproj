@@ -113,7 +113,6 @@
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-40.png" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-40%402x.png" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-40%403x.png" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-60%402x.png" />
@@ -194,6 +193,7 @@
     <ImageAsset Include="Assets.xcassets\Logo-Red.imageset\capital-letter-c-with-a-chevron-arrow-on-top~universal%401x.png" />
     <ImageAsset Include="Assets.xcassets\Logo-Red.imageset\capital-letter-c-with-a-chevron-arrow-on-top~universal%402x.png" />
     <ImageAsset Include="Assets.xcassets\Logo-Red.imageset\capital-letter-c-with-a-chevron-arrow-on-top~universal%403x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-40.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
