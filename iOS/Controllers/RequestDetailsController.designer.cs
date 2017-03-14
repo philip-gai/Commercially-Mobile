@@ -48,7 +48,11 @@ namespace Commercially.iOS
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        Commercially.iOS.StatusPickerView StatusPickerView { get; set; }
+        UIKit.UILabel StatusLabel { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIPickerView StatusPickerView { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -98,6 +102,11 @@ namespace Commercially.iOS
             if (SaveButton != null) {
                 SaveButton.Dispose ();
                 SaveButton = null;
+            }
+
+            if (StatusLabel != null) {
+                StatusLabel.Dispose ();
+                StatusLabel = null;
             }
 
             if (StatusPickerView != null) {

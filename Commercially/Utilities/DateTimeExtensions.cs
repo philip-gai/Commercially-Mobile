@@ -5,8 +5,9 @@ namespace Commercially
 	{
 		static readonly DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, 0);
 
-		public static DateTime ConvertToDateTime(this string jsonDate)
+		public static DateTime? ConvertToDateTime(this string jsonDate)
 		{
+			if (jsonDate == null) return null;
 			var milliseconds = Convert.ToDouble(jsonDate);
 			var dateTime = UnixEpoch.AddMilliseconds(milliseconds).ToLocalTime();
 			return dateTime;

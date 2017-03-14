@@ -91,10 +91,10 @@ namespace Commercially.iOS
 
 		public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
 		{
-			var cell = tableView.DequeueReusableCell(LocalConstants.ReuseIdentifiers.RequestCell, indexPath) as RequestCell;
+			//var cell = tableView.DequeueReusableCell(LocalConstants.ReuseIdentifiers.RequestCell, indexPath) as RequestCell;
 			var requestDetailsController = UINavigationControllerExtensions.GetViewController(GlobalConstants.Screens.RequestDetails) as RequestDetailsController;
-			requestDetailsController.Request = cell.Request;
 			NavigationController.PushViewController(requestDetailsController, true);
+			requestDetailsController.Request = RequestLists[indexPath.Section][indexPath.Row];
 		}
 	}
 }

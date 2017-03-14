@@ -6,23 +6,28 @@ namespace Commercially.iOS
 {
 	public partial class RequestDetailsController : UIViewController
 	{
-		Request _Request;
-		public Request Request {
-			get {
-				return _Request;
-			}
-			set {
-				DescriptionLabel.Text = value.description;
-				RoomLabel.Text = value.room;
-				UrgentIndicator.Hidden = !value.urgent;
-				ReceivedTimeLabel.Text = value.time_received.ConvertToDateTime().ToString();
-				AcceptedTimeLabel.Text = value.time_scheduled.ConvertToDateTime().ToString() ?? "N/A";
-				CompletedTimeLabel.Text = value.time_completed.ConvertToDateTime().ToString() ?? "N/A";
-				AssignButton.Hidden = value.assignedTo == null;
-				SaveButton.Enabled = false;
-				_Request = value;
-			}
-		}
+		public Request Request;
+
 		public RequestDetailsController(IntPtr handle) : base(handle) { }
+
+		public override void ViewDidLoad()
+		{
+			base.ViewDidLoad();
+			SetLabelsFromRequest();
+			StatusPickerView.Model = new StatusPickerViewModel();
+		}
+
+		void SetLabelsFromRequest()
+		{
+			DescriptionLabel.Text = Request.description;
+			RoomLabel.Text = Request.room;
+			UrgentIndicator.Hidden = !Request.urgent;
+			ReceivedTimeLabel.Text = Request.GetTime(Request.TimeType.Received) ?? "N/A";
+			AcceptedTimeLabel.Text = Request.GetTime(Request.TimeType.Schedule) ?? "N/A";
+			CompletedTimeLabel.Text = Request.GetTime(Request.TimeType.Completed) ?? "N/A";
+			StatusPickerView.Hidden = Request.assignedTo != null && !Request.assignedTo.Equals(SessionData.User.email);
+			AssignButton.Hidden = Request.GetStatus() != Status.Assigned;
+			SaveButton.Hidden = Request.assignedTo != null && !Request.assignedTo.Equals(SessionData.User.email);
+		}
 	}
 }

@@ -310,9 +310,9 @@
     <Compile Include="Controllers\RequestDetailsController.designer.cs">
       <DependentUpon>RequestDetailsController.cs</DependentUpon>
     </Compile>
-    <Compile Include="Custom Classes\Picker Views\StatusPickerView.cs" />
+    <Compile Include="Custom Classes\Picker Views\StatusPickerViewModel.cs" />
     <Compile Include="Custom Classes\Picker Views\StatusPickerView.designer.cs">
-      <DependentUpon>StatusPickerView.cs</DependentUpon>
+      <DependentUpon>StatusPickerViewModel.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

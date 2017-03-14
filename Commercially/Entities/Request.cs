@@ -9,17 +9,17 @@ namespace Commercially
 		public string room { get; set; }
 		public string time_received { get; set; }
 
-		public DateTime GetTime(TimeType type)
+		public string GetTime(TimeType type)
 		{
 			switch (type) {
 				case TimeType.Received:
-					return time_received.ConvertToDateTime();
+				return time_received.ConvertToDateTime()?.ToShortTimeString();
 				case TimeType.Schedule:
-					return time_scheduled.ConvertToDateTime();
+					return time_scheduled.ConvertToDateTime()?.ToShortTimeString();
 				case TimeType.Completed:
-					return time_completed.ConvertToDateTime();
+					return time_completed.ConvertToDateTime()?.ToShortTimeString();
 				default:
-					return time_received.ConvertToDateTime();
+					return time_received.ConvertToDateTime()?.ToShortTimeString();
 			}
 		}
 		public string time_completed { get; set; }
