@@ -62,12 +62,12 @@ namespace Commercially
 		{
 			var DummyReq = new Request();
 			DummyReq._id = Guid.NewGuid().ToString();
-			DummyReq.description = "Replace X";
+			DummyReq.description = "Replace the Toilet Paper";
 			DummyReq.time_received = DateTime.Now.ConvertToJsonTime().ToString();
 			DummyReq.room = "Room " + num++;
 			DummyReq.button_id = Guid.NewGuid().ToString();
 			string status;
-			switch (rand.Next() % 3) {
+			switch (rand.Next() % 4) {
 				case 0:
 					status = Status.New.ToString().ToLower();
 					break;
@@ -76,6 +76,9 @@ namespace Commercially
 					break;
 				case 2:
 					status = Status.Completed.ToString().ToLower();
+					break;
+				case 3:
+					status = Status.Cancelled.ToString().ToLower();
 					break;
 				default:
 					status = Status.Undefined.ToString().ToLower();

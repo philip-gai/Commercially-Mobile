@@ -10,12 +10,10 @@ namespace Commercially
 		const string Endpoint = "/api/requests/";
 		static string Url = HttpRequest.GetRequestUrl(Endpoint);
 
-		static Random randGen = new Random();
 		public static Request[] GetDummyRequests()
 		{
 			var RequestList = new List<Request>();
-			int rand = randGen.Next() % 30 + 10;
-			for (int i = 0; i < rand; i++) {
+			for (int i = 0; i < 30; i++) {
 				RequestList.Add(Request.GetDummyRequest());
 			}
 			return RequestList.ToArray();

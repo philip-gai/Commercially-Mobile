@@ -243,6 +243,7 @@
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
     <InterfaceDefinition Include="Storyboards\Dashboard.storyboard" />
     <InterfaceDefinition Include="Storyboards\RequestDetails.storyboard" />
+    <InterfaceDefinition Include="Storyboards\RequestList.storyboard" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Entitlements.plist" />
@@ -313,6 +314,10 @@
     <Compile Include="Custom Classes\Picker Views\StatusPickerViewModel.cs" />
     <Compile Include="Custom Classes\Picker Views\StatusPickerView.designer.cs">
       <DependentUpon>StatusPickerViewModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\RequestListController.cs" />
+    <Compile Include="Controllers\RequestListController.designer.cs">
+      <DependentUpon>RequestListController.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

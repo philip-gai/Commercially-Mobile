@@ -11,10 +11,11 @@ namespace Commercially.iOS
 	{
 		static nfloat HeaderHeight = 50;
 		static nfloat RowHeight = 88;
-		static string[] SectionTitles = { Localizable.Labels.InProgress, Localizable.Labels.ToDo, Localizable.Labels.Complete };
-		static UIColor[] SectionBackgroundColors = { GlobalConstants.DefaultColors.Yellow.GetUIColor(), GlobalConstants.DefaultColors.Red.GetUIColor(), GlobalConstants.DefaultColors.Green.GetUIColor() };
+		static string[] SectionTitles = { Localizable.Labels.MyTasks, Status.Completed.ToString(), Status.Cancelled.ToString() };
+		public static UIColor[] SectionBackgroundColors = { GlobalConstants.DefaultColors.Yellow.GetUIColor(), GlobalConstants.DefaultColors.Green.GetUIColor(), GlobalConstants.DefaultColors.Purple.GetUIColor() };
 
 		Request[][] RequestLists;
+		int[] SectionToArray = new int[SectionTitles.Length];
 
 		public DashboardController(IntPtr handle) : base(handle) { }
 
@@ -27,7 +28,7 @@ namespace Commercially.iOS
 
 			new TaskFactory().StartNew(delegate {
 				while (SessionData.Requests == null) { }
-				RequestLists = SessionData.GetRequestLists();
+				RequestLists = SessionData.GetRequestLists(new Status[] { Status.Assigned, Status.Completed, Status.Cancelled });
 				InvokeOnMainThread(() => {
 					TableView.ReloadData();
 				});
@@ -40,6 +41,7 @@ namespace Commercially.iOS
 			int NumSections = 0;
 			for (int i = 0; i < RequestLists.Length; i++) {
 				if (RequestLists[i] != null && RequestLists[i].Length > 0) {
+					SectionToArray[NumSections] = i;
 					NumSections++;
 				}
 			}
@@ -50,7 +52,7 @@ namespace Commercially.iOS
 		{
 			if (RequestLists == null) return 0;
 			int i;
-			for (i = (int)section; i < RequestLists.Length && (RequestLists[i] == null || RequestLists[i].Length == 0); i++) { }
+			for (i = SectionToArray[section]; i < RequestLists.Length && (RequestLists[i] == null || RequestLists[i].Length == 0); i++) { }
 			return RequestLists[i].Length;
 		}
 
@@ -66,14 +68,15 @@ namespace Commercially.iOS
 
 		public override UIView GetViewForHeader(UITableView tableView, nint section)
 		{
+			int arrayIndex = SectionToArray[section];
 			var HeaderView = new UIView(new CGRect(0, 0, tableView.Frame.Size.Width, HeaderHeight));
-			HeaderView.BackgroundColor = SectionBackgroundColors[section];
+			HeaderView.BackgroundColor = SectionBackgroundColors[arrayIndex];
 
 			var Frame = new CGRect(10, 0, HeaderView.Frame.Width, HeaderHeight);
 			var Label = new UILabel(Frame);
-			Label.Text = SectionTitles[section];
+			Label.Text = SectionTitles[arrayIndex];
 			if (RequestLists != null) {
-				Label.Text += " (" + RequestLists[section].Length + ")";
+				Label.Text += " (" + RequestLists[arrayIndex].Length + ")";
 			}
 			HeaderView.AddSubview(Label);
 
@@ -82,19 +85,20 @@ namespace Commercially.iOS
 
 		public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
 		{
+			int arrayIndex = SectionToArray[indexPath.Section];
 			var cell = tableView.DequeueReusableCell(LocalConstants.ReuseIdentifiers.RequestCell, indexPath) as RequestCell;
-			cell.Request = RequestLists[indexPath.Section][indexPath.Row];
+			cell.Request = RequestLists[arrayIndex][indexPath.Row];
 			cell.SetStatusLabelIsHidden(true);
-			cell.BackgroundColor = SectionBackgroundColors[indexPath.Section].ColorWithAlpha((nfloat)0.33);
+			cell.BackgroundColor = SectionBackgroundColors[arrayIndex].ColorWithAlpha((nfloat)0.33);
 			return cell;
 		}
 
 		public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
 		{
-			//var cell = tableView.DequeueReusableCell(LocalConstants.ReuseIdentifiers.RequestCell, indexPath) as RequestCell;
+			int arrayIndex = SectionToArray[indexPath.Section];
 			var requestDetailsController = UINavigationControllerExtensions.GetViewController(GlobalConstants.Screens.RequestDetails) as RequestDetailsController;
 			NavigationController.PushViewController(requestDetailsController, true);
-			requestDetailsController.Request = RequestLists[indexPath.Section][indexPath.Row];
+			requestDetailsController.Request = RequestLists[arrayIndex][indexPath.Row];
 		}
 	}
 }

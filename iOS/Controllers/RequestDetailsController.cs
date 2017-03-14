@@ -1,6 +1,7 @@
 using Foundation;
 using System;
 using UIKit;
+using Commercially.iOS.Extensions;
 
 namespace Commercially.iOS
 {
@@ -25,9 +26,11 @@ namespace Commercially.iOS
 			ReceivedTimeLabel.Text = Request.GetTime(Request.TimeType.Received) ?? "N/A";
 			AcceptedTimeLabel.Text = Request.GetTime(Request.TimeType.Schedule) ?? "N/A";
 			CompletedTimeLabel.Text = Request.GetTime(Request.TimeType.Completed) ?? "N/A";
-			StatusPickerView.Hidden = Request.assignedTo != null && !Request.assignedTo.Equals(SessionData.User.email);
-			AssignButton.Hidden = Request.GetStatus() != Status.Assigned;
-			SaveButton.Hidden = Request.assignedTo != null && !Request.assignedTo.Equals(SessionData.User.email);
+			StatusPickerView.Hidden = !(Request.assignedTo != null && Request.assignedTo.Equals(SessionData.User.email));
+			AssignButton.Hidden = Request.GetStatus() != Status.New;
+			SaveButton.Hidden = !(Request.assignedTo != null && Request.assignedTo.Equals(SessionData.User.email));
+			ButtonStackView.Hidden = AssignButton.Hidden && SaveButton.Hidden;
+			StatusLabel.Text = Request.GetStatus().ToString();
 		}
 	}
 }

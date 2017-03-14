@@ -34,6 +34,7 @@
 			public const string ToDo = "To Do";
 			public const string Complete = "Complete";
 			public const string InProgress = "In Progress";
+			public const string MyTasks = "My Tasks";
 		}
 	}
 }
