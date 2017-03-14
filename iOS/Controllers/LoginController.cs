@@ -60,6 +60,7 @@ namespace Commercially.iOS
 				try {
 					var response = UserApi.LoginUser(EmailField.Text, PasswordField.Text);
 					SessionData.OAuth = new OAuthResponse(response);
+					SessionData.User = new User(EmailField.Text, PasswordField.Text);
 					NavigationController.GetAndActOnViewController(GlobalConstants.Screens.Home);
 				} catch (Exception e) {
 					NavigationController.ShowPrompt(e.Message, 50);

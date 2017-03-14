@@ -10,6 +10,12 @@ namespace Commercially.iOS
 	public class StatusPickerViewModel : UIPickerViewModel
 	{
 		readonly string[] Statuses = { Status.New.ToString(), Status.Assigned.ToString(), Status.Completed.ToString(), Status.Cancelled.ToString() };
+		readonly Action<UIPickerView, nint, nint> OnSelect;
+
+		public StatusPickerViewModel(Action<UIPickerView, nint, nint> OnSelect)
+		{
+			this.OnSelect = OnSelect;
+		}
 
 		public override nint GetComponentCount(UIPickerView pickerView)
 		{
@@ -24,6 +30,11 @@ namespace Commercially.iOS
 		public override string GetTitle(UIPickerView pickerView, nint row, nint component)
 		{
 			return Statuses[row];
+		}
+
+		public override void Selected(UIPickerView pickerView, nint row, nint component)
+		{
+			OnSelect(pickerView, row, component);
 		}
 	}
 }

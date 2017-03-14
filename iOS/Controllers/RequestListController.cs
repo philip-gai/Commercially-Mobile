@@ -23,13 +23,18 @@ namespace Commercially.iOS
 			TableView.Delegate = this;
 			TableView.RegisterNibForCellReuse(UINib.FromName(LocalConstants.ReuseIdentifiers.RequestCell, null), LocalConstants.ReuseIdentifiers.RequestCell);
 
-			new TaskFactory().StartNew(delegate {
+			SessionData.TaskFactory.StartNew(delegate {
 				while (SessionData.Requests == null) { }
 				NewRequestList = SessionData.GetRequestLists(new Status[] { Status.New })[0];
 				InvokeOnMainThread(() => {
 					TableView.ReloadData();
 				});
 			});
+		}
+
+		public override void ViewWillAppear(bool animated)
+		{
+			base.ViewWillAppear(animated);
 		}
 
 		public override nint NumberOfSections(UITableView tableView)

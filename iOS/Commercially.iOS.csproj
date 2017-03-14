@@ -319,6 +319,8 @@
     <Compile Include="Controllers\RequestListController.designer.cs">
       <DependentUpon>RequestListController.cs</DependentUpon>
     </Compile>
+    <Compile Include="Extensions\UIPickerViewExtensions.cs" />
+    <Compile Include="Custom Classes\Delegates\PickerDelegate.cs" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="json.net">

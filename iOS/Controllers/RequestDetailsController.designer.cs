@@ -62,6 +62,14 @@ namespace Commercially.iOS
         [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIView UrgentIndicator { get; set; }
 
+        [Action ("AssignButtonPress:")]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        partial void AssignButtonPress (UIKit.UIButton sender);
+
+        [Action ("SaveChangesButtonPress:")]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        partial void SaveChangesButtonPress (UIKit.UIButton sender);
+
         void ReleaseDesignerOutlets ()
         {
             if (AcceptedTimeLabel != null) {

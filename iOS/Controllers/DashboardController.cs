@@ -26,7 +26,7 @@ namespace Commercially.iOS
 			TableView.Delegate = this;
 			TableView.RegisterNibForCellReuse(UINib.FromName(LocalConstants.ReuseIdentifiers.RequestCell, null), LocalConstants.ReuseIdentifiers.RequestCell);
 
-			new TaskFactory().StartNew(delegate {
+			SessionData.TaskFactory.StartNew(delegate {
 				while (SessionData.Requests == null) { }
 				RequestLists = SessionData.GetRequestLists(new Status[] { Status.Assigned, Status.Completed, Status.Cancelled });
 				InvokeOnMainThread(() => {

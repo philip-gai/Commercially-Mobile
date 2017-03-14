@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 namespace Commercially
 {
 	public static class SessionData
@@ -7,25 +8,26 @@ namespace Commercially
 		public static User User;
 		public static OAuthResponse OAuth;
 		public static Request[] Requests;
-		public static bool TestMode = true;
+		public static bool TestMode;
+		public static TaskFactory TaskFactory = new TaskFactory();
 
 		public static Request[][] GetRequestLists(Status[] Types = null)
 		{
 			if (Requests == null || Requests.Length <= 0) return null;
-			var ToDoList = new List<Request>();
-			var InProgressList = new List<Request>();
+			var NewList = new List<Request>();
+			var AssignedList = new List<Request>();
 			var CancelledList = new List<Request>();
-			var CompleteList = new List<Request>();
+			var CompletedList = new List<Request>();
 			foreach (Request request in Requests) {
 				switch (request.GetStatus()) {
 					case Status.New:
-						ToDoList.Add(request);
+						NewList.Add(request);
 						break;
 					case Status.Assigned:
-						InProgressList.Add(request);
+						AssignedList.Add(request);
 						break;
 					case Status.Completed:
-						CompleteList.Add(request);
+						CompletedList.Add(request);
 						break;
 					case Status.Cancelled:
 						CancelledList.Add(request);
@@ -37,23 +39,23 @@ namespace Commercially
 				foreach (Status type in Types) {
 					switch (type) {
 						case Status.New:
-							RequestLists.Add(ToDoList);
+							RequestLists.Add(NewList);
 							break;
 						case Status.Assigned:
-							RequestLists.Add(InProgressList);
+							RequestLists.Add(AssignedList);
 							break;
 						case Status.Completed:
-							RequestLists.Add(CompleteList);
+							RequestLists.Add(CompletedList);
 							break;
 						case Status.Cancelled:
 							RequestLists.Add(CancelledList);
 							break;
 					}
 				}
-				return RequestLists.Select(a => a.ToArray()).ToArray();
+				return RequestLists.Select(list => list.ToArray()).ToArray();
 			}
 
-			return new Request[][] { ToDoList.ToArray(), InProgressList.ToArray(), CompleteList.ToArray(), CancelledList.ToArray() };
+			return new Request[][] { NewList.ToArray(), AssignedList.ToArray(), CompletedList.ToArray(), CancelledList.ToArray() };
 		}
 	}
 }
