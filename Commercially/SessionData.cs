@@ -6,21 +6,23 @@ namespace Commercially
 		public static User User;
 		public static OAuthResponse OAuth;
 		public static Request[] Requests;
+		public static bool TestMode = true;
 
-		public static Request[][] GetRequestLists() {
+		public static Request[][] GetRequestLists()
+		{
 			if (Requests == null || Requests.Length <= 0) return null;
 			var ToDoList = new List<Request>();
 			var InProgressList = new List<Request>();
 			var CompleteList = new List<Request>();
 			foreach (Request request in Requests) {
-				switch (request.Status) {
-					case Status.ToDo:
+				switch (request.GetStatus()) {
+					case Status.New:
 						ToDoList.Add(request);
 						break;
-					case Status.InProgress:
+					case Status.Assigned:
 						InProgressList.Add(request);
 						break;
-					case Status.Complete:
+					case Status.Completed:
 						CompleteList.Add(request);
 						break;
 				}

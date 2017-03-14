@@ -7,12 +7,11 @@
 using Foundation;
 using System;
 using System.CodeDom.Compiler;
-using UIKit;
 
 namespace Commercially.iOS
 {
-    [Register ("RequestListController")]
-    partial class RequestListController
+    [Register ("StatusPickerView")]
+    partial class StatusPickerView
     {
         void ReleaseDesignerOutlets ()
         {

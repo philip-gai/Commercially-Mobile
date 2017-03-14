@@ -10,8 +10,7 @@ namespace Commercially.iOS
 		{
 			// if you want to use a different Application Delegate class from "AppDelegate"
 			// you can specify it here.
-			ServicePointManager.ServerCertificateValidationCallback = delegate
-			{
+			ServicePointManager.ServerCertificateValidationCallback = delegate {
 				return true;
 			};
 			UIApplication.Main(args, null, "AppDelegate");

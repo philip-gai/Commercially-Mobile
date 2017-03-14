@@ -232,9 +232,9 @@
     <Folder Include="Assets.xcassets\Logo-Yellow.imageset\" />
     <Folder Include="Assets.xcassets\Logo-TealBlue.imageset\" />
     <Folder Include="Assets.xcassets\Logo-Purple.imageset\" />
+    <Folder Include="Custom Classes\Picker Views\" />
   </ItemGroup>
   <ItemGroup>
-    <InterfaceDefinition Include="Storyboards\RequestList.storyboard" />
     <InterfaceDefinition Include="Storyboards\Main.storyboard" />
     <InterfaceDefinition Include="Storyboards\Login.storyboard" />
     <InterfaceDefinition Include="Storyboards\Prompt.storyboard" />
@@ -242,6 +242,7 @@
     <InterfaceDefinition Include="Custom Classes\Cells\RequestCell.xib" />
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
     <InterfaceDefinition Include="Storyboards\Dashboard.storyboard" />
+    <InterfaceDefinition Include="Storyboards\RequestDetails.storyboard" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Entitlements.plist" />
@@ -304,11 +305,15 @@
     <Compile Include="Controllers\DashboardController.designer.cs">
       <DependentUpon>DashboardController.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controllers\RequestListController.cs" />
-    <Compile Include="Controllers\RequestListController.designer.cs" />
-    <Compile Include="Custom Classes\Data Sources\RequestListDataSource.cs" />
-    <Compile Include="Custom Classes\Delegates\RequestListDelegate.cs" />
     <Compile Include="Extensions\ColorExtensions.cs" />
+    <Compile Include="Controllers\RequestDetailsController.cs" />
+    <Compile Include="Controllers\RequestDetailsController.designer.cs">
+      <DependentUpon>RequestDetailsController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Custom Classes\Picker Views\StatusPickerView.cs" />
+    <Compile Include="Custom Classes\Picker Views\StatusPickerView.designer.cs">
+      <DependentUpon>StatusPickerView.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="json.net">

@@ -31,6 +31,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\Color.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)APIs\RequestApi.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RequestType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\DateTimeExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Entities\" />

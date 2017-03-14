@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Eqa-vA-1sP">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
@@ -41,7 +41,7 @@
         <!--RequestList-->
         <scene sceneID="cNI-fC-e0d">
             <objects>
-                <viewControllerPlaceholder storyboardName="RequestList" id="06g-9e-cxr" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="Dashboard" id="06g-9e-cxr" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="G72-6V-qQg"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h2n-yG-Nb4" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -49,4 +49,22 @@
             <point key="canvasLocation" x="368" y="76"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Logo-White" width="170.666672" height="170.666672"/>
+        <image name="Logo-Black" width="170.666672" height="170.666672"/>
+        <image name="user" width="20" height="22"/>
+        <image name="error" width="139" height="122"/>
+        <image name="dashboard" width="25" height="25"/>
+        <image name="notification" width="22" height="22"/>
+        <image name="list-TabBar" width="25" height="25"/>
+        <image name="list" width="25" height="25"/>
+        <image name="Logo-Orange" width="170.666672" height="170.666672"/>
+        <image name="Logo-Yellow" width="170.666672" height="170.666672"/>
+        <image name="Logo-Green" width="170.666672" height="170.666672"/>
+        <image name="Logo-TealBlue" width="170.666672" height="170.666672"/>
+        <image name="Logo-Blue" width="170.666672" height="170.666672"/>
+        <image name="Logo-Purple" width="170.666672" height="170.666672"/>
+        <image name="Logo-Pink" width="170.666672" height="170.666672"/>
+        <image name="Logo-Red" width="170.666672" height="170.666672"/>
+    </resources>
 </document>

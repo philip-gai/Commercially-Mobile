@@ -12,13 +12,16 @@ namespace Commercially.iOS
 
 		Request _Request;
 		public Request Request {
+			get {
+				return _Request;
+			}
 			set {
-				_Request = value;
-				RoomLabel.Text = value.room;
-				TimeLabel.Text = value.time_received.ToShortTimeString();
+				RoomLabel.Text = value.room ?? null;
+				TimeLabel.Text = value.GetTime(Request.TimeType.Received).ToShortTimeString() ?? null;
 				SetStatusLabel(value);
 				UrgentIndicator.Hidden = !value.urgent;
 				Message.Text = value.description;
+				_Request = value;
 			}
 		}
 
@@ -27,30 +30,23 @@ namespace Commercially.iOS
 			Nib = UINib.FromName(LocalConstants.ReuseIdentifiers.RequestCell, NSBundle.MainBundle);
 		}
 
-		protected RequestCell(IntPtr handle) : base(handle)
-		{
-			// Note: this .ctor should not contain any initialization logic.
-		}
+		protected RequestCell(IntPtr handle) : base(handle) { }
 
 		public void SetStatusLabelIsHidden(bool isHidden)
 		{
-			if (isHidden) {
-				StatusLabel.Text = "";
-			} else {
-				SetStatusLabel(_Request);
-			}
+			StatusLabel.Hidden = isHidden;
 		}
 
 		void SetStatusLabel(Request request)
 		{
-			switch (request.Status) {
-				case Status.ToDo:
+			switch (request.GetStatus()) {
+				case Status.New:
 					StatusLabel.Text = Localizable.Labels.ToDo;
 					break;
-				case Status.InProgress:
+				case Status.Assigned:
 					StatusLabel.Text = Localizable.Labels.InProgress;
 					break;
-				case Status.Complete:
+				case Status.Completed:
 					StatusLabel.Text = Localizable.Labels.Complete;
 					break;
 			}

@@ -51,15 +51,18 @@ namespace Commercially.iOS
 
 		public override void ButtonTouchUpInside(object sender, EventArgs events)
 		{
-			// MUST REMOVE THIS LATER. FOR TESTING ONLY
-			//NavigationController.GetAndActOnViewController(GlobalConstants.Screens.Home);
 			if (CheckIfFieldsValid()) {
+				if (SessionData.TestMode) {
+					// MUST REMOVE THIS LATER. FOR TESTING ONLY
+					NavigationController.GetAndActOnViewController(GlobalConstants.Screens.Home);
+					return;
+				}
 				try {
 					var response = UserApi.LoginUser(EmailField.Text, PasswordField.Text);
 					SessionData.OAuth = new OAuthResponse(response);
 					NavigationController.GetAndActOnViewController(GlobalConstants.Screens.Home);
 				} catch (Exception e) {
-					NavigationController.ShowPrompt(e.Message.Substring(0, 20) + "...");
+					NavigationController.ShowPrompt(e.Message, 50);
 				}
 			} else {
 				if (!EmailField.IsValidInput()) {

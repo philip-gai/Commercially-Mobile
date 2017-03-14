@@ -9,7 +9,6 @@ namespace Commercially.iOS
 {
 	public partial class DashboardController : UITableViewController
 	{
-		const int NumSections = 3;
 		static nfloat HeaderHeight = 50;
 		static nfloat RowHeight = 88;
 		static string[] SectionTitles = { Localizable.Labels.InProgress, Localizable.Labels.ToDo, Localizable.Labels.Complete };
@@ -37,13 +36,22 @@ namespace Commercially.iOS
 
 		public override nint NumberOfSections(UITableView tableView)
 		{
+			if (RequestLists == null) return 0;
+			int NumSections = 0;
+			for (int i = 0; i < RequestLists.Length; i++) {
+				if (RequestLists[i] != null && RequestLists[i].Length > 0) {
+					NumSections++;
+				}
+			}
 			return NumSections;
 		}
 
 		public override nint RowsInSection(UITableView tableView, nint section)
 		{
 			if (RequestLists == null) return 0;
-			return RequestLists[section].Length;
+			int i;
+			for (i = (int)section; i < RequestLists.Length && (RequestLists[i] == null || RequestLists[i].Length == 0); i++) { }
+			return RequestLists[i].Length;
 		}
 
 		public override nfloat GetHeightForHeader(UITableView tableView, nint section)
@@ -79,6 +87,14 @@ namespace Commercially.iOS
 			cell.SetStatusLabelIsHidden(true);
 			cell.BackgroundColor = SectionBackgroundColors[indexPath.Section].ColorWithAlpha((nfloat)0.33);
 			return cell;
+		}
+
+		public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
+		{
+			var cell = tableView.DequeueReusableCell(LocalConstants.ReuseIdentifiers.RequestCell, indexPath) as RequestCell;
+			var requestDetailsController = UINavigationControllerExtensions.GetViewController(GlobalConstants.Screens.RequestDetails) as RequestDetailsController;
+			requestDetailsController.Request = cell.Request;
+			NavigationController.PushViewController(requestDetailsController, true);
 		}
 	}
 }

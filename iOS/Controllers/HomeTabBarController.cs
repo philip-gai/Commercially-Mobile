@@ -5,11 +5,11 @@ using Commercially.iOS.Extensions;
 
 namespace Commercially.iOS
 {
-    public partial class HomeTabBarController : UITabBarController
-    {
-        public HomeTabBarController (IntPtr handle) : base (handle)
-        {
-        }
+	public partial class HomeTabBarController : UITabBarController
+	{
+		public HomeTabBarController(IntPtr handle) : base(handle)
+		{
+		}
 
 		public override void ViewDidLoad()
 		{
@@ -21,11 +21,18 @@ namespace Commercially.iOS
 
 			new TaskFactory().StartNew(delegate {
 				try {
+					if (SessionData.TestMode) {
+						SessionData.Requests = RequestApi.GetOfflineRequests();
+						return;
+					}
 					SessionData.Requests = RequestApi.GetRequests();
 				} catch (Exception e) {
-					Console.WriteLine(e.Message);
+					InvokeOnMainThread(delegate {
+						Console.WriteLine(e.Message);
+						NavigationController.ShowPrompt(e.Message, 50);
+					});
 				}
 			});
 		}
-    }
+	}
 }
