@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using System.Net.Http;
 using System.IO;
 using System.Text;
 
@@ -27,7 +28,9 @@ namespace Commercially
 					request.Method = WebRequestMethods.Http.Put;
 					break;
 				case HttpRequestMethodType.PATCH:
-					request.Method = WebRequestMethods.Http.Post;
+					request.Method = "PATCH";
+					request.Expect = "False";
+					request.ContentType = @"application/json";
 					request.Headers.Add("X-Http-Method-Override", "PATCH");
 					break;
 				case HttpRequestMethodType.DELETE:
@@ -39,7 +42,6 @@ namespace Commercially
 					var encoding = new UTF8Encoding();
 					var byteArray = encoding.GetBytes(body);
 					request.ContentLength = byteArray.Length;
-					//request.ContentType = @"application/json";
 					using (Stream dataStream = request.GetRequestStream()) {
 						dataStream.Write(byteArray, 0, byteArray.Length);
 					}

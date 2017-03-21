@@ -22,29 +22,34 @@ namespace Commercially.iOS
 			TableView.DataSource = this;
 			TableView.Delegate = this;
 			TableView.RegisterNibForCellReuse(UINib.FromName(LocalConstants.ReuseIdentifiers.RequestCell, null), LocalConstants.ReuseIdentifiers.RequestCell);
-
-			SessionData.TaskFactory.StartNew(delegate {
-				while (SessionData.Requests == null) { }
-				NewRequestList = SessionData.GetRequestLists(new Status[] { Status.New })[0];
-				InvokeOnMainThread(() => {
-					TableView.ReloadData();
-				});
-			});
 		}
 
 		public override void ViewWillAppear(bool animated)
 		{
 			base.ViewWillAppear(animated);
+			SessionData.TaskFactory.StartNew(delegate {
+				try {
+					SessionData.Requests = RequestApi.GetRequests();
+					NewRequestList = SessionData.GetRequestLists(new Status[] { Status.New })[0];
+					InvokeOnMainThread(delegate {
+						TableView.ReloadData();
+					});
+				} catch (Exception e) {
+					InvokeOnMainThread(delegate {
+						NavigationController.ShowPrompt(e.Message, 50);
+					});
+				}
+			});
 		}
 
 		public override nint NumberOfSections(UITableView tableView)
 		{
-			return 1;
+			return NewRequestList == null ? 0 : NewRequestList.Length == 0 ? 0 : 1;
 		}
 
 		public override nint RowsInSection(UITableView tableView, nint section)
 		{
-			return NewRequestList.Length;
+			return NewRequestList == null ? 0 : NewRequestList.Length;
 		}
 
 		public override nfloat GetHeightForHeader(UITableView tableView, nint section)

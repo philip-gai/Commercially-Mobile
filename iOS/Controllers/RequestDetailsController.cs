@@ -1,6 +1,7 @@
 using Foundation;
 using System;
 using UIKit;
+using Newtonsoft.Json.Linq;
 using Commercially.iOS.Extensions;
 
 namespace Commercially.iOS
@@ -14,6 +15,8 @@ namespace Commercially.iOS
 				return Request.assignedTo != null && Request.assignedTo.Equals(SessionData.User.email);
 			}
 		}
+
+		string currentStatus;
 
 		public RequestDetailsController(IntPtr handle) : base(handle) { }
 
@@ -32,6 +35,13 @@ namespace Commercially.iOS
 		partial void AssignButtonPress(UIButton sender)
 		{
 			// Call Post to change button ownedBy value to this user's email in DB
+			try {
+				RequestApi.ClaimRequest(Request._id);
+			} catch (Exception e) {
+				NavigationController.ShowPrompt(e.Message);
+				return;
+			}
+
 			UIView.AnimateAsync(AnimationDuration, delegate {
 				ButtonStackView.Hidden = SaveButton.Hidden;
 			});
@@ -40,8 +50,19 @@ namespace Commercially.iOS
 
 		partial void SaveChangesButtonPress(UIButton sender)
 		{
-			// Call Post to change request status stringg
+			JObject jsonBody = new JObject();
+			// Call Post to change request status string
 			// Post for time that status was changed
+			jsonBody.Add("status", currentStatus.ToLower());
+			if (currentStatus.ToLower().Equals("new")) {
+				jsonBody.Add("assignedTo", "");
+			}
+			try {
+				RequestApi.PatchRequest(Request._id, jsonBody.ToString());
+			} catch (Exception e) {
+				NavigationController.ShowPrompt(e.Message);
+				return;
+			}
 			UIView.AnimateAsync(AnimationDuration, delegate {
 				ButtonStackView.Hidden = AssignButton.Hidden;
 			});
@@ -62,7 +83,7 @@ namespace Commercially.iOS
 		void SetDateTimes()
 		{
 			ReceivedTimeLabel.Text = Request.GetTime(Request.TimeType.Received) ?? "N/A";
-			AcceptedTimeLabel.Text = Request.GetTime(Request.TimeType.Schedule) ?? "N/A";
+			AcceptedTimeLabel.Text = Request.GetTime(Request.TimeType.Scheduled) ?? "N/A";
 			CompletedTimeLabel.Text = Request.GetTime(Request.TimeType.Completed) ?? "N/A";
 		}
 
@@ -71,14 +92,15 @@ namespace Commercially.iOS
 			StatusPickerView.Model = new StatusPickerViewModel(OnPickerChange);
 			StatusPickerView.Hidden = !IsMyRequest;
 			if (!StatusStackView.Hidden) {
-				// Scroll to current status in picker viewr
+				// Scroll to current status in picker view
 				StatusPickerView.ScrollToTitle(Request.GetStatus().ToString());
 			}
 		}
 
 		void OnPickerChange(UIPickerView pickerView, nint row, nint component)
 		{
-			SaveButton.Hidden = pickerView.IsTitleMatch(Request.GetStatus().ToString(), row, component);
+			currentStatus = pickerView.Model.GetTitle(pickerView, row, component);
+			SaveButton.Hidden = Request.GetStatus().ToString().Equals(currentStatus);
 			UIView.AnimateAsync(AnimationDuration, delegate {
 				ButtonStackView.Hidden = AssignButton.Hidden && SaveButton.Hidden;
 			});

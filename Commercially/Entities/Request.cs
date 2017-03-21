@@ -4,23 +4,29 @@ namespace Commercially
 	[Serializable]
 	public class Request
 	{
-		public enum TimeType { Received, Completed, Schedule };
+		public enum TimeType { Received, Completed, Scheduled };
 
 		public string room { get; set; }
 		public string time_received { get; set; }
 
 		public string GetTime(TimeType type)
 		{
+			DateTime? Time = null;
 			switch (type) {
 				case TimeType.Received:
-				return time_received.ConvertToDateTime()?.ToShortTimeString();
-				case TimeType.Schedule:
-					return time_scheduled.ConvertToDateTime()?.ToShortTimeString();
+					Time = time_received.ConvertToDateTime();
+					break;
+				case TimeType.Scheduled:
+					Time = time_scheduled.ConvertToDateTime();
+					break;
 				case TimeType.Completed:
-					return time_completed.ConvertToDateTime()?.ToShortTimeString();
-				default:
-					return time_received.ConvertToDateTime()?.ToShortTimeString();
+					Time = time_completed.ConvertToDateTime();
+					break;
 			}
+			if (Time == null) {
+				return null;
+			}
+			return Time?.ToShortTimeString() + " " + Time?.ToShortDateString();
 		}
 		public string time_completed { get; set; }
 		public string time_scheduled { get; set; }
@@ -63,7 +69,7 @@ namespace Commercially
 			var DummyReq = new Request();
 			DummyReq._id = Guid.NewGuid().ToString();
 			DummyReq.description = "Replace the Toilet Paper";
-			DummyReq.time_received = DateTime.Now.ConvertToJsonTime().ToString();
+			DummyReq.time_received = DateTime.Now.ConvertToMilliseconds().ToString();
 			DummyReq.room = "Room " + num++;
 			DummyReq.button_id = Guid.NewGuid().ToString();
 			string status;

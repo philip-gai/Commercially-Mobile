@@ -19,20 +19,34 @@ namespace Commercially.iOS
 
 		public DashboardController(IntPtr handle) : base(handle) { }
 
+		public override void ViewWillAppear(bool animated)
+		{
+			base.ViewWillAppear(animated);
+			SessionData.TaskFactory.StartNew(delegate {
+				try {
+					if (SessionData.TestMode) {
+						SessionData.Requests = RequestApi.GetOfflineRequests();
+						return;
+					}
+					SessionData.Requests = RequestApi.GetRequests();
+					RequestLists = SessionData.GetRequestLists(new Status[] { Status.Assigned, Status.Completed, Status.Cancelled });
+					InvokeOnMainThread(delegate {
+						TableView.ReloadData();
+					});
+				} catch (Exception e) {
+					InvokeOnMainThread(delegate {
+						NavigationController.ShowPrompt(e.Message, 50);
+					});
+				}
+			});
+		}
+
 		public override void ViewDidLoad()
 		{
 			base.ViewDidLoad();
 			TableView.DataSource = this;
 			TableView.Delegate = this;
 			TableView.RegisterNibForCellReuse(UINib.FromName(LocalConstants.ReuseIdentifiers.RequestCell, null), LocalConstants.ReuseIdentifiers.RequestCell);
-
-			SessionData.TaskFactory.StartNew(delegate {
-				while (SessionData.Requests == null) { }
-				RequestLists = SessionData.GetRequestLists(new Status[] { Status.Assigned, Status.Completed, Status.Cancelled });
-				InvokeOnMainThread(() => {
-					TableView.ReloadData();
-				});
-			});
 		}
 
 		public override nint NumberOfSections(UITableView tableView)

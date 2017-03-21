@@ -3,20 +3,18 @@ namespace Commercially
 {
 	public static class DateTimeExtensions
 	{
-		static readonly DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, 0);
-
-		public static DateTime? ConvertToDateTime(this string jsonDate)
+		public static DateTime? ConvertToDateTime(this string milliseconds)
 		{
-			if (jsonDate == null) return null;
-			var milliseconds = Convert.ToDouble(jsonDate);
-			var dateTime = UnixEpoch.AddMilliseconds(milliseconds).ToLocalTime();
-			return dateTime;
+			if (milliseconds == null) return null;
+			var dateTimeOffset = DateTimeOffset.FromUnixTimeMilliseconds(long.Parse(milliseconds));
+			return dateTimeOffset.UtcDateTime;
 		}
 
-		public static long ConvertToJsonTime(this DateTime date)
+		public static long ConvertToMilliseconds(this DateTime date)
 		{
-			var timeSpan = date.ToLocalTime().Subtract(UnixEpoch);
-			return (long)Math.Truncate(timeSpan.TotalSeconds);
+			var tempDate = DateTime.SpecifyKind(date, DateTimeKind.Utc);
+			DateTimeOffset dateTimeOffset = tempDate;
+			return dateTimeOffset.ToUnixTimeMilliseconds();
 		}
 	}
 }
