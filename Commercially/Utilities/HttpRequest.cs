@@ -42,14 +42,14 @@ namespace Commercially
 					var encoding = new UTF8Encoding();
 					var byteArray = encoding.GetBytes(body);
 					request.ContentLength = byteArray.Length;
-					using (Stream dataStream = request.GetRequestStream()) {
+					using (Stream dataStream = request.GetRequestStream()) {	//THIS line causing hangup when can't connect to server
 						dataStream.Write(byteArray, 0, byteArray.Length);
 					}
 				}
-				var response = request.GetResponse();
+				var response = request.GetResponse() as HttpWebResponse;
 				using (Stream responseStream = response.GetResponseStream()) {
 					var reader = new StreamReader(responseStream, Encoding.UTF8);
-					string json = reader.ReadToEnd();
+					var json = reader.ReadToEnd();
 					return json;
 				}
 			} catch (WebException ex) {
