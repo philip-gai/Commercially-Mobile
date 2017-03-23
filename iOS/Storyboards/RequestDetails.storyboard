@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="RWZ-np-Q0m">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="RWZ-np-Q0m">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -58,13 +58,26 @@
                                                 </constraints>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </stackView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Room" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QnF-Uy-Ndf" fixedFrame="YES">
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Kmy-mD-fLS" fixedFrame="YES">
                                                 <rect key="frame" x="0.0" y="79.5" width="375" height="80"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Room" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QnF-Uy-Ndf" fixedFrame="YES">
+                                                        <rect key="frame" x="0.0" y="0.0" width="187.5" height="80"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Assigned To:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D8p-Wy-G7h" fixedFrame="YES">
+                                                        <rect key="frame" x="187.5" y="0.0" width="187.5" height="80"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    </label>
+                                                </subviews>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            </label>
+                                            </stackView>
                                         </subviews>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </stackView>
@@ -162,10 +175,10 @@
                                                 <state key="normal" title="Assign To Me">
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <connections>
-                                                    <action selector="AssignButtonPress:" destination="RWZ-np-Q0m" id="3" eventType="touchUpInside"/>
+                                                    <action selector="AssignButtonPress:" destination="RWZ-np-Q0m" eventType="touchUpInside" id="3"/>
                                                 </connections>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UCM-sK-rb0" fixedFrame="YES">
                                                 <rect key="frame" x="0.0" y="84.5" width="375" height="74.5"/>
@@ -174,10 +187,10 @@
                                                 <state key="normal" title="Save Changes">
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <connections>
-                                                    <action selector="SaveChangesButtonPress:" destination="RWZ-np-Q0m" id="4" eventType="touchUpInside"/>
+                                                    <action selector="SaveChangesButtonPress:" destination="RWZ-np-Q0m" eventType="touchUpInside" id="4"/>
                                                 </connections>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </button>
                                         </subviews>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -203,10 +216,11 @@
                         <outlet property="ReceivedTimeLabel" destination="Trg-dr-bgq" id="name-outlet-Trg-dr-bgq"/>
                         <outlet property="RoomLabel" destination="QnF-Uy-Ndf" id="name-outlet-QnF-Uy-Ndf"/>
                         <outlet property="SaveButton" destination="UCM-sK-rb0" id="name-outlet-UCM-sK-rb0"/>
+                        <outlet property="StatusLabel" destination="FaO-FZ-hWq" id="name-outlet-FaO-FZ-hWq"/>
                         <outlet property="StatusPickerView" destination="xwd-yS-rVd" id="name-outlet-xwd-yS-rVd"/>
                         <outlet property="StatusStackView" destination="3wu-r0-tDZ" id="name-outlet-3wu-r0-tDZ"/>
                         <outlet property="UrgentIndicator" destination="s5i-9R-Ct6" id="name-outlet-s5i-9R-Ct6"/>
-                        <outlet property="StatusLabel" destination="FaO-FZ-hWq" id="name-outlet-FaO-FZ-hWq"/>
+                        <outlet property="AssignedToLabel" destination="D8p-Wy-G7h" id="name-outlet-D8p-Wy-G7h"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xOy-du-oNI" userLabel="First Responder" sceneMemberID="firstResponder"/>

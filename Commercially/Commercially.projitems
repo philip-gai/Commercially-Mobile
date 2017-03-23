@@ -11,16 +11,11 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Entities\User.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\Request.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Entities\Role.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Entities\Status.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\FlicButton.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)APIs\UserApi.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\HttpRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\Validator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\Emailer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Utilities\GlobalConstants.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Utilities\HttpRequestMethodType.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Utilities\Localizable.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Exceptions\ConnectionException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Exceptions\EmailAlreadySentException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Exceptions\EmailSendingException.cs" />
@@ -30,13 +25,21 @@
     <Compile Include="$(MSBuildThisFileDirectory)SessionData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\Color.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)APIs\RequestApi.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)RequestType.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Utilities\DateTimeExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Enumerations\UserRoleType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Enumerations\RequestStatusType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Enumerations\HttpRequestMethodType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\StringExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\DateTimeExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Constants\GlobalConstants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Constants\Localizable.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Entities\" />
     <Folder Include="$(MSBuildThisFileDirectory)APIs\" />
     <Folder Include="$(MSBuildThisFileDirectory)Utilities\" />
     <Folder Include="$(MSBuildThisFileDirectory)Exceptions\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Enumerations\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Extensions\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Constants\" />
   </ItemGroup>
 </Project>

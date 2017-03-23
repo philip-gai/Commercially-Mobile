@@ -37,33 +37,13 @@ namespace Commercially
 		public string description { get; set; }
 		public string assignedTo { get; set; }
 
-		public Status GetStatus()
+		public RequestStatusType? GetStatus()
 		{
-			const string NewStr = "new";
-			const string assigned = "assigned";
-			const string completed = "completed";
-			const string cancelled = "cancelled";
-
-			if (string.IsNullOrWhiteSpace(status)) {
-				return Status.Undefined;
-			}
-
-			switch (status) {
-				case NewStr:
-					return Status.New;
-				case assigned:
-					return Status.Assigned;
-				case completed:
-					return Status.Completed;
-				case cancelled:
-					return Status.Cancelled;
-				default:
-					return Status.Undefined;
-			}
+			return status.GetStatus();
 		}
 
 		static int num = 1;
-		static Random rand = new Random();
+		readonly static Random rand = new Random();
 		public static Request GetDummyRequest()
 		{
 			var DummyReq = new Request();
@@ -75,19 +55,19 @@ namespace Commercially
 			string status;
 			switch (rand.Next() % 4) {
 				case 0:
-					status = Status.New.ToString().ToLower();
+					status = RequestStatusType.New.ToString().ToLower();
 					break;
 				case 1:
-					status = Status.Assigned.ToString().ToLower();
+					status = RequestStatusType.Assigned.ToString().ToLower();
 					break;
 				case 2:
-					status = Status.Completed.ToString().ToLower();
+					status = RequestStatusType.Completed.ToString().ToLower();
 					break;
 				case 3:
-					status = Status.Cancelled.ToString().ToLower();
+					status = RequestStatusType.Cancelled.ToString().ToLower();
 					break;
 				default:
-					status = Status.Undefined.ToString().ToLower();
+					status = null;
 					break;
 			}
 			DummyReq.status = status;

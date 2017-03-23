@@ -9,7 +9,7 @@ namespace Commercially.iOS
 {
 	public class StatusPickerViewModel : UIPickerViewModel
 	{
-		readonly string[] Statuses = { Status.New.ToString(), Status.Assigned.ToString(), Status.Completed.ToString(), Status.Cancelled.ToString() };
+		readonly string[] Statuses = { RequestStatusType.New.ToString(), RequestStatusType.Assigned.ToString(), RequestStatusType.Completed.ToString(), RequestStatusType.Cancelled.ToString() };
 		readonly Action<UIPickerView, nint, nint> OnSelect;
 
 		public StatusPickerViewModel(Action<UIPickerView, nint, nint> OnSelect)

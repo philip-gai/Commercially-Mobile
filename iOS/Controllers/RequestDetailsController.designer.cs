@@ -24,6 +24,10 @@ namespace Commercially.iOS
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel AssignedToLabel { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIStackView ButtonStackView { get; set; }
 
         [Outlet]
@@ -80,6 +84,11 @@ namespace Commercially.iOS
             if (AssignButton != null) {
                 AssignButton.Dispose ();
                 AssignButton = null;
+            }
+
+            if (AssignedToLabel != null) {
+                AssignedToLabel.Dispose ();
+                AssignedToLabel = null;
             }
 
             if (ButtonStackView != null) {

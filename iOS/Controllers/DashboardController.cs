@@ -11,7 +11,7 @@ namespace Commercially.iOS
 	{
 		static nfloat HeaderHeight = 50;
 		static nfloat RowHeight = 88;
-		static string[] SectionTitles = { Localizable.Labels.MyTasks, Status.Completed.ToString(), Status.Cancelled.ToString() };
+		static string[] SectionTitles = { Localizable.Labels.MyTasks, RequestStatusType.Completed.ToString(), RequestStatusType.Cancelled.ToString() };
 		public static UIColor[] SectionBackgroundColors = { GlobalConstants.DefaultColors.Yellow.GetUIColor(), GlobalConstants.DefaultColors.Green.GetUIColor(), GlobalConstants.DefaultColors.Purple.GetUIColor() };
 
 		Request[][] RequestLists;
@@ -29,7 +29,7 @@ namespace Commercially.iOS
 						return;
 					}
 					SessionData.Requests = RequestApi.GetRequests();
-					RequestLists = SessionData.GetRequestLists(new Status[] { Status.Assigned, Status.Completed, Status.Cancelled });
+					RequestLists = SessionData.GetRequestLists(new RequestStatusType[] { RequestStatusType.Assigned, RequestStatusType.Completed, RequestStatusType.Cancelled });
 					InvokeOnMainThread(delegate {
 						TableView.ReloadData();
 					});

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -21,8 +20,25 @@ namespace Commercially
 			return resp;
 		}
 
-		public static string ClaimRequest(string id) {
-			var resp = HttpRequest.MakeRequest(HttpRequestMethodType.POST, Url + id + "/claim", "", "Bearer " + SessionData.OAuth.access_token);
+		public static string UpdateRequest(string id, RequestStatusType newStatus) {
+			string service = "";
+			switch (newStatus) {
+				case RequestStatusType.New:
+					var jsonBody = new JObject();
+					jsonBody.Add("status", RequestStatusType.New.ToString().ToLower());
+					jsonBody.Add("assignedTo", "");
+					return HttpRequest.MakeRequest(HttpRequestMethodType.PATCH, Url + id, jsonBody.ToString(), "Bearer " + SessionData.OAuth.access_token);
+				case RequestStatusType.Assigned:
+					service = "/claim";
+					break;
+				case RequestStatusType.Completed:
+					service = "/complete";
+					break;
+				case RequestStatusType.Cancelled:
+					service = "/cancel";
+					break;
+			}
+			var resp = HttpRequest.MakeRequest(HttpRequestMethodType.POST, Url + id + service, "", "Bearer " + SessionData.OAuth.access_token);
 			return resp;
 		}
 

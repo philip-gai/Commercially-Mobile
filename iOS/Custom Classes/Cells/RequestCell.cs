@@ -40,13 +40,13 @@ namespace Commercially.iOS
 		void SetStatusLabel(Request request)
 		{
 			switch (request.GetStatus()) {
-				case Status.New:
+				case RequestStatusType.New:
 					StatusLabel.Text = Localizable.Labels.ToDo;
 					break;
-				case Status.Assigned:
+				case RequestStatusType.Assigned:
 					StatusLabel.Text = Localizable.Labels.InProgress;
 					break;
-				case Status.Completed:
+				case RequestStatusType.Completed:
 					StatusLabel.Text = Localizable.Labels.Complete;
 					break;
 			}

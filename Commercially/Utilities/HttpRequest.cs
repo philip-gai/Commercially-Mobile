@@ -42,7 +42,7 @@ namespace Commercially
 					var encoding = new UTF8Encoding();
 					var byteArray = encoding.GetBytes(body);
 					request.ContentLength = byteArray.Length;
-					using (Stream dataStream = request.GetRequestStream()) {	//THIS line causing hangup when can't connect to server
+					using (Stream dataStream = request.GetRequestStream()) {	// THIS line causing hangup when can't connect to server
 						dataStream.Write(byteArray, 0, byteArray.Length);
 					}
 				}

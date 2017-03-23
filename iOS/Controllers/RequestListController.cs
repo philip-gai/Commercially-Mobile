@@ -30,7 +30,7 @@ namespace Commercially.iOS
 			SessionData.TaskFactory.StartNew(delegate {
 				try {
 					SessionData.Requests = RequestApi.GetRequests();
-					NewRequestList = SessionData.GetRequestLists(new Status[] { Status.New })[0];
+					NewRequestList = SessionData.GetRequestLists(new RequestStatusType[] { RequestStatusType.New })[0];
 					InvokeOnMainThread(delegate {
 						TableView.ReloadData();
 					});
@@ -69,7 +69,7 @@ namespace Commercially.iOS
 
 			var Frame = new CGRect(10, 0, HeaderView.Frame.Width, HeaderHeight);
 			var Label = new UILabel(Frame);
-			Label.Text = Status.New.ToString();
+			Label.Text = RequestStatusType.New.ToString();
 			if (NewRequestList != null) {
 				Label.Text += " (" + NewRequestList.Length + ")";
 			}

@@ -11,7 +11,7 @@ namespace Commercially
 		public static bool TestMode;
 		public static TaskFactory TaskFactory = new TaskFactory();
 
-		public static Request[][] GetRequestLists(Status[] Types = null)
+		public static Request[][] GetRequestLists(RequestStatusType[] Types = null)
 		{
 			if (Requests == null || Requests.Length <= 0) return null;
 			var NewList = new List<Request>();
@@ -20,34 +20,34 @@ namespace Commercially
 			var CompletedList = new List<Request>();
 			foreach (Request request in Requests) {
 				switch (request.GetStatus()) {
-					case Status.New:
+					case RequestStatusType.New:
 						NewList.Add(request);
 						break;
-					case Status.Assigned:
+					case RequestStatusType.Assigned:
 						AssignedList.Add(request);
 						break;
-					case Status.Completed:
+					case RequestStatusType.Completed:
 						CompletedList.Add(request);
 						break;
-					case Status.Cancelled:
+					case RequestStatusType.Cancelled:
 						CancelledList.Add(request);
 						break;
 				}
 			}
 			if (Types != null) {
 				var RequestLists = new List<List<Request>>();
-				foreach (Status type in Types) {
+				foreach (RequestStatusType type in Types) {
 					switch (type) {
-						case Status.New:
+						case RequestStatusType.New:
 							RequestLists.Add(NewList);
 							break;
-						case Status.Assigned:
+						case RequestStatusType.Assigned:
 							RequestLists.Add(AssignedList);
 							break;
-						case Status.Completed:
+						case RequestStatusType.Completed:
 							RequestLists.Add(CompletedList);
 							break;
-						case Status.Cancelled:
+						case RequestStatusType.Cancelled:
 							RequestLists.Add(CancelledList);
 							break;
 					}

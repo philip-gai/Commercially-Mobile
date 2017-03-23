@@ -1,4 +1,3 @@
-using Foundation;
 using System;
 using UIKit;
 using Newtonsoft.Json.Linq;
@@ -16,7 +15,7 @@ namespace Commercially.iOS
 			}
 		}
 
-		string currentStatus;
+		string NewStatus;
 
 		public RequestDetailsController(IntPtr handle) : base(handle) { }
 
@@ -36,7 +35,7 @@ namespace Commercially.iOS
 		{
 			// Call Post to change button ownedBy value to this user's email in DB
 			try {
-				RequestApi.ClaimRequest(Request._id);
+				RequestApi.UpdateRequest(Request._id, RequestStatusType.Assigned);
 			} catch (Exception e) {
 				NavigationController.ShowPrompt(e.Message);
 				return;
@@ -50,15 +49,10 @@ namespace Commercially.iOS
 
 		partial void SaveChangesButtonPress(UIButton sender)
 		{
-			JObject jsonBody = new JObject();
 			// Call Post to change request status string
 			// Post for time that status was changed
-			jsonBody.Add("status", currentStatus.ToLower());
-			if (currentStatus.ToLower().Equals("new")) {
-				jsonBody.Add("assignedTo", "");
-			}
 			try {
-				RequestApi.PatchRequest(Request._id, jsonBody.ToString());
+				RequestApi.UpdateRequest(Request._id, (RequestStatusType)NewStatus.GetStatus());
 			} catch (Exception e) {
 				NavigationController.ShowPrompt(e.Message);
 				return;
@@ -74,10 +68,19 @@ namespace Commercially.iOS
 			DescriptionLabel.Text = Request.description;
 			RoomLabel.Text = Request.room;
 			UrgentIndicator.Hidden = !Request.urgent;
+			SetAssignedTo();
 			SetDateTimes();
 			SetStatusPicker();
 			SetButtonsVisible();
 			SetStatusLabel();
+		}
+
+		void SetAssignedTo()
+		{
+			AssignedToLabel.Hidden = string.IsNullOrWhiteSpace(Request.assignedTo);
+			if (!string.IsNullOrWhiteSpace(Request.assignedTo)) {
+				AssignedToLabel.Text = "Assigned To: " + Request.assignedTo;
+			}
 		}
 
 		void SetDateTimes()
@@ -99,8 +102,8 @@ namespace Commercially.iOS
 
 		void OnPickerChange(UIPickerView pickerView, nint row, nint component)
 		{
-			currentStatus = pickerView.Model.GetTitle(pickerView, row, component);
-			SaveButton.Hidden = Request.GetStatus().ToString().Equals(currentStatus);
+			NewStatus = pickerView.Model.GetTitle(pickerView, row, component).ToLower();
+			SaveButton.Hidden = Request.GetStatus().ToString().Equals(NewStatus);
 			UIView.AnimateAsync(AnimationDuration, delegate {
 				ButtonStackView.Hidden = AssignButton.Hidden && SaveButton.Hidden;
 			});
@@ -108,14 +111,14 @@ namespace Commercially.iOS
 
 		void SetButtonsVisible()
 		{
-			AssignButton.Hidden = Request.GetStatus() != Status.New;
+			AssignButton.Hidden = Request.GetStatus() != RequestStatusType.New;
 			SaveButton.Hidden = true;
 			ButtonStackView.Hidden = AssignButton.Hidden && SaveButton.Hidden;
 		}
 
 		void SetStatusLabel()
 		{
-			if (Request.GetStatus() == Status.New) {
+			if (Request.GetStatus() == RequestStatusType.New) {
 				StatusLabel.Hidden = false;
 				StatusLabel.Text = Request.GetStatus().ToString();
 			} else {

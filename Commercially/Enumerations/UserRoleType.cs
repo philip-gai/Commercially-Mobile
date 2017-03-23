@@ -1,7 +1,7 @@
 ﻿using System;
 namespace Commercially
 {
-	public enum Role
+	public enum UserRoleType
 	{
 		Admin,
 		Manager,
