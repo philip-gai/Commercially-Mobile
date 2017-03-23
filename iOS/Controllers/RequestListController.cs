@@ -1,6 +1,5 @@
 using Foundation;
 using System;
-using System.Threading.Tasks;
 using UIKit;
 using CoreGraphics;
 using Commercially.iOS.Extensions;
@@ -21,7 +20,7 @@ namespace Commercially.iOS
 			base.ViewDidLoad();
 			TableView.DataSource = this;
 			TableView.Delegate = this;
-			TableView.RegisterNibForCellReuse(UINib.FromName(LocalConstants.ReuseIdentifiers.RequestCell, null), LocalConstants.ReuseIdentifiers.RequestCell);
+			TableView.RegisterNibForCellReuse(UINib.FromName(RequestCell.Key, null), RequestCell.Key);
 		}
 
 		public override void ViewWillAppear(bool animated)
@@ -30,7 +29,7 @@ namespace Commercially.iOS
 			SessionData.TaskFactory.StartNew(delegate {
 				try {
 					SessionData.Requests = RequestApi.GetRequests();
-					NewRequestList = SessionData.GetRequestLists(new RequestStatusType[] { RequestStatusType.New })[0];
+					NewRequestList = Request.GetRequestLists(SessionData.Requests, new RequestStatusType[] { RequestStatusType.New })[0];
 					InvokeOnMainThread(delegate {
 						TableView.ReloadData();
 					});
@@ -79,7 +78,7 @@ namespace Commercially.iOS
 
 		public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
 		{
-			var cell = tableView.DequeueReusableCell(LocalConstants.ReuseIdentifiers.RequestCell, indexPath) as RequestCell;
+			var cell = tableView.DequeueReusableCell(RequestCell.Key, indexPath) as RequestCell;
 			cell.Request = NewRequestList[indexPath.Row];
 			cell.SetStatusLabelIsHidden(true);
 			cell.BackgroundColor = GlobalConstants.DefaultColors.Red.GetUIColor().ColorWithAlpha((nfloat)0.33);

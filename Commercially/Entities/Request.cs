@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
 namespace Commercially
 {
 	[Serializable]
@@ -40,6 +43,53 @@ namespace Commercially
 		public RequestStatusType? GetStatus()
 		{
 			return status.GetStatus();
+		}
+
+		public static Request[][] GetRequestLists(Request[] requests, RequestStatusType[] Types = null)
+		{
+			if (requests == null || requests.Length <= 0) return null;
+			var NewList = new List<Request>();
+			var AssignedList = new List<Request>();
+			var CancelledList = new List<Request>();
+			var CompletedList = new List<Request>();
+			foreach (Request request in requests) {
+				switch (request.GetStatus()) {
+					case RequestStatusType.New:
+						NewList.Add(request);
+						break;
+					case RequestStatusType.Assigned:
+						AssignedList.Add(request);
+						break;
+					case RequestStatusType.Completed:
+						CompletedList.Add(request);
+						break;
+					case RequestStatusType.Cancelled:
+						CancelledList.Add(request);
+						break;
+				}
+			}
+			if (Types != null) {
+				var RequestLists = new List<List<Request>>();
+				foreach (RequestStatusType type in Types) {
+					switch (type) {
+						case RequestStatusType.New:
+							RequestLists.Add(NewList);
+							break;
+						case RequestStatusType.Assigned:
+							RequestLists.Add(AssignedList);
+							break;
+						case RequestStatusType.Completed:
+							RequestLists.Add(CompletedList);
+							break;
+						case RequestStatusType.Cancelled:
+							RequestLists.Add(CancelledList);
+							break;
+					}
+				}
+				return RequestLists.Select(list => list.ToArray()).ToArray();
+			}
+
+			return new Request[][] { NewList.ToArray(), AssignedList.ToArray(), CompletedList.ToArray(), CancelledList.ToArray() };
 		}
 
 		static int num = 1;

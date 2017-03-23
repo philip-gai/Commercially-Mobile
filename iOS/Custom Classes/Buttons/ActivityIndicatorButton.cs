@@ -28,7 +28,6 @@ namespace Commercially.iOS {
 		}
 
 		void HideTitle() {
-			;
 			TitleText = TitleLabel.Text;
 			SetTitle("", UIControlState.Normal);
 		}

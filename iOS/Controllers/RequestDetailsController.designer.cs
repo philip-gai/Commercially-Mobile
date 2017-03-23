@@ -52,15 +52,15 @@ namespace Commercially.iOS
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel StaticStatusLabel { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UILabel StatusLabel { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIPickerView StatusPickerView { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIStackView StatusStackView { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -121,6 +121,11 @@ namespace Commercially.iOS
                 SaveButton = null;
             }
 
+            if (StaticStatusLabel != null) {
+                StaticStatusLabel.Dispose ();
+                StaticStatusLabel = null;
+            }
+
             if (StatusLabel != null) {
                 StatusLabel.Dispose ();
                 StatusLabel = null;
@@ -129,11 +134,6 @@ namespace Commercially.iOS
             if (StatusPickerView != null) {
                 StatusPickerView.Dispose ();
                 StatusPickerView = null;
-            }
-
-            if (StatusStackView != null) {
-                StatusStackView.Dispose ();
-                StatusStackView = null;
             }
 
             if (UrgentIndicator != null) {

@@ -7,8 +7,15 @@ namespace Commercially.iOS
 {
 	public partial class RequestCell : UITableViewCell
 	{
-		public static readonly NSString Key = new NSString(LocalConstants.ReuseIdentifiers.RequestCell);
+		public static readonly NSString Key = new NSString("RequestCell");
 		public static readonly UINib Nib;
+
+		static RequestCell()
+		{
+			Nib = UINib.FromName(Key, NSBundle.MainBundle);
+		}
+
+		protected RequestCell(IntPtr handle) : base(handle) { }
 
 		Request _Request;
 		public Request Request {
@@ -16,7 +23,7 @@ namespace Commercially.iOS
 				return _Request;
 			}
 			set {
-				RoomLabel.Text = value.room ?? null;
+				LocationLabel.Text = value.room ?? null;
 				TimeLabel.Text = value.GetTime(Request.TimeType.Received) ?? "N/A";
 				SetStatusLabel(value);
 				UrgentIndicator.Hidden = !value.urgent;
@@ -24,13 +31,6 @@ namespace Commercially.iOS
 				_Request = value;
 			}
 		}
-
-		static RequestCell()
-		{
-			Nib = UINib.FromName(LocalConstants.ReuseIdentifiers.RequestCell, NSBundle.MainBundle);
-		}
-
-		protected RequestCell(IntPtr handle) : base(handle) { }
 
 		public void SetStatusLabelIsHidden(bool isHidden)
 		{

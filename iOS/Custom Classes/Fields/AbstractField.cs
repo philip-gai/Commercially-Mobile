@@ -1,6 +1,7 @@
 using Foundation;
 using System;
 using UIKit;
+using Commercially.iOS.Extensions;
 
 namespace Commercially.iOS {
 	public abstract class AbstractField : UITextField {
@@ -17,7 +18,7 @@ namespace Commercially.iOS {
 		public override void AwakeFromNib() {
 			base.AwakeFromNib();
 			Delegate = FieldDelegate;
-			AttributedPlaceholder = new NSAttributedString(Placeholder, foregroundColor: TextColor);
+			this.SetPlaceholderColor(this.TextColor);
 		}
 
 		public virtual bool IsValidInput() {

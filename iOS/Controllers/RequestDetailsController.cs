@@ -19,16 +19,16 @@ namespace Commercially.iOS
 
 		public RequestDetailsController(IntPtr handle) : base(handle) { }
 
-		public override void ViewDidLoad()
-		{
-			base.ViewDidLoad();
-			SetInfo();
-		}
-
 		public override void ViewWillAppear(bool animated)
 		{
 			base.ViewWillAppear(animated);
 			NavigationItem.Title = "Details";
+		}
+
+		public override void ViewDidLoad()
+		{
+			base.ViewDidLoad();
+			SetInfo();
 		}
 
 		partial void AssignButtonPress(UIButton sender)
@@ -65,14 +65,15 @@ namespace Commercially.iOS
 
 		void SetInfo()
 		{
+			if (Request == null) return;
 			DescriptionLabel.Text = Request.description;
-			RoomLabel.Text = Request.room;
+			RoomLabel.Text = "Location: " + Request.room;
 			UrgentIndicator.Hidden = !Request.urgent;
+			StatusLabel.Text = Request.GetStatus().ToString();
 			SetAssignedTo();
 			SetDateTimes();
+			SetVisibility();
 			SetStatusPicker();
-			SetButtonsVisible();
-			SetStatusLabel();
 		}
 
 		void SetAssignedTo()
@@ -85,18 +86,19 @@ namespace Commercially.iOS
 
 		void SetDateTimes()
 		{
-			ReceivedTimeLabel.Text = Request.GetTime(Request.TimeType.Received) ?? "N/A";
-			AcceptedTimeLabel.Text = Request.GetTime(Request.TimeType.Scheduled) ?? "N/A";
-			CompletedTimeLabel.Text = Request.GetTime(Request.TimeType.Completed) ?? "N/A";
+			ReceivedTimeLabel.Text = "Received:\n" + Request.GetTime(Request.TimeType.Received) ?? "N/A";
+			AcceptedTimeLabel.Text = "Scheduled:\n" + Request.GetTime(Request.TimeType.Scheduled) ?? "N/A";
+			CompletedTimeLabel.Text = "Completed:\n" + Request.GetTime(Request.TimeType.Completed) ?? "N/A";
 		}
 
 		void SetStatusPicker()
 		{
 			StatusPickerView.Model = new StatusPickerViewModel(OnPickerChange);
-			StatusPickerView.Hidden = !IsMyRequest;
-			if (!StatusStackView.Hidden) {
+			StaticStatusLabel.TextColor = UIColor.Black;
+			if (!StatusPickerView.Hidden) {
 				// Scroll to current status in picker view
 				StatusPickerView.ScrollToTitle(Request.GetStatus().ToString());
+				StaticStatusLabel.TextColor = GlobalConstants.DefaultColors.Red.GetUIColor();
 			}
 		}
 
@@ -109,21 +111,13 @@ namespace Commercially.iOS
 			});
 		}
 
-		void SetButtonsVisible()
+		void SetVisibility()
 		{
 			AssignButton.Hidden = Request.GetStatus() != RequestStatusType.New;
 			SaveButton.Hidden = true;
 			ButtonStackView.Hidden = AssignButton.Hidden && SaveButton.Hidden;
-		}
-
-		void SetStatusLabel()
-		{
-			if (Request.GetStatus() == RequestStatusType.New) {
-				StatusLabel.Hidden = false;
-				StatusLabel.Text = Request.GetStatus().ToString();
-			} else {
-				StatusLabel.Hidden = true;
-			}
+			StatusPickerView.Hidden = !IsMyRequest || (Request.GetStatus() == RequestStatusType.Completed || Request.GetStatus() == RequestStatusType.Cancelled);
+			StatusLabel.Hidden = !StatusPickerView.Hidden;
 		}
 	}
 }

@@ -15,11 +15,11 @@ namespace Commercially.iOS
     {
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UILabel Message { get; set; }
+        UIKit.UILabel LocationLabel { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UILabel RoomLabel { get; set; }
+        UIKit.UILabel Message { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -35,14 +35,14 @@ namespace Commercially.iOS
 
         void ReleaseDesignerOutlets ()
         {
+            if (LocationLabel != null) {
+                LocationLabel.Dispose ();
+                LocationLabel = null;
+            }
+
             if (Message != null) {
                 Message.Dispose ();
                 Message = null;
-            }
-
-            if (RoomLabel != null) {
-                RoomLabel.Dispose ();
-                RoomLabel = null;
             }
 
             if (StatusLabel != null) {

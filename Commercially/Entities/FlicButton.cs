@@ -1,17 +1,13 @@
 ﻿using System;
 namespace Commercially
 {
+	[Serializable]
 	public class FlicButton
 	{
-		public FlicButton(string BluetoothId) {
-			this.BluetoothId = BluetoothId;
-		}
-		public FlicButton(string Message, string BluetoothId)
-		{
-			this.Message = Message;
-			this.BluetoothId = BluetoothId;
-		}
-		public string Message { get; set; }
-		public string BluetoothId { get; set; }
+		public string description { get; set; }
+		public string bluetooth_id { get; set; }
+		public string room { get; set; }
+		public string clientId { get; set; }
+		public string[] discoveredBy { get; set; }
 	}
 }

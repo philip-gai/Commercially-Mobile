@@ -32,6 +32,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\DateTimeExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\GlobalConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\Localizable.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)APIs\ButtonApi.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\Client.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)APIs\ClientApi.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Entities\" />

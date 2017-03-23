@@ -194,6 +194,10 @@
     <ImageAsset Include="Assets.xcassets\Logo-Red.imageset\capital-letter-c-with-a-chevron-arrow-on-top~universal%402x.png" />
     <ImageAsset Include="Assets.xcassets\Logo-Red.imageset\capital-letter-c-with-a-chevron-arrow-on-top~universal%403x.png" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-40.png" />
+    <ImageAsset Include="Assets.xcassets\button-TabBar.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\button-TabBar.imageset\hand-finger-pressing-a-circular-ring-button~universal%401x.png" />
+    <ImageAsset Include="Assets.xcassets\button-TabBar.imageset\hand-finger-pressing-a-circular-ring-button~universal%402x.png" />
+    <ImageAsset Include="Assets.xcassets\button-TabBar.imageset\hand-finger-pressing-a-circular-ring-button~universal%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
@@ -233,6 +237,7 @@
     <Folder Include="Assets.xcassets\Logo-TealBlue.imageset\" />
     <Folder Include="Assets.xcassets\Logo-Purple.imageset\" />
     <Folder Include="Custom Classes\Picker Views\" />
+    <Folder Include="Assets.xcassets\button-TabBar.imageset\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Storyboards\Main.storyboard" />
@@ -244,6 +249,9 @@
     <InterfaceDefinition Include="Storyboards\Dashboard.storyboard" />
     <InterfaceDefinition Include="Storyboards\RequestDetails.storyboard" />
     <InterfaceDefinition Include="Storyboards\RequestList.storyboard" />
+    <InterfaceDefinition Include="Storyboards\ButtonList.storyboard" />
+    <InterfaceDefinition Include="Custom Classes\Cells\ButtonCell.xib" />
+    <InterfaceDefinition Include="Storyboards\ButtonDetails.storyboard" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Entitlements.plist" />
@@ -312,15 +320,26 @@
       <DependentUpon>RequestDetailsController.cs</DependentUpon>
     </Compile>
     <Compile Include="Custom Classes\Picker Views\StatusPickerViewModel.cs" />
-    <Compile Include="Custom Classes\Picker Views\StatusPickerView.designer.cs">
-      <DependentUpon>StatusPickerViewModel.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controllers\RequestListController.cs" />
     <Compile Include="Controllers\RequestListController.designer.cs">
       <DependentUpon>RequestListController.cs</DependentUpon>
     </Compile>
     <Compile Include="Extensions\UIPickerViewExtensions.cs" />
     <Compile Include="Custom Classes\Delegates\PickerDelegate.cs" />
+    <Compile Include="Custom Classes\Cells\ButtonCell.cs" />
+    <Compile Include="Custom Classes\Cells\ButtonCell.designer.cs">
+      <DependentUpon>ButtonCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\ButtonListController.cs" />
+    <Compile Include="Controllers\ButtonListController.designer.cs">
+      <DependentUpon>ButtonListController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\ButtonDetailsController.cs" />
+    <Compile Include="Controllers\ButtonDetailsController.designer.cs">
+      <DependentUpon>ButtonDetailsController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Extensions\UITextFieldExtensions.cs" />
+    <Compile Include="Custom Classes\Picker Views\ClientPickerViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="json.net">

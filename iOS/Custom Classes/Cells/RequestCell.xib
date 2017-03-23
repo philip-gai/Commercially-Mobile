@@ -74,7 +74,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="Message" destination="mh7-gZ-nYF" id="name-outlet-mh7-gZ-nYF"/>
-                <outlet property="RoomLabel" destination="amV-Wk-TLq" id="name-outlet-amV-Wk-TLq"/>
+                <outlet property="LocationLabel" destination="amV-Wk-TLq" id="name-outlet-amV-Wk-TLq"/>
                 <outlet property="StatusLabel" destination="Kh9-68-HWV" id="name-outlet-Kh9-68-HWV"/>
                 <outlet property="TimeLabel" destination="nH3-bM-tWf" id="name-outlet-nH3-bM-tWf"/>
                 <outlet property="UrgentIndicator" destination="2du-NO-vFE" id="name-outlet-2du-NO-vFE"/>
@@ -99,5 +99,6 @@
         <image name="Logo-Purple" width="170.666672" height="170.666672"/>
         <image name="Logo-Pink" width="170.666672" height="170.666672"/>
         <image name="Logo-Red" width="170.666672" height="170.666672"/>
+        <image name="button-TabBar" width="25" height="25"/>
     </resources>
 </document>

@@ -29,7 +29,7 @@ namespace Commercially.iOS
 						return;
 					}
 					SessionData.Requests = RequestApi.GetRequests();
-					RequestLists = SessionData.GetRequestLists(new RequestStatusType[] { RequestStatusType.Assigned, RequestStatusType.Completed, RequestStatusType.Cancelled });
+					RequestLists = Request.GetRequestLists(SessionData.Requests, new RequestStatusType[] { RequestStatusType.Assigned, RequestStatusType.Completed, RequestStatusType.Cancelled });
 					InvokeOnMainThread(delegate {
 						TableView.ReloadData();
 					});
@@ -46,7 +46,7 @@ namespace Commercially.iOS
 			base.ViewDidLoad();
 			TableView.DataSource = this;
 			TableView.Delegate = this;
-			TableView.RegisterNibForCellReuse(UINib.FromName(LocalConstants.ReuseIdentifiers.RequestCell, null), LocalConstants.ReuseIdentifiers.RequestCell);
+			TableView.RegisterNibForCellReuse(UINib.FromName(RequestCell.Key, null), RequestCell.Key);
 		}
 
 		public override nint NumberOfSections(UITableView tableView)
@@ -100,7 +100,7 @@ namespace Commercially.iOS
 		public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
 		{
 			int arrayIndex = SectionToArray[indexPath.Section];
-			var cell = tableView.DequeueReusableCell(LocalConstants.ReuseIdentifiers.RequestCell, indexPath) as RequestCell;
+			var cell = tableView.DequeueReusableCell(RequestCell.Key, indexPath) as RequestCell;
 			cell.Request = RequestLists[arrayIndex][indexPath.Row];
 			cell.SetStatusLabelIsHidden(true);
 			cell.BackgroundColor = SectionBackgroundColors[arrayIndex].ColorWithAlpha((nfloat)0.33);

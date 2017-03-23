@@ -1,14 +1,14 @@
-using System;
+﻿using System;
 using UIKit;
 
 namespace Commercially.iOS
 {
-	public class StatusPickerViewModel : UIPickerViewModel
+	public class ClientPickerViewModel : UIPickerViewModel
 	{
-		readonly string[] Statuses = { RequestStatusType.New.ToString(), RequestStatusType.Assigned.ToString(), RequestStatusType.Completed.ToString(), RequestStatusType.Cancelled.ToString() };
+		readonly Client[] DiscoveredBy;
 		readonly Action<UIPickerView, nint, nint> OnSelect;
 
-		public StatusPickerViewModel(Action<UIPickerView, nint, nint> OnSelect)
+		public ClientPickerViewModel(Action<UIPickerView, nint, nint> OnSelect)
 		{
 			this.OnSelect = OnSelect;
 		}
@@ -20,12 +20,12 @@ namespace Commercially.iOS
 
 		public override nint GetRowsInComponent(UIPickerView pickerView, nint component)
 		{
-			return Statuses.Length;
+			return DiscoveredBy.Length;
 		}
 
 		public override string GetTitle(UIPickerView pickerView, nint row, nint component)
 		{
-			return Statuses[row];
+			return DiscoveredBy[row].friendlyName;
 		}
 
 		public override void Selected(UIPickerView pickerView, nint row, nint component)

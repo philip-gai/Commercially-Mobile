@@ -7,7 +7,7 @@ namespace Commercially
 	public static class RequestApi
 	{
 		const string Endpoint = "/api/requests/";
-		static string Url = HttpRequest.GetRequestUrl(Endpoint);
+		readonly static string Url = HttpRequest.GetRequestUrl(Endpoint);
 
 		public static Request[] GetRequests()
 		{
@@ -27,6 +27,8 @@ namespace Commercially
 					var jsonBody = new JObject();
 					jsonBody.Add("status", RequestStatusType.New.ToString().ToLower());
 					jsonBody.Add("assignedTo", "");
+					jsonBody.Add("time_scheduled", "");
+					jsonBody.Add("time_completed", "");
 					return HttpRequest.MakeRequest(HttpRequestMethodType.PATCH, Url + id, jsonBody.ToString(), "Bearer " + SessionData.OAuth.access_token);
 				case RequestStatusType.Assigned:
 					service = "/claim";
