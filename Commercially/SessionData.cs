@@ -9,8 +9,7 @@ namespace Commercially
 		public static Request[] Requests;
 		public static FlicButton[] Buttons;
 		public static Client[] Clients;
-
-		public static bool TestMode;
 		public static TaskFactory TaskFactory = new TaskFactory();
+		public static bool TestMode;
 	}
 }

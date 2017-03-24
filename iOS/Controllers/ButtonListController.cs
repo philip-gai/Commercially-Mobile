@@ -65,7 +65,7 @@ namespace Commercially.iOS
 
 			var Frame = new CGRect(10, 0, HeaderView.Frame.Width, HeaderHeight);
 			var Label = new UILabel(Frame);
-			Label.Text = "Flic Buttons";
+			Label.Text = "Buttons";
 			if (SessionData.Buttons != null) {
 				Label.Text += " (" + SessionData.Buttons.Length + ")";
 			}
@@ -83,10 +83,9 @@ namespace Commercially.iOS
 
 		public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
 		{
-			return;
-			//var requestDetailsController = UINavigationControllerExtensions.GetViewController(GlobalConstants.Screens.RequestDetails) as RequestDetailsController;
-			//NavigationController.PushViewController(requestDetailsController, true);
-			//requestDetailsController.Request = ButtonList[indexPath.Row];
+			var requestDetailsController = UINavigationControllerExtensions.GetViewController(GlobalConstants.Screens.RequestDetails) as ButtonDetailsController;
+			NavigationController.PushViewController(requestDetailsController, true);
+			requestDetailsController.Button = SessionData.Buttons[indexPath.Row];
 		}
 	}
 }

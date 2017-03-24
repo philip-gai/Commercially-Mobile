@@ -5,11 +5,13 @@ namespace Commercially.iOS
 {
 	public class ClientPickerViewModel : UIPickerViewModel
 	{
+		public const string Placeholder = "-- None --";
 		readonly Client[] DiscoveredBy;
 		readonly Action<UIPickerView, nint, nint> OnSelect;
 
-		public ClientPickerViewModel(Action<UIPickerView, nint, nint> OnSelect)
+		public ClientPickerViewModel(Client[] DiscoveredBy, Action<UIPickerView, nint, nint> OnSelect)
 		{
+			this.DiscoveredBy = DiscoveredBy;
 			this.OnSelect = OnSelect;
 		}
 
@@ -25,7 +27,10 @@ namespace Commercially.iOS
 
 		public override string GetTitle(UIPickerView pickerView, nint row, nint component)
 		{
-			return DiscoveredBy[row].friendlyName;
+			if (row == 0) {
+				return Placeholder;
+			}
+			return DiscoveredBy[row-1].friendlyName;
 		}
 
 		public override void Selected(UIPickerView pickerView, nint row, nint component)

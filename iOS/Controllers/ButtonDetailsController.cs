@@ -1,7 +1,7 @@
-using Foundation;
 using System;
 using UIKit;
 using Commercially.iOS.Extensions;
+using Newtonsoft.Json.Linq;
 
 namespace Commercially.iOS
 {
@@ -9,12 +9,37 @@ namespace Commercially.iOS
 	{
 		public ButtonDetailsController(IntPtr handle) : base(handle) { }
 
+		const double AnimationDuration = 0.25;
 		public FlicButton Button;
-		string NewClientFriendlyName;
+		string SelectedClient;
 
 		bool IsPaired {
 			get {
 				return !string.IsNullOrWhiteSpace(Button.clientId);
+			}
+		}
+
+		bool IsChanged {
+			get {
+				return PickerChanged || LocationChanged || DescriptionChanged;
+			}
+		}
+
+		bool PickerChanged {
+			get {
+				return !ClientPickerView.Model.GetTitle(ClientPickerView, 0, 0).Equals(SelectedClient);
+			}
+		}
+
+		bool LocationChanged {
+			get {
+				return !Button.room.Equals(LocationField.Text);
+			}
+		}
+
+		bool DescriptionChanged {
+			get {
+				return !Button.description.Equals(DescriptionField.Text);
 			}
 		}
 
@@ -27,46 +52,63 @@ namespace Commercially.iOS
 		public override void ViewDidLoad()
 		{
 			base.ViewDidLoad();
-			SetInfo();
+			InitializeView();
 		}
 
-		void SetInfo()
+		partial void SaveButtonPress(UIButton sender)
+		{
+			try {
+				var jsonBody = new JObject();
+				if (LocationChanged && !string.IsNullOrWhiteSpace(LocationField.Text)) {
+					jsonBody.Add("room", LocationField.Text);
+				}
+				if (DescriptionChanged && !string.IsNullOrWhiteSpace(DescriptionField.Text)) {
+					jsonBody.Add("description", DescriptionField.Text);
+				}
+				if (jsonBody.Count > 0) {
+					ButtonApi.PatchButton(Button.bluetooth_id, jsonBody.ToString());
+				}
+				if (PickerChanged) {
+					ButtonApi.PairButton(Button.bluetooth_id, Button.clientId);
+				}
+			} catch (Exception e) {
+				NavigationController.ShowPrompt(e.Message, 50);
+				return;
+			}
+			UIView.AnimateAsync(AnimationDuration, delegate {
+				SaveButton.Hidden = true;
+			});
+			NavigationController.PopViewController(true);
+		}
+
+		void InitializeView()
 		{
 			if (Button == null) return;
 			LocationField.Text = Button.room;
 			DescriptionField.Text = Button.description;
 			BluetoothIdLabel.Text = Button.bluetooth_id;
 			if (IsPaired) {
-				ClientIdLabel.Text = Client.FindFriendlyName(SessionData.Clients, Button.clientId);
+				ClientIdLabel.Text = Client.FindClient(Button.clientId, SessionData.Clients).friendlyName;
 			}
-
-			LocationField.SetPlaceholderColor(LocationField.TextColor);
-			DescriptionField.SetPlaceholderColor(DescriptionField.TextColor);
-		}
-
-		void SetVisibility()
-		{
+			ClientPickerView.Model = new ClientPickerViewModel(FlicButton.GetDiscoveredByClients(Button), OnPickerChange);
+			LocationField.EditingDidBegin += OnFieldChange;
 			ClientIdLabel.Hidden = !IsPaired;
 			ClientPickerView.Hidden = IsPaired;
 		}
 
-		void SetClientPicker()
-		{
-			ClientPickerView.Model = new ClientPickerViewModel(OnPickerChange);
-			//if (!StatusPickerView.Hidden) {
-			//	// Scroll to current status in picker view
-			//	StatusPickerView.ScrollToTitle(Request.GetStatus().ToString());
-			//	StaticStatusLabel.TextColor = GlobalConstants.DefaultColors.Red.GetUIColor();
-			//}
-		}
-
 		void OnPickerChange(UIPickerView pickerView, nint row, nint component)
 		{
-			NewClientFriendlyName = pickerView.Model.GetTitle(pickerView, row, component).ToLower();
-			//SaveButton.Hidden = Request.GetStatus().ToString().Equals(NewStatus);
-			//UIView.AnimateAsync(AnimationDuration, delegate {
-				//ButtonStackView.Hidden = AssignButton.Hidden && SaveButton.Hidden;
-			//});
+			SelectedClient = pickerView.Model.GetTitle(pickerView, row, component);
+			UIView.AnimateAsync(AnimationDuration, delegate {
+				SaveButton.Hidden = !IsChanged;
+			}); ;
+		}
+
+		void OnFieldChange(object sender, EventArgs e)
+		{
+			UIView.AnimateAsync(AnimationDuration, delegate {
+				SaveButton.Hidden = !IsChanged;
+			});
 		}
 	}
 }

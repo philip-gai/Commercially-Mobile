@@ -14,8 +14,13 @@ namespace Commercially.iOS
 				return Request.assignedTo != null && Request.assignedTo.Equals(SessionData.User.email);
 			}
 		}
+		bool StatusChanged {
+			get {
+				return !Request.GetStatus().ToString().Equals(SelectedStatus);
+			}
+		}
 
-		string NewStatus;
+		string SelectedStatus;
 
 		public RequestDetailsController(IntPtr handle) : base(handle) { }
 
@@ -28,7 +33,24 @@ namespace Commercially.iOS
 		public override void ViewDidLoad()
 		{
 			base.ViewDidLoad();
-			SetInfo();
+			InitializeView();
+		}
+
+		partial void SaveButtonPress(UIButton sender)
+		{
+			// Call Post to change request status string
+			// Post for time that status was changed
+			try {
+				RequestApi.UpdateRequest(Request._id, (RequestStatusType)SelectedStatus.GetStatus());
+			} catch (Exception e) {
+				NavigationController.ShowPrompt(e.Message);
+				return;
+			}
+			UIView.AnimateAsync(AnimationDuration, delegate {
+				ButtonStackView.Hidden = AssignButton.Hidden;
+			});
+			SaveButton.Hidden = true;
+			NavigationController.PopViewController(true);
 		}
 
 		partial void AssignButtonPress(UIButton sender)
@@ -45,38 +67,23 @@ namespace Commercially.iOS
 				ButtonStackView.Hidden = SaveButton.Hidden;
 			});
 			AssignButton.Hidden = true;
+			NavigationController.PopViewController(true);
 		}
 
-		partial void SaveChangesButtonPress(UIButton sender)
-		{
-			// Call Post to change request status string
-			// Post for time that status was changed
-			try {
-				RequestApi.UpdateRequest(Request._id, (RequestStatusType)NewStatus.GetStatus());
-			} catch (Exception e) {
-				NavigationController.ShowPrompt(e.Message);
-				return;
-			}
-			UIView.AnimateAsync(AnimationDuration, delegate {
-				ButtonStackView.Hidden = AssignButton.Hidden;
-			});
-			SaveButton.Hidden = true;
-		}
-
-		void SetInfo()
+		void InitializeView()
 		{
 			if (Request == null) return;
 			DescriptionLabel.Text = Request.description;
 			RoomLabel.Text = "Location: " + Request.room;
 			UrgentIndicator.Hidden = !Request.urgent;
 			StatusLabel.Text = Request.GetStatus().ToString();
-			SetAssignedTo();
-			SetDateTimes();
-			SetVisibility();
-			SetStatusPicker();
+			InitializeAssignedTo();
+			InitializeDateTimes();
+			InitializeVisibility();
+			InitializeStatusPicker();
 		}
 
-		void SetAssignedTo()
+		void InitializeAssignedTo()
 		{
 			AssignedToLabel.Hidden = string.IsNullOrWhiteSpace(Request.assignedTo);
 			if (!string.IsNullOrWhiteSpace(Request.assignedTo)) {
@@ -84,14 +91,23 @@ namespace Commercially.iOS
 			}
 		}
 
-		void SetDateTimes()
+		void InitializeDateTimes()
 		{
 			ReceivedTimeLabel.Text = "Received:\n" + Request.GetTime(Request.TimeType.Received) ?? "N/A";
 			AcceptedTimeLabel.Text = "Scheduled:\n" + Request.GetTime(Request.TimeType.Scheduled) ?? "N/A";
 			CompletedTimeLabel.Text = "Completed:\n" + Request.GetTime(Request.TimeType.Completed) ?? "N/A";
 		}
 
-		void SetStatusPicker()
+		void InitializeVisibility()
+		{
+			AssignButton.Hidden = Request.GetStatus() != RequestStatusType.New;
+			SaveButton.Hidden = true;
+			ButtonStackView.Hidden = AssignButton.Hidden && SaveButton.Hidden;
+			StatusPickerView.Hidden = !IsMyRequest || (Request.GetStatus() == RequestStatusType.Completed || Request.GetStatus() == RequestStatusType.Cancelled);
+			StatusLabel.Hidden = !StatusPickerView.Hidden;
+		}
+
+		void InitializeStatusPicker()
 		{
 			StatusPickerView.Model = new StatusPickerViewModel(OnPickerChange);
 			StaticStatusLabel.TextColor = UIColor.Black;
@@ -104,20 +120,11 @@ namespace Commercially.iOS
 
 		void OnPickerChange(UIPickerView pickerView, nint row, nint component)
 		{
-			NewStatus = pickerView.Model.GetTitle(pickerView, row, component).ToLower();
-			SaveButton.Hidden = Request.GetStatus().ToString().Equals(NewStatus);
+			SelectedStatus = pickerView.Model.GetTitle(pickerView, row, component).ToLower();
+			SaveButton.Hidden = !StatusChanged;
 			UIView.AnimateAsync(AnimationDuration, delegate {
 				ButtonStackView.Hidden = AssignButton.Hidden && SaveButton.Hidden;
 			});
-		}
-
-		void SetVisibility()
-		{
-			AssignButton.Hidden = Request.GetStatus() != RequestStatusType.New;
-			SaveButton.Hidden = true;
-			ButtonStackView.Hidden = AssignButton.Hidden && SaveButton.Hidden;
-			StatusPickerView.Hidden = !IsMyRequest || (Request.GetStatus() == RequestStatusType.Completed || Request.GetStatus() == RequestStatusType.Cancelled);
-			StatusLabel.Hidden = !StatusPickerView.Hidden;
 		}
 	}
 }

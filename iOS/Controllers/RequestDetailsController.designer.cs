@@ -70,9 +70,9 @@ namespace Commercially.iOS
         [GeneratedCode ("iOS Designer", "1.0")]
         partial void AssignButtonPress (UIKit.UIButton sender);
 
-        [Action ("SaveChangesButtonPress:")]
+        [Action ("SaveButtonPress:")]
         [GeneratedCode ("iOS Designer", "1.0")]
-        partial void SaveChangesButtonPress (UIKit.UIButton sender);
+        partial void SaveButtonPress (UIKit.UIButton sender);
 
         void ReleaseDesignerOutlets ()
         {
