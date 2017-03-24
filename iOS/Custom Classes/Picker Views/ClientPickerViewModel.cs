@@ -22,7 +22,7 @@ namespace Commercially.iOS
 
 		public override nint GetRowsInComponent(UIPickerView pickerView, nint component)
 		{
-			return DiscoveredBy.Length;
+			return DiscoveredBy != null ? DiscoveredBy.Length : 1;
 		}
 
 		public override string GetTitle(UIPickerView pickerView, nint row, nint component)
@@ -30,7 +30,8 @@ namespace Commercially.iOS
 			if (row == 0) {
 				return Placeholder;
 			}
-			return DiscoveredBy[row-1].friendlyName;
+			Client client = DiscoveredBy[row - 1];
+			return string.IsNullOrWhiteSpace(client.friendlyName) ? client.clientId : client.friendlyName;
 		}
 
 		public override void Selected(UIPickerView pickerView, nint row, nint component)

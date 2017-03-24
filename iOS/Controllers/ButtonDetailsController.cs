@@ -27,6 +27,7 @@ namespace Commercially.iOS
 
 		bool PickerChanged {
 			get {
+				if (ClientPickerView.Model == null) return false;
 				return !ClientPickerView.Model.GetTitle(ClientPickerView, 0, 0).Equals(SelectedClient);
 			}
 		}
@@ -90,10 +91,17 @@ namespace Commercially.iOS
 			if (IsPaired) {
 				ClientIdLabel.Text = Client.FindClient(Button.clientId, SessionData.Clients).friendlyName;
 			}
-			ClientPickerView.Model = new ClientPickerViewModel(FlicButton.GetDiscoveredByClients(Button), OnPickerChange);
-			LocationField.EditingDidBegin += OnFieldChange;
+			LocationField.EditingChanged += OnFieldChange;
+			DescriptionField.EditingChanged += OnFieldChange;
 			ClientIdLabel.Hidden = !IsPaired;
-			ClientPickerView.Hidden = IsPaired;
+			PairStack.Hidden = IsPaired;
+			if (!PairStack.Hidden) {
+				ClientPickerView.Model = new ClientPickerViewModel(FlicButton.GetDiscoveredByClients(Button), OnPickerChange);
+			}
+			if (!ClientIdLabel.Hidden) {
+				ClientIdLabel.Text = Client.FindClient(Button.clientId, SessionData.Clients).friendlyName ?? Button.clientId;
+			}
+			SaveButton.Hidden = true;
 		}
 
 		void OnPickerChange(UIPickerView pickerView, nint row, nint component)
@@ -101,7 +109,7 @@ namespace Commercially.iOS
 			SelectedClient = pickerView.Model.GetTitle(pickerView, row, component);
 			UIView.AnimateAsync(AnimationDuration, delegate {
 				SaveButton.Hidden = !IsChanged;
-			}); ;
+			});
 		}
 
 		void OnFieldChange(object sender, EventArgs e)

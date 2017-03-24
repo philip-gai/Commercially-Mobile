@@ -12,6 +12,7 @@ namespace Commercially
 
 		public static Client[] GetDiscoveredByClients(FlicButton Button)
 		{
+			if (Button == null || Button.discoveredBy == null || SessionData.Clients == null) return null;
 			Client[] clients = new Client[Button.discoveredBy.Length];
 			for (int i = 0; i < Button.discoveredBy.Length; i++) {
 				clients[i] = Client.FindClient(Button.discoveredBy[i], SessionData.Clients);

@@ -83,9 +83,9 @@ namespace Commercially.iOS
 
 		public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
 		{
-			var requestDetailsController = UINavigationControllerExtensions.GetViewController(GlobalConstants.Screens.RequestDetails) as ButtonDetailsController;
-			NavigationController.PushViewController(requestDetailsController, true);
-			requestDetailsController.Button = SessionData.Buttons[indexPath.Row];
+			var buttonDetailsController = UINavigationControllerExtensions.GetViewController(GlobalConstants.Screens.ButtonDetails) as ButtonDetailsController;
+			NavigationController.PushViewController(buttonDetailsController, true);
+			buttonDetailsController.Button = SessionData.Buttons[indexPath.Row];
 		}
 	}
 }

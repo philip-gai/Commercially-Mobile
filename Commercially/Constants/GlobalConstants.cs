@@ -10,6 +10,7 @@
 			public const string Login = "Login";
 			public const string Prompt = "Prompt";
 			public const string RequestDetails = "RequestDetails";
+			public const string ButtonDetails = "ButtonDetails";
 		}
 		public struct DefaultColors
 		{
