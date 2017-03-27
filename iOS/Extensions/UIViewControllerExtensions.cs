@@ -21,6 +21,11 @@ namespace Commercially.iOS.Extensions {
 				scrollView = inputView.ScrollView;
 				scrollViewFrame = scrollView.ConvertRectToView(scrollView.Bounds, view);
 			}
+			if (controller is KeyboardController) {
+				var inputView = controller as KeyboardController;
+				scrollView = inputView.ScrollView;
+				scrollViewFrame = scrollView.ConvertRectToView(scrollView.Bounds, view);
+			}
 
 			nfloat nextY = view.Frame.Y;
 			switch (Type) {

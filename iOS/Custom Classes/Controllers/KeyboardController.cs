@@ -41,11 +41,6 @@ namespace Commercially.iOS
 			keyboardHideToken.Dispose();
 		}
 
-		public override void ViewDidDisappear(bool animated)
-		{
-			base.ViewDidDisappear(animated);
-		}
-
 		void HandleKeyboardDidShow(NSNotification notification)
 		{
 			this.KeyboardDid(UIViewControllerExtensions.KeyboardActionType.Show, notification);

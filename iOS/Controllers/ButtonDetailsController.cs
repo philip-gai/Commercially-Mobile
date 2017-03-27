@@ -93,6 +93,8 @@ namespace Commercially.iOS
 		void InitializeView()
 		{
 			if (Button == null) return;
+			LocationField.ShouldReturn += (textField) => { LocationField.ResignFirstResponder(); return true; };
+			DescriptionField.ShouldReturn += (textField) => { DescriptionField.ResignFirstResponder(); return true; };
 			LocationField.Text = Button.room;
 			DescriptionField.Text = Button.description;
 			BluetoothIdLabel.Text = Button.bluetooth_id;
