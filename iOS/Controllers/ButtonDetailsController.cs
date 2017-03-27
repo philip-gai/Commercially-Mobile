@@ -70,7 +70,7 @@ namespace Commercially.iOS
 					ButtonApi.PatchButton(Button.bluetooth_id, jsonBody.ToString());
 				}
 				if (PickerChanged) {
-					ButtonApi.PairButton(Button.bluetooth_id, Button.clientId);
+					ButtonApi.PairButton(Button.bluetooth_id, Client.FindClient(SelectedClient, SessionData.Clients).clientId);
 				}
 			} catch (Exception e) {
 				NavigationController.ShowPrompt(e.Message, 50);
@@ -88,9 +88,6 @@ namespace Commercially.iOS
 			LocationField.Text = Button.room;
 			DescriptionField.Text = Button.description;
 			BluetoothIdLabel.Text = Button.bluetooth_id;
-			if (IsPaired) {
-				ClientIdLabel.Text = Client.FindClient(Button.clientId, SessionData.Clients).friendlyName;
-			}
 			LocationField.EditingChanged += OnFieldChange;
 			DescriptionField.EditingChanged += OnFieldChange;
 			ClientIdLabel.Hidden = !IsPaired;

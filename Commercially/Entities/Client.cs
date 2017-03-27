@@ -8,10 +8,10 @@ namespace Commercially
 		public string clientId { get; set; }
 		public string friendlyName { get; set; }
 
-		public static Client FindClient(string clientId, Client[] clients)
+		public static Client FindClient(string clientInfo, Client[] clients)
 		{
 			foreach (Client tmpClient in clients) {
-				if (tmpClient.clientId.Equals(clientId)) {
+				if (tmpClient.clientId.Equals(clientInfo) || tmpClient.friendlyName.Equals(clientInfo)) {
 					return tmpClient;
 				}
 			}
