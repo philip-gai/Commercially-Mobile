@@ -32,6 +32,10 @@ namespace Commercially.iOS
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIScrollView KeyboardScrollView { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UITextField LocationField { get; set; }
 
         [Outlet]
@@ -66,6 +70,11 @@ namespace Commercially.iOS
             if (DescriptionField != null) {
                 DescriptionField.Dispose ();
                 DescriptionField = null;
+            }
+
+            if (KeyboardScrollView != null) {
+                KeyboardScrollView.Dispose ();
+                KeyboardScrollView = null;
             }
 
             if (LocationField != null) {

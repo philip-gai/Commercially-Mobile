@@ -38,6 +38,15 @@ namespace Commercially.iOS.Extensions {
 			return null;
 		}
 
+		public static UITextField GetActiveField(this UIView view)
+		{
+			var FirstResponder = view.GetFirstResponder();
+			if (FirstResponder is UITextField) {
+				return (FirstResponder as UITextField);
+			}
+			return null;
+		}
+
 		public static void SetBackgroundFromImageName(this UIView view, string imageName) {
 			var image = UIImage.FromFile(imageName);
 			var backgroundView = new UIImageView(image);

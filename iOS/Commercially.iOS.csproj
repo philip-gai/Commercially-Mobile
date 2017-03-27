@@ -340,6 +340,7 @@
     </Compile>
     <Compile Include="Extensions\UITextFieldExtensions.cs" />
     <Compile Include="Custom Classes\Picker Views\ClientPickerViewModel.cs" />
+    <Compile Include="Custom Classes\Controllers\KeyboardController.cs" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="json.net">

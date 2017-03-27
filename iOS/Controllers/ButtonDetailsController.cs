@@ -5,7 +5,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Commercially.iOS
 {
-	public partial class ButtonDetailsController : UIViewController
+	public partial class ButtonDetailsController : KeyboardController
 	{
 		public ButtonDetailsController(IntPtr handle) : base(handle) { }
 
@@ -34,13 +34,21 @@ namespace Commercially.iOS
 
 		bool LocationChanged {
 			get {
+				if (Button.room == null) return !string.IsNullOrWhiteSpace(LocationField.Text);
 				return !Button.room.Equals(LocationField.Text);
 			}
 		}
 
 		bool DescriptionChanged {
 			get {
+				if (Button.description == null) return !string.IsNullOrWhiteSpace(DescriptionField.Text);
 				return !Button.description.Equals(DescriptionField.Text);
+			}
+		}
+
+		public override UIScrollView ScrollView {
+			get {
+				return KeyboardScrollView;
 			}
 		}
 

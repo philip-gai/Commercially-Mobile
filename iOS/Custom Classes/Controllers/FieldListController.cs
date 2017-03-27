@@ -54,11 +54,11 @@ namespace Commercially.iOS {
 		}
 
 		void HandleKeyboardDidShow(NSNotification notification) {
-			this.KeyboardDid(UIViewControllerExtensions.KeyboardActionType.Show, notification, GetActiveField());
+			this.KeyboardDid(UIViewControllerExtensions.KeyboardActionType.Show, notification);
 		}
 
 		void HandleKeyboardDidHide(NSNotification notification) {
-			this.KeyboardDid(UIViewControllerExtensions.KeyboardActionType.Hide, notification, GetActiveField());
+			this.KeyboardDid(UIViewControllerExtensions.KeyboardActionType.Hide, notification);
 		}
 
 		void HandleKeyboardOnButtonTouch(object sender, EventArgs events) {
@@ -101,14 +101,6 @@ namespace Commercially.iOS {
 					button.SetLineColor(true);
 				}
 			}
-		}
-
-		public AbstractField GetActiveField() {
-			UIView FirstResponder = View.GetFirstResponder();
-			if (FirstResponder is AbstractField) {
-				return (FirstResponder as AbstractField);
-			}
-			return null;
 		}
 
 		void SetNextResponders() {
