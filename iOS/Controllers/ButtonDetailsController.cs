@@ -106,7 +106,8 @@ namespace Commercially.iOS
 				ClientPickerView.Model = new ClientPickerViewModel(FlicButton.GetDiscoveredByClients(Button), OnPickerChange);
 			}
 			if (!ClientIdLabel.Hidden) {
-				ClientIdLabel.Text = Client.FindClient(Button.clientId, SessionData.Clients).friendlyName ?? Button.clientId;
+				Client tmpClient = Client.FindClient(Button.clientId, SessionData.Clients);
+				ClientIdLabel.Text = tmpClient != null && tmpClient.friendlyName != null ? tmpClient.friendlyName : Button.clientId;
 			}
 			SaveButton.Hidden = true;
 		}

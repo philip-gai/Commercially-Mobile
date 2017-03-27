@@ -120,7 +120,7 @@ namespace Commercially.iOS
 
 		void OnPickerChange(UIPickerView pickerView, nint row, nint component)
 		{
-			SelectedStatus = pickerView.Model.GetTitle(pickerView, row, component).ToLower();
+			SelectedStatus = pickerView.Model.GetTitle(pickerView, row, component);
 			SaveButton.Hidden = !StatusChanged;
 			UIView.AnimateAsync(AnimationDuration, delegate {
 				ButtonStackView.Hidden = AssignButton.Hidden && SaveButton.Hidden;

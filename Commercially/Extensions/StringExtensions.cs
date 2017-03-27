@@ -5,16 +5,17 @@ namespace Commercially
 	{
 		public static RequestStatusType? GetStatus(this string status)
 		{
+			if (string.IsNullOrWhiteSpace(status)) {
+				return null;
+			}
+
 			const string NewStr = "new";
 			const string assigned = "assigned";
 			const string completed = "completed";
 			const string cancelled = "cancelled";
 
-			if (string.IsNullOrWhiteSpace(status)) {
-				return null;
-			}
 
-			switch (status) {
+			switch (status.ToLower()) {
 				case NewStr:
 					return RequestStatusType.New;
 				case assigned:
