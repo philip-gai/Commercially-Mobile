@@ -2,9 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:backgroundTint="#fff44336">
     <ImageView
-        android:src="@drawable/white"
+        android:src="@drawable/logored"
         android:layout_width="match_parent"
         android:layout_height="163.5dp"
         android:id="@+id/imageView1"
@@ -19,33 +20,26 @@
         android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp">
-        <TextView
-            android:text="Email"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView1" />
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/EmailField"
             android:hint="email"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp" />
-        <TextView
-            android:text="Password"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView2" />
+            android:layout_marginBottom="10dp"
+            android:textColorHint="#c8ff3b30"
+            android:textColor="#ffff3b30"
+            android:inputType="textEmailAddress" />
         <EditText
-            android:inputType="textPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/PasswordField"
             android:hint="password"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp" />
+            android:layout_marginBottom="10dp"
+            android:textColorHint="#c8ff3b30"
+            android:textColor="#ffff3b30"
+            android:inputType="textPassword" />
         <Button
             android:text="Login"
             android:layout_width="match_parent"
