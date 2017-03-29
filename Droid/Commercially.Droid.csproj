@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Commercially.Droid</RootNamespace>
     <AssemblyName>Commercially.Droid</AssemblyName>
-    <TargetFrameworkVersion>v6.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v7.1</TargetFrameworkVersion>
     <AndroidApplication>True</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AndroidResgenClass>Resource</AndroidResgenClass>
@@ -66,11 +66,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LoginActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Resources\DashboardActivity.cs" />
     <Compile Include="Resources\AlertDialogFragment.cs" />
+    <Compile Include="Activities\LoginActivity.cs" />
+    <Compile Include="Activities\DashboardActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -80,32 +80,71 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
+    <AndroidResource Include="Resources\layout\Login.axml" />
     <AndroidResource Include="Resources\mipmap-hdpi\Icon.png" />
     <AndroidResource Include="Resources\mipmap-mdpi\Icon.png" />
     <AndroidResource Include="Resources\mipmap-xhdpi\Icon.png" />
     <AndroidResource Include="Resources\mipmap-xxhdpi\Icon.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\Icon.png" />
-    <AndroidResource Include="Resources\layout\Login.axml" />
-    <AndroidResource Include="Resources\drawable\LogoBlack.png" />
-    <AndroidResource Include="Resources\drawable\LogoBlue.png" />
-    <AndroidResource Include="Resources\drawable\LogoGreen.png" />
-    <AndroidResource Include="Resources\drawable\LogoOrange.png" />
-    <AndroidResource Include="Resources\drawable\LogoPink.png" />
-    <AndroidResource Include="Resources\drawable\LogoPurple.png" />
-    <AndroidResource Include="Resources\drawable\LogoRed.png" />
-    <AndroidResource Include="Resources\drawable\LogoTealBlue.png" />
-    <AndroidResource Include="Resources\drawable\LogoWhite.png" />
-    <AndroidResource Include="Resources\drawable\LogoYellow.png" />
-    <AndroidResource Include="Resources\mipmap-hdpi\Icon2.png" />
-    <AndroidResource Include="Resources\mipmap-mdpi\Icon2.png" />
-    <AndroidResource Include="Resources\mipmap-xhdpi\Icon2.png" />
-    <AndroidResource Include="Resources\mipmap-xxhdpi\Icon2.png" />
-    <AndroidResource Include="Resources\mipmap-xxxhdpi\Icon2.png" />
     <AndroidResource Include="Resources\values\theme.xml" />
     <AndroidResource Include="Resources\layout\Dashboard.axml" />
+    <AndroidResource Include="Resources\drawable-hdpi\LogoRed.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\chevronRight.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\LogoBlack.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\LogoBlue.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\LogoGreen.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\LogoOrange.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\LogoPink.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\LogoPurple.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\LogoTealBlue.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\LogoWhite.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\LogoYellow.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\chevronRight.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\LogoBlack.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\LogoBlue.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\LogoGreen.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\LogoOrange.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\LogoPink.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\LogoPurple.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\LogoRed.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\LogoTealBlue.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\LogoWhite.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\LogoYellow.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\chevronRight.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\LogoBlack.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\LogoBlue.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\LogoGreen.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\LogoOrange.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\LogoPink.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\LogoPurple.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\LogoRed.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\LogoTealBlue.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\LogoWhite.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\LogoYellow.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\chevronRight.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\LogoBlack.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\LogoBlue.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\LogoGreen.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\LogoOrange.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\LogoPink.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\LogoPurple.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\LogoRed.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\LogoTealBlue.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\LogoWhite.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\LogoYellow.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\urgent.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\urgent.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\urgent.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\urgent.png" />
+    <AndroidResource Include="Resources\layout\RequestRow.axml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\drawable\" />
+    <Folder Include="Resources\drawable-hdpi\" />
+    <Folder Include="Activities\" />
+    <Folder Include="Resources\drawable-mdpi\" />
+    <Folder Include="Resources\drawable-xhdpi\" />
+    <Folder Include="Resources\drawable-xxhdpi\" />
+    <Folder Include="Resources\Table Rows\" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="json.net">

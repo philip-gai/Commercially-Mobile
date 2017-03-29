@@ -5,7 +5,7 @@
 		<item name="android:colorBackground">@color/theme_devicedefault_background</item>
 		<item name="android:windowBackground">?android:attr/colorBackground</item>
 		<item name="android:colorPrimary">#ffff3b30</item>
-		<item name="android:colorPrimaryDark">#ffb71c1c</item>
+		<item name="android:colorPrimaryDark">#7fff3b30</item>
 		<item name="android:colorAccent">#ff5ac8fa</item>
 		<item name="android:colorControlNormal">@android:color/black</item>
 		<item name="android:colorButtonNormal">#ffff3b30</item>

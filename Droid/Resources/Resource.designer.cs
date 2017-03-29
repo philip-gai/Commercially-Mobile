@@ -61,34 +61,40 @@ namespace Commercially.Droid
 		{
 			
 			// aapt resource value: 0x7f020000
-			public const int LogoBlack = 2130837504;
+			public const int chevronRight = 2130837504;
 			
 			// aapt resource value: 0x7f020001
-			public const int LogoBlue = 2130837505;
+			public const int LogoBlack = 2130837505;
 			
 			// aapt resource value: 0x7f020002
-			public const int LogoGreen = 2130837506;
+			public const int LogoBlue = 2130837506;
 			
 			// aapt resource value: 0x7f020003
-			public const int LogoOrange = 2130837507;
+			public const int LogoGreen = 2130837507;
 			
 			// aapt resource value: 0x7f020004
-			public const int LogoPink = 2130837508;
+			public const int LogoOrange = 2130837508;
 			
 			// aapt resource value: 0x7f020005
-			public const int LogoPurple = 2130837509;
+			public const int LogoPink = 2130837509;
 			
 			// aapt resource value: 0x7f020006
-			public const int LogoRed = 2130837510;
+			public const int LogoPurple = 2130837510;
 			
 			// aapt resource value: 0x7f020007
-			public const int LogoTealBlue = 2130837511;
+			public const int LogoRed = 2130837511;
 			
 			// aapt resource value: 0x7f020008
-			public const int LogoWhite = 2130837512;
+			public const int LogoTealBlue = 2130837512;
 			
 			// aapt resource value: 0x7f020009
-			public const int LogoYellow = 2130837513;
+			public const int LogoWhite = 2130837513;
+			
+			// aapt resource value: 0x7f02000a
+			public const int LogoYellow = 2130837514;
+			
+			// aapt resource value: 0x7f02000b
+			public const int urgent = 2130837515;
 			
 			static Drawable()
 			{
@@ -103,32 +109,53 @@ namespace Commercially.Droid
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f080006
-			public const int EmailField = 2131230726;
-			
-			// aapt resource value: 0x7f080008
-			public const int LoginButton = 2131230728;
-			
-			// aapt resource value: 0x7f080007
-			public const int PasswordField = 2131230727;
-			
-			// aapt resource value: 0x7f080004
-			public const int imageView1 = 2131230724;
+			// aapt resource value: 0x7f080003
+			public const int EmailField = 2131230723;
 			
 			// aapt resource value: 0x7f080005
-			public const int linearLayout1 = 2131230725;
-			
-			// aapt resource value: 0x7f080000
-			public const int tableLayout1 = 2131230720;
+			public const int LoginButton = 2131230725;
 			
 			// aapt resource value: 0x7f080001
-			public const int tableRow1 = 2131230721;
+			public const int LogoImage = 2131230721;
+			
+			// aapt resource value: 0x7f080004
+			public const int PasswordField = 2131230724;
+			
+			// aapt resource value: 0x7f080006
+			public const int RequestRow = 2131230726;
+			
+			// aapt resource value: 0x7f080009
+			public const int descriptionText = 2131230729;
+			
+			// aapt resource value: 0x7f080007
+			public const int layout1 = 2131230727;
+			
+			// aapt resource value: 0x7f080008
+			public const int layout2 = 2131230728;
+			
+			// aapt resource value: 0x7f08000a
+			public const int layout3 = 2131230730;
 			
 			// aapt resource value: 0x7f080002
-			public const int tableRow2 = 2131230722;
+			public const int linearLayout = 2131230722;
 			
-			// aapt resource value: 0x7f080003
-			public const int tableRow3 = 2131230723;
+			// aapt resource value: 0x7f08000b
+			public const int locationText = 2131230731;
+			
+			// aapt resource value: 0x7f08000f
+			public const int rowArrow = 2131230735;
+			
+			// aapt resource value: 0x7f08000d
+			public const int statusText = 2131230733;
+			
+			// aapt resource value: 0x7f080000
+			public const int tableLayout = 2131230720;
+			
+			// aapt resource value: 0x7f08000c
+			public const int timeText = 2131230732;
+			
+			// aapt resource value: 0x7f08000e
+			public const int urgentIndicator = 2131230734;
 			
 			static Id()
 			{
@@ -149,6 +176,9 @@ namespace Commercially.Droid
 			// aapt resource value: 0x7f040001
 			public const int Login = 2130968577;
 			
+			// aapt resource value: 0x7f040002
+			public const int RequestRow = 2130968578;
+			
 			static Layout()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
@@ -164,9 +194,6 @@ namespace Commercially.Droid
 			
 			// aapt resource value: 0x7f030000
 			public const int Icon = 2130903040;
-			
-			// aapt resource value: 0x7f030001
-			public const int Icon2 = 2130903041;
 			
 			static Mipmap()
 			{

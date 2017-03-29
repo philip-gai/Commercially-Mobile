@@ -10,15 +10,5 @@
         android:minHeight="25px"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tableLayout1">
-        <TableRow
-            android:id="@+id/tableRow1">
-        </TableRow>
-        <TableRow
-            android:id="@+id/tableRow2">
-        </TableRow>
-        <TableRow
-            android:id="@+id/tableRow3">
-        </TableRow>
-    </TableLayout>
+        android:id="@+id/tableLayout" />
 </LinearLayout>
