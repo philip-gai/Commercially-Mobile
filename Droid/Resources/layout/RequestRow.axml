@@ -7,7 +7,6 @@
         android:orientation="horizontal"
         android:minWidth="25px"
         android:minHeight="25px"
-        android:id="@+id/layout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -16,7 +15,6 @@
             android:orientation="vertical"
             android:minWidth="25px"
             android:minHeight="25px"
-            android:id="@+id/layout2"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1">
@@ -36,7 +34,6 @@
                 android:minHeight="25px"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:id="@+id/layout3"
                 android:layout_weight="1">
                 <TextView
                     android:text="Room"
@@ -72,7 +69,6 @@
         </LinearLayout>
         <ImageView
             android:src="@drawable/chevronRight"
-            android:id="@+id/rowArrow"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:alpha="0.25" />

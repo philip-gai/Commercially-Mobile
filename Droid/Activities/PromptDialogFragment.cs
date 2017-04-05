@@ -14,22 +14,13 @@ using Android.Widget;
 
 namespace Commercially.Droid
 {
-	public class AlertDialogFragment : DialogFragment
+	public class PromptDialogFragment : DialogFragment
 	{
-		string title;
+		readonly string Title;
 
-		public static AlertDialogFragment newInstance(string title) {
-			var fragment = new AlertDialogFragment();
-			var args = new Bundle();
-			args.PutString("title", title);
-			fragment.Arguments = args;
-			return fragment;
-		}
-
-		public override void OnCreate(Bundle savedInstanceState)
+		public PromptDialogFragment (string title)
 		{
-			base.OnCreate(savedInstanceState);
-			title = Arguments.GetString("title");
+			Title = title;
 		}
 
 		public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -38,13 +29,13 @@ namespace Commercially.Droid
 			var promptMessage = prompt.FindViewById<TextView>(Resource.Id.promptMessage);
 			var dismissButton = prompt.FindViewById<Button>(Resource.Id.dismissButton);
 
-			promptMessage.Text = title;
+			promptMessage.Text = Title;
+
 			dismissButton.Click += (sender, e) => {
-				Dialog.Show();
+				Dismiss();
 			};
 
 			return prompt;
 		}
-		
 	}
 }

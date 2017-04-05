@@ -1,22 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="300dp"
+    android:layout_height="300dp"
+    android:background="#000000">
     <ImageView
-        android:src="@android:drawable/ic_menu_gallery"
+        android:src="@drawable/logored"
+        android:id="@+id/logoView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/logoView" />
+        android:layout_height="100dp"
+        android:layout_gravity="center_horizontal"
+        android:background="#ffffffff" />
     <TextView
         android:text="Medium Text"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/promptMessage" />
+        android:id="@+id/promptMessage"
+        android:background="#ffff3b30"
+        android:gravity="center"
+        android:textColor="#ffffffff"
+        android:padding="10dp"
+        android:layout_width="300dp"
+        android:layout_height="100dp" />
     <Button
-        android:text="Button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/dismissButton" />
+        android:text="Dismiss"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:id="@+id/dismissButton"
+        android:textColor="#ffff3b30"
+        android:background="#ffffffff" />
 </LinearLayout>

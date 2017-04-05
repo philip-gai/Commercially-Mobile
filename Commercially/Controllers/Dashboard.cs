@@ -8,6 +8,7 @@ namespace Commercially
 		public static int[] SectionToArray = new int[SectionTitles.Length];
 		public static double HeaderHeight = 50;
 		public static double RowHeight = 88;
+		public static double RowAlpha = 0.33;
 		public static Color[] SectionBackgroundColors = { GlobalConstants.DefaultColors.Yellow, GlobalConstants.DefaultColors.Green, GlobalConstants.DefaultColors.Purple };
 
 		public static void GetRequests(Action OnSuccess, Action<Exception> IfException)
@@ -16,6 +17,8 @@ namespace Commercially
 				try {
 					if (Session.TestMode) {
 						Session.Requests = RequestApi.GetOfflineRequests();
+						RequestLists = Request.GetRequestLists(Session.Requests, new RequestStatusType[] { RequestStatusType.Assigned, RequestStatusType.Completed, RequestStatusType.Cancelled });
+						OnSuccess.Invoke();
 						return;
 					}
 					Session.Requests = RequestApi.GetRequests();

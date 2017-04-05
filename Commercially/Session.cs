@@ -10,6 +10,6 @@ namespace Commercially
 		public static FlicButton[] Buttons;
 		public static Client[] Clients;
 		public static TaskFactory TaskFactory = new TaskFactory();
-		public static bool TestMode;
+		public static bool TestMode = true;
 	}
 }

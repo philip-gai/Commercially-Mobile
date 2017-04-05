@@ -87,7 +87,7 @@ namespace Commercially.iOS
 			var cell = tableView.DequeueReusableCell(RequestCell.Key, indexPath) as RequestCell;
 			cell.Request = Dashboard.RequestLists[arrayIndex][indexPath.Row];
 			cell.SetStatusLabelIsHidden(true);
-			cell.BackgroundColor = Dashboard.SectionBackgroundColors[arrayIndex].GetUIColor().ColorWithAlpha((nfloat)0.33);
+			cell.BackgroundColor = Dashboard.SectionBackgroundColors[arrayIndex].GetUIColor().ColorWithAlpha((nfloat)Dashboard.RowAlpha);
 			return cell;
 		}
 

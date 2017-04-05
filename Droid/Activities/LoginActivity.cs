@@ -27,16 +27,14 @@ namespace Commercially.Droid
 
 			LoginButton.Click += delegate {
 				try {
-					var response = UserApi.LoginUser(EmailField.Text, PasswordField.Text);
-					Session.OAuth = new OAuthResponse(response);
-					Session.User = new User(EmailField.Text, PasswordField.Text);
+					//var response = UserApi.LoginUser(EmailField.Text, PasswordField.Text);
+					//Session.OAuth = new OAuthResponse(response);
+					//Session.User = new User(EmailField.Text, PasswordField.Text);
 					var intent = new Intent(this, typeof(DashboardActivity));
 					StartActivity(intent);
 				} catch (Exception e) {
-					//Intent intent = new Intent();
-					//intent.SetClass(Activity, typeof());
-					//var newFragment = new AlertDialogFragment();
-					//newFragment.Show(FragmentManager, e.Message);
+					var newFragment = new PromptDialogFragment(e.Message);
+					newFragment.Show(FragmentManager, "Error");
 				}
 			};
 		}

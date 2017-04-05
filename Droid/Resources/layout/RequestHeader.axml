@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TableRow xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/RequestRow"
     android:layout_height="142dp"
     android:layout_width="match_parent">
     <LinearLayout
         android:orientation="horizontal"
         android:minWidth="25px"
         android:minHeight="25px"
-        android:id="@+id/layout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -16,7 +14,6 @@
             android:orientation="vertical"
             android:minWidth="25px"
             android:minHeight="25px"
-            android:id="@+id/layout2"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1">
