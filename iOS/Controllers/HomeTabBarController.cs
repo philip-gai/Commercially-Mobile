@@ -18,14 +18,7 @@ namespace Commercially.iOS
 			NavigationItem.SetTitleImage("Logo-Red", NavigationController.NavigationBar);
 			NavigationItem.RightBarButtonItem = new UIBarButtonItem(UIImage.FromBundle("notification"), UIBarButtonItemStyle.Plain, (sender, e) => { });
 			NavigationItem.RightBarButtonItem.TintColor = GlobalConstants.DefaultColors.Red.GetUIColor();
-			PrefetchData();
-		}
-
-		void PrefetchData()
-		{
-			SessionData.TaskFactory.StartNew(delegate {
-				SessionData.Clients = ClientApi.GetClients();
-			});
+			Home.PrefetchData();
 		}
 	}
 }

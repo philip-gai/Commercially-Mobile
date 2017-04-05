@@ -78,7 +78,7 @@ namespace Commercially.iOS
 					ButtonApi.PatchButton(Button.bluetooth_id, jsonBody.ToString());
 				}
 				if (PickerChanged) {
-					ButtonApi.PairButton(Button.bluetooth_id, Client.FindClient(SelectedClient, SessionData.Clients).clientId);
+					ButtonApi.PairButton(Button.bluetooth_id, Client.FindClient(SelectedClient, Session.Clients).clientId);
 				}
 			} catch (Exception e) {
 				NavigationController.ShowPrompt(e.Message, 50);
@@ -106,7 +106,7 @@ namespace Commercially.iOS
 				ClientPickerView.Model = new ClientPickerViewModel(FlicButton.GetDiscoveredByClients(Button), OnPickerChange);
 			}
 			if (!ClientIdLabel.Hidden) {
-				Client tmpClient = Client.FindClient(Button.clientId, SessionData.Clients);
+				Client tmpClient = Client.FindClient(Button.clientId, Session.Clients);
 				ClientIdLabel.Text = tmpClient != null && tmpClient.friendlyName != null ? tmpClient.friendlyName : Button.clientId;
 			}
 			SaveButton.Hidden = true;

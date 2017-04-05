@@ -23,33 +23,18 @@ namespace Commercially.iOS
 				return _Request;
 			}
 			set {
-				LocationLabel.Text = value.room ?? null;
+				_Request = value;
+				LocationLabel.Text = value.room;
 				TimeLabel.Text = value.GetTime(Request.TimeType.Received) ?? "N/A";
-				SetStatusLabel(value);
+				StatusLabel.Text = _Request.GetStatus().ToString();
 				UrgentIndicator.Hidden = !value.urgent;
 				Message.Text = value.description;
-				_Request = value;
 			}
 		}
 
 		public void SetStatusLabelIsHidden(bool isHidden)
 		{
 			StatusLabel.Hidden = isHidden;
-		}
-
-		void SetStatusLabel(Request request)
-		{
-			switch (request.GetStatus()) {
-				case RequestStatusType.New:
-					StatusLabel.Text = Localizable.Labels.ToDo;
-					break;
-				case RequestStatusType.Assigned:
-					StatusLabel.Text = Localizable.Labels.InProgress;
-					break;
-				case RequestStatusType.Completed:
-					StatusLabel.Text = Localizable.Labels.Complete;
-					break;
-			}
 		}
 	}
 }

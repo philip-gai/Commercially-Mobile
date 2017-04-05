@@ -71,6 +71,7 @@
     <Compile Include="Resources\AlertDialogFragment.cs" />
     <Compile Include="Activities\LoginActivity.cs" />
     <Compile Include="Activities\DashboardActivity.cs" />
+    <Compile Include="Extensions\ColorExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -137,6 +138,7 @@
     <AndroidResource Include="Resources\drawable-xhdpi\urgent.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\urgent.png" />
     <AndroidResource Include="Resources\layout\RequestRow.axml" />
+    <AndroidResource Include="Resources\layout\RequestHeader.axml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable-hdpi\" />
@@ -144,7 +146,7 @@
     <Folder Include="Resources\drawable-mdpi\" />
     <Folder Include="Resources\drawable-xhdpi\" />
     <Folder Include="Resources\drawable-xxhdpi\" />
-    <Folder Include="Resources\Table Rows\" />
+    <Folder Include="Extensions\" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="json.net">

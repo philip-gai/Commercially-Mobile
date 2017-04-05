@@ -22,7 +22,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Exceptions\ErrorResponseException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Exceptions\ObjectExistsException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\OAuthResponse.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)SessionData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Session.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\Color.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)APIs\RequestApi.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enumerations\UserRoleType.cs" />
@@ -35,6 +35,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)APIs\ButtonApi.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\Client.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)APIs\ClientApi.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controllers\Dashboard.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controllers\Home.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Entities\" />
@@ -44,5 +46,7 @@
     <Folder Include="$(MSBuildThisFileDirectory)Enumerations\" />
     <Folder Include="$(MSBuildThisFileDirectory)Extensions\" />
     <Folder Include="$(MSBuildThisFileDirectory)Constants\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Controllers\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Table Cells\" />
   </ItemGroup>
 </Project>

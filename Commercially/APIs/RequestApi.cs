@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -11,12 +11,12 @@ namespace Commercially
 
 		public static Request[] GetRequests()
 		{
-			var resp = HttpRequest.MakeRequest(HttpRequestMethodType.GET, Url, "", "Bearer " + SessionData.OAuth.access_token);
+			var resp = HttpRequest.MakeRequest(HttpRequestMethodType.GET, Url, "", "Bearer " + Session.OAuth.access_token);
 			return JsonConvert.DeserializeObject<List<Request>>(resp).ToArray();
 		}
 
 		public static string PatchRequest(string id, string body) {
-			var resp = HttpRequest.MakeRequest(HttpRequestMethodType.PATCH, Url + id, body, "Bearer " + SessionData.OAuth.access_token);
+			var resp = HttpRequest.MakeRequest(HttpRequestMethodType.PATCH, Url + id, body, "Bearer " + Session.OAuth.access_token);
 			return resp;
 		}
 
@@ -29,7 +29,7 @@ namespace Commercially
 					jsonBody.Add("assignedTo", "");
 					jsonBody.Add("time_scheduled", "");
 					jsonBody.Add("time_completed", "");
-					return HttpRequest.MakeRequest(HttpRequestMethodType.PATCH, Url + id, jsonBody.ToString(), "Bearer " + SessionData.OAuth.access_token);
+					return HttpRequest.MakeRequest(HttpRequestMethodType.PATCH, Url + id, jsonBody.ToString(), "Bearer " + Session.OAuth.access_token);
 				case RequestStatusType.Assigned:
 					service = "/claim";
 					break;
@@ -40,7 +40,7 @@ namespace Commercially
 					service = "/cancel";
 					break;
 			}
-			var resp = HttpRequest.MakeRequest(HttpRequestMethodType.POST, Url + id + service, "", "Bearer " + SessionData.OAuth.access_token);
+			var resp = HttpRequest.MakeRequest(HttpRequestMethodType.POST, Url + id + service, "", "Bearer " + Session.OAuth.access_token);
 			return resp;
 		}
 

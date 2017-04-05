@@ -26,10 +26,10 @@ namespace Commercially.iOS
 		public override void ViewWillAppear(bool animated)
 		{
 			base.ViewWillAppear(animated);
-			SessionData.TaskFactory.StartNew(delegate {
+			Session.TaskFactory.StartNew(delegate {
 				try {
-					SessionData.Requests = RequestApi.GetRequests();
-					NewRequestList = Request.GetRequestLists(SessionData.Requests, new RequestStatusType[] { RequestStatusType.New })[0];
+					Session.Requests = RequestApi.GetRequests();
+					NewRequestList = Request.GetRequestLists(Session.Requests, new RequestStatusType[] { RequestStatusType.New })[0];
 					InvokeOnMainThread(delegate {
 						TableView.ReloadData();
 					});

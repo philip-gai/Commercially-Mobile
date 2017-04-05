@@ -11,7 +11,7 @@ namespace Commercially.iOS
 		public Request Request;
 		bool IsMyRequest {
 			get {
-				return Request.assignedTo != null && Request.assignedTo.Equals(SessionData.User.email);
+				return Request.assignedTo != null && Request.assignedTo.Equals(Session.User.email);
 			}
 		}
 		bool StatusChanged {

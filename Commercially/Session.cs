@@ -2,7 +2,7 @@
 
 namespace Commercially
 {
-	public static class SessionData
+	public static class Session
 	{
 		public static User User;
 		public static OAuthResponse OAuth;

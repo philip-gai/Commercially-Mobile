@@ -16,9 +16,9 @@ namespace Commercially.iOS
 		public override void ViewWillAppear(bool animated)
 		{
 			base.ViewWillAppear(animated);
-			SessionData.TaskFactory.StartNew(delegate {
+			Session.TaskFactory.StartNew(delegate {
 				try {
-					SessionData.Buttons = ButtonApi.GetButtons();
+					Session.Buttons = ButtonApi.GetButtons();
 					InvokeOnMainThread(delegate {
 						TableView.ReloadData();
 					});
@@ -40,12 +40,12 @@ namespace Commercially.iOS
 
 		public override nint NumberOfSections(UITableView tableView)
 		{
-			return SessionData.Buttons == null ? 0 : SessionData.Buttons.Length == 0 ? 0 : 1;
+			return Session.Buttons == null ? 0 : Session.Buttons.Length == 0 ? 0 : 1;
 		}
 
 		public override nint RowsInSection(UITableView tableView, nint section)
 		{
-			return SessionData.Buttons == null ? 0 : SessionData.Buttons.Length;
+			return Session.Buttons == null ? 0 : Session.Buttons.Length;
 		}
 
 		public override nfloat GetHeightForHeader(UITableView tableView, nint section)
@@ -66,8 +66,8 @@ namespace Commercially.iOS
 			var Frame = new CGRect(10, 0, HeaderView.Frame.Width, HeaderHeight);
 			var Label = new UILabel(Frame);
 			Label.Text = "Buttons";
-			if (SessionData.Buttons != null) {
-				Label.Text += " (" + SessionData.Buttons.Length + ")";
+			if (Session.Buttons != null) {
+				Label.Text += " (" + Session.Buttons.Length + ")";
 			}
 			HeaderView.AddSubview(Label);
 			return HeaderView;
@@ -76,7 +76,7 @@ namespace Commercially.iOS
 		public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
 		{
 			var cell = tableView.DequeueReusableCell(ButtonCell.Key, indexPath) as ButtonCell;
-			cell.Button = SessionData.Buttons[indexPath.Row];
+			cell.Button = Session.Buttons[indexPath.Row];
 			cell.BackgroundColor = GlobalConstants.DefaultColors.TealBlue.GetUIColor().ColorWithAlpha((nfloat)0.33);
 			return cell;
 		}
@@ -85,7 +85,7 @@ namespace Commercially.iOS
 		{
 			var buttonDetailsController = UINavigationControllerExtensions.GetViewController(GlobalConstants.Screens.ButtonDetails) as ButtonDetailsController;
 			NavigationController.PushViewController(buttonDetailsController, true);
-			buttonDetailsController.Button = SessionData.Buttons[indexPath.Row];
+			buttonDetailsController.Button = Session.Buttons[indexPath.Row];
 		}
 	}
 }

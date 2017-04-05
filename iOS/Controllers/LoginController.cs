@@ -52,15 +52,15 @@ namespace Commercially.iOS
 		public override void ButtonTouchUpInside(object sender, EventArgs events)
 		{
 			if (CheckIfFieldsValid()) {
-				if (SessionData.TestMode) {
+				if (Session.TestMode) {
 					// MUST REMOVE THIS LATER. FOR TESTING ONLY
 					NavigationController.GetAndActOnViewController(GlobalConstants.Screens.Home);
 					return;
 				}
 				try {
 					var response = UserApi.LoginUser(EmailField.Text, PasswordField.Text);
-					SessionData.OAuth = new OAuthResponse(response);
-					SessionData.User = new User(EmailField.Text, PasswordField.Text);
+					Session.OAuth = new OAuthResponse(response);
+					Session.User = new User(EmailField.Text, PasswordField.Text);
 					NavigationController.GetAndActOnViewController(GlobalConstants.Screens.Home);
 				} catch (Exception e) {
 					NavigationController.ShowPrompt(e.Message, 50);
