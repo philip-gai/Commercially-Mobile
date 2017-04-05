@@ -13,10 +13,7 @@ namespace Commercially.Droid
 
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
-			ServicePointManager.ServerCertificateValidationCallback = delegate {
-				return true;
-			};
-
+			Main.Initialize();
 			base.OnCreate(savedInstanceState);
 
 			// Set our view from the "login" layout resource
@@ -30,14 +27,16 @@ namespace Commercially.Droid
 
 			LoginButton.Click += delegate {
 				try {
-					//var response = UserApi.LoginUser(EmailField.Text, PasswordField.Text);
-					//SessionData.OAuth = new OAuthResponse(response);
-					//SessionData.User = new User(EmailField.Text, PasswordField.Text);
+					var response = UserApi.LoginUser(EmailField.Text, PasswordField.Text);
+					Session.OAuth = new OAuthResponse(response);
+					Session.User = new User(EmailField.Text, PasswordField.Text);
 					var intent = new Intent(this, typeof(DashboardActivity));
 					StartActivity(intent);
 				} catch (Exception e) {
-					var newFragment = new AlertDialogFragment();
-					newFragment.Show(FragmentManager, e.Message);
+					//Intent intent = new Intent();
+					//intent.SetClass(Activity, typeof());
+					//var newFragment = new AlertDialogFragment();
+					//newFragment.Show(FragmentManager, e.Message);
 				}
 			};
 		}

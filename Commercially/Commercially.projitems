@@ -37,6 +37,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)APIs\ClientApi.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Dashboard.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Home.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Main.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Entities\" />

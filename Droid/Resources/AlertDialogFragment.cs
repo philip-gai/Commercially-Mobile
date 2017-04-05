@@ -16,18 +16,35 @@ namespace Commercially.Droid
 {
 	public class AlertDialogFragment : DialogFragment
 	{
-		public static AlertDialogFragment NewInstance(int title) {
+		string title;
+
+		public static AlertDialogFragment newInstance(string title) {
 			var fragment = new AlertDialogFragment();
-			Bundle args = new Bundle();
-			args.PutInt("title", title);
+			var args = new Bundle();
+			args.PutString("title", title);
 			fragment.Arguments = args;
 			return fragment;
 		}
 
-		public override Dialog OnCreateDialog(Bundle savedInstanceState)
+		public override void OnCreate(Bundle savedInstanceState)
 		{
-			return new AlertDialog.Builder(Activity)
-								  .Create();
+			base.OnCreate(savedInstanceState);
+			title = Arguments.GetString("title");
 		}
+
+		public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+		{
+			var prompt = inflater.Inflate(Resource.Layout.Prompt, container, false);
+			var promptMessage = prompt.FindViewById<TextView>(Resource.Id.promptMessage);
+			var dismissButton = prompt.FindViewById<Button>(Resource.Id.dismissButton);
+
+			promptMessage.Text = title;
+			dismissButton.Click += (sender, e) => {
+				Dialog.Show();
+			};
+
+			return prompt;
+		}
+		
 	}
 }

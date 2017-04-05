@@ -1,5 +1,4 @@
-﻿using System.Net;
-using UIKit;
+﻿using UIKit;
 
 namespace Commercially.iOS
 {
@@ -10,9 +9,7 @@ namespace Commercially.iOS
 		{
 			// if you want to use a different Application Delegate class from "AppDelegate"
 			// you can specify it here.
-			ServicePointManager.ServerCertificateValidationCallback = delegate {
-				return true;
-			};
+			Commercially.Main.Initialize();
 			UIApplication.Main(args, null, "AppDelegate");
 		}
 	}

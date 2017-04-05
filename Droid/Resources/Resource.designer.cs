@@ -121,44 +121,53 @@ namespace Commercially.Droid
 			// aapt resource value: 0x7f080004
 			public const int PasswordField = 2131230724;
 			
-			// aapt resource value: 0x7f080006
-			public const int RequestRow = 2131230726;
-			
-			// aapt resource value: 0x7f08000a
-			public const int descriptionText = 2131230730;
-			
 			// aapt resource value: 0x7f080009
-			public const int headerText = 2131230729;
+			public const int RequestRow = 2131230729;
 			
-			// aapt resource value: 0x7f080007
-			public const int layout1 = 2131230727;
+			// aapt resource value: 0x7f08000d
+			public const int descriptionText = 2131230733;
 			
 			// aapt resource value: 0x7f080008
-			public const int layout2 = 2131230728;
+			public const int dismissButton = 2131230728;
+			
+			// aapt resource value: 0x7f08000c
+			public const int headerText = 2131230732;
+			
+			// aapt resource value: 0x7f08000a
+			public const int layout1 = 2131230730;
 			
 			// aapt resource value: 0x7f08000b
-			public const int layout3 = 2131230731;
+			public const int layout2 = 2131230731;
+			
+			// aapt resource value: 0x7f08000e
+			public const int layout3 = 2131230734;
 			
 			// aapt resource value: 0x7f080002
 			public const int linearLayout = 2131230722;
 			
-			// aapt resource value: 0x7f08000c
-			public const int locationText = 2131230732;
+			// aapt resource value: 0x7f08000f
+			public const int locationText = 2131230735;
 			
-			// aapt resource value: 0x7f080010
-			public const int rowArrow = 2131230736;
+			// aapt resource value: 0x7f080006
+			public const int logoView = 2131230726;
 			
-			// aapt resource value: 0x7f08000e
-			public const int statusText = 2131230734;
+			// aapt resource value: 0x7f080007
+			public const int promptMessage = 2131230727;
+			
+			// aapt resource value: 0x7f080013
+			public const int rowArrow = 2131230739;
+			
+			// aapt resource value: 0x7f080011
+			public const int statusText = 2131230737;
 			
 			// aapt resource value: 0x7f080000
 			public const int tableLayout = 2131230720;
 			
-			// aapt resource value: 0x7f08000d
-			public const int timeText = 2131230733;
+			// aapt resource value: 0x7f080010
+			public const int timeText = 2131230736;
 			
-			// aapt resource value: 0x7f08000f
-			public const int urgentIndicator = 2131230735;
+			// aapt resource value: 0x7f080012
+			public const int urgentIndicator = 2131230738;
 			
 			static Id()
 			{
@@ -180,10 +189,13 @@ namespace Commercially.Droid
 			public const int Login = 2130968577;
 			
 			// aapt resource value: 0x7f040002
-			public const int RequestHeader = 2130968578;
+			public const int Prompt = 2130968578;
 			
 			// aapt resource value: 0x7f040003
-			public const int RequestRow = 2130968579;
+			public const int RequestHeader = 2130968579;
+			
+			// aapt resource value: 0x7f040004
+			public const int RequestRow = 2130968580;
 			
 			static Layout()
 			{
