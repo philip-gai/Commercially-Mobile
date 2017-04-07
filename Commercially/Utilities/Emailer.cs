@@ -1,6 +1,6 @@
 ﻿using System;
-using MimeKit;
-using MailKit.Net.Smtp;
+//using MimeKit;
+//using MailKit.Net.Smtp;
 
 namespace Commercially {
 	public static class Emailer {

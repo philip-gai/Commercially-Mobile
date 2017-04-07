@@ -3,21 +3,23 @@ using System.Net;
 using Android.App;
 using Android.Widget;
 using Android.OS;
-using Android.Content;
+using Android.Content; 
 
 namespace Commercially.Droid
 {
 	[Activity(Label = "Commercially", MainLauncher = true, Icon = "@mipmap/icon")]
 	public class LoginActivity : Activity
 	{
-
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
-			Main.Initialize();
 			base.OnCreate(savedInstanceState);
 
 			// Set our view from the "login" layout resource
 			SetContentView(Resource.Layout.Login);
+
+			Main.Initialize();
+			//Window.SetStatusBarColor(GetColor(Resource.Id.);
+			ActionBar.Hide();
 
 			// Get our button from the layout resource,
 			// and attach an event to it
@@ -27,11 +29,10 @@ namespace Commercially.Droid
 
 			LoginButton.Click += delegate {
 				try {
-					//var response = UserApi.LoginUser(EmailField.Text, PasswordField.Text);
-					//Session.OAuth = new OAuthResponse(response);
-					//Session.User = new User(EmailField.Text, PasswordField.Text);
-					var intent = new Intent(this, typeof(DashboardActivity));
-					StartActivity(intent);
+					var response = UserApi.LoginUser(EmailField.Text, PasswordField.Text);
+					Session.OAuth = new OAuthResponse(response);
+					Session.User = new User(EmailField.Text, PasswordField.Text);
+					StartActivity(new Intent(this, typeof(DashboardActivity)));
 				} catch (Exception e) {
 					var newFragment = new PromptDialogFragment(e.Message);
 					newFragment.Show(FragmentManager, "Error");

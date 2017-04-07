@@ -12,24 +12,24 @@ namespace Commercially
 		public string room { get; set; }
 		public string time_received { get; set; }
 
-		public string GetTime(TimeType type)
+		public DateTime? GetTime(TimeType type)
 		{
-			DateTime? Time = null;
+			DateTime? time = null;
 			switch (type) {
 				case TimeType.Received:
-					Time = time_received.ConvertToDateTime();
+					time = time_received.ConvertToDateTime();
 					break;
 				case TimeType.Scheduled:
-					Time = time_scheduled.ConvertToDateTime();
+					time = time_scheduled.ConvertToDateTime();
 					break;
 				case TimeType.Completed:
-					Time = time_completed.ConvertToDateTime();
+					time = time_completed.ConvertToDateTime();
 					break;
 			}
-			if (Time == null) {
+			if (time == null) {
 				return null;
 			}
-			return Time?.ToShortTimeString() + " " + Time?.ToShortDateString();
+			return time;
 		}
 		public string time_completed { get; set; }
 		public string time_scheduled { get; set; }

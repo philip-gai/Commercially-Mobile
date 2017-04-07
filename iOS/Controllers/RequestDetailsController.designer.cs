@@ -64,7 +64,7 @@ namespace Commercially.iOS
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIView UrgentIndicator { get; set; }
+        UIKit.UIImageView UrgentIndicator { get; set; }
 
         [Action ("AssignButtonPress:")]
         [GeneratedCode ("iOS Designer", "1.0")]

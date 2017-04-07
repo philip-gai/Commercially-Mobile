@@ -15,6 +15,10 @@ namespace Commercially.iOS
     {
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel ClientLabel { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UILabel DescriptionLabel { get; set; }
 
         [Outlet]
@@ -23,6 +27,11 @@ namespace Commercially.iOS
 
         void ReleaseDesignerOutlets ()
         {
+            if (ClientLabel != null) {
+                ClientLabel.Dispose ();
+                ClientLabel = null;
+            }
+
             if (DescriptionLabel != null) {
                 DescriptionLabel.Dispose ();
                 DescriptionLabel = null;

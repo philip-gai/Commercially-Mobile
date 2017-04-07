@@ -25,7 +25,7 @@ namespace Commercially.iOS
 			set {
 				_Request = value;
 				LocationLabel.Text = value.room;
-				TimeLabel.Text = value.GetTime(Request.TimeType.Received) ?? "N/A";
+				TimeLabel.Text = value.GetTime(Request.TimeType.Received)?.ToShortTimeString();
 				StatusLabel.Text = _Request.GetStatus().ToString();
 				UrgentIndicator.Hidden = !value.urgent;
 				Message.Text = value.description;

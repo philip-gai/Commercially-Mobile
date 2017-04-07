@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Commercially.Droid</RootNamespace>
     <AssemblyName>Commercially.Droid</AssemblyName>
-    <TargetFrameworkVersion>v7.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v6.0</TargetFrameworkVersion>
     <AndroidApplication>True</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AndroidResgenClass>Resource</AndroidResgenClass>
@@ -46,23 +46,24 @@
     <Reference Include="System.Data" />
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="Microsoft.AspNetCore.Cryptography.Internal">
-      <HintPath>..\packages\Microsoft.AspNetCore.Cryptography.Internal.1.1.0\lib\netstandard1.3\Microsoft.AspNetCore.Cryptography.Internal.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AspNetCore.Cryptography.KeyDerivation">
-      <HintPath>..\packages\Microsoft.AspNetCore.Cryptography.KeyDerivation.1.1.0\lib\netstandard1.3\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll</HintPath>
-    </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="BouncyCastle">
-      <HintPath>..\packages\MimeKit.1.10.1\lib\MonoAndroid10\BouncyCastle.dll</HintPath>
+      <HintPath>..\packages\MimeKit.1.12.0\lib\MonoAndroid10\BouncyCastle.dll</HintPath>
     </Reference>
     <Reference Include="MimeKit">
-      <HintPath>..\packages\MimeKit.1.10.1\lib\MonoAndroid10\MimeKit.dll</HintPath>
+      <HintPath>..\packages\MimeKit.1.12.0\lib\MonoAndroid10\MimeKit.dll</HintPath>
     </Reference>
     <Reference Include="MailKit">
-      <HintPath>..\packages\MailKit.1.10.2\lib\MonoAndroid10\MailKit.dll</HintPath>
+      <HintPath>..\packages\MailKit.1.12.0\lib\MonoAndroid10\MailKit.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Cryptography.Internal">
+      <HintPath>..\packages\Microsoft.AspNetCore.Cryptography.Internal.1.1.1\lib\netstandard1.3\Microsoft.AspNetCore.Cryptography.Internal.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Cryptography.KeyDerivation">
+      <HintPath>..\packages\Microsoft.AspNetCore.Cryptography.KeyDerivation.1.1.1\lib\netstandard1.3\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -71,7 +72,9 @@
     <Compile Include="Activities\LoginActivity.cs" />
     <Compile Include="Activities\DashboardActivity.cs" />
     <Compile Include="Extensions\ColorExtensions.cs" />
-    <Compile Include="Activities\PromptDialogFragment.cs" />
+    <Compile Include="Fragments\PromptDialogFragment.cs" />
+    <Compile Include="Activities\RequestListActivity.cs" />
+    <Compile Include="Extensions\ActivityExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -135,11 +138,30 @@
     <AndroidResource Include="Resources\drawable-mdpi\urgent.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\urgent.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\urgent.png" />
-    <AndroidResource Include="Resources\layout\Dashboard.axml" />
+    <AndroidResource Include="Resources\layout\Table.axml" />
     <AndroidResource Include="Resources\layout\Login.axml" />
     <AndroidResource Include="Resources\layout\RequestHeader.axml" />
     <AndroidResource Include="Resources\layout\RequestRow.axml" />
     <AndroidResource Include="Resources\layout\Prompt.axml" />
+    <AndroidResource Include="Resources\layout\Toolbar.axml" />
+    <AndroidResource Include="Resources\drawable-hdpi\user.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\user.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\user.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\user.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\dashboard.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\dashboard.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\dashboard.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\dashboard.png" />
+    <AndroidResource Include="Resources\menu\top_menus.xml" />
+    <AndroidResource Include="Resources\drawable-hdpi\list.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\list.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\list.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\list.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\button.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\button.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\button.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\button.png" />
+    <AndroidResource Include="Resources\values\Colors.xml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable-hdpi\" />
@@ -149,14 +171,12 @@
     <Folder Include="Resources\drawable-xxhdpi\" />
     <Folder Include="Extensions\" />
     <Folder Include="Resources\layout\" />
+    <Folder Include="Fragments\" />
+    <Folder Include="Resources\menu\" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="json.net">
       <Version>7.0.1</Version>
-      <Visible>False</Visible>
-    </XamarinComponentReference>
-    <XamarinComponentReference Include="mailkit">
-      <Version>1.8.1</Version>
       <Visible>False</Visible>
     </XamarinComponentReference>
   </ItemGroup>

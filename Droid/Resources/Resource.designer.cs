@@ -61,40 +61,52 @@ namespace Commercially.Droid
 		{
 			
 			// aapt resource value: 0x7f020000
-			public const int chevronRight = 2130837504;
+			public const int button = 2130837504;
 			
 			// aapt resource value: 0x7f020001
-			public const int LogoBlack = 2130837505;
+			public const int chevronRight = 2130837505;
 			
 			// aapt resource value: 0x7f020002
-			public const int LogoBlue = 2130837506;
+			public const int dashboard = 2130837506;
 			
 			// aapt resource value: 0x7f020003
-			public const int LogoGreen = 2130837507;
+			public const int list = 2130837507;
 			
 			// aapt resource value: 0x7f020004
-			public const int LogoOrange = 2130837508;
+			public const int LogoBlack = 2130837508;
 			
 			// aapt resource value: 0x7f020005
-			public const int LogoPink = 2130837509;
+			public const int LogoBlue = 2130837509;
 			
 			// aapt resource value: 0x7f020006
-			public const int LogoPurple = 2130837510;
+			public const int LogoGreen = 2130837510;
 			
 			// aapt resource value: 0x7f020007
-			public const int LogoRed = 2130837511;
+			public const int LogoOrange = 2130837511;
 			
 			// aapt resource value: 0x7f020008
-			public const int LogoTealBlue = 2130837512;
+			public const int LogoPink = 2130837512;
 			
 			// aapt resource value: 0x7f020009
-			public const int LogoWhite = 2130837513;
+			public const int LogoPurple = 2130837513;
 			
 			// aapt resource value: 0x7f02000a
-			public const int LogoYellow = 2130837514;
+			public const int LogoRed = 2130837514;
 			
 			// aapt resource value: 0x7f02000b
-			public const int urgent = 2130837515;
+			public const int LogoTealBlue = 2130837515;
+			
+			// aapt resource value: 0x7f02000c
+			public const int LogoWhite = 2130837516;
+			
+			// aapt resource value: 0x7f02000d
+			public const int LogoYellow = 2130837517;
+			
+			// aapt resource value: 0x7f02000e
+			public const int urgent = 2130837518;
+			
+			// aapt resource value: 0x7f02000f
+			public const int user = 2130837519;
 			
 			static Drawable()
 			{
@@ -109,47 +121,59 @@ namespace Commercially.Droid
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f080001
-			public const int EmailField = 2131230721;
+			// aapt resource value: 0x7f090000
+			public const int EmailField = 2131296256;
 			
-			// aapt resource value: 0x7f080003
-			public const int LoginButton = 2131230723;
+			// aapt resource value: 0x7f090002
+			public const int LoginButton = 2131296258;
 			
-			// aapt resource value: 0x7f080002
-			public const int PasswordField = 2131230722;
+			// aapt resource value: 0x7f090001
+			public const int PasswordField = 2131296257;
 			
-			// aapt resource value: 0x7f080008
-			public const int RequestRow = 2131230728;
+			// aapt resource value: 0x7f090007
+			public const int RequestRow = 2131296263;
 			
-			// aapt resource value: 0x7f080009
-			public const int descriptionText = 2131230729;
+			// aapt resource value: 0x7f090008
+			public const int descriptionText = 2131296264;
 			
-			// aapt resource value: 0x7f080006
-			public const int dismissButton = 2131230726;
+			// aapt resource value: 0x7f090005
+			public const int dismissButton = 2131296261;
 			
-			// aapt resource value: 0x7f080007
-			public const int headerText = 2131230727;
+			// aapt resource value: 0x7f090006
+			public const int headerText = 2131296262;
 			
-			// aapt resource value: 0x7f08000a
-			public const int locationText = 2131230730;
+			// aapt resource value: 0x7f090009
+			public const int locationText = 2131296265;
 			
-			// aapt resource value: 0x7f080004
-			public const int logoView = 2131230724;
+			// aapt resource value: 0x7f090003
+			public const int logoView = 2131296259;
 			
-			// aapt resource value: 0x7f080005
-			public const int promptMessage = 2131230725;
+			// aapt resource value: 0x7f090011
+			public const int menu_buttons = 2131296273;
 			
-			// aapt resource value: 0x7f08000c
-			public const int statusText = 2131230732;
+			// aapt resource value: 0x7f09000f
+			public const int menu_dashboard = 2131296271;
 			
-			// aapt resource value: 0x7f080000
-			public const int tableLayout = 2131230720;
+			// aapt resource value: 0x7f090010
+			public const int menu_queue = 2131296272;
 			
-			// aapt resource value: 0x7f08000b
-			public const int timeText = 2131230731;
+			// aapt resource value: 0x7f090004
+			public const int promptMessage = 2131296260;
 			
-			// aapt resource value: 0x7f08000d
-			public const int urgentIndicator = 2131230733;
+			// aapt resource value: 0x7f09000b
+			public const int statusText = 2131296267;
+			
+			// aapt resource value: 0x7f09000d
+			public const int tableLayout = 2131296269;
+			
+			// aapt resource value: 0x7f09000a
+			public const int timeText = 2131296266;
+			
+			// aapt resource value: 0x7f09000e
+			public const int toolbar = 2131296270;
+			
+			// aapt resource value: 0x7f09000c
+			public const int urgentIndicator = 2131296268;
 			
 			static Id()
 			{
@@ -165,19 +189,22 @@ namespace Commercially.Droid
 		{
 			
 			// aapt resource value: 0x7f040000
-			public const int Dashboard = 2130968576;
+			public const int Login = 2130968576;
 			
 			// aapt resource value: 0x7f040001
-			public const int Login = 2130968577;
+			public const int Prompt = 2130968577;
 			
 			// aapt resource value: 0x7f040002
-			public const int Prompt = 2130968578;
+			public const int RequestHeader = 2130968578;
 			
 			// aapt resource value: 0x7f040003
-			public const int RequestHeader = 2130968579;
+			public const int RequestRow = 2130968579;
 			
 			// aapt resource value: 0x7f040004
-			public const int RequestRow = 2130968580;
+			public const int Table = 2130968580;
+			
+			// aapt resource value: 0x7f040005
+			public const int Toolbar = 2130968581;
 			
 			static Layout()
 			{
@@ -185,6 +212,22 @@ namespace Commercially.Droid
 			}
 			
 			private Layout()
+			{
+			}
+		}
+		
+		public partial class Menu
+		{
+			
+			// aapt resource value: 0x7f080000
+			public const int top_menus = 2131230720;
+			
+			static Menu()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Menu()
 			{
 			}
 		}

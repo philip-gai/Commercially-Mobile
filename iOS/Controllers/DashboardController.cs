@@ -1,6 +1,5 @@
 using Foundation;
 using System;
-using System.Threading.Tasks;
 using UIKit;
 using CoreGraphics;
 using Commercially.iOS.Extensions;
@@ -14,7 +13,7 @@ namespace Commercially.iOS
 		public override void ViewWillAppear(bool animated)
 		{
 			base.ViewWillAppear(animated);
-			Dashboard.GetRequests(delegate {
+			Dashboard.GetRequests(Dashboard.RequestTypes, delegate {
 				InvokeOnMainThread(delegate {
 					TableView.ReloadData();
 				});
@@ -22,7 +21,7 @@ namespace Commercially.iOS
 				InvokeOnMainThread(delegate {
 					NavigationController.ShowPrompt(e.Message, 50);
 				});
-			});;
+			});
 		}
 
 		public override void ViewDidLoad()
@@ -87,7 +86,7 @@ namespace Commercially.iOS
 			var cell = tableView.DequeueReusableCell(RequestCell.Key, indexPath) as RequestCell;
 			cell.Request = Dashboard.RequestLists[arrayIndex][indexPath.Row];
 			cell.SetStatusLabelIsHidden(true);
-			cell.BackgroundColor = Dashboard.SectionBackgroundColors[arrayIndex].GetUIColor().ColorWithAlpha((nfloat)Dashboard.RowAlpha);
+			cell.BackgroundColor = Dashboard.SectionBackgroundColors[arrayIndex].GetUIColor().ColorWithAlpha((nfloat)Dashboard.RowAlphaDouble);
 			return cell;
 		}
 

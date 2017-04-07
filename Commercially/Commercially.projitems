@@ -38,6 +38,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Dashboard.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Home.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Main.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controllers\RequestList.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Entities\" />
@@ -48,6 +49,5 @@
     <Folder Include="$(MSBuildThisFileDirectory)Extensions\" />
     <Folder Include="$(MSBuildThisFileDirectory)Constants\" />
     <Folder Include="$(MSBuildThisFileDirectory)Controllers\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Table Cells\" />
   </ItemGroup>
 </Project>
