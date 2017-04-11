@@ -190,8 +190,13 @@
     <AndroidResource Include="Resources\drawable-mdpi\button.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\button.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\button.png" />
+<<<<<<< HEAD
     <AndroidResource Include="Resources\values\colors.xml" />
     <AndroidResource Include="Resources\splash\splash.xml" />
+=======
+    <AndroidResource Include="Resources\values\Colors.xml" />
+    <AndroidResource Include="Resources\values\splash.xml" />
+>>>>>>> origin/old-state
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable-hdpi\" />
