@@ -7,7 +7,7 @@ using Android.Content;
 
 namespace Commercially.Droid
 {
-	[Activity(Label = "Commercially", MainLauncher = true, Icon = "@mipmap/icon")]
+	[Activity(Label = "Commercially")]
 	public class LoginActivity : Activity
 	{
 		protected override void OnCreate(Bundle savedInstanceState)
