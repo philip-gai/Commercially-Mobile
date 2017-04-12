@@ -29,8 +29,8 @@ namespace Commercially.Droid
 
 		public override bool OnCreateOptionsMenu(IMenu menu)
 		{
-			MenuInflater.Inflate(Resource.Menu.top_menus, menu);
-			menu.RemoveItem(Resource.Id.ListIcon);
+			//MenuInflater.Inflate(Resource.Menu.top_menus, menu);
+			//menu.RemoveItem(Resource.Id.ListIcon);
 			return base.OnCreateOptionsMenu(menu);
 		}
 

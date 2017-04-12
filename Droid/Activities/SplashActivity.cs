@@ -7,7 +7,7 @@ using Android.Util;
 
 namespace Commercially.Droid
 {
-	[Activity(Theme = "@style/MyTheme.Splash", MainLauncher = false, NoHistory = true)]
+	[Activity(Label = "SplashActivity")]
 	public class SplashActivity : AppCompatActivity
 	{
 		static readonly string TAG = "X:" + typeof(SplashActivity).Name;
