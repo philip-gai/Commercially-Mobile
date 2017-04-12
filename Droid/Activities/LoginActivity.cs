@@ -7,7 +7,7 @@ using Android.Content;
 
 namespace Commercially.Droid
 {
-	[Activity(Label = "Commercially")]
+[Activity(Label = "LoginActivity", MainLauncher = true, NoHistory = true)]
 	public class LoginActivity : Activity
 	{
 		protected override void OnCreate(Bundle savedInstanceState)

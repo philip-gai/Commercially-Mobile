@@ -84,23 +84,8 @@
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.Net.Http" />
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="BouncyCastle">
-      <HintPath>..\packages\MimeKit.1.12.0\lib\Xamarin.iOS10\BouncyCastle.dll</HintPath>
-    </Reference>
-    <Reference Include="MimeKit">
-      <HintPath>..\packages\MimeKit.1.12.0\lib\Xamarin.iOS10\MimeKit.dll</HintPath>
-    </Reference>
-    <Reference Include="MailKit">
-      <HintPath>..\packages\MailKit.1.12.0\lib\Xamarin.iOS10\MailKit.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AspNetCore.Cryptography.Internal">
-      <HintPath>..\packages\Microsoft.AspNetCore.Cryptography.Internal.1.1.1\lib\netstandard1.3\Microsoft.AspNetCore.Cryptography.Internal.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AspNetCore.Cryptography.KeyDerivation">
-      <HintPath>..\packages\Microsoft.AspNetCore.Cryptography.KeyDerivation.1.1.1\lib\netstandard1.3\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -252,8 +237,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Entitlements.plist" />
-    <None Include="packages.config" />
     <None Include="Info.plist" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
@@ -338,12 +323,6 @@
     <Compile Include="Extensions\UITextFieldExtensions.cs" />
     <Compile Include="Custom Classes\Picker Views\ClientPickerViewModel.cs" />
     <Compile Include="Custom Classes\Controllers\KeyboardController.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <XamarinComponentReference Include="json.net">
-      <Version>7.0.1</Version>
-      <Visible>False</Visible>
-    </XamarinComponentReference>
   </ItemGroup>
   <Import Project="..\Commercially\Commercially.projitems" Label="Shared" Condition="Exists('..\Commercially\Commercially.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

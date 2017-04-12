@@ -1,10 +1,7 @@
 ﻿<Properties StartupConfiguration="{26811657-1310-4E9D-8DD4-12575F9190CB}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Droid/Resources/values/theme.xml">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Droid/Activities/SplashActivity.cs">
     <Files>
-      <File FileName="Droid/Activities/SplashActivity.cs" Line="12" Column="3" />
-      <File FileName="Droid/Activities/LoginActivity.cs" Line="11" Column="35" />
-      <File FileName="Droid/Properties/AndroidManifest.xml" Line="4" Column="107" />
-      <File FileName="Droid/Resources/values/theme.xml" Line="3" Column="47" />
+      <File FileName="Droid/Activities/SplashActivity.cs" Line="36" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
@@ -13,5 +10,5 @@
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.ItemProperties.Commercially.Droid AndroidDesignerPreferredDevice="Nexus 4" PreferredExecutionTarget="Android.AVD_for_Nexus_5_by_Google" AndroidDesignerPreferredTheme="Theme.Default" />
+  <MonoDevelop.Ide.ItemProperties.Commercially.Droid PreferredExecutionTarget="Android.AVD_for_Nexus_5_by_Google" />
 </Properties>

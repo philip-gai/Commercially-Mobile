@@ -9,13 +9,13 @@ namespace Commercially.Droid
 	{
 		public static void StartActivityMenuItem(this Activity activity, IMenuItem item) {
 			switch (item.ItemId) {
-				case Resource.Id.menu_dashboard:
+				case Resource.Id.DashboardIcon:
 					activity.StartActivity(new Intent(activity, typeof(DashboardActivity)));
 					break;
-				case Resource.Id.menu_queue:
+				case Resource.Id.ListIcon:
 					activity.StartActivity(new Intent(activity, typeof(RequestListActivity)));
 					break;
-				case Resource.Id.menu_buttons:
+				case Resource.Id.ButtonIcon:
 					break;
 			}
 		}
