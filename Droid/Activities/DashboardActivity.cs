@@ -8,22 +8,20 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
+using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
 
 namespace Commercially.Droid
 {
 	[Activity(Label = "DashboardActivity")]
-	public class DashboardActivity : Activity
+	public class DashboardActivity : AppCompatActivity
 	{
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
 			SetContentView(Resource.Layout.Table);
-
-			ActionBar.Show();
-			ActionBar.Title = "Dashboard";
-
+			SupportActionBar.Title = "Dashboard";
 			Home.PrefetchData();
 			Dashboard.GetRequests(Dashboard.RequestTypes, () => { RunOnUiThread(() => { InitializeTable(); }); }, (obj) => { Console.WriteLine(obj.Message); });
 		}
@@ -31,13 +29,14 @@ namespace Commercially.Droid
 
 		public override bool OnCreateOptionsMenu(IMenu menu)
 		{
-			//MenuInflater.Inflate(Resource.Menu.top_menus, menu);
-			//menu.RemoveItem(Resource.Id.DashboardIcon);
+			MenuInflater.Inflate(Resource.Menu.TopMenu, menu);
+			menu.RemoveItem(Resource.Id.DashboardIcon);
 			return base.OnCreateOptionsMenu(menu);
 		}
 
 		public override bool OnOptionsItemSelected(IMenuItem item)
 		{
+			this.StartActivityMenuItem(item);
 			return base.OnOptionsItemSelected(item);
 		}
 

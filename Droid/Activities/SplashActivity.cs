@@ -1,37 +1,32 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Support.V7.App;
 using Android.Util;
+using Android.Views;
 
 namespace Commercially.Droid
 {
-	[Activity(Label = "SplashActivity")]
+	[Activity(Label = "Commercially", MainLauncher = true, NoHistory = true)]
 	public class SplashActivity : AppCompatActivity
 	{
-		static readonly string TAG = "X:" + typeof(SplashActivity).Name;
-
-		public override void OnCreate(Bundle savedInstanceState, PersistableBundle persistentState)
+		protected override void OnCreate(Bundle savedInstanceState)
 		{
-			base.OnCreate(savedInstanceState, persistentState);
-			Log.Debug(TAG, "SplashActivity.OnCreate");
+			base.OnCreate(savedInstanceState);
+			Main.Initialize();
+            SetContentView(Resource.Layout.Splash);
+			SupportActionBar.Hide();
 		}
 
-		// Launches the startup task
 		protected override void OnResume()
 		{
 			base.OnResume();
-			Session.TaskFactory.StartNew(SimulateStartup);
-		}
-
-		// Simulates background work that happens behind the splash screen
-		void SimulateStartup()
-		{
-			Log.Debug(TAG, "Performing some startup work that takes a bit of time.");
-			Task.Delay(5000);
-			Log.Debug(TAG, "Startup work is finished - starting MainActivity.");
-			StartActivity(new Intent(Application.Context, typeof(LoginActivity)));
+			Session.TaskFactory.StartNew(delegate {
+				Thread.Sleep(2000);
+				StartActivity(new Intent(this, typeof(LoginActivity)));
+			});
 		}
 	}
 }

@@ -58,7 +58,7 @@ namespace Commercially.iOS
 					Session.User = new User(EmailField.Text, PasswordField.Text);
 					NavigationController.GetAndActOnViewController(GlobalConstants.Screens.Home);
 				} catch (Exception e) {
-					NavigationController.ShowPrompt(e.Message, 50);
+					NavigationController.ShowPrompt(Localizable.PromptMessages.LoginError);
 				}
 			} else {
 				if (!EmailField.IsValidInput()) {

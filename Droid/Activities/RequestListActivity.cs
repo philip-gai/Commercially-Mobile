@@ -8,34 +8,33 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
+using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
 
 namespace Commercially.Droid
 {
 	[Activity(Label = "RequestListActivity")]
-	public class RequestListActivity : Activity
+	public class RequestListActivity : AppCompatActivity
 	{
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
 			SetContentView(Resource.Layout.Table);
-
-			ActionBar.Show();
-			ActionBar.Title = "Queue";
-
+			SupportActionBar.Title = "Queue";
 			RequestList.GetRequests(() => { RunOnUiThread(() => { InitializeTable(); }); }, (obj) => { Console.WriteLine(obj.Message); });
 		}
 
 		public override bool OnCreateOptionsMenu(IMenu menu)
 		{
-			//MenuInflater.Inflate(Resource.Menu.top_menus, menu);
-			//menu.RemoveItem(Resource.Id.ListIcon);
+			MenuInflater.Inflate(Resource.Menu.TopMenu, menu);
+			menu.RemoveItem(Resource.Id.ListIcon);
 			return base.OnCreateOptionsMenu(menu);
 		}
 
 		public override bool OnOptionsItemSelected(IMenuItem item)
 		{
+            this.StartActivityMenuItem(item);
 			return base.OnOptionsItemSelected(item);
 		}
 

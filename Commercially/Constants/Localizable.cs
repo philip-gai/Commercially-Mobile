@@ -11,6 +11,7 @@
 			public const string PasswordRequirements = "Password Requirements:\n- At least 8 characters long\n- At least one lowercase letter\n- At least one uppercase letter\n- At least one number\n- No spaces at beginning or end\n- One special character";
 			public const string InvalidEmail = "Check that your email is valid.";
 			public const string InvalidPassword = "Check that your password is valid.";
+			public const string LoginError = "Incorrect email or password.";
 		}
 		public struct ExceptionMessages {
 			public const string CannotConnectServer = "Cannot connect to server";

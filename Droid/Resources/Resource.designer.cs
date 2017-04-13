@@ -1711,8 +1711,17 @@ namespace Commercially.Droid
 		public partial class Id
 		{
 			
+			// aapt resource value: 0x7f0b007f
+			public const int ButtonIcon = 2131427455;
+			
+			// aapt resource value: 0x7f0b007d
+			public const int DashboardIcon = 2131427453;
+			
 			// aapt resource value: 0x7f0b0056
 			public const int EmailField = 2131427414;
+			
+			// aapt resource value: 0x7f0b007e
+			public const int ListIcon = 2131427454;
 			
 			// aapt resource value: 0x7f0b0058
 			public const int LoginButton = 2131427416;
@@ -2029,8 +2038,8 @@ namespace Commercially.Droid
 			// aapt resource value: 0x7f0b000b
 			public const int tabMode = 2131427339;
 			
-			// aapt resource value: 0x7f0b007a
-			public const int tableLayout = 2131427450;
+			// aapt resource value: 0x7f0b007b
+			public const int tableLayout = 2131427451;
 			
 			// aapt resource value: 0x7f0b006e
 			public const int text = 2131427438;
@@ -2043,6 +2052,9 @@ namespace Commercially.Droid
 			
 			// aapt resource value: 0x7f0b0034
 			public const int textSpacerNoTitle = 2131427380;
+			
+			// aapt resource value: 0x7f0b007a
+			public const int textView1 = 2131427450;
 			
 			// aapt resource value: 0x7f0b0064
 			public const int time = 2131427428;
@@ -2059,8 +2071,8 @@ namespace Commercially.Droid
 			// aapt resource value: 0x7f0b003a
 			public const int title_template = 2131427386;
 			
-			// aapt resource value: 0x7f0b007b
-			public const int toolbar = 2131427451;
+			// aapt resource value: 0x7f0b007c
+			public const int toolbar = 2131427452;
 			
 			// aapt resource value: 0x7f0b0023
 			public const int top = 2131427363;
@@ -2269,13 +2281,16 @@ namespace Commercially.Droid
 			public const int select_dialog_singlechoice_material = 2130968624;
 			
 			// aapt resource value: 0x7f040031
-			public const int support_simple_spinner_dropdown_item = 2130968625;
+			public const int Splash = 2130968625;
 			
 			// aapt resource value: 0x7f040032
-			public const int Table = 2130968626;
+			public const int support_simple_spinner_dropdown_item = 2130968626;
 			
 			// aapt resource value: 0x7f040033
-			public const int Toolbar = 2130968627;
+			public const int Table = 2130968627;
+			
+			// aapt resource value: 0x7f040034
+			public const int Toolbar = 2130968628;
 			
 			static Layout()
 			{
@@ -2283,6 +2298,22 @@ namespace Commercially.Droid
 			}
 			
 			private Layout()
+			{
+			}
+		}
+		
+		public partial class Menu
+		{
+			
+			// aapt resource value: 0x7f0d0000
+			public const int TopMenu = 2131558400;
+			
+			static Menu()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Menu()
 			{
 			}
 		}
@@ -3229,7 +3260,7 @@ namespace Commercially.Droid
 			public const int Theme_AppCompat_NoActionBar = 2131230991;
 			
 			// aapt resource value: 0x7f08015f
-			public const int Theme_Custom = 2131231071;
+			public const int Theme_MyDefault = 2131231071;
 			
 			// aapt resource value: 0x7f080110
 			public const int ThemeOverlay_AppCompat = 2131230992;

@@ -153,7 +153,6 @@
     <AndroidResource Include="Resources\drawable-xhdpi\urgent.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\urgent.png" />
     <AndroidResource Include="Resources\layout\Table.axml" />
-    <AndroidResource Include="Resources\layout\Login.axml" />
     <AndroidResource Include="Resources\layout\RequestHeader.axml" />
     <AndroidResource Include="Resources\layout\RequestRow.axml" />
     <AndroidResource Include="Resources\layout\Prompt.axml" />
@@ -174,6 +173,9 @@
     <AndroidResource Include="Resources\drawable-mdpi\button.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\button.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\button.png" />
+    <AndroidResource Include="Resources\menu\TopMenu.xml" />
+    <AndroidResource Include="Resources\layout\Splash.axml" />
+    <AndroidResource Include="Resources\layout\Login.axml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable-hdpi\" />
