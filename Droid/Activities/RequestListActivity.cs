@@ -58,36 +58,19 @@ namespace Commercially.Droid
 
 		View GetHeader()
 		{
-			var inflater = (LayoutInflater)GetSystemService(LayoutInflaterService);
-			var headerView = (TableRow)inflater.Inflate(Resource.Layout.RequestHeader, null);
-			headerView.SetBackgroundColor(RequestList.TableBackgroundColor.GetAndroidColor());
-			var headerLabel = headerView.FindViewById<TextView>(Resource.Id.headerText);
-			headerLabel.Text = RequestStatusType.New.ToString();
+			string label = RequestStatusType.New.ToString();
 			if (sharedController.NewRequestList != null) {
-				headerLabel.Text += " (" + sharedController.NewRequestList.Length + ")";
+				label += " (" + sharedController.NewRequestList.Length + ")";
 			}
-			return headerView;
+			return this.GetSectionHeader(label);
 		}
 
 		TableRow GetTableRow(int row)
 		{
-			var inflater = (LayoutInflater)GetSystemService(LayoutInflaterService);
-			var rowView = (TableRow)inflater.Inflate(Resource.Layout.RequestRow, null);
+			var rowView = this.GetRequestRow(sharedController.NewRequestList[row]);
 			Android.Graphics.Color color = RequestList.TableBackgroundColor.GetAndroidColor();
 			color.A = RequestList.RowAlphaByte;
 			rowView.SetBackgroundColor(color);
-			var description = rowView.FindViewById<TextView>(Resource.Id.descriptionText);
-			var locationLabel = rowView.FindViewById<TextView>(Resource.Id.locationText);
-			var timeLabel = rowView.FindViewById<TextView>(Resource.Id.timeText);
-			var statusLabel = rowView.FindViewById<TextView>(Resource.Id.statusText);
-			var urgentIndicator = rowView.FindViewById(Resource.Id.urgentIndicator);
-
-			var request = sharedController.NewRequestList[row];
-			description.Text = request.description;
-			locationLabel.Text = request.room;
-			timeLabel.Text = request.GetTime(Request.TimeType.Received)?.ToShortTimeString();
-			statusLabel.Text = request.GetStatus().ToString();
-			urgentIndicator.Visibility = request.urgent ? ViewStates.Visible : ViewStates.Gone;
 			return rowView;
 		}
 	}

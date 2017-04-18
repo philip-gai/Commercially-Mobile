@@ -26,8 +26,8 @@ namespace Commercially.iOS
 				_Button = value;
 				var tmpClient = Client.FindClient(Button.clientId, Session.Clients);
 				ClientLabel.Text = tmpClient != null && tmpClient.friendlyName != null ? tmpClient.friendlyName : value.clientId;
-				LocationLabel.Text = value.room ?? null;
-				DescriptionLabel.Text = value.description ?? null;
+				DescriptionLabel.Text = value.description;
+				LocationLabel.Text = value.room;
 			}
 		}
 	}

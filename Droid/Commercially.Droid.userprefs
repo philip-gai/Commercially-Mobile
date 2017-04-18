@@ -6,5 +6,5 @@
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.ItemProperties.Commercially.Droid AndroidDesignerPreferredDevice="Nexus 4" PreferredExecutionTarget="Android.AVD_for_Nexus_5_by_Google" AndroidDesignerPreferredTheme="Theme.MyDefault" />
+  <MonoDevelop.Ide.ItemProperties.Commercially.Droid PreferredExecutionTarget="Android.AVD_for_Nexus_5_by_Google" />
 </Properties>

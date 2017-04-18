@@ -65,37 +65,19 @@ namespace Commercially.Droid
 
 		View GetHeader(int section)
 		{
-			var inflater = (LayoutInflater)GetSystemService(LayoutInflaterService);
-			var headerView = (TableRow)inflater.Inflate(Resource.Layout.RequestHeader, null);
-			headerView.SetBackgroundColor(Dashboard.SectionBackgroundColors[section].GetAndroidColor());
-			var headerLabel = headerView.FindViewById<TextView>(Resource.Id.headerText);
-			headerLabel.Text = Dashboard.SectionTitles[section];
+			string label = Dashboard.SectionTitles[section];
 			if (sharedController.RequestLists != null) {
-				headerLabel.Text += " (" + sharedController.RequestLists[section].Length + ")";
+				label += " (" + sharedController.RequestLists[section].Length + ")";
 			}
-			return headerView;
+			return this.GetSectionHeader(label);
 		}
 
 		TableRow GetTableRow(int row, int section)
 		{
-			var inflater = (LayoutInflater)GetSystemService(LayoutInflaterService);
-			var rowView = (TableRow)inflater.Inflate(Resource.Layout.RequestRow, null);
+			var rowView = this.GetRequestRow(sharedController.RequestLists[section][row]);
 			Android.Graphics.Color color = Dashboard.SectionBackgroundColors[section].GetAndroidColor();
 			color.A = Dashboard.RowAlphaByte;
 			rowView.SetBackgroundColor(color);
-			var description = rowView.FindViewById<TextView>(Resource.Id.descriptionText);
-			var locationLabel = rowView.FindViewById<TextView>(Resource.Id.locationText);
-			var timeLabel = rowView.FindViewById<TextView>(Resource.Id.timeText);
-			var statusLabel = rowView.FindViewById<TextView>(Resource.Id.statusText);
-			var urgentIndicator = rowView.FindViewById(Resource.Id.urgentIndicator);
-
-			var requestList = sharedController.RequestLists[section];
-			var request = requestList[row];
-			description.Text = request.description;
-			locationLabel.Text = request.room;
-			timeLabel.Text = request.GetTime(Request.TimeType.Received)?.ToShortTimeString();
-			statusLabel.Text = request.GetStatus().ToString();
-			urgentIndicator.Visibility = request.urgent ? ViewStates.Visible : ViewStates.Gone;
 			return rowView;
 		}
 	}

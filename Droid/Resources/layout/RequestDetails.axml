@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+        <TextView
+            android:text="Change the toilet paper"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/descriptionText"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:layout_weight="1" />
+        <ImageView
+            android:src="@drawable/urgent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/urgentIndicator"
+            android:layout_weight="1" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+        <TextView
+            android:text="Location"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/locationText"
+            android:layout_weight="1"
+            android:textColor="@android:color/black" />
+        <TextView
+            android:text="Assigned To:"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/assignedToText"
+            android:layout_weight="1"
+            android:textColor="@android:color/black" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+        <TextView
+            android:text="12:00 AM"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/receivedTimeText"
+            android:layout_weight="1"
+            android:textColor="@android:color/black" />
+        <TextView
+            android:text="12:00 AM"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/acceptedTimeText"
+            android:layout_weight="1"
+            android:textColor="@android:color/black" />
+        <TextView
+            android:text="12:00 AM"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/completedTimeText"
+            android:layout_weight="1"
+            android:textColor="@android:color/black" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+        <TextView
+            android:text="Current Status:"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/staticStatusText"
+            android:layout_weight="1"
+            android:textColor="@android:color/black" />
+        <TextView
+            android:text="Completed"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/statusText"
+            android:layout_weight="1"
+            android:textColor="@android:color/black" />
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/statusSpinner" />
+    </LinearLayout>
+    <Button
+        android:text="Assign To Me"
+        android:layout_width="match_parent"
+        android:id="@+id/assignButton"
+        android:background="#ffff3130"
+        android:layout_height="66dp"
+        android:textColor="#ffffffff"
+        android:layout_weight="1" />
+    <Button
+        android:text="Save Changes"
+        android:layout_width="match_parent"
+        android:id="@+id/saveButton"
+        android:background="#ffff3130"
+        android:layout_height="66dp"
+        android:textColor="#ffffffff"
+        android:layout_weight="1" />
+</LinearLayout>
