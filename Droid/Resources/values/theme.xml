@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
-	<style name="Theme.MyDefault" parent="@style/Theme.AppCompat.Light.NoActionBar">
+	<style name="Theme.MyDefault" parent="@style/Theme.AppCompat.Light">
 		<item name="android:colorControlActivated">#ffff3b30</item>
 		<item name="android:colorAccent">#ffff3b30</item>
 		<item name="android:textColorPrimary">#ffff3b30</item>

@@ -17,7 +17,7 @@ namespace Commercially.Droid
 		{
 			base.OnCreate(savedInstanceState);
 			SetContentView(Resource.Layout.Table);
-			SupportActionBar.Title = "Queue";
+            this.SetSupportActionBarDefault();
 			sharedController.GetRequests(
 				delegate {
 					RunOnUiThread(delegate {
@@ -62,7 +62,9 @@ namespace Commercially.Droid
 			if (sharedController.NewRequestList != null) {
 				label += " (" + sharedController.NewRequestList.Length + ")";
 			}
-			return this.GetSectionHeader(label);
+			var header = this.GetSectionHeader(label);
+			header.SetBackgroundColor(RequestList.TableBackgroundColor.GetAndroidColor());
+			return header;
 		}
 
 		TableRow GetTableRow(int row)

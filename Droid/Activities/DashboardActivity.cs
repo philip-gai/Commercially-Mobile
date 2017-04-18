@@ -17,7 +17,7 @@ namespace Commercially.Droid
 		{
 			base.OnCreate(savedInstanceState);
 			SetContentView(Resource.Layout.Table);
-			SupportActionBar.Title = "Dashboard";
+			this.SetSupportActionBarDefault();
 			Home.PrefetchData();
 			sharedController.GetRequests(
 				Dashboard.RequestTypes,
@@ -69,7 +69,9 @@ namespace Commercially.Droid
 			if (sharedController.RequestLists != null) {
 				label += " (" + sharedController.RequestLists[section].Length + ")";
 			}
-			return this.GetSectionHeader(label);
+			var header = this.GetSectionHeader(label);
+			header.SetBackgroundColor(Dashboard.SectionBackgroundColors[section].GetAndroidColor());
+			return header;
 		}
 
 		TableRow GetTableRow(int row, int section)

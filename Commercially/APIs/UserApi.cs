@@ -12,7 +12,7 @@ namespace Commercially
 
 		public static string LoginUser(string email, string password)
 		{
-			return HttpRequest.MakeRequest(HttpRequestMethodType.POST, Url, "grant_type=password&username=" + WebUtility.UrlEncode(email) + "&password=" + WebUtility.UrlEncode(password) + "&client_id=MobileApp&client_secret=null");
+			return HttpRequest.MakeRequest(HttpRequestMethodType.POST, Url, "grant_type=password&username=" + WebUtility.UrlEncode(email) + "&password=" + WebUtility.UrlEncode(password) + "&client_id=MobileApp&client_secret=null", "", @"application/x-www-form-urlencoded");
 		}
 	}
 }

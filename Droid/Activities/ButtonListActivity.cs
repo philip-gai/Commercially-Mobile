@@ -15,7 +15,7 @@ namespace Commercially.Droid
 		{
 			base.OnCreate(savedInstanceState);
 			SetContentView(Resource.Layout.Table);
-			SupportActionBar.Title = "Buttons";
+            this.SetSupportActionBarDefault();
 			ButtonList.GetButtons(
 				delegate {
 					RunOnUiThread(delegate {
@@ -60,7 +60,9 @@ namespace Commercially.Droid
 			if (Session.Buttons != null) {
 				label += " (" + Session.Buttons.Length + ")";
 			}
-			return this.GetSectionHeader(label);
+			var header = this.GetSectionHeader(label);
+			header.SetBackgroundColor(ButtonList.TableBackgroundColor.GetAndroidColor());
+			return header;
 		}
 
 		TableRow GetTableRow(int row)

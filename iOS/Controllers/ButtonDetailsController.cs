@@ -62,10 +62,10 @@ namespace Commercially.iOS
 		{
 			try {
 				var jsonBody = new JObject();
-				if (LocationChanged && !string.IsNullOrWhiteSpace(LocationField.Text)) {
+				if (LocationChanged && LocationField.Text != null) {
 					jsonBody.Add("room", LocationField.Text);
 				}
-				if (DescriptionChanged && !string.IsNullOrWhiteSpace(DescriptionField.Text)) {
+				if (DescriptionChanged && DescriptionField.Text != null) {
 					jsonBody.Add("description", DescriptionField.Text);
 				}
 				if (jsonBody.Count > 0) {

@@ -14,7 +14,7 @@ namespace Commercially.Droid
 		{
 			base.OnCreate(savedInstanceState);
 			SetContentView(Resource.Layout.Login);
-			SupportActionBar.Hide();
+			SupportActionBar?.Hide();
 
 			var EmailField = FindViewById<EditText>(Resource.Id.EmailField);
 			var PasswordField = FindViewById<EditText>(Resource.Id.PasswordField);

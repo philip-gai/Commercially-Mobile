@@ -73,15 +73,19 @@ namespace Commercially
 				foreach (RequestStatusType type in Types) {
 					switch (type) {
 						case RequestStatusType.New:
+							NewList.Reverse();
 							RequestLists.Add(NewList);
 							break;
 						case RequestStatusType.Assigned:
+							AssignedList.Reverse();
 							RequestLists.Add(AssignedList);
 							break;
 						case RequestStatusType.Completed:
+							CompletedList.Reverse();
 							RequestLists.Add(CompletedList);
 							break;
 						case RequestStatusType.Cancelled:
+							CancelledList.Reverse();
 							RequestLists.Add(CancelledList);
 							break;
 					}

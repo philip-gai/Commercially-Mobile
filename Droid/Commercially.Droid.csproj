@@ -90,6 +90,7 @@
     <Compile Include="Extensions\ActivityExtensions.cs" />
     <Compile Include="Activities\SplashActivity.cs" />
     <Compile Include="Activities\ButtonListActivity.cs" />
+    <Compile Include="Activities\RequestDetailsActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -157,7 +158,6 @@
     <AndroidResource Include="Resources\layout\TableSectionHeader.axml" />
     <AndroidResource Include="Resources\layout\RequestRow.axml" />
     <AndroidResource Include="Resources\layout\Prompt.axml" />
-    <AndroidResource Include="Resources\layout\Toolbar.axml" />
     <AndroidResource Include="Resources\drawable-hdpi\user.png" />
     <AndroidResource Include="Resources\drawable-mdpi\user.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\user.png" />

@@ -5,6 +5,7 @@
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.Commercially.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.457A64A5-B6AA-4655-A0BF-126FC82D54F8" />
   <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.ItemProperties.Commercially.Droid AndroidDesignerPreferredDevice="Nexus 4" PreferredExecutionTarget="Android.AVD_for_Nexus_5_by_Google" AndroidDesignerPreferredTheme="Theme.MyDefault" />
 </Properties>

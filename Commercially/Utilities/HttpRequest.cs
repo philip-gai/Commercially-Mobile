@@ -12,7 +12,7 @@ namespace Commercially
 			return "https://" + GlobalConstants.ServerUrl + ":" + GlobalConstants.ServerPort + Endpoint;
 		}
 
-		public static string MakeRequest(HttpRequestMethodType Type, string url, string body = "", string authHeader = "")
+		public static string MakeRequest(HttpRequestMethodType Type, string url, string body = "", string authHeader = "", string contentType = "")
 		{
 			var request = (HttpWebRequest)WebRequest.Create(url);
 			request.Headers.Add("Authorization", authHeader);
@@ -22,7 +22,7 @@ namespace Commercially
 					break;
 				case HttpRequestMethodType.POST:
 					request.Method = WebRequestMethods.Http.Post;
-					request.ContentType = @"application/x-www-form-urlencoded";
+					request.ContentType = @"application/json";
 					break;
 				case HttpRequestMethodType.PUT:
 					request.Method = WebRequestMethods.Http.Put;
@@ -36,6 +36,9 @@ namespace Commercially
 				case HttpRequestMethodType.DELETE:
 					request.Method = "DELETE";
 					break;
+			}
+			if (!string.IsNullOrWhiteSpace(contentType)) {
+				request.ContentType = contentType;
 			}
 			try {
 				if (Type == HttpRequestMethodType.POST || Type == HttpRequestMethodType.PUT || Type == HttpRequestMethodType.PATCH) {

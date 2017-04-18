@@ -11,7 +11,10 @@ namespace Commercially.iOS
 
 		public ClientPickerViewModel(Client[] DiscoveredBy, Action<UIPickerView, nint, nint> OnSelect)
 		{
-			this.DiscoveredBy = DiscoveredBy;
+			Client[] tmpArr = new Client[DiscoveredBy.Length + 1];
+			DiscoveredBy.CopyTo(tmpArr, 1);
+			tmpArr[0] = Client.FindClient("ignore", Session.Clients);
+			this.DiscoveredBy = tmpArr;
 			this.OnSelect = OnSelect;
 		}
 
@@ -22,7 +25,7 @@ namespace Commercially.iOS
 
 		public override nint GetRowsInComponent(UIPickerView pickerView, nint component)
 		{
-			return DiscoveredBy != null ? DiscoveredBy.Length : 1;
+			return DiscoveredBy != null ? DiscoveredBy.Length+1 : 1;
 		}
 
 		public override string GetTitle(UIPickerView pickerView, nint row, nint component)

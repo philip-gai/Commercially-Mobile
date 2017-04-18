@@ -4,6 +4,8 @@ using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
 
+using System;
+
 namespace Commercially.Droid
 {
 	public static class ActivityExtensions
@@ -32,8 +34,7 @@ namespace Commercially.Droid
 		public static View GetSectionHeader(this Activity activity, string label)
 		{
 			var inflater = (LayoutInflater)activity.GetSystemService(Context.LayoutInflaterService);
-			//var headerView = (TableRow)inflater.Inflate(Resource.Layout.TableSectionHeader, null);
-			var headerView = (TableRow)inflater.Inflate(Resource.Layout.RequestHeader, null);
+			var headerView = (TableRow)inflater.Inflate(Resource.Layout.TableSectionHeader, null);
 			headerView.SetBackgroundColor(RequestList.TableBackgroundColor.GetAndroidColor());
 			var headerLabel = headerView.FindViewById<TextView>(Resource.Id.headerText);
 			headerLabel.Text = label;
@@ -54,23 +55,35 @@ namespace Commercially.Droid
 			timeLabel.Text = request.GetTime(Request.TimeType.Received)?.ToShortTimeString();
 			statusLabel.Text = request.GetStatus().ToString();
 			urgentIndicator.Visibility = request.urgent ? ViewStates.Visible : ViewStates.Gone;
+			rowView.Click += (object sender, EventArgs e) => {
+				var intent = new Intent(activity, typeof(RequestDetailsActivity));
+				//intent.PutExtra(typeof(Request).Name, );
+				activity.StartActivity(intent);
+			};
 			return rowView;
 		}
 
 		public static TableRow GetButtonRow(this Activity activity, FlicButton button)
 		{
 			var inflater = (LayoutInflater)activity.GetSystemService(Context.LayoutInflaterService);
-			var rowView = (TableRow)inflater.Inflate(Resource.Layout.RequestRow, null);
-			//var rowView = (TableRow)inflater.Inflate(Resource.Layout.ButtonRow, null);
-			//var clientLabel = rowView.FindViewById<TextView>(Resource.Id.clientText);
-			//var descriptionLabel = rowView.FindViewById<TextView>(Resource.Id.descriptionText);
-			//var locationLabel = rowView.FindViewById<TextView>(Resource.Id.locationText);
+			var rowView = (TableRow)inflater.Inflate(Resource.Layout.ButtonRow, null);
+			var clientLabel = rowView.FindViewById<TextView>(Resource.Id.clientText);
+			var descriptionLabel = rowView.FindViewById<TextView>(Resource.Id.descriptionText);
+			var locationLabel = rowView.FindViewById<TextView>(Resource.Id.locationText);
 
-			//var tmpClient = Client.FindClient(button.clientId, Session.Clients);
-			//clientLabel.Text = tmpClient != null && tmpClient.friendlyName != null ? tmpClient.friendlyName : button.clientId;
-			//descriptionLabel.Text = button.description;
-			//locationLabel.Text = button.room;
+			var tmpClient = Client.FindClient(button.clientId, Session.Clients);
+			clientLabel.Text = tmpClient != null && tmpClient.friendlyName != null ? tmpClient.friendlyName : button.clientId;
+			descriptionLabel.Text = button.description;
+			locationLabel.Text = button.room;
 			return rowView;
+		}
+
+		public static void SetSupportActionBarDefault(this AppCompatActivity activity)
+		{
+			activity.SupportActionBar.Show();
+			activity.SupportActionBar.SetDisplayShowHomeEnabled(true);
+			activity.SupportActionBar.SetIcon(Resource.Drawable.LogoRed);
+			activity.SupportActionBar.SetDisplayShowTitleEnabled(false);
 		}
 	}
 }

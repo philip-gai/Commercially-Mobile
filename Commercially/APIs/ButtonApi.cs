@@ -12,7 +12,9 @@ namespace Commercially
 		public static FlicButton[] GetButtons()
 		{
 			var resp = HttpRequest.MakeRequest(HttpRequestMethodType.GET, Url, "", "Bearer " + Session.OAuth.access_token);
-			return JsonConvert.DeserializeObject<List<FlicButton>>(resp).ToArray();
+			var buttonList = JsonConvert.DeserializeObject<List<FlicButton>>(resp);
+			buttonList.Reverse();
+			return buttonList.ToArray();
 		}
 
 		public static string PatchButton(string buttonId, string body)
@@ -23,7 +25,9 @@ namespace Commercially
 
 		public static string PairButton(string buttonId, string clientId)
 		{
-			var resp = HttpRequest.MakeRequest(HttpRequestMethodType.POST, Url + buttonId + "/pair", new JObject("client_id", clientId).ToString(), "Bearer " + Session.OAuth.access_token);
+			var jsonBody = new JObject();
+			jsonBody.Add("client_id", clientId);
+			var resp = HttpRequest.MakeRequest(HttpRequestMethodType.POST, Url + buttonId + "/pair", jsonBody.ToString(), "Bearer " + Session.OAuth.access_token);
 			return resp;
 		}
 	}

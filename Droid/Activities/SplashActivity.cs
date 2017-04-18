@@ -14,7 +14,7 @@ namespace Commercially.Droid
 			base.OnCreate(savedInstanceState);
 			Main.Initialize();
 			SetContentView(Resource.Layout.Splash);
-			SupportActionBar.Hide();
+			SupportActionBar?.Hide();
 		}
 
 		protected override void OnResume()
