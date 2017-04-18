@@ -1,13 +1,7 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System;
 
 using Android.App;
-using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
@@ -17,13 +11,27 @@ namespace Commercially.Droid
 	[Activity(Label = "DashboardActivity")]
 	public class DashboardActivity : AppCompatActivity
 	{
+		readonly Dashboard sharedController = new Dashboard();
+
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
 			SetContentView(Resource.Layout.Table);
 			SupportActionBar.Title = "Dashboard";
 			Home.PrefetchData();
-			Dashboard.GetRequests(Dashboard.RequestTypes, () => { RunOnUiThread(() => { InitializeTable(); }); }, (obj) => { Console.WriteLine(obj.Message); });
+			sharedController.GetRequests(
+				Dashboard.RequestTypes,
+				delegate {
+					RunOnUiThread(delegate {
+						InitializeTable();
+					});
+				},
+				(Exception obj) => {
+					RunOnUiThread(delegate {
+						this.ShowPrompt(Localizable.PromptMessages.RequestsError);
+					});
+				}
+			);
 		}
 
 
@@ -43,8 +51,8 @@ namespace Commercially.Droid
 		void InitializeTable()
 		{
 			var table = FindViewById<TableLayout>(Resource.Id.tableLayout);
-			for (int section = 0; section < Dashboard.RequestLists.Length; section++) {
-				var requestList = Dashboard.RequestLists[section];
+			for (int section = 0; section < sharedController.RequestLists.Length; section++) {
+				var requestList = sharedController.RequestLists[section];
 				if (requestList.Length <= 0) continue;
 				var header = GetHeader(section);
 				table.AddView(header);
@@ -62,8 +70,8 @@ namespace Commercially.Droid
 			headerView.SetBackgroundColor(Dashboard.SectionBackgroundColors[section].GetAndroidColor());
 			var headerLabel = headerView.FindViewById<TextView>(Resource.Id.headerText);
 			headerLabel.Text = Dashboard.SectionTitles[section];
-			if (Dashboard.RequestLists != null) {
-				headerLabel.Text += " (" + Dashboard.RequestLists[section].Length + ")";
+			if (sharedController.RequestLists != null) {
+				headerLabel.Text += " (" + sharedController.RequestLists[section].Length + ")";
 			}
 			return headerView;
 		}
@@ -81,7 +89,7 @@ namespace Commercially.Droid
 			var statusLabel = rowView.FindViewById<TextView>(Resource.Id.statusText);
 			var urgentIndicator = rowView.FindViewById(Resource.Id.urgentIndicator);
 
-			var requestList = Dashboard.RequestLists[section];
+			var requestList = sharedController.RequestLists[section];
 			var request = requestList[row];
 			description.Text = request.description;
 			locationLabel.Text = request.room;

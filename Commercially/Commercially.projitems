@@ -39,6 +39,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Home.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Main.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\RequestList.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controllers\ButtonList.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Entities\" />

@@ -57,7 +57,7 @@ namespace Commercially.iOS
 					Session.OAuth = new OAuthResponse(response);
 					Session.User = new User(EmailField.Text, PasswordField.Text);
 					NavigationController.GetAndActOnViewController(GlobalConstants.Screens.Home);
-				} catch (Exception e) {
+				} catch (Exception) {
 					NavigationController.ShowPrompt(Localizable.PromptMessages.LoginError);
 				}
 			} else {

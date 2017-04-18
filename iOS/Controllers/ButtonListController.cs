@@ -10,24 +10,20 @@ namespace Commercially.iOS
 	{
 		public ButtonListController(IntPtr handle) : base(handle) { }
 
-		static nfloat HeaderHeight = 50;
-		static nfloat RowHeight = 88;
-
 		public override void ViewWillAppear(bool animated)
 		{
 			base.ViewWillAppear(animated);
-			Session.TaskFactory.StartNew(delegate {
-				try {
-					Session.Buttons = ButtonApi.GetButtons();
-					InvokeOnMainThread(delegate {
-						TableView.ReloadData();
-					});
-				} catch (Exception e) {
-					InvokeOnMainThread(delegate {
-						NavigationController.ShowPrompt(e.Message, 50);
-					});
-				}
+
+			ButtonList.GetButtons(delegate {
+				InvokeOnMainThread(delegate {
+					TableView.ReloadData();
+				});
+			}, (Exception e) => {
+				InvokeOnMainThread(delegate {
+					NavigationController.ShowPrompt(Localizable.PromptMessages.ButtonsError);
+				});
 			});
+
 		}
 
 		public override void ViewDidLoad()
@@ -50,20 +46,20 @@ namespace Commercially.iOS
 
 		public override nfloat GetHeightForHeader(UITableView tableView, nint section)
 		{
-			return HeaderHeight;
+			return (nfloat)ButtonList.HeaderHeight;
 		}
 
 		public override nfloat GetHeightForRow(UITableView tableView, NSIndexPath indexPath)
 		{
-			return RowHeight;
+			return (nfloat)ButtonList.RowHeight;
 		}
 
 		public override UIView GetViewForHeader(UITableView tableView, nint section)
 		{
-			var HeaderView = new UIView(new CGRect(0, 0, tableView.Frame.Size.Width, HeaderHeight));
-			HeaderView.BackgroundColor = GlobalConstants.DefaultColors.TealBlue.GetUIColor();
+			var HeaderView = new UIView(new CGRect(0, 0, tableView.Frame.Size.Width, (nfloat)ButtonList.HeaderHeight));
+			HeaderView.BackgroundColor = ButtonList.TableBackgroundColor.GetUIColor();
 
-			var Frame = new CGRect(10, 0, HeaderView.Frame.Width, HeaderHeight);
+			var Frame = new CGRect(10, 0, HeaderView.Frame.Width, (nfloat)ButtonList.HeaderHeight);
 			var Label = new UILabel(Frame);
 			Label.Text = "Buttons";
 			if (Session.Buttons != null) {
@@ -77,7 +73,7 @@ namespace Commercially.iOS
 		{
 			var cell = tableView.DequeueReusableCell(ButtonCell.Key, indexPath) as ButtonCell;
 			cell.Button = Session.Buttons[indexPath.Row];
-			cell.BackgroundColor = GlobalConstants.DefaultColors.TealBlue.GetUIColor().ColorWithAlpha((nfloat)0.33);
+			cell.BackgroundColor = ButtonList.TableBackgroundColor.GetUIColor().ColorWithAlpha((nfloat)ButtonList.RowAlphaDouble);
 			return cell;
 		}
 

@@ -17,6 +17,7 @@ namespace Commercially.Droid
 					activity.StartActivity(new Intent(activity, typeof(RequestListActivity)));
 					break;
 				case Resource.Id.ButtonIcon:
+					activity.StartActivity(new Intent(activity, typeof(ButtonListActivity)));
 					break;
 			}
 		}
@@ -26,6 +27,11 @@ namespace Commercially.Droid
 		{
 			activity.Window.RequestFeature(WindowFeatures.ActionBar);
 			activity.ActionBar.Hide();
+		}
+
+		public static void ShowPrompt(this Activity activity, string message) {
+			var newFragment = new PromptDialogFragment(message);
+			newFragment.Show(activity.FragmentManager, message);
 		}
 	}
 }

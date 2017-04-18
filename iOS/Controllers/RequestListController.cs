@@ -10,6 +10,8 @@ namespace Commercially.iOS
 	{
 		public RequestListController(IntPtr handle) : base(handle) { }
 
+		readonly RequestList sharedController = new RequestList();
+
 		public override void ViewDidLoad()
 		{
 			base.ViewDidLoad();
@@ -21,7 +23,7 @@ namespace Commercially.iOS
 		public override void ViewWillAppear(bool animated)
 		{
 			base.ViewWillAppear(animated);
-			RequestList.GetRequests(delegate {
+			sharedController.GetRequests(delegate {
 				InvokeOnMainThread(delegate {
 					TableView.ReloadData();
 				});
@@ -34,12 +36,12 @@ namespace Commercially.iOS
 
 		public override nint NumberOfSections(UITableView tableView)
 		{
-			return RequestList.NewRequestList == null ? 0 : RequestList.NewRequestList.Length == 0 ? 0 : 1;
+			return sharedController.NewRequestList == null ? 0 : sharedController.NewRequestList.Length == 0 ? 0 : 1;
 		}
 
 		public override nint RowsInSection(UITableView tableView, nint section)
 		{
-			return RequestList.NewRequestList == null ? 0 : RequestList.NewRequestList.Length;
+			return sharedController.NewRequestList == null ? 0 : sharedController.NewRequestList.Length;
 		}
 
 		public override nfloat GetHeightForHeader(UITableView tableView, nint section)
@@ -60,8 +62,8 @@ namespace Commercially.iOS
 			var Frame = new CGRect(10, 0, HeaderView.Frame.Width, RequestList.HeaderHeight);
 			var Label = new UILabel(Frame);
 			Label.Text = RequestStatusType.New.ToString();
-			if (RequestList.NewRequestList != null) {
-				Label.Text += " (" + RequestList.NewRequestList.Length + ")";
+			if (sharedController.NewRequestList != null) {
+				Label.Text += " (" + sharedController.NewRequestList.Length + ")";
 			}
 			HeaderView.AddSubview(Label);
 			return HeaderView;
@@ -70,7 +72,7 @@ namespace Commercially.iOS
 		public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
 		{
 			var cell = tableView.DequeueReusableCell(RequestCell.Key, indexPath) as RequestCell;
-			cell.Request = RequestList.NewRequestList[indexPath.Row];
+			cell.Request = sharedController.NewRequestList[indexPath.Row];
 			cell.SetStatusLabelIsHidden(true);
 			cell.BackgroundColor = RequestList.TableBackgroundColor.GetUIColor().ColorWithAlpha((nfloat)RequestList.RowAlphaDouble);
 			return cell;
@@ -80,7 +82,7 @@ namespace Commercially.iOS
 		{
 			var requestDetailsController = UINavigationControllerExtensions.GetViewController(GlobalConstants.Screens.RequestDetails) as RequestDetailsController;
 			NavigationController.PushViewController(requestDetailsController, true);
-			requestDetailsController.Request = RequestList.NewRequestList[indexPath.Row];
+			requestDetailsController.Request = sharedController.NewRequestList[indexPath.Row];
 		}
 	}
 }

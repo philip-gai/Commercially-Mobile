@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Net;
 using Android.App;
 using Android.Widget;
 using Android.OS;
@@ -29,8 +28,7 @@ namespace Commercially.Droid
 					Session.User = new User(EmailField.Text, PasswordField.Text);
 					StartActivity(new Intent(this, typeof(DashboardActivity)));
 				} catch (Exception) {
-					var newFragment = new PromptDialogFragment(Localizable.PromptMessages.LoginError);
-					newFragment.Show(FragmentManager, "Error");
+					this.ShowPrompt(Localizable.PromptMessages.LoginError);
 				}
 			};
 		}

@@ -52,12 +52,6 @@ namespace Commercially.iOS
 			}
 		}
 
-		public override void ViewWillAppear(bool animated)
-		{
-			base.ViewWillAppear(animated);
-			NavigationItem.Title = "Details";
-		}
-
 		public override void ViewDidLoad()
 		{
 			base.ViewDidLoad();
