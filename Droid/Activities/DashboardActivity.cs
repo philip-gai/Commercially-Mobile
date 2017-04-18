@@ -17,7 +17,9 @@ namespace Commercially.Droid
 		{
 			base.OnCreate(savedInstanceState);
 			SetContentView(Resource.Layout.Table);
-			this.SetSupportActionBarDefault();
+			this.SetSupportActionBarDefault("Dashboard");
+			Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
+
 			Home.PrefetchData();
 			sharedController.GetRequests(
 				Dashboard.RequestTypes,

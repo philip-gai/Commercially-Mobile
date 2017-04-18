@@ -4,7 +4,10 @@ using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
 
+using Java.IO;
+
 using System;
+using Android.OS;
 
 namespace Commercially.Droid
 {
@@ -57,7 +60,9 @@ namespace Commercially.Droid
 			urgentIndicator.Visibility = request.urgent ? ViewStates.Visible : ViewStates.Gone;
 			rowView.Click += (object sender, EventArgs e) => {
 				var intent = new Intent(activity, typeof(RequestDetailsActivity));
-				//intent.PutExtra(typeof(Request).Name, );
+				//var bundle = new Bundle();
+				//bundle.PutSerializable(typeof(Request).Name, request);
+				//intent.PutExtra(typeof(Request).Name, request);
 				activity.StartActivity(intent);
 			};
 			return rowView;
@@ -67,10 +72,12 @@ namespace Commercially.Droid
 		{
 			var inflater = (LayoutInflater)activity.GetSystemService(Context.LayoutInflaterService);
 			var rowView = (TableRow)inflater.Inflate(Resource.Layout.ButtonRow, null);
+			var buttonLabel = rowView.FindViewById<TextView>(Resource.Id.buttonText);
 			var clientLabel = rowView.FindViewById<TextView>(Resource.Id.clientText);
 			var descriptionLabel = rowView.FindViewById<TextView>(Resource.Id.descriptionText);
 			var locationLabel = rowView.FindViewById<TextView>(Resource.Id.locationText);
 
+			buttonLabel.Text = button.bluetooth_id;
 			var tmpClient = Client.FindClient(button.clientId, Session.Clients);
 			clientLabel.Text = tmpClient != null && tmpClient.friendlyName != null ? tmpClient.friendlyName : button.clientId;
 			descriptionLabel.Text = button.description;
@@ -78,12 +85,39 @@ namespace Commercially.Droid
 			return rowView;
 		}
 
-		public static void SetSupportActionBarDefault(this AppCompatActivity activity)
+		public static void SetRequestDetails(this Activity activity, Request request)
+		{
+			var descriptionText = activity.FindViewById<TextView>(Resource.Id.descriptionText);
+			var urgentIndicator = activity.FindViewById(Resource.Id.urgentIndicator);
+			var locationText = activity.FindViewById<TextView>(Resource.Id.locationText);
+			var assignedToText = activity.FindViewById<TextView>(Resource.Id.assignedToText);
+			var receivedTimeText = activity.FindViewById<TextView>(Resource.Id.receivedTimeText);
+			var acceptedTimeText = activity.FindViewById<TextView>(Resource.Id.acceptedTimeText);
+			var completedTimeText = activity.FindViewById<TextView>(Resource.Id.completedTimeText);
+			var staticStatusText = activity.FindViewById<TextView>(Resource.Id.staticStatusText);
+			var statusText = activity.FindViewById<TextView>(Resource.Id.statusText);
+			var statusSpinner = activity.FindViewById<Spinner>(Resource.Id.statusSpinner);
+			var assignButton = activity.FindViewById<Button>(Resource.Id.assignButton);
+			var saveButton = activity.FindViewById<Button>(Resource.Id.saveButton);
+
+			descriptionText.Text = request.description;
+			urgentIndicator.Visibility = request.urgent ? ViewStates.Visible : ViewStates.Gone;
+			locationText.Text = "Location: " + request.room;
+			statusText.Text = request.GetStatus().ToString();
+			assignedToText.Text = request.assignedTo;
+			assignedToText.Visibility = string.IsNullOrWhiteSpace(request.assignedTo) ? ViewStates.Gone : ViewStates.Visible;
+			receivedTimeText.Text = "Received:\n" + request.GetTime(Request.TimeType.Received) ?? "N/A";
+			acceptedTimeText.Text = "Scheduled:\n" + request.GetTime(Request.TimeType.Scheduled) ?? "N/A";
+			completedTimeText.Text = "Completed:\n" + request.GetTime(Request.TimeType.Completed) ?? "N/A";
+		}
+
+		public static void SetSupportActionBarDefault(this AppCompatActivity activity, string title)
 		{
 			activity.SupportActionBar.Show();
+			activity.SupportActionBar.Title = "  " + title;
 			activity.SupportActionBar.SetDisplayShowHomeEnabled(true);
 			activity.SupportActionBar.SetIcon(Resource.Drawable.LogoRed);
-			activity.SupportActionBar.SetDisplayShowTitleEnabled(false);
+			activity.SupportActionBar.SetDisplayShowTitleEnabled(true);
 		}
 	}
 }

@@ -15,7 +15,9 @@ namespace Commercially.Droid
 		{
 			base.OnCreate(savedInstanceState);
 			SetContentView(Resource.Layout.Table);
-            this.SetSupportActionBarDefault();
+            this.SetSupportActionBarDefault("Buttons");
+			Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
+
 			ButtonList.GetButtons(
 				delegate {
 					RunOnUiThread(delegate {

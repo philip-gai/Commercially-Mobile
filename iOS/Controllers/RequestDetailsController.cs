@@ -80,7 +80,7 @@ namespace Commercially.iOS
 		void InitializeAssignedTo()
 		{
 			AssignedToLabel.Hidden = string.IsNullOrWhiteSpace(Request.assignedTo);
-			if (!string.IsNullOrWhiteSpace(Request.assignedTo)) {
+			if (!AssignedToLabel.Hidden) {
 				AssignedToLabel.Text = "Assigned To: " + Request.assignedTo;
 			}
 		}

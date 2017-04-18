@@ -17,7 +17,9 @@ namespace Commercially.Droid
 		{
 			base.OnCreate(savedInstanceState);
 			SetContentView(Resource.Layout.Table);
-            this.SetSupportActionBarDefault();
+            this.SetSupportActionBarDefault("Queue");
+			Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
+
 			sharedController.GetRequests(
 				delegate {
 					RunOnUiThread(delegate {

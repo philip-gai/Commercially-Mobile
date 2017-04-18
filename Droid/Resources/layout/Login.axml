@@ -43,8 +43,8 @@
             android:text="Login"
             android:layout_width="match_parent"
             android:id="@+id/LoginButton"
-            android:background="#ffff3130"
+            android:background="?android:attr/colorAccent"
             android:layout_height="66dp"
-            android:textColor="#ffffffff" />
+            android:textColor="@android:color/white" />
     </LinearLayout>
 </LinearLayout>

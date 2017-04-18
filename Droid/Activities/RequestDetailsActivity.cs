@@ -17,11 +17,21 @@ namespace Commercially.Droid
 	[Activity(Label = "RequestDetailsActivity")]
 	public class RequestDetailsActivity : AppCompatActivity
 	{
+		Request _Request;
+		Request Request {
+			set {
+				_Request = value;
+				this.SetRequestDetails(value);
+			}
+		}
+
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
 			SetContentView(Resource.Layout.RequestDetails);
-			// Create your application here
+			Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
+
+			Request = Intent.GetSerializableExtra(typeof(Request).Name) as Request;
 		}
 	}
 }
