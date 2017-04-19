@@ -11,11 +11,13 @@ namespace Commercially.Droid
 	[Activity(Label = "ButtonListActivity")]
 	public class ButtonListActivity : AppCompatActivity
 	{
+		TableLayout Table { get { return FindViewById<TableLayout>(Resource.Id.tableLayout); } }
+
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
 			SetContentView(Resource.Layout.Table);
-            this.SetSupportActionBarDefault("Buttons");
+			this.SetSupportActionBarDefault("Buttons");
 			Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
 
 			ButtonList.GetButtons(
@@ -47,12 +49,11 @@ namespace Commercially.Droid
 
 		void InitializeTable()
 		{
-			var table = FindViewById<TableLayout>(Resource.Id.tableLayout);
 			var header = GetHeader();
-			table.AddView(header);
+			Table.AddView(header);
 			for (int row = 0; row < Session.Buttons.Length; row++) {
 				var tableRow = GetTableRow(row);
-				table.AddView(tableRow);
+				Table.AddView(tableRow);
 			}
 		}
 

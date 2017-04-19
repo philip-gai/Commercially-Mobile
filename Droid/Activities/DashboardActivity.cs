@@ -1,5 +1,6 @@
 ﻿using System;
-
+using System.Threading;
+using System.Threading.Tasks;
 using Android.App;
 using Android.OS;
 using Android.Support.V7.App;
@@ -12,6 +13,8 @@ namespace Commercially.Droid
 	public class DashboardActivity : AppCompatActivity
 	{
 		readonly Dashboard sharedController = new Dashboard();
+
+		TableLayout Table { get { return FindViewById<TableLayout>(Resource.Id.tableLayout); } }
 
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
@@ -28,7 +31,7 @@ namespace Commercially.Droid
 						InitializeTable();
 					});
 				},
-				(Exception obj) => {
+				(Exception e) => {
 					RunOnUiThread(delegate {
 						this.ShowPrompt(Localizable.PromptMessages.RequestsError);
 					});
@@ -52,15 +55,14 @@ namespace Commercially.Droid
 
 		void InitializeTable()
 		{
-			var table = FindViewById<TableLayout>(Resource.Id.tableLayout);
 			for (int section = 0; section < sharedController.RequestLists.Length; section++) {
 				var requestList = sharedController.RequestLists[section];
 				if (requestList.Length <= 0) continue;
 				var header = GetHeader(section);
-				table.AddView(header);
+				Table.AddView(header);
 				for (int row = 0; row < requestList.Length; row++) {
 					var tableRow = GetTableRow(row, section);
-					table.AddView(tableRow);
+					Table.AddView(tableRow);
 				}
 			}
 		}

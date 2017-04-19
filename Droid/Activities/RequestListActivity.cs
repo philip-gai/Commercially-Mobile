@@ -13,11 +13,13 @@ namespace Commercially.Droid
 	{
 		readonly RequestList sharedController = new RequestList();
 
+		TableLayout Table { get { return FindViewById<TableLayout>(Resource.Id.tableLayout); } }
+
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
 			SetContentView(Resource.Layout.Table);
-            this.SetSupportActionBarDefault("Queue");
+			this.SetSupportActionBarDefault("Queue");
 			Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
 
 			sharedController.GetRequests(
@@ -49,12 +51,11 @@ namespace Commercially.Droid
 
 		void InitializeTable()
 		{
-			var table = FindViewById<TableLayout>(Resource.Id.tableLayout);
 			var header = GetHeader();
-			table.AddView(header);
+			Table.AddView(header);
 			for (int row = 0; row < sharedController.NewRequestList.Length; row++) {
 				var tableRow = GetTableRow(row);
-				table.AddView(tableRow);
+				Table.AddView(tableRow);
 			}
 		}
 

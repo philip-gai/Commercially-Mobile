@@ -11,16 +11,16 @@ namespace Commercially.Droid
 	[Activity(Label = "LoginActivity", NoHistory = true)]
 	public class LoginActivity : AppCompatActivity
 	{
+		EditText EmailField { get { return FindViewById<EditText>(Resource.Id.EmailField); } }
+		EditText PasswordField { get { return FindViewById<EditText>(Resource.Id.PasswordField); } }
+		Button LoginButton { get { return FindViewById<Button>(Resource.Id.LoginButton); } }
+
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
 			SetContentView(Resource.Layout.Login);
 			SupportActionBar?.Hide();
 			Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
-
-			var EmailField = FindViewById<EditText>(Resource.Id.EmailField);
-			var PasswordField = FindViewById<EditText>(Resource.Id.PasswordField);
-			var LoginButton = FindViewById<Button>(Resource.Id.LoginButton);
 
 			LoginButton.Click += delegate {
 				if (string.IsNullOrWhiteSpace(EmailField.Text) || string.IsNullOrWhiteSpace(PasswordField.Text)) return;

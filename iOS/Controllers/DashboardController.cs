@@ -19,9 +19,9 @@ namespace Commercially.iOS
 				InvokeOnMainThread(delegate {
 					TableView.ReloadData();
 				});
-			}, (Exception e) => {
+			}, (Exception) => {
 				InvokeOnMainThread(delegate {
-					NavigationController.ShowPrompt(e.Message, 50);
+					NavigationController.ShowPrompt(Localizable.PromptMessages.RequestsError);
 				});
 			});
 		}
@@ -97,7 +97,7 @@ namespace Commercially.iOS
 			int arrayIndex = Dashboard.SectionToArray[indexPath.Section];
 			var requestDetailsController = UINavigationControllerExtensions.GetViewController(GlobalConstants.Screens.RequestDetails) as RequestDetailsController;
 			NavigationController.PushViewController(requestDetailsController, true);
-			requestDetailsController.SharedController.Request = SharedController.RequestLists[arrayIndex][indexPath.Row];
+			requestDetailsController.Request = SharedController.RequestLists[arrayIndex][indexPath.Row];
 		}
 	}
 }

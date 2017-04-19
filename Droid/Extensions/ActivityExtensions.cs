@@ -6,6 +6,7 @@ using Android.Widget;
 using Newtonsoft.Json;
 
 using System;
+using Android.Content.Res;
 
 namespace Commercially.Droid
 {
@@ -30,6 +31,13 @@ namespace Commercially.Droid
 		{
 			var newFragment = new PromptDialogFragment(message);
 			newFragment.Show(activity.FragmentManager, message);
+		}
+
+		public static void ShowBackArrow(this AppCompatActivity activity)
+		{
+			activity.SupportActionBar.SetDisplayHomeAsUpEnabled(true);
+			activity.SupportActionBar.SetDisplayShowHomeEnabled(true);
+			activity.SupportActionBar.SetDisplayShowTitleEnabled(false);
 		}
 
 		public static View GetSectionHeader(this Activity activity, string label)
@@ -78,6 +86,11 @@ namespace Commercially.Droid
 			clientLabel.Text = tmpClient != null && tmpClient.friendlyName != null ? tmpClient.friendlyName : button.clientId;
 			descriptionLabel.Text = button.description;
 			locationLabel.Text = button.room;
+			rowView.Click += (object sender, EventArgs e) => {
+				var intent = new Intent(activity, typeof(ButtonDetailsActivity));
+				intent.PutExtra(typeof(FlicButton).Name, JsonConvert.SerializeObject(button));
+				activity.StartActivity(intent);
+			};
 			return rowView;
 		}
 

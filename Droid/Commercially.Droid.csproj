@@ -91,6 +91,7 @@
     <Compile Include="Activities\SplashActivity.cs" />
     <Compile Include="Activities\ButtonListActivity.cs" />
     <Compile Include="Activities\RequestDetailsActivity.cs" />
+    <Compile Include="Activities\ButtonDetailsActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

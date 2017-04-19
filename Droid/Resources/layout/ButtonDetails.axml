@@ -2,4 +2,86 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" />
+    android:layout_height="match_parent"
+    android:padding="20dp">
+    <EditText
+        android:layout_width="match_parent"
+        android:id="@+id/locationField"
+        android:hint="Location"
+        android:inputType="textEmailAddress"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="Location" />
+    <EditText
+        android:layout_width="match_parent"
+        android:id="@+id/descriptionField"
+        android:hint="Description"
+        android:inputType="textEmailAddress"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="Description" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+        <TextView
+            android:text="Button ID:"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+        <TextView
+            android:text="80-e4"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/bluetoothIdText"
+            android:layout_weight="1" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+        <TextView
+            android:text="Client ID:"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+        <TextView
+            android:text="rpi0"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/clientIdText"
+            android:layout_weight="1" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:id="@+id/pairLayout">
+        <TextView
+            android:text="Pair With:"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textColor="?android:attr/colorPrimary" />
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/clientSpinner"
+            android:layout_weight="1" />
+    </LinearLayout>
+    <Button
+        android:text="Save Changes"
+        android:layout_width="match_parent"
+        android:id="@+id/saveButton"
+        android:background="?android:attr/colorPrimary"
+        android:layout_height="66dp"
+        android:textColor="@android:color/white" />
+</LinearLayout>

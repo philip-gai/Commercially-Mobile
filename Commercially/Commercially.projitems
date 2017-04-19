@@ -42,6 +42,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Shared\ButtonList.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Shared\RequestDetails.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Shared\StatusPicker.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Shared\ButtonDetails.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Entities\" />

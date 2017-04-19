@@ -3,26 +3,48 @@ using Android.Content;
 using Android.OS;
 using Android.Support.V7.App;
 using Android.Views;
-using Android.Views.Animations;
 using Android.Widget;
+using Android.Animation;
 using Newtonsoft.Json;
+using System;
+using Android.Support.V4.App;
 
 namespace Commercially.Droid
 {
 	[Activity(Label = "RequestDetailsActivity")]
 	public class RequestDetailsActivity : AppCompatActivity
 	{
-		public readonly RequestDetails SharedController = new RequestDetails();
+		readonly RequestDetails SharedController = new RequestDetails();
+
+		TextView DescriptionText { get { return FindViewById<TextView>(Resource.Id.descriptionText); } }
+		TextView LocationText { get { return FindViewById<TextView>(Resource.Id.locationText); } }
+		TextView StatusText { get { return FindViewById<TextView>(Resource.Id.statusText); } }
+		TextView StaticStatusText { get { return FindViewById<TextView>(Resource.Id.staticStatusText); } }
+		TextView AssignedToText { get { return FindViewById<TextView>(Resource.Id.assignedToText); } }
+		TextView ReceivedTimeText { get { return FindViewById<TextView>(Resource.Id.receivedTimeText); } }
+		TextView AcceptedTimeText { get { return FindViewById<TextView>(Resource.Id.acceptedTimeText); } }
+		TextView CompletedTimeText { get { return FindViewById<TextView>(Resource.Id.completedTimeText); } }
+		ImageView UrgentIndicator { get { return FindViewById<ImageView>(Resource.Id.urgentIndicator); } }
+		Button AssignButton { get { return FindViewById<Button>(Resource.Id.assignButton); } }
+		Button SaveButton { get { return FindViewById<Button>(Resource.Id.saveButton); } }
+		Spinner StatusSpinner { get { return FindViewById<Spinner>(Resource.Id.statusSpinner); } }
 
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
 			SetContentView(Resource.Layout.RequestDetails);
 			Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
+			this.ShowBackArrow();
 
 			var request = JsonConvert.DeserializeObject<Request>(Intent.GetStringExtra(typeof(Request).Name));
 			SharedController.Request = request;
 			InitializeView();
+		}
+
+		public override bool OnSupportNavigateUp()
+		{
+			Finish();
+			return true;
 		}
 
 		void InitializeView()
@@ -31,67 +53,76 @@ namespace Commercially.Droid
 			InitializeText();
 			InitializeVisibility();
 			InitializeSpinner();
+			InitializeActions();
 		}
 
 		void InitializeText()
 		{
-			var descriptionText = FindViewById<TextView>(Resource.Id.descriptionText);
-			var locationText = FindViewById<TextView>(Resource.Id.locationText);
-			var statusText = FindViewById<TextView>(Resource.Id.statusText);
-			var assignedToText = FindViewById<TextView>(Resource.Id.assignedToText);
-			var receivedTimeText = FindViewById<TextView>(Resource.Id.receivedTimeText);
-			var acceptedTimeText = FindViewById<TextView>(Resource.Id.acceptedTimeText);
-			var completedTimeText = FindViewById<TextView>(Resource.Id.completedTimeText);
-
-			descriptionText.Text = SharedController.DescriptionText;
-			locationText.Text = SharedController.LocationText;
-			statusText.Text = SharedController.StatusText;
-			assignedToText.Text = SharedController.AssignedToText;
-			receivedTimeText.Text = SharedController.ReceivedTimeText;
-			acceptedTimeText.Text = SharedController.AcceptedTimeText;
-			completedTimeText.Text = SharedController.CompletedTimeText;
+			DescriptionText.Text = SharedController.DescriptionText;
+			LocationText.Text = SharedController.LocationText;
+			StatusText.Text = SharedController.StatusText;
+			AssignedToText.Text = SharedController.AssignedToText;
+			ReceivedTimeText.Text = SharedController.ReceivedTimeText;
+			AcceptedTimeText.Text = SharedController.AcceptedTimeText;
+			CompletedTimeText.Text = SharedController.CompletedTimeText;
 		}
 
 		void InitializeVisibility()
 		{
-			var urgentIndicator = FindViewById(Resource.Id.urgentIndicator);
-			var assignedToText = FindViewById<TextView>(Resource.Id.assignedToText);
-			var assignButton = FindViewById<Button>(Resource.Id.assignButton);
-			var saveButton = FindViewById<Button>(Resource.Id.saveButton);
-			var statusSpinner = FindViewById<Spinner>(Resource.Id.statusSpinner);
-			var statusText = FindViewById<TextView>(Resource.Id.statusText);
-
-			urgentIndicator.Visibility = SharedController.UrgentIndicatorIsHidden ? ViewStates.Gone : ViewStates.Visible;
-			assignedToText.Visibility = SharedController.AssignedToIsHidden ? ViewStates.Gone : ViewStates.Visible;
-			assignButton.Visibility = SharedController.AssignButtonIsHidden ? ViewStates.Gone : ViewStates.Visible;
-			saveButton.Visibility = SharedController.SaveButtonIsHidden ? ViewStates.Gone : ViewStates.Visible;
-			statusSpinner.Visibility = SharedController.StatusInputIsHidden ? ViewStates.Gone : ViewStates.Visible;
-			statusText.Visibility = SharedController.StatusLabelIsHidden ? ViewStates.Gone : ViewStates.Visible;
+			UrgentIndicator.Visibility = SharedController.UrgentIndicatorIsHidden ? ViewStates.Gone : ViewStates.Visible;
+			AssignedToText.Visibility = SharedController.AssignedToIsHidden ? ViewStates.Gone : ViewStates.Visible;
+			AssignButton.Visibility = SharedController.AssignButtonIsHidden ? ViewStates.Gone : ViewStates.Visible;
+			SaveButton.Visibility = SharedController.SaveButtonIsHidden ? ViewStates.Gone : ViewStates.Visible;
+			StatusSpinner.Visibility = SharedController.StatusInputIsHidden ? ViewStates.Gone : ViewStates.Visible;
+			StatusText.Visibility = SharedController.StatusLabelIsHidden ? ViewStates.Gone : ViewStates.Visible;
 		}
 
 		void InitializeSpinner()
 		{
-			var statusSpinner = FindViewById<Spinner>(Resource.Id.statusSpinner);
-			var saveButton = FindViewById<Button>(Resource.Id.saveButton);
-			var assignButton = FindViewById<Button>(Resource.Id.assignButton);
-			var staticStatusText = FindViewById<TextView>(Resource.Id.staticStatusText);
-
 			var adapter = new ArrayAdapter(this, Resource.Array.status_array);
-			statusSpinner.Adapter = adapter;
-			statusSpinner.ItemSelected += (object sender, AdapterView.ItemSelectedEventArgs e) => {
-				SharedController.SelectedStatus = e.ToString();
-				assignButton.Animate()
-							.TranslationY(assignButton.Height)
-							.Alpha(0)
-							.SetDuration((long)(RequestDetails.AnimationDuration * 100));
-				assignButton.Visibility = SharedController.AssignButtonIsHidden ? ViewStates.Gone : ViewStates.Visible;
-				saveButton.Visibility = SharedController.SaveButtonIsHidden ? ViewStates.Gone : ViewStates.Visible;
-				//});
-			};
-			staticStatusText.SetTextColor(RequestDetails.StaticStatusDefault.GetAndroidColor());
+			StatusSpinner.Adapter = adapter;
+			StaticStatusText.SetTextColor(RequestDetails.StaticStatusDefault.GetAndroidColor());
 			if (!SharedController.StatusInputIsHidden) {
-				staticStatusText.SetTextColor(RequestDetails.StaticStatusEdit.GetAndroidColor());
+				StaticStatusText.SetTextColor(RequestDetails.StaticStatusEdit.GetAndroidColor());
 			}
+		}
+
+		void InitializeActions()
+		{
+			StatusSpinner.ItemSelected += (object sender, AdapterView.ItemSelectedEventArgs e) => {
+				SharedController.SelectedStatus = e.ToString();
+				SaveButton.Visibility = SharedController.SaveButtonIsHidden ? ViewStates.Gone : ViewStates.Visible;
+			};
+			SaveButton.Click += SaveButtonClick;
+			AssignButton.Click += AssignButtonClick;
+		}
+
+		void SaveButtonClick(object sender, EventArgs e)
+		{
+			var saveButton = sender as Button;
+			try {
+				RequestApi.UpdateRequest(SharedController.Request._id, (RequestStatusType)SharedController.SelectedStatus.GetStatus());
+			} catch (Exception) {
+				this.ShowPrompt(Localizable.PromptMessages.RequestSaveError);
+				return;
+			}
+			saveButton.Visibility = ViewStates.Gone;
+			Finish();
+		}
+
+		void AssignButtonClick(object sender, EventArgs e)
+		{
+			var assignButton = sender as Button;
+			// Call Post to change button ownedBy value to this user's email in DB
+			try {
+				RequestApi.UpdateRequest(SharedController.Request._id, RequestStatusType.Assigned);
+			} catch (Exception) {
+				this.ShowPrompt(Localizable.PromptMessages.AssignError);
+				return;
+			}
+
+			assignButton.Visibility = ViewStates.Gone;
+			Finish();
 		}
 	}
 }

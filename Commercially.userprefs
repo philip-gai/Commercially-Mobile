@@ -1,11 +1,5 @@
-﻿<Properties StartupConfiguration="{B9BD7A31-A665-492A-8207-AAB835D1C7CC}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="iOS/Controllers/RequestDetailsController.cs">
-    <Files>
-      <File FileName="Droid/Activities/RequestDetailsActivity.cs" Line="77" Column="91" />
-      <File FileName="Droid/Extensions/ActivityExtensions.cs" Line="60" Column="56" />
-      <File FileName="iOS/Controllers/RequestDetailsController.cs" Line="83" Column="32" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
+﻿<Properties StartupConfiguration="{26811657-1310-4E9D-8DD4-12575F9190CB}|Default">
+  <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />

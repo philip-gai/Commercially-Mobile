@@ -7,17 +7,15 @@ namespace Commercially.iOS
 {
 	public partial class ButtonDetailsController : KeyboardController
 	{
-		public ButtonDetailsController(IntPtr handle) : base(handle) { }
+		private readonly ButtonDetails SharedController = new ButtonDetails();
 
-		const double AnimationDuration = 0.25;
-		public FlicButton Button;
-		string SelectedClient;
-
-		bool IsPaired {
-			get {
-				return !string.IsNullOrWhiteSpace(Button.clientId);
+		public FlicButton Button {
+			set {
+				SharedController.Button = value;
 			}
 		}
+
+		public ButtonDetailsController(IntPtr handle) : base(handle) { }
 
 		bool IsChanged {
 			get {
@@ -28,21 +26,21 @@ namespace Commercially.iOS
 		bool PickerChanged {
 			get {
 				if (ClientPickerView.Model == null) return false;
-				return !ClientPickerView.Model.GetTitle(ClientPickerView, 0, 0).Equals(SelectedClient);
+				return !ClientPickerView.Model.GetTitle(ClientPickerView, 0, 0).Equals(SharedController.SelectedClient);
 			}
 		}
 
 		bool LocationChanged {
 			get {
-				if (Button.room == null) return !string.IsNullOrWhiteSpace(LocationField.Text);
-				return !Button.room.Equals(LocationField.Text);
+				if (SharedController.Button.room == null) return !string.IsNullOrWhiteSpace(LocationField.Text);
+				return !SharedController.Button.room.Equals(LocationField.Text);
 			}
 		}
 
 		bool DescriptionChanged {
 			get {
-				if (Button.description == null) return !string.IsNullOrWhiteSpace(DescriptionField.Text);
-				return !Button.description.Equals(DescriptionField.Text);
+				if (SharedController.Button.description == null) return !string.IsNullOrWhiteSpace(DescriptionField.Text);
+				return !SharedController.Button.description.Equals(DescriptionField.Text);
 			}
 		}
 
@@ -69,16 +67,16 @@ namespace Commercially.iOS
 					jsonBody.Add("description", DescriptionField.Text);
 				}
 				if (jsonBody.Count > 0) {
-					ButtonApi.PatchButton(Button.bluetooth_id, jsonBody.ToString());
+					ButtonApi.PatchButton(SharedController.Button.bluetooth_id, jsonBody.ToString());
 				}
 				if (PickerChanged) {
-					ButtonApi.PairButton(Button.bluetooth_id, Client.FindClient(SelectedClient, Session.Clients).clientId);
+					ButtonApi.PairButton(SharedController.Button.bluetooth_id, Client.FindClient(SharedController.SelectedClient, Session.Clients).clientId);
 				}
 			} catch (Exception) {
 				NavigationController.ShowPrompt(Localizable.PromptMessages.ButtonSaveError);
 				return;
 			}
-			UIView.AnimateAsync(AnimationDuration, delegate {
+			UIView.AnimateAsync(ButtonDetails.AnimationDuration, delegate {
 				SaveButton.Hidden = true;
 			});
 			NavigationController.PopViewController(true);
@@ -86,37 +84,36 @@ namespace Commercially.iOS
 
 		void InitializeView()
 		{
-			if (Button == null) return;
+			if (SharedController.Button == null) return;
 			LocationField.ShouldReturn += (textField) => { LocationField.ResignFirstResponder(); return true; };
 			DescriptionField.ShouldReturn += (textField) => { DescriptionField.ResignFirstResponder(); return true; };
-			LocationField.Text = Button.room;
-			DescriptionField.Text = Button.description;
-			BluetoothIdLabel.Text = Button.bluetooth_id;
+			LocationField.Text = SharedController.LocationFieldText;
+			DescriptionField.Text = SharedController.DescriptionFieldText;
+			BluetoothIdLabel.Text = SharedController.BluetoothIdText;
 			LocationField.EditingChanged += OnFieldChange;
 			DescriptionField.EditingChanged += OnFieldChange;
-			ClientIdLabel.Hidden = !IsPaired;
-			PairStack.Hidden = IsPaired;
+			ClientIdLabel.Hidden = SharedController.ClientIdIsHidden;
+			PairStack.Hidden = SharedController.PairStackIsHidden;
 			if (!PairStack.Hidden) {
-				ClientPickerView.Model = new ClientPickerViewModel(FlicButton.GetDiscoveredByClients(Button), OnPickerChange);
+				ClientPickerView.Model = new ClientPickerViewModel(FlicButton.GetDiscoveredByClients(SharedController.Button), OnPickerChange);
 			}
 			if (!ClientIdLabel.Hidden) {
-				var tmpClient = Client.FindClient(Button.clientId, Session.Clients);
-				ClientIdLabel.Text = tmpClient != null && tmpClient.friendlyName != null ? tmpClient.friendlyName : Button.clientId;
+				ClientIdLabel.Text = SharedController.ClientIdText;
 			}
 			SaveButton.Hidden = true;
 		}
 
 		void OnPickerChange(UIPickerView pickerView, nint row, nint component)
 		{
-			SelectedClient = pickerView.Model.GetTitle(pickerView, row, component);
-			UIView.AnimateAsync(AnimationDuration, delegate {
+			SharedController.SelectedClient = pickerView.Model.GetTitle(pickerView, row, component);
+			UIView.AnimateAsync(ButtonDetails.AnimationDuration, delegate {
 				SaveButton.Hidden = !IsChanged;
 			});
 		}
 
 		void OnFieldChange(object sender, EventArgs e)
 		{
-			UIView.AnimateAsync(AnimationDuration, delegate {
+			UIView.AnimateAsync(ButtonDetails.AnimationDuration, delegate {
 				SaveButton.Hidden = !IsChanged;
 			});
 		}

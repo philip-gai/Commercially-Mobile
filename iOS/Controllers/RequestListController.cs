@@ -82,7 +82,7 @@ namespace Commercially.iOS
 		{
 			var requestDetailsController = UINavigationControllerExtensions.GetViewController(GlobalConstants.Screens.RequestDetails) as RequestDetailsController;
 			NavigationController.PushViewController(requestDetailsController, true);
-			requestDetailsController.SharedController.Request = SharedController.NewRequestList[indexPath.Row];
+			requestDetailsController.Request = SharedController.NewRequestList[indexPath.Row];
 		}
 	}
 }

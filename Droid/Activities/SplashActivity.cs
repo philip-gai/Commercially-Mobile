@@ -18,6 +18,7 @@ namespace Commercially.Droid
 			SetContentView(Resource.Layout.Splash);
 			SupportActionBar.Hide();
 			Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
+			Window.SetStatusBarColor(GlobalConstants.DefaultColors.Red.GetAndroidColor());
 		}
 
 		protected override void OnResume()

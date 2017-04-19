@@ -9,13 +9,14 @@ namespace Commercially
 		public Request Request;
 		public string SelectedStatus;
 
-		public bool IsMyRequest {
+		bool IsMyRequest {
 			get {
 				return Request.assignedTo != null && Request.assignedTo.Equals(Session.User.email);
 			}
 		}
-		public bool StatusChanged {
+		bool StatusChanged {
 			get {
+				if (SelectedStatus == null) return false;
 				return !Request.GetStatus().ToString().Equals(SelectedStatus);
 			}
 		}

@@ -7,8 +7,13 @@ namespace Commercially.iOS
 {
 	public partial class RequestDetailsController : UIViewController
 	{
+		private readonly RequestDetails SharedController = new RequestDetails();
 
-		public readonly RequestDetails SharedController = new RequestDetails();
+		public Request Request {
+			set {
+				SharedController.Request = value;
+			}
+		}
 
 		public RequestDetailsController(IntPtr handle) : base(handle) { }
 
