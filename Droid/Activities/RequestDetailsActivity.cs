@@ -3,6 +3,7 @@ using Android.Content;
 using Android.OS;
 using Android.Support.V7.App;
 using Android.Views;
+using Android.Views.Animations;
 using Android.Widget;
 using Newtonsoft.Json;
 
@@ -70,11 +71,22 @@ namespace Commercially.Droid
 
 		void InitializeSpinner()
 		{
-			var staticStatusText = FindViewById<TextView>(Resource.Id.staticStatusText);
 			var statusSpinner = FindViewById<Spinner>(Resource.Id.statusSpinner);
+			var saveButton = FindViewById<Button>(Resource.Id.saveButton);
+			var assignButton = FindViewById<Button>(Resource.Id.assignButton);
+			var staticStatusText = FindViewById<TextView>(Resource.Id.staticStatusText);
+
 			var adapter = new ArrayAdapter(this, Resource.Array.status_array);
 			statusSpinner.Adapter = adapter;
 			statusSpinner.ItemSelected += (object sender, AdapterView.ItemSelectedEventArgs e) => {
+				SharedController.SelectedStatus = e.ToString();
+				assignButton.Animate()
+							.TranslationY(assignButton.Height)
+							.Alpha(0)
+							.SetDuration((long)(RequestDetails.AnimationDuration * 100));
+				assignButton.Visibility = SharedController.AssignButtonIsHidden ? ViewStates.Gone : ViewStates.Visible;
+				saveButton.Visibility = SharedController.SaveButtonIsHidden ? ViewStates.Gone : ViewStates.Visible;
+				//});
 			};
 			staticStatusText.SetTextColor(RequestDetails.StaticStatusDefault.GetAndroidColor());
 			if (!SharedController.StatusInputIsHidden) {
