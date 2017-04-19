@@ -5,7 +5,6 @@ namespace Commercially.iOS
 {
 	public class StatusPickerViewModel : UIPickerViewModel
 	{
-		readonly string[] Statuses = { RequestStatusType.New.ToString(), RequestStatusType.Assigned.ToString(), RequestStatusType.Completed.ToString(), RequestStatusType.Cancelled.ToString() };
 		readonly Action<UIPickerView, nint, nint> OnSelect;
 
 		public StatusPickerViewModel(Action<UIPickerView, nint, nint> OnSelect)
@@ -20,12 +19,12 @@ namespace Commercially.iOS
 
 		public override nint GetRowsInComponent(UIPickerView pickerView, nint component)
 		{
-			return Statuses.Length;
+			return StatusPicker.Statuses.Length;
 		}
 
 		public override string GetTitle(UIPickerView pickerView, nint row, nint component)
 		{
-			return Statuses[row];
+			return StatusPicker.Statuses[row];
 		}
 
 		public override void Selected(UIPickerView pickerView, nint row, nint component)

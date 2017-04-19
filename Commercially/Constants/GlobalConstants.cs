@@ -22,6 +22,8 @@
 			public static Color Blue = new Color(0, 122, 255);
 			public static Color Purple = new Color(88, 86, 214);
 			public static Color Pink = new Color(255, 45, 85);
+			public static Color Black = new Color(255, 255, 255);
+			public static Color White = new Color(0, 0, 0);
 		}
 	}
 }

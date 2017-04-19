@@ -7,20 +7,8 @@ namespace Commercially.iOS
 {
 	public partial class RequestDetailsController : UIViewController
 	{
-		const double AnimationDuration = 0.25;
-		public Request Request;
-		bool IsMyRequest {
-			get {
-				return Request.assignedTo != null && Request.assignedTo.Equals(Session.User.email);
-			}
-		}
-		bool StatusChanged {
-			get {
-				return !Request.GetStatus().ToString().Equals(SelectedStatus);
-			}
-		}
 
-		string SelectedStatus;
+		public readonly RequestDetails SharedController = new RequestDetails();
 
 		public RequestDetailsController(IntPtr handle) : base(handle) { }
 
@@ -35,12 +23,12 @@ namespace Commercially.iOS
 			// Call Post to change request status string
 			// Post for time that status was changed
 			try {
-				RequestApi.UpdateRequest(Request._id, (RequestStatusType)SelectedStatus.GetStatus());
+				RequestApi.UpdateRequest(SharedController.Request._id, (RequestStatusType)SharedController.SelectedStatus.GetStatus());
 			} catch (Exception) {
 				NavigationController.ShowPrompt(Localizable.PromptMessages.RequestSaveError);
 				return;
 			}
-			UIView.AnimateAsync(AnimationDuration, delegate {
+			UIView.AnimateAsync(RequestDetails.AnimationDuration, delegate {
 				ButtonStackView.Hidden = AssignButton.Hidden;
 			});
 			SaveButton.Hidden = true;
@@ -51,13 +39,13 @@ namespace Commercially.iOS
 		{
 			// Call Post to change button ownedBy value to this user's email in DB
 			try {
-				RequestApi.UpdateRequest(Request._id, RequestStatusType.Assigned);
+				RequestApi.UpdateRequest(SharedController.Request._id, RequestStatusType.Assigned);
 			} catch (Exception) {
 				NavigationController.ShowPrompt(Localizable.PromptMessages.AssignError);
 				return;
 			}
 
-			UIView.AnimateAsync(AnimationDuration, delegate {
+			UIView.AnimateAsync(RequestDetails.AnimationDuration, delegate {
 				ButtonStackView.Hidden = SaveButton.Hidden;
 			});
 			AssignButton.Hidden = true;
@@ -66,58 +54,49 @@ namespace Commercially.iOS
 
 		void InitializeView()
 		{
-			if (Request == null) return;
-			DescriptionLabel.Text = Request.description;
-			RoomLabel.Text = "Location: " + Request.room;
-			UrgentIndicator.Hidden = !Request.urgent;
-			StatusLabel.Text = Request.GetStatus().ToString();
-			InitializeAssignedTo();
-			InitializeDateTimes();
+			if (SharedController.Request == null) return;
+			InitializeText();
 			InitializeVisibility();
 			InitializeStatusPicker();
 		}
 
-		void InitializeAssignedTo()
-		{
-			AssignedToLabel.Hidden = string.IsNullOrWhiteSpace(Request.assignedTo);
-			if (!AssignedToLabel.Hidden) {
-				AssignedToLabel.Text = "Assigned To: " + Request.assignedTo;
-			}
+		void InitializeText() {
+			DescriptionLabel.Text = SharedController.DescriptionText;
+			RoomLabel.Text = SharedController.LocationText;
+			StatusLabel.Text = SharedController.StatusText;
+			AssignedToLabel.Text = SharedController.AssignedToText;
+			ReceivedTimeLabel.Text = SharedController.ReceivedTimeText;
+			AcceptedTimeLabel.Text = SharedController.AcceptedTimeText;
+			CompletedTimeLabel.Text = SharedController.CompletedTimeText;
 		}
 
-		void InitializeDateTimes()
-		{
-			ReceivedTimeLabel.Text = "Received:\n" + Request.GetTime(Request.TimeType.Received) ?? "N/A";
-			AcceptedTimeLabel.Text = "Scheduled:\n" + Request.GetTime(Request.TimeType.Scheduled) ?? "N/A";
-			CompletedTimeLabel.Text = "Completed:\n" + Request.GetTime(Request.TimeType.Completed) ?? "N/A";
-		}
-
-		void InitializeVisibility()
-		{
-			AssignButton.Hidden = Request.GetStatus() != RequestStatusType.New;
-			SaveButton.Hidden = true;
-			ButtonStackView.Hidden = AssignButton.Hidden && SaveButton.Hidden;
-			StatusPickerView.Hidden = !IsMyRequest || (Request.GetStatus() == RequestStatusType.Completed || Request.GetStatus() == RequestStatusType.Cancelled);
-			StatusLabel.Hidden = !StatusPickerView.Hidden;
+		void InitializeVisibility() {
+			UrgentIndicator.Hidden = SharedController.UrgentIndicatorIsHidden;
+			AssignedToLabel.Hidden = SharedController.AssignedToIsHidden;
+			AssignButton.Hidden = SharedController.AssignButtonIsHidden;
+			SaveButton.Hidden = SharedController.SaveButtonIsHidden;
+			ButtonStackView.Hidden = SharedController.ButtonStackIsHidden;
+			StatusPickerView.Hidden = SharedController.StatusInputIsHidden;
+			StatusLabel.Hidden = SharedController.StatusLabelIsHidden;
 		}
 
 		void InitializeStatusPicker()
 		{
 			StatusPickerView.Model = new StatusPickerViewModel(OnPickerChange);
-			StaticStatusLabel.TextColor = UIColor.Black;
-			if (!StatusPickerView.Hidden) {
+			StaticStatusLabel.TextColor = RequestDetails.StaticStatusDefault.GetUIColor();
+			if (!SharedController.StatusInputIsHidden) {
 				// Scroll to current status in picker view
-				StatusPickerView.ScrollToTitle(Request.GetStatus().ToString());
-				StaticStatusLabel.TextColor = GlobalConstants.DefaultColors.Red.GetUIColor();
+				StatusPickerView.ScrollToTitle(SharedController.Request.GetStatus().ToString());
+				StaticStatusLabel.TextColor = RequestDetails.StaticStatusEdit.GetUIColor();
 			}
 		}
 
 		void OnPickerChange(UIPickerView pickerView, nint row, nint component)
 		{
-			SelectedStatus = pickerView.Model.GetTitle(pickerView, row, component);
-			SaveButton.Hidden = !StatusChanged;
-			UIView.AnimateAsync(AnimationDuration, delegate {
-				ButtonStackView.Hidden = AssignButton.Hidden && SaveButton.Hidden;
+			SharedController.SelectedStatus = pickerView.Model.GetTitle(pickerView, row, component);
+			SaveButton.Hidden = SharedController.SaveButtonIsHidden;
+			UIView.AnimateAsync(RequestDetails.AnimationDuration, delegate {
+				ButtonStackView.Hidden = SharedController.ButtonStackIsHidden;
 			});
 		}
 	}

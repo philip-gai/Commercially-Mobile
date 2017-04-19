@@ -3,7 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffff3b30"
+    android:background="?android:attr/colorPrimary"
     android:minWidth="25px"
     android:minHeight="25px">
     <ImageView
@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/textView1"
         android:gravity="center"
-        android:textColor="#ffffffff" />
+        android:textColor="@android:color/white" />
     <TextView
         android:text="Team PVS01"
         android:textAppearance="?android:attr/textAppearanceMedium"
@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/textView1"
         android:gravity="center"
-        android:textColor="#ffffffff"
+        android:textColor="@android:color/white"
         android:textStyle="bold"
         android:layout_marginTop="5dp" />
 </LinearLayout>

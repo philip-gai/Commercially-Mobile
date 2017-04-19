@@ -35,12 +35,13 @@
     <Compile Include="$(MSBuildThisFileDirectory)APIs\ButtonApi.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\Client.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)APIs\ClientApi.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Controllers\Dashboard.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Controllers\Home.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Shared\Dashboard.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Shared\Home.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Main.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Controllers\RequestList.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Controllers\ButtonList.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Controllers\RequestDetails.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Shared\RequestList.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Shared\ButtonList.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Shared\RequestDetails.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Shared\StatusPicker.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Entities\" />
@@ -50,6 +51,6 @@
     <Folder Include="$(MSBuildThisFileDirectory)Enumerations\" />
     <Folder Include="$(MSBuildThisFileDirectory)Extensions\" />
     <Folder Include="$(MSBuildThisFileDirectory)Constants\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Controllers\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Shared\" />
   </ItemGroup>
 </Project>

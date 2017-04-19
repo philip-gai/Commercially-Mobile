@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<resources>
+    <string-array name="status_array">
+        <item>New</item>
+        <item>Assigned</item>
+        <item>Completed</item>
+        <item>Cancelled</item>
+    </string-array>
+</resources>

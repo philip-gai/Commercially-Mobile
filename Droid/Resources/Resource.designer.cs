@@ -71,6 +71,22 @@ namespace Commercially.Droid
 			}
 		}
 		
+		public partial class Array
+		{
+			
+			// aapt resource value: 0x7f0d0000
+			public const int status_array = 2131558400;
+			
+			static Array()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Array()
+			{
+			}
+		}
+		
 		public partial class Attribute
 		{
 			
@@ -2341,8 +2357,8 @@ namespace Commercially.Droid
 		public partial class Menu
 		{
 			
-			// aapt resource value: 0x7f0d0000
-			public const int TopMenu = 2131558400;
+			// aapt resource value: 0x7f0e0000
+			public const int TopMenu = 2131623936;
 			
 			static Menu()
 			{

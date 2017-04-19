@@ -8,9 +8,9 @@ namespace Commercially.iOS
 {
 	public partial class RequestListController : UITableViewController
 	{
-		public RequestListController(IntPtr handle) : base(handle) { }
+		readonly RequestList SharedController = new RequestList();
 
-		readonly RequestList sharedController = new RequestList();
+		public RequestListController(IntPtr handle) : base(handle) { }
 
 		public override void ViewDidLoad()
 		{
@@ -23,7 +23,7 @@ namespace Commercially.iOS
 		public override void ViewWillAppear(bool animated)
 		{
 			base.ViewWillAppear(animated);
-			sharedController.GetRequests(delegate {
+			SharedController.GetRequests(delegate {
 				InvokeOnMainThread(delegate {
 					TableView.ReloadData();
 				});
@@ -36,12 +36,12 @@ namespace Commercially.iOS
 
 		public override nint NumberOfSections(UITableView tableView)
 		{
-			return sharedController.NewRequestList == null ? 0 : sharedController.NewRequestList.Length == 0 ? 0 : 1;
+			return SharedController.NewRequestList == null ? 0 : SharedController.NewRequestList.Length == 0 ? 0 : 1;
 		}
 
 		public override nint RowsInSection(UITableView tableView, nint section)
 		{
-			return sharedController.NewRequestList == null ? 0 : sharedController.NewRequestList.Length;
+			return SharedController.NewRequestList == null ? 0 : SharedController.NewRequestList.Length;
 		}
 
 		public override nfloat GetHeightForHeader(UITableView tableView, nint section)
@@ -62,8 +62,8 @@ namespace Commercially.iOS
 			var Frame = new CGRect(10, 0, HeaderView.Frame.Width, RequestList.HeaderHeight);
 			var Label = new UILabel(Frame);
 			Label.Text = RequestStatusType.New.ToString();
-			if (sharedController.NewRequestList != null) {
-				Label.Text += " (" + sharedController.NewRequestList.Length + ")";
+			if (SharedController.NewRequestList != null) {
+				Label.Text += " (" + SharedController.NewRequestList.Length + ")";
 			}
 			HeaderView.AddSubview(Label);
 			return HeaderView;
@@ -72,7 +72,7 @@ namespace Commercially.iOS
 		public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
 		{
 			var cell = tableView.DequeueReusableCell(RequestCell.Key, indexPath) as RequestCell;
-			cell.Request = sharedController.NewRequestList[indexPath.Row];
+			cell.Request = SharedController.NewRequestList[indexPath.Row];
 			cell.SetStatusLabelIsHidden(true);
 			cell.BackgroundColor = RequestList.TableBackgroundColor.GetUIColor().ColorWithAlpha((nfloat)RequestList.RowAlphaDouble);
 			return cell;
@@ -82,7 +82,7 @@ namespace Commercially.iOS
 		{
 			var requestDetailsController = UINavigationControllerExtensions.GetViewController(GlobalConstants.Screens.RequestDetails) as RequestDetailsController;
 			NavigationController.PushViewController(requestDetailsController, true);
-			requestDetailsController.Request = sharedController.NewRequestList[indexPath.Row];
+			requestDetailsController.SharedController.Request = SharedController.NewRequestList[indexPath.Row];
 		}
 	}
 }

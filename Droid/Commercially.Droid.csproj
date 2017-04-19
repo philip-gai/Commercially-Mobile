@@ -180,6 +180,7 @@
     <AndroidResource Include="Resources\layout\ButtonRow.axml" />
     <AndroidResource Include="Resources\layout\RequestDetails.axml" />
     <AndroidResource Include="Resources\layout\ButtonDetails.axml" />
+    <AndroidResource Include="Resources\values\status_array.xml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable-hdpi\" />

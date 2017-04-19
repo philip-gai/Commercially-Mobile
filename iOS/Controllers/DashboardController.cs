@@ -8,13 +8,14 @@ namespace Commercially.iOS
 {
 	public partial class DashboardController : UITableViewController
 	{
+		readonly Dashboard SharedController = new Dashboard();
+
 		public DashboardController(IntPtr handle) : base(handle) { }
-		Dashboard sharedController = new Dashboard();
 
 		public override void ViewWillAppear(bool animated)
 		{
 			base.ViewWillAppear(animated);
-			sharedController.GetRequests(Dashboard.RequestTypes, delegate {
+			SharedController.GetRequests(Dashboard.RequestTypes, delegate {
 				InvokeOnMainThread(delegate {
 					TableView.ReloadData();
 				});
@@ -35,10 +36,10 @@ namespace Commercially.iOS
 
 		public override nint NumberOfSections(UITableView tableView)
 		{
-			if (sharedController.RequestLists == null) return 0;
+			if (SharedController.RequestLists == null) return 0;
 			int NumSections = 0;
-			for (int i = 0; i < sharedController.RequestLists.Length; i++) {
-				if (sharedController.RequestLists[i] != null && sharedController.RequestLists[i].Length > 0) {
+			for (int i = 0; i < SharedController.RequestLists.Length; i++) {
+				if (SharedController.RequestLists[i] != null && SharedController.RequestLists[i].Length > 0) {
 					Dashboard.SectionToArray[NumSections] = i;
 					NumSections++;
 				}
@@ -48,10 +49,10 @@ namespace Commercially.iOS
 
 		public override nint RowsInSection(UITableView tableView, nint section)
 		{
-			if (sharedController.RequestLists == null) return 0;
+			if (SharedController.RequestLists == null) return 0;
 			int i;
-			for (i = Dashboard.SectionToArray[section]; i < sharedController.RequestLists.Length && (sharedController.RequestLists[i] == null || sharedController.RequestLists[i].Length == 0); i++) { }
-			return sharedController.RequestLists[i].Length;
+			for (i = Dashboard.SectionToArray[section]; i < SharedController.RequestLists.Length && (SharedController.RequestLists[i] == null || SharedController.RequestLists[i].Length == 0); i++) { }
+			return SharedController.RequestLists[i].Length;
 		}
 
 		public override nfloat GetHeightForHeader(UITableView tableView, nint section)
@@ -73,8 +74,8 @@ namespace Commercially.iOS
 			var Frame = new CGRect(10, 0, HeaderView.Frame.Width, Dashboard.HeaderHeight);
 			var Label = new UILabel(Frame);
 			Label.Text = Dashboard.SectionTitles[arrayIndex];
-			if (sharedController.RequestLists != null) {
-				Label.Text += " (" + sharedController.RequestLists[arrayIndex].Length + ")";
+			if (SharedController.RequestLists != null) {
+				Label.Text += " (" + SharedController.RequestLists[arrayIndex].Length + ")";
 			}
 			HeaderView.AddSubview(Label);
 
@@ -85,7 +86,7 @@ namespace Commercially.iOS
 		{
 			int arrayIndex = Dashboard.SectionToArray[indexPath.Section];
 			var cell = tableView.DequeueReusableCell(RequestCell.Key, indexPath) as RequestCell;
-			cell.Request = sharedController.RequestLists[arrayIndex][indexPath.Row];
+			cell.Request = SharedController.RequestLists[arrayIndex][indexPath.Row];
 			cell.SetStatusLabelIsHidden(true);
 			cell.BackgroundColor = Dashboard.SectionBackgroundColors[arrayIndex].GetUIColor().ColorWithAlpha((nfloat)Dashboard.RowAlphaDouble);
 			return cell;
@@ -96,7 +97,7 @@ namespace Commercially.iOS
 			int arrayIndex = Dashboard.SectionToArray[indexPath.Section];
 			var requestDetailsController = UINavigationControllerExtensions.GetViewController(GlobalConstants.Screens.RequestDetails) as RequestDetailsController;
 			NavigationController.PushViewController(requestDetailsController, true);
-			requestDetailsController.Request = sharedController.RequestLists[arrayIndex][indexPath.Row];
+			requestDetailsController.SharedController.Request = SharedController.RequestLists[arrayIndex][indexPath.Row];
 		}
 	}
 }
