@@ -1,11 +1,15 @@
 ﻿namespace Commercially {
 	public struct Localizable {
 		public struct PromptMessages {
-			public const string InvalidEmail = "Check that your email is valid.";
-			public const string InvalidPassword = "Check that your password is valid.";
-			public const string LoginError = "Incorrect email address or password.";
-			public const string ButtonsError = "Error loading buttons.";
-			public const string RequestsError = "Error loading requests.";
+			public const string FriendlyStart = "Oops! ";
+			public const string InvalidEmail = FriendlyStart + "Check that your email is valid.";
+			public const string InvalidPassword = FriendlyStart + "Check that your password is valid.";
+			public const string LoginError = FriendlyStart + "Check your email address or password.";
+			public const string ButtonsError = FriendlyStart + "Buttons were unable to load.";
+			public const string RequestsError = FriendlyStart + "FlicButton requests were unable to load.";
+			public const string ButtonSaveError = FriendlyStart + "Changes to this button were unable to save.";
+			public const string RequestSaveError = FriendlyStart + "Changes to this request were unable to save.";
+			public const string AssignError = FriendlyStart + "Assiging the request was unsuccessful.";
 		}
 		public struct ExceptionMessages {
 			public const string CannotConnectServer = "Cannot connect to server";

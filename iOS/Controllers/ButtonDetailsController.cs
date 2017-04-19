@@ -74,8 +74,8 @@ namespace Commercially.iOS
 				if (PickerChanged) {
 					ButtonApi.PairButton(Button.bluetooth_id, Client.FindClient(SelectedClient, Session.Clients).clientId);
 				}
-			} catch (Exception e) {
-				NavigationController.ShowPrompt(e.Message, 50);
+			} catch (Exception) {
+				NavigationController.ShowPrompt(Localizable.PromptMessages.ButtonSaveError);
 				return;
 			}
 			UIView.AnimateAsync(AnimationDuration, delegate {

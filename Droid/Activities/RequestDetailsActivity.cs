@@ -12,15 +12,15 @@ using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
 
+using Newtonsoft.Json;
+
 namespace Commercially.Droid
 {
 	[Activity(Label = "RequestDetailsActivity")]
 	public class RequestDetailsActivity : AppCompatActivity
 	{
-		Request _Request;
 		Request Request {
 			set {
-				_Request = value;
 				this.SetRequestDetails(value);
 			}
 		}
@@ -31,7 +31,7 @@ namespace Commercially.Droid
 			SetContentView(Resource.Layout.RequestDetails);
 			Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
 
-			Request = Intent.GetSerializableExtra(typeof(Request).Name) as Request;
+			Request = JsonConvert.DeserializeObject<Request>(Intent.GetStringExtra(typeof(Request).Name));
 		}
 	}
 }

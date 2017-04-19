@@ -1,10 +1,10 @@
-﻿<Properties StartupConfiguration="{26811657-1310-4E9D-8DD4-12575F9190CB}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Commercially/Entities/Request.cs">
+﻿<Properties StartupConfiguration="{B9BD7A31-A665-492A-8207-AAB835D1C7CC}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="iOS/Controllers/RequestDetailsController.cs">
     <Files>
       <File FileName="Droid/Activities/RequestDetailsActivity.cs" Line="26" Column="4" />
-      <File FileName="Droid/Extensions/ActivityExtensions.cs" Line="47" Column="67" />
-      <File FileName="iOS/Controllers/RequestDetailsController.cs" Line="76" Column="27" />
-      <File FileName="Commercially/Entities/Request.cs" Line="8" Column="30" />
+      <File FileName="Droid/Extensions/ActivityExtensions.cs" Line="102" Column="47" />
+      <File FileName="iOS/Controllers/RequestDetailsController.cs" Line="23" Column="25" />
+      <File FileName="Commercially/Controllers/RequestDetails.cs" Line="6" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
@@ -12,7 +12,7 @@
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.Commercially.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.457A64A5-B6AA-4655-A0BF-126FC82D54F8" />
+  <MonoDevelop.Ide.ItemProperties.Commercially.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.1DABA4D8-6015-4A58-A0EA-2FDD3FFA7170" />
   <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.ItemProperties.Commercially.Droid AndroidDesignerPreferredDevice="Nexus 4" PreferredExecutionTarget="Android.AVD_for_Nexus_5_by_Google" AndroidDesignerPreferredTheme="Theme.MyDefault" />
 </Properties>

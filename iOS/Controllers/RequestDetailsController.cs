@@ -36,8 +36,8 @@ namespace Commercially.iOS
 			// Post for time that status was changed
 			try {
 				RequestApi.UpdateRequest(Request._id, (RequestStatusType)SelectedStatus.GetStatus());
-			} catch (Exception e) {
-				NavigationController.ShowPrompt(e.Message);
+			} catch (Exception) {
+				NavigationController.ShowPrompt(Localizable.PromptMessages.RequestSaveError);
 				return;
 			}
 			UIView.AnimateAsync(AnimationDuration, delegate {
@@ -52,8 +52,8 @@ namespace Commercially.iOS
 			// Call Post to change button ownedBy value to this user's email in DB
 			try {
 				RequestApi.UpdateRequest(Request._id, RequestStatusType.Assigned);
-			} catch (Exception e) {
-				NavigationController.ShowPrompt(e.Message);
+			} catch (Exception) {
+				NavigationController.ShowPrompt(Localizable.PromptMessages.AssignError);
 				return;
 			}
 

@@ -5,6 +5,7 @@ using Android.Views;
 using Android.Widget;
 
 using Java.IO;
+using Newtonsoft.Json;
 
 using System;
 using Android.OS;
@@ -60,9 +61,7 @@ namespace Commercially.Droid
 			urgentIndicator.Visibility = request.urgent ? ViewStates.Visible : ViewStates.Gone;
 			rowView.Click += (object sender, EventArgs e) => {
 				var intent = new Intent(activity, typeof(RequestDetailsActivity));
-				//var bundle = new Bundle();
-				//bundle.PutSerializable(typeof(Request).Name, request);
-				//intent.PutExtra(typeof(Request).Name, request);
+				intent.PutExtra(typeof(Request).Name, JsonConvert.SerializeObject(request));
 				activity.StartActivity(intent);
 			};
 			return rowView;
