@@ -14,6 +14,22 @@ namespace Commercially
 			}
 		}
 
+		public bool PickerChanged(string originalTitle) {
+			return !originalTitle.Equals(SelectedClient);
+		}
+
+		public bool LocationChanged(string locationText)
+		{
+			if (Button.room == null) return !string.IsNullOrWhiteSpace(locationText);
+			return !Button.room.Equals(locationText);
+		}
+
+		public bool DescriptionChanged(string descriptionText)
+		{
+			if (Button.description == null) return !string.IsNullOrWhiteSpace(descriptionText);
+			return !Button.description.Equals(descriptionText);
+		}
+
 		public string LocationFieldText {
 			get {
 				return Button.room;

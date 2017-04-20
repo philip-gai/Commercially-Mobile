@@ -24,21 +24,17 @@ namespace Commercially.Droid
 			Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
 
 			Home.PrefetchData();
-			sharedController.GetRequests(
-				Dashboard.RequestTypes,
-				delegate {
-					RunOnUiThread(delegate {
-						InitializeTable();
-					});
-				},
-				(Exception e) => {
-					RunOnUiThread(delegate {
-						this.ShowPrompt(Localizable.PromptMessages.RequestsError);
-					});
-				}
-			);
 		}
 
+		protected override void OnResume()
+		{
+			base.OnResume();
+			sharedController.GetRequests(
+				Dashboard.RequestTypes,
+				delegate { RunOnUiThread(delegate { InitializeTable(); }); },
+				(Exception e) => { RunOnUiThread(delegate { this.ShowPrompt(Localizable.PromptMessages.RequestsError); }); }
+			);
+		}
 
 		public override bool OnCreateOptionsMenu(IMenu menu)
 		{
@@ -55,6 +51,7 @@ namespace Commercially.Droid
 
 		void InitializeTable()
 		{
+			Table.RemoveAllViews();
 			for (int section = 0; section < sharedController.RequestLists.Length; section++) {
 				var requestList = sharedController.RequestLists[section];
 				if (requestList.Length <= 0) continue;

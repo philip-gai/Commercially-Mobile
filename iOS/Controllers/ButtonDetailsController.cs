@@ -19,28 +19,7 @@ namespace Commercially.iOS
 
 		bool IsChanged {
 			get {
-				return PickerChanged || LocationChanged || DescriptionChanged;
-			}
-		}
-
-		bool PickerChanged {
-			get {
-				if (ClientPickerView.Model == null) return false;
-				return !ClientPickerView.Model.GetTitle(ClientPickerView, 0, 0).Equals(SharedController.SelectedClient);
-			}
-		}
-
-		bool LocationChanged {
-			get {
-				if (SharedController.Button.room == null) return !string.IsNullOrWhiteSpace(LocationField.Text);
-				return !SharedController.Button.room.Equals(LocationField.Text);
-			}
-		}
-
-		bool DescriptionChanged {
-			get {
-				if (SharedController.Button.description == null) return !string.IsNullOrWhiteSpace(DescriptionField.Text);
-				return !SharedController.Button.description.Equals(DescriptionField.Text);
+				return SharedController.PickerChanged(ClientPickerView.Model.GetTitle(ClientPickerView, 0, 0)) || SharedController.DescriptionChanged(DescriptionField.Text) || SharedController.LocationChanged(LocationField.Text);
 			}
 		}
 
@@ -60,16 +39,16 @@ namespace Commercially.iOS
 		{
 			try {
 				var jsonBody = new JObject();
-				if (LocationChanged && LocationField.Text != null) {
+				if (SharedController.LocationChanged(LocationField.Text) && LocationField.Text != null) {
 					jsonBody.Add("room", LocationField.Text);
 				}
-				if (DescriptionChanged && DescriptionField.Text != null) {
+				if (SharedController.DescriptionChanged(DescriptionField.Text) && DescriptionField.Text != null) {
 					jsonBody.Add("description", DescriptionField.Text);
 				}
 				if (jsonBody.Count > 0) {
 					ButtonApi.PatchButton(SharedController.Button.bluetooth_id, jsonBody.ToString());
 				}
-				if (PickerChanged) {
+				if (SharedController.PickerChanged(ClientPickerView.Model.GetTitle(ClientPickerView, 0, 0))) {
 					ButtonApi.PairButton(SharedController.Button.bluetooth_id, Client.FindClient(SharedController.SelectedClient, Session.Clients).clientId);
 				}
 			} catch (Exception) {
@@ -94,12 +73,8 @@ namespace Commercially.iOS
 			DescriptionField.EditingChanged += OnFieldChange;
 			ClientIdLabel.Hidden = SharedController.ClientIdIsHidden;
 			PairStack.Hidden = SharedController.PairStackIsHidden;
-			if (!PairStack.Hidden) {
-				ClientPickerView.Model = new ClientPickerViewModel(FlicButton.GetDiscoveredByClients(SharedController.Button), OnPickerChange);
-			}
-			if (!ClientIdLabel.Hidden) {
-				ClientIdLabel.Text = SharedController.ClientIdText;
-			}
+			ClientPickerView.Model = new ClientPickerViewModel(FlicButton.GetDiscoveredByClients(SharedController.Button), OnPickerChange);
+			ClientIdLabel.Text = SharedController.ClientIdText;
 			SaveButton.Hidden = true;
 		}
 

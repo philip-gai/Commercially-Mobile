@@ -11,7 +11,8 @@
         android:inputType="textEmailAddress"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:text="Location" />
+        android:text="Location"
+        android:layout_marginBottom="10dp" />
     <EditText
         android:layout_width="match_parent"
         android:id="@+id/descriptionField"
@@ -19,18 +20,21 @@
         android:inputType="textEmailAddress"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:text="Description" />
+        android:text="Description"
+        android:layout_marginBottom="10dp" />
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:layout_marginBottom="10dp">
         <TextView
             android:text="Button ID:"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_marginRight="10dp" />
         <TextView
             android:text="80-e4"
             android:textAppearance="?android:attr/textAppearanceMedium"
@@ -43,13 +47,15 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:layout_marginBottom="10dp">
         <TextView
             android:text="Client ID:"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:layout_marginRight="10dp" />
         <TextView
             android:text="rpi0"
             android:textAppearance="?android:attr/textAppearanceMedium"
@@ -63,14 +69,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:id="@+id/pairLayout">
+        android:id="@+id/pairLayout"
+        android:layout_marginBottom="10dp">
         <TextView
             android:text="Pair With:"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textColor="?android:attr/colorPrimary" />
+            android:textColor="?android:attr/colorPrimary"
+            android:layout_marginRight="10dp" />
         <Spinner
             android:layout_width="wrap_content"
             android:layout_height="match_parent"

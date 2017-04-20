@@ -3,26 +3,28 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp">
+    android:padding="20dp"
+    android:id="@+id/mainLayout">
     <LinearLayout
         android:orientation="horizontal"
-        android:minWidth="25px"
-        android:minHeight="25px"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="10dp"
+        android:minHeight="25px"
+        android:minWidth="25px"
         android:layout_weight="1">
         <TextView
             android:text="Change the toilet paper"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/descriptionText"
             android:textStyle="bold"
-            android:layout_gravity="center"
+            android:gravity="center"
             android:layout_weight="1" />
         <ImageView
             android:src="@drawable/urgent"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/urgentIndicator"
             android:layout_weight="1" />
@@ -33,21 +35,25 @@
         android:minHeight="25px"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:layout_marginBottom="10dp">
         <TextView
             android:text="Location"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/locationText"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:layout_marginRight="10dp"
+            android:gravity="center_horizontal" />
         <TextView
             android:text="Assigned To:"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/assignedToText"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:gravity="center_horizontal" />
     </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
@@ -55,28 +61,34 @@
         android:minHeight="25px"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:layout_marginBottom="10dp">
         <TextView
             android:text="12:00 AM"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/receivedTimeText"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:layout_marginRight="10dp"
+            android:gravity="center_horizontal" />
         <TextView
             android:text="12:00 AM"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/acceptedTimeText"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:layout_marginRight="10dp"
+            android:gravity="center_horizontal" />
         <TextView
             android:text="12:00 AM"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/completedTimeText"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:gravity="center_horizontal" />
     </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
@@ -84,26 +96,34 @@
         android:minHeight="25px"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:layout_marginBottom="10dp">
         <TextView
             android:text="Current Status:"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/staticStatusText"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:layout_marginRight="10dp"
+            android:paddingTop="10dp" />
         <TextView
             android:text="Completed"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/statusText"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:layout_marginRight="10dp"
+            android:paddingTop="10dp" />
         <Spinner
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/statusSpinner"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:textAlignment="center" />
     </LinearLayout>
     <Button
         android:text="Assign To Me"
@@ -112,7 +132,8 @@
         android:background="?android:attr/colorPrimary"
         android:layout_height="match_parent"
         android:textColor="@android:color/white"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:layout_marginBottom="10dp" />
     <Button
         android:text="Save Changes"
         android:layout_width="match_parent"

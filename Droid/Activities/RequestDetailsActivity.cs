@@ -54,6 +54,7 @@ namespace Commercially.Droid
 			InitializeVisibility();
 			InitializeSpinner();
 			InitializeActions();
+			StatusSpinner.SetSelection(((ArrayAdapter)StatusSpinner.Adapter).GetPosition(SharedController.StatusText));
 		}
 
 		void InitializeText()
@@ -79,8 +80,7 @@ namespace Commercially.Droid
 
 		void InitializeSpinner()
 		{
-			var adapter = new ArrayAdapter(this, Resource.Array.status_array);
-			StatusSpinner.Adapter = adapter;
+			this.InitializeStatusSpinner();
 			StaticStatusText.SetTextColor(RequestDetails.StaticStatusDefault.GetAndroidColor());
 			if (!SharedController.StatusInputIsHidden) {
 				StaticStatusText.SetTextColor(RequestDetails.StaticStatusEdit.GetAndroidColor());
@@ -90,7 +90,8 @@ namespace Commercially.Droid
 		void InitializeActions()
 		{
 			StatusSpinner.ItemSelected += (object sender, AdapterView.ItemSelectedEventArgs e) => {
-				SharedController.SelectedStatus = e.ToString();
+				var adapter = (sender as Spinner).Adapter;
+				SharedController.SelectedStatus = adapter.GetItem(e.Position).ToString();
 				SaveButton.Visibility = SharedController.SaveButtonIsHidden ? ViewStates.Gone : ViewStates.Visible;
 			};
 			SaveButton.Click += SaveButtonClick;

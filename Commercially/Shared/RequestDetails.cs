@@ -27,7 +27,7 @@ namespace Commercially
 		}
 		public string LocationText {
 			get {
-				return "Location: " + Request.room;	
+				return "Location:\n" + Request.room;	
 			}
 		}
 		public bool UrgentIndicatorIsHidden {
@@ -48,24 +48,27 @@ namespace Commercially
 		public string AssignedToText {
 			get {
 				if (!AssignedToIsHidden) {
-					return "Assigned To: " + Request.assignedTo;
+					return "Assigned To:\n" + Request.assignedTo;
 				}
 				return null;
 			}
 		}
 		public string ReceivedTimeText {
 			get {
-				return "Received:\n" + Request.GetTime(Request.TimeType.Received) ?? "N/A";
+				var time = Request.GetTime(Request.TimeType.Received);
+				return "Received:\n" +  (time == null ? "N/A" : time.ToString());
 			}
 		}
 		public string AcceptedTimeText {
 			get {
-				return "Scheduled:\n" + Request.GetTime(Request.TimeType.Scheduled) ?? "N/A";
+				var time = Request.GetTime(Request.TimeType.Scheduled);
+				return "Scheduled:\n" +  (time == null ? "N/A" : time.ToString());
 			}
 		}
 		public string CompletedTimeText {
 			get {
-				return "Completed:\n" + Request.GetTime(Request.TimeType.Completed) ?? "N/A";
+				var time = Request.GetTime(Request.TimeType.Completed);
+				return "Completed:\n" + (time == null ? "N/A" : time.ToString());
 			}
 		}
 		public bool AssignButtonIsHidden {

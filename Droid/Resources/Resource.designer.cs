@@ -1727,20 +1727,20 @@ namespace Commercially.Droid
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f0b008f
-			public const int ButtonIcon = 2131427471;
+			// aapt resource value: 0x7f0b0090
+			public const int ButtonIcon = 2131427472;
 			
 			// aapt resource value: 0x7f0b005d
 			public const int ButtonRow = 2131427421;
 			
-			// aapt resource value: 0x7f0b008d
-			public const int DashboardIcon = 2131427469;
+			// aapt resource value: 0x7f0b008e
+			public const int DashboardIcon = 2131427470;
 			
 			// aapt resource value: 0x7f0b0062
 			public const int EmailField = 2131427426;
 			
-			// aapt resource value: 0x7f0b008e
-			public const int ListIcon = 2131427470;
+			// aapt resource value: 0x7f0b008f
+			public const int ListIcon = 2131427471;
 			
 			// aapt resource value: 0x7f0b0064
 			public const int LoginButton = 2131427428;
@@ -1748,11 +1748,11 @@ namespace Commercially.Droid
 			// aapt resource value: 0x7f0b0063
 			public const int PasswordField = 2131427427;
 			
-			// aapt resource value: 0x7f0b0088
-			public const int RequestRow = 2131427464;
+			// aapt resource value: 0x7f0b0089
+			public const int RequestRow = 2131427465;
 			
-			// aapt resource value: 0x7f0b0082
-			public const int acceptedTimeText = 2131427458;
+			// aapt resource value: 0x7f0b0083
+			public const int acceptedTimeText = 2131427459;
 			
 			// aapt resource value: 0x7f0b0068
 			public const int action0 = 2131427432;
@@ -1823,11 +1823,11 @@ namespace Commercially.Droid
 			// aapt resource value: 0x7f0b001d
 			public const int always = 2131427357;
 			
-			// aapt resource value: 0x7f0b0087
-			public const int assignButton = 2131427463;
+			// aapt resource value: 0x7f0b0088
+			public const int assignButton = 2131427464;
 			
-			// aapt resource value: 0x7f0b0080
-			public const int assignedToText = 2131427456;
+			// aapt resource value: 0x7f0b0081
+			public const int assignedToText = 2131427457;
 			
 			// aapt resource value: 0x7f0b001a
 			public const int beginning = 2131427354;
@@ -1865,8 +1865,8 @@ namespace Commercially.Droid
 			// aapt resource value: 0x7f0b001e
 			public const int collapseActionView = 2131427358;
 			
-			// aapt resource value: 0x7f0b0083
-			public const int completedTimeText = 2131427459;
+			// aapt resource value: 0x7f0b0084
+			public const int completedTimeText = 2131427460;
 			
 			// aapt resource value: 0x7f0b0031
 			public const int contentPanel = 2131427377;
@@ -1910,8 +1910,8 @@ namespace Commercially.Droid
 			// aapt resource value: 0x7f0b003d
 			public const int expanded_menu = 2131427389;
 			
-			// aapt resource value: 0x7f0b008c
-			public const int headerText = 2131427468;
+			// aapt resource value: 0x7f0b008d
+			public const int headerText = 2131427469;
 			
 			// aapt resource value: 0x7f0b0004
 			public const int home = 2131427332;
@@ -1954,6 +1954,9 @@ namespace Commercially.Droid
 			
 			// aapt resource value: 0x7f0b007c
 			public const int logoView = 2131427452;
+			
+			// aapt resource value: 0x7f0b007f
+			public const int mainLayout = 2131427455;
 			
 			// aapt resource value: 0x7f0b006b
 			public const int media_actions = 2131427435;
@@ -2000,8 +2003,8 @@ namespace Commercially.Droid
 			// aapt resource value: 0x7f0b0040
 			public const int radio = 2131427392;
 			
-			// aapt resource value: 0x7f0b0081
-			public const int receivedTimeText = 2131427457;
+			// aapt resource value: 0x7f0b0082
+			public const int receivedTimeText = 2131427458;
 			
 			// aapt resource value: 0x7f0b0073
 			public const int right_icon = 2131427443;
@@ -2084,14 +2087,14 @@ namespace Commercially.Droid
 			// aapt resource value: 0x7f0b0018
 			public const int src_over = 2131427352;
 			
-			// aapt resource value: 0x7f0b0084
-			public const int staticStatusText = 2131427460;
+			// aapt resource value: 0x7f0b0085
+			public const int staticStatusText = 2131427461;
+			
+			// aapt resource value: 0x7f0b0087
+			public const int statusSpinner = 2131427463;
 			
 			// aapt resource value: 0x7f0b0086
-			public const int statusSpinner = 2131427462;
-			
-			// aapt resource value: 0x7f0b0085
-			public const int statusText = 2131427461;
+			public const int statusText = 2131427462;
 			
 			// aapt resource value: 0x7f0b006a
 			public const int status_bar_latest_event_content = 2131427434;
@@ -2105,8 +2108,8 @@ namespace Commercially.Droid
 			// aapt resource value: 0x7f0b000b
 			public const int tabMode = 2131427339;
 			
-			// aapt resource value: 0x7f0b008b
-			public const int tableLayout = 2131427467;
+			// aapt resource value: 0x7f0b008c
+			public const int tableLayout = 2131427468;
 			
 			// aapt resource value: 0x7f0b007a
 			public const int text = 2131427450;
@@ -2120,14 +2123,14 @@ namespace Commercially.Droid
 			// aapt resource value: 0x7f0b0034
 			public const int textSpacerNoTitle = 2131427380;
 			
-			// aapt resource value: 0x7f0b008a
-			public const int textView1 = 2131427466;
+			// aapt resource value: 0x7f0b008b
+			public const int textView1 = 2131427467;
 			
 			// aapt resource value: 0x7f0b0070
 			public const int time = 2131427440;
 			
-			// aapt resource value: 0x7f0b0089
-			public const int timeText = 2131427465;
+			// aapt resource value: 0x7f0b008a
+			public const int timeText = 2131427466;
 			
 			// aapt resource value: 0x7f0b002d
 			public const int title = 2131427373;
@@ -2147,8 +2150,8 @@ namespace Commercially.Droid
 			// aapt resource value: 0x7f0b0008
 			public const int up = 2131427336;
 			
-			// aapt resource value: 0x7f0b007f
-			public const int urgentIndicator = 2131427455;
+			// aapt resource value: 0x7f0b0080
+			public const int urgentIndicator = 2131427456;
 			
 			// aapt resource value: 0x7f0b0012
 			public const int useLogo = 2131427346;

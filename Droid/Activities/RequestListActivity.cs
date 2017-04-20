@@ -21,18 +21,14 @@ namespace Commercially.Droid
 			SetContentView(Resource.Layout.Table);
 			this.SetSupportActionBarDefault("Queue");
 			Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
+		}
 
+		protected override void OnResume()
+		{
+			base.OnResume();
 			sharedController.GetRequests(
-				delegate {
-					RunOnUiThread(delegate {
-						InitializeTable();
-					});
-				},
-				(Exception obj) => {
-					RunOnUiThread(delegate {
-						this.ShowPrompt(Localizable.PromptMessages.RequestsError);
-					});
-				}
+				delegate { RunOnUiThread(delegate { InitializeTable(); }); },
+				(Exception obj) => { RunOnUiThread(delegate { this.ShowPrompt(Localizable.PromptMessages.RequestsError); }); }
 			);
 		}
 
@@ -51,6 +47,7 @@ namespace Commercially.Droid
 
 		void InitializeTable()
 		{
+			Table.RemoveAllViews();
 			var header = GetHeader();
 			Table.AddView(header);
 			for (int row = 0; row < sharedController.NewRequestList.Length; row++) {

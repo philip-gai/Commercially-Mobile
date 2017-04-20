@@ -19,18 +19,14 @@ namespace Commercially.Droid
 			SetContentView(Resource.Layout.Table);
 			this.SetSupportActionBarDefault("Buttons");
 			Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
+		}
 
+		protected override void OnResume()
+		{
+			base.OnResume();
 			ButtonList.GetButtons(
-				delegate {
-					RunOnUiThread(delegate {
-						InitializeTable();
-					});
-				},
-				(Exception obj) => {
-					RunOnUiThread(delegate {
-						this.ShowPrompt(Localizable.PromptMessages.ButtonsError);
-					});
-				}
+				delegate { RunOnUiThread(delegate { InitializeTable(); }); },
+				(Exception obj) => { RunOnUiThread(delegate { this.ShowPrompt(Localizable.PromptMessages.ButtonsError); }); }
 			);
 		}
 
@@ -49,6 +45,7 @@ namespace Commercially.Droid
 
 		void InitializeTable()
 		{
+			Table.RemoveAllViews();
 			var header = GetHeader();
 			Table.AddView(header);
 			for (int row = 0; row < Session.Buttons.Length; row++) {

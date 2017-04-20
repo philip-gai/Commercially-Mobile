@@ -102,5 +102,13 @@ namespace Commercially.Droid
 			activity.SupportActionBar.SetIcon(Resource.Drawable.LogoRed);
 			activity.SupportActionBar.SetDisplayShowTitleEnabled(true);
 		}
+
+		public static void InitializeStatusSpinner(this Activity activity)
+		{
+			Spinner statusSpinner = activity.FindViewById<Spinner>(Resource.Id.statusSpinner);
+			var adapter = ArrayAdapter.CreateFromResource(activity, Resource.Array.status_array, Android.Resource.Layout.SimpleSpinnerDropDownItem);
+			adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
+			statusSpinner.Adapter = adapter;
+		}
 	}
 }

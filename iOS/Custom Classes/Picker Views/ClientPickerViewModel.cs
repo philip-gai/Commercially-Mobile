@@ -5,7 +5,6 @@ namespace Commercially.iOS
 {
 	public class ClientPickerViewModel : UIPickerViewModel
 	{
-		public const string Placeholder = "-- None --";
 		readonly Client[] DiscoveredBy;
 		readonly Action<UIPickerView, nint, nint> OnSelect;
 
@@ -31,7 +30,7 @@ namespace Commercially.iOS
 		public override string GetTitle(UIPickerView pickerView, nint row, nint component)
 		{
 			if (row == 0) {
-				return Placeholder;
+				return Localizable.Labels.NoneOption;
 			}
 			Client client = DiscoveredBy[row - 1];
 			return string.IsNullOrWhiteSpace(client.friendlyName) ? client.clientId : client.friendlyName;

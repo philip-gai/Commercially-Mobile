@@ -26,9 +26,6 @@ namespace Commercially
 					time = time_completed.ConvertToDateTime();
 					break;
 			}
-			if (time == null) {
-				return null;
-			}
 			return time;
 		}
 		public string time_completed { get; set; }

@@ -24,6 +24,30 @@ namespace Commercially.Droid
 		EditText LocationField { get { return FindViewById<EditText>(Resource.Id.locationField); } }
 		EditText DescriptionField { get { return FindViewById<EditText>(Resource.Id.descriptionField); } }
 		TextView BluetoothIdText { get { return FindViewById<TextView>(Resource.Id.bluetoothIdText); } }
+		TextView ClientIdText { get { return FindViewById<TextView>(Resource.Id.clientIdText); } }
+		Button SaveButton { get { return FindViewById<Button>(Resource.Id.saveButton); } }
+		LinearLayout PairLayout { get { return FindViewById<LinearLayout>(Resource.Id.pairLayout); } }
+		Spinner ClientSpinner { get { return FindViewById<Spinner>(Resource.Id.clientSpinner); } }
+
+		bool IsChanged {
+			get {
+				return SharedController.PickerChanged(ClientSpinner.GetItemAtPosition(0).ToString()) || SharedController.DescriptionChanged(DescriptionField.Text) || SharedController.LocationChanged(LocationField.Text);
+			}
+		}
+
+		bool LocationChanged {
+			get {
+				if (SharedController.Button.room == null) return !string.IsNullOrWhiteSpace(LocationField.Text);
+				return !SharedController.Button.room.Equals(LocationField.Text);
+			}
+		}
+
+		bool DescriptionChanged {
+			get {
+				if (SharedController.Button.description == null) return !string.IsNullOrWhiteSpace(DescriptionField.Text);
+				return !SharedController.Button.description.Equals(DescriptionField.Text);
+			}
+		}
 
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
@@ -37,6 +61,12 @@ namespace Commercially.Droid
 			InitializeView();
 		}
 
+		public override bool OnSupportNavigateUp()
+		{
+			Finish();
+			return true;
+		}
+
 		void InitializeView()
 		{
 			if (SharedController.Button == null) return;
@@ -44,23 +74,27 @@ namespace Commercially.Droid
 			DescriptionField.Text = SharedController.DescriptionFieldText;
 			BluetoothIdText.Text = SharedController.BluetoothIdText;
 
-			LocationField.TextChanged += OnFieldChange;
-			DescriptionField.TextChanged += OnFieldChange;
+			LocationField.TextChanged += OnFieldTextChange;
+			DescriptionField.TextChanged += OnFieldTextChange;
 
-			//ClientIdLabel.Hidden = SharedController.ClientIdIsHidden;
-			//PairStack.Hidden = SharedController.PairStackIsHidden;
-			//if (!PairStack.Hidden) {
+			ClientIdText.Visibility = SharedController.ClientIdIsHidden ? ViewStates.Gone : ViewStates.Visible;
+			PairLayout.Visibility = SharedController.PairStackIsHidden ? ViewStates.Gone : ViewStates.Visible;
+			// Make the spinner
 			//	ClientPickerView.Model = new ClientPickerViewModel(FlicButton.GetDiscoveredByClients(SharedController.Button), OnPickerChange);
-			//}
-			//if (!ClientIdLabel.Hidden) {
-			//	ClientIdLabel.Text = SharedController.ClientIdText;
-			//}
-			//SaveButton.Hidden = true;
+			ClientIdText.Text = SharedController.ClientIdText;
+			SaveButton.Visibility = ViewStates.Gone;
+			ClientSpinner.ItemSelected += OnSpinnerItemSelected;
 		}
 
-		void OnFieldChange(object sender, TextChangedEventArgs e)
+		void OnSpinnerItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
 		{
+			SharedController.SelectedClient = e.ToString();
+			SaveButton.Visibility = IsChanged ? ViewStates.Visible : ViewStates.Gone;
+		}
 
+		void OnFieldTextChange(object sender, TextChangedEventArgs e)
+		{
+			SaveButton.Visibility = IsChanged ? ViewStates.Visible : ViewStates.Gone;
 		}
 	}
 }
