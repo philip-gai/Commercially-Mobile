@@ -17,7 +17,7 @@ namespace Commercially.Droid
 		{
 			base.OnCreate(savedInstanceState);
 			SetContentView(Resource.Layout.Table);
-			this.SetSupportActionBarDefault("Buttons");
+			this.SetSupportActionBarDefault();
 			Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
 		}
 
@@ -33,7 +33,6 @@ namespace Commercially.Droid
 		public override bool OnCreateOptionsMenu(IMenu menu)
 		{
 			MenuInflater.Inflate(Resource.Menu.TopMenu, menu);
-			menu.RemoveItem(Resource.Id.ButtonIcon);
 			return base.OnCreateOptionsMenu(menu);
 		}
 

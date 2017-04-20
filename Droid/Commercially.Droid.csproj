@@ -92,6 +92,7 @@
     <Compile Include="Activities\ButtonListActivity.cs" />
     <Compile Include="Activities\RequestDetailsActivity.cs" />
     <Compile Include="Activities\ButtonDetailsActivity.cs" />
+    <Compile Include="Extensions\AppCompatActivityExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

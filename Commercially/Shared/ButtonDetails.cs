@@ -15,6 +15,7 @@ namespace Commercially
 		}
 
 		public bool PickerChanged(string originalTitle) {
+			if (SelectedClient == null) return false;
 			return !originalTitle.Equals(SelectedClient);
 		}
 

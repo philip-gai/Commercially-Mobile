@@ -89,13 +89,16 @@ namespace Commercially.Droid
 
 		void InitializeActions()
 		{
-			StatusSpinner.ItemSelected += (object sender, AdapterView.ItemSelectedEventArgs e) => {
-				var adapter = (sender as Spinner).Adapter;
-				SharedController.SelectedStatus = adapter.GetItem(e.Position).ToString();
-				SaveButton.Visibility = SharedController.SaveButtonIsHidden ? ViewStates.Gone : ViewStates.Visible;
-			};
+			StatusSpinner.ItemSelected += OnSpinnerItemSelected;
 			SaveButton.Click += SaveButtonClick;
 			AssignButton.Click += AssignButtonClick;
+		}
+
+		void OnSpinnerItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+		{
+			var adapter = (sender as Spinner).Adapter;
+			SharedController.SelectedStatus = adapter.GetItem(e.Position).ToString();
+			SaveButton.Visibility = SharedController.SaveButtonIsHidden ? ViewStates.Gone : ViewStates.Visible;
 		}
 
 		void SaveButtonClick(object sender, EventArgs e)

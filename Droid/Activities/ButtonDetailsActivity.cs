@@ -1,18 +1,13 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿using System;
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Support.V7.App;
 using Android.Text;
 using Android.Views;
 using Android.Widget;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Commercially.Droid
 {
@@ -70,31 +65,57 @@ namespace Commercially.Droid
 		void InitializeView()
 		{
 			if (SharedController.Button == null) return;
+
 			LocationField.Text = SharedController.LocationFieldText;
 			DescriptionField.Text = SharedController.DescriptionFieldText;
 			BluetoothIdText.Text = SharedController.BluetoothIdText;
-
-			LocationField.TextChanged += OnFieldTextChange;
-			DescriptionField.TextChanged += OnFieldTextChange;
+			this.InitializeClientSpinner(SharedController.Button);
+			ClientIdText.Text = SharedController.ClientIdText;
 
 			ClientIdText.Visibility = SharedController.ClientIdIsHidden ? ViewStates.Gone : ViewStates.Visible;
 			PairLayout.Visibility = SharedController.PairStackIsHidden ? ViewStates.Gone : ViewStates.Visible;
-			// Make the spinner
-			//	ClientPickerView.Model = new ClientPickerViewModel(FlicButton.GetDiscoveredByClients(SharedController.Button), OnPickerChange);
-			ClientIdText.Text = SharedController.ClientIdText;
 			SaveButton.Visibility = ViewStates.Gone;
-			ClientSpinner.ItemSelected += OnSpinnerItemSelected;
+
+			ClientSpinner.ItemSelected += ClientSpinnerItemSelected;
+			LocationField.TextChanged += OnTextChanged;
+			DescriptionField.TextChanged += OnTextChanged;
+			SaveButton.Click += SaveButtonClick;
 		}
 
-		void OnSpinnerItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+		void ClientSpinnerItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
 		{
-			SharedController.SelectedClient = e.ToString();
+			var adapter = (sender as Spinner).Adapter;
+			SharedController.SelectedClient = adapter.GetItem(e.Position).ToString();
 			SaveButton.Visibility = IsChanged ? ViewStates.Visible : ViewStates.Gone;
 		}
 
-		void OnFieldTextChange(object sender, TextChangedEventArgs e)
+		void OnTextChanged(object sender, TextChangedEventArgs e)
 		{
 			SaveButton.Visibility = IsChanged ? ViewStates.Visible : ViewStates.Gone;
+		}
+
+		void SaveButtonClick(object sender, EventArgs e)
+		{
+			try {
+				var jsonBody = new JObject();
+				if (SharedController.LocationChanged(LocationField.Text) && LocationField.Text != null) {
+					jsonBody.Add("room", LocationField.Text);
+				}
+				if (SharedController.DescriptionChanged(DescriptionField.Text) && DescriptionField.Text != null) {
+					jsonBody.Add("description", DescriptionField.Text);
+				}
+				if (jsonBody.Count > 0) {
+					ButtonApi.PatchButton(SharedController.Button.bluetooth_id, jsonBody.ToString());
+				}
+				if (SharedController.PickerChanged(ClientSpinner.GetItemAtPosition(0).ToString())) {
+					ButtonApi.PairButton(SharedController.Button.bluetooth_id, Client.FindClient(SharedController.SelectedClient, Session.Clients).clientId);
+				}
+			} catch (Exception) {
+				this.ShowPrompt(Localizable.PromptMessages.ButtonSaveError);
+				return;
+			}
+			SaveButton.Visibility = ViewStates.Gone;
+			Finish();
 		}
 	}
 }

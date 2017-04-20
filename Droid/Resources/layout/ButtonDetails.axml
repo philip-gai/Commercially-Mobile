@@ -3,7 +3,9 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp">
+    android:padding="20dp"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
     <EditText
         android:layout_width="match_parent"
         android:id="@+id/locationField"
@@ -12,7 +14,8 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:text="Location"
-        android:layout_marginBottom="10dp" />
+        android:layout_marginBottom="10dp"
+        android:gravity="center" />
     <EditText
         android:layout_width="match_parent"
         android:id="@+id/descriptionField"
@@ -21,7 +24,8 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:text="Description"
-        android:layout_marginBottom="10dp" />
+        android:layout_marginBottom="10dp"
+        android:gravity="center" />
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -34,14 +38,16 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_marginRight="10dp" />
+            android:layout_marginRight="10dp"
+            android:gravity="center" />
         <TextView
             android:text="80-e4"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:id="@+id/bluetoothIdText"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:gravity="center" />
     </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
@@ -55,14 +61,16 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_marginRight="10dp" />
+            android:layout_marginRight="10dp"
+            android:gravity="center" />
         <TextView
             android:text="rpi0"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:id="@+id/clientIdText"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:gravity="center" />
     </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
@@ -74,16 +82,18 @@
         <TextView
             android:text="Pair With:"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:textColor="?android:attr/colorPrimary"
-            android:layout_marginRight="10dp" />
+            android:layout_marginRight="10dp"
+            android:gravity="center" />
         <Spinner
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/clientSpinner"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:layout_gravity="center" />
     </LinearLayout>
     <Button
         android:text="Save Changes"

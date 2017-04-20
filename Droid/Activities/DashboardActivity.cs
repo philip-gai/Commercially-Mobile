@@ -20,7 +20,7 @@ namespace Commercially.Droid
 		{
 			base.OnCreate(savedInstanceState);
 			SetContentView(Resource.Layout.Table);
-			this.SetSupportActionBarDefault("Dashboard");
+			this.SetSupportActionBarDefault();
 			Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
 
 			Home.PrefetchData();
@@ -39,7 +39,6 @@ namespace Commercially.Droid
 		public override bool OnCreateOptionsMenu(IMenu menu)
 		{
 			MenuInflater.Inflate(Resource.Menu.TopMenu, menu);
-			menu.RemoveItem(Resource.Id.DashboardIcon);
 			return base.OnCreateOptionsMenu(menu);
 		}
 

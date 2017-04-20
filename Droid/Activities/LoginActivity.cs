@@ -22,17 +22,20 @@ namespace Commercially.Droid
 			SupportActionBar?.Hide();
 			Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
 
-			LoginButton.Click += delegate {
-				if (string.IsNullOrWhiteSpace(EmailField.Text) || string.IsNullOrWhiteSpace(PasswordField.Text)) return;
-				try {
-					var response = UserApi.LoginUser(EmailField.Text, PasswordField.Text);
-					Session.OAuth = new OAuthResponse(response);
-					Session.User = new User(EmailField.Text, PasswordField.Text);
-					StartActivity(new Intent(this, typeof(DashboardActivity)));
-				} catch (Exception) {
-					this.ShowPrompt(Localizable.PromptMessages.LoginError);
-				}
-			};
+			LoginButton.Click += LoginButtonClick;
+		}
+
+		void LoginButtonClick(object sender, EventArgs e)
+		{
+			if (string.IsNullOrWhiteSpace(EmailField.Text) || string.IsNullOrWhiteSpace(PasswordField.Text)) return;
+			try {
+				var response = UserApi.LoginUser(EmailField.Text, PasswordField.Text);
+				Session.OAuth = new OAuthResponse(response);
+				Session.User = new User(EmailField.Text, PasswordField.Text);
+				StartActivity(new Intent(this, typeof(DashboardActivity)));
+			} catch (Exception) {
+				this.ShowPrompt(Localizable.PromptMessages.LoginError);
+			}
 		}
 	}
 }

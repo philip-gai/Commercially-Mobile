@@ -25,5 +25,9 @@
 			public static Color Black = new Color(0, 0, 0);
 			public static Color White = new Color(255, 255, 255);
 		}
+
+		public struct Strings {
+			public const string Ignore = "ignore";
+		}
 	}
 }

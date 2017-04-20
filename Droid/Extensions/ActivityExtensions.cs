@@ -1,12 +1,10 @@
 ﻿using Android.App;
 using Android.Content;
-using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
 using Newtonsoft.Json;
 
 using System;
-using Android.Content.Res;
 
 namespace Commercially.Droid
 {
@@ -16,12 +14,15 @@ namespace Commercially.Droid
 		{
 			switch (item.ItemId) {
 				case Resource.Id.DashboardIcon:
+					if (activity is DashboardActivity) return;
 					activity.StartActivity(new Intent(activity, typeof(DashboardActivity)));
 					break;
 				case Resource.Id.ListIcon:
+					if (activity is RequestListActivity) return;
 					activity.StartActivity(new Intent(activity, typeof(RequestListActivity)));
 					break;
 				case Resource.Id.ButtonIcon:
+					if (activity is ButtonListActivity) return;
 					activity.StartActivity(new Intent(activity, typeof(ButtonListActivity)));
 					break;
 			}
@@ -31,13 +32,6 @@ namespace Commercially.Droid
 		{
 			var newFragment = new PromptDialogFragment(message);
 			newFragment.Show(activity.FragmentManager, message);
-		}
-
-		public static void ShowBackArrow(this AppCompatActivity activity)
-		{
-			activity.SupportActionBar.SetDisplayHomeAsUpEnabled(true);
-			activity.SupportActionBar.SetDisplayShowHomeEnabled(true);
-			activity.SupportActionBar.SetDisplayShowTitleEnabled(false);
 		}
 
 		public static View GetSectionHeader(this Activity activity, string label)
@@ -94,19 +88,22 @@ namespace Commercially.Droid
 			return rowView;
 		}
 
-		public static void SetSupportActionBarDefault(this AppCompatActivity activity, string title)
-		{
-			activity.SupportActionBar.Show();
-			activity.SupportActionBar.Title = "  " + title;
-			activity.SupportActionBar.SetDisplayShowHomeEnabled(true);
-			activity.SupportActionBar.SetIcon(Resource.Drawable.LogoRed);
-			activity.SupportActionBar.SetDisplayShowTitleEnabled(true);
-		}
-
 		public static void InitializeStatusSpinner(this Activity activity)
 		{
 			Spinner statusSpinner = activity.FindViewById<Spinner>(Resource.Id.statusSpinner);
 			var adapter = ArrayAdapter.CreateFromResource(activity, Resource.Array.status_array, Android.Resource.Layout.SimpleSpinnerDropDownItem);
+			adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
+			statusSpinner.Adapter = adapter;
+		}
+
+		public static void InitializeClientSpinner(this Activity activity, FlicButton button)
+		{
+			Spinner statusSpinner = activity.FindViewById<Spinner>(Resource.Id.clientSpinner);
+			string[] tmpDiscoveredBy = new string[button.discoveredBy.Length+2];
+			tmpDiscoveredBy[0] = Localizable.Labels.NoneOption;
+			tmpDiscoveredBy[1] = GlobalConstants.Strings.Ignore;
+			button.discoveredBy.CopyTo(tmpDiscoveredBy, 2);
+			var adapter = new ArrayAdapter(activity, Android.Resource.Layout.SimpleSpinnerDropDownItem, tmpDiscoveredBy);
 			adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
 			statusSpinner.Adapter = adapter;
 		}

@@ -12,7 +12,7 @@ namespace Commercially.iOS
 		{
 			Client[] tmpArr = new Client[DiscoveredBy.Length + 1];
 			DiscoveredBy.CopyTo(tmpArr, 1);
-			tmpArr[0] = Client.FindClient("ignore", Session.Clients);
+			tmpArr[0] = Client.FindClient(GlobalConstants.Strings.Ignore, Session.Clients);
 			this.DiscoveredBy = tmpArr;
 			this.OnSelect = OnSelect;
 		}
