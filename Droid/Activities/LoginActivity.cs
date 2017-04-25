@@ -31,7 +31,7 @@ namespace Commercially.Droid
 			try {
 				var response = UserApi.LoginUser(EmailField.Text, PasswordField.Text);
 				Session.OAuth = new OAuthResponse(response);
-				Session.User = new User(EmailField.Text, PasswordField.Text);
+				Session.User = UserApi.GetCurrentUser();
 				StartActivity(new Intent(this, typeof(DashboardActivity)));
 			} catch (Exception) {
 				this.ShowPrompt(Localizable.PromptMessages.LoginError);

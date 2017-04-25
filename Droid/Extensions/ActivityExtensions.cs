@@ -5,6 +5,7 @@ using Android.Widget;
 using Newtonsoft.Json;
 
 using System;
+using Android.Graphics;
 
 namespace Commercially.Droid
 {
@@ -53,17 +54,43 @@ namespace Commercially.Droid
 			var timeLabel = rowView.FindViewById<TextView>(Resource.Id.timeText);
 			var statusLabel = rowView.FindViewById<TextView>(Resource.Id.statusText);
 			var urgentIndicator = rowView.FindViewById(Resource.Id.urgentIndicator);
+			var deleteButton = rowView.FindViewById<Button>(Resource.Id.deleteButton);
 			description.Text = request.description;
 			locationLabel.Text = request.room;
 			timeLabel.Text = request.GetTime(Request.TimeType.Received)?.ToShortTimeString();
 			statusLabel.Text = request.GetStatus().ToString();
 			urgentIndicator.Visibility = request.urgent ? ViewStates.Visible : ViewStates.Gone;
+			deleteButton.Visibility = ViewStates.Gone;
+			deleteButton.Click += (object sender, EventArgs e) => {
+				RequestApi.DeleteRequest(request._id);
+				var table = activity.FindViewById<TableLayout>(Resource.Id.tableLayout);
+				table.RemoveView(rowView);
+			};
+
 			rowView.Click += (object sender, EventArgs e) => {
 				var intent = new Intent(activity, typeof(RequestDetailsActivity));
 				intent.PutExtra(typeof(Request).Name, JsonConvert.SerializeObject(request));
 				activity.StartActivity(intent);
 			};
+			if (Session.User.GetUserRoleType() == UserRoleType.Admin) {
+				rowView.LongClick += (object sender, View.LongClickEventArgs e) => {
+					switch (deleteButton.Visibility) {
+						case ViewStates.Gone:
+							deleteButton.Visibility = ViewStates.Visible;
+							break;
+						case ViewStates.Visible:
+							deleteButton.Visibility = ViewStates.Gone;
+							break;
+					}
+				};
+			}
 			return rowView;
+		}
+
+		public static void HideRequestStatusLabel(this Activity activity, TableRow rowView)
+		{
+			var statusLabel = rowView.FindViewById<TextView>(Resource.Id.statusText);
+			statusLabel.Visibility = ViewStates.Gone;
 		}
 
 		public static TableRow GetButtonRow(this Activity activity, FlicButton button)
@@ -99,13 +126,32 @@ namespace Commercially.Droid
 		public static void InitializeClientSpinner(this Activity activity, FlicButton button)
 		{
 			Spinner statusSpinner = activity.FindViewById<Spinner>(Resource.Id.clientSpinner);
-			string[] tmpDiscoveredBy = new string[button.discoveredBy.Length+2];
+			string[] tmpDiscoveredBy = new string[button.discoveredBy.Length + 2];
 			tmpDiscoveredBy[0] = Localizable.Labels.NoneOption;
 			tmpDiscoveredBy[1] = GlobalConstants.Strings.Ignore;
 			button.discoveredBy.CopyTo(tmpDiscoveredBy, 2);
 			var adapter = new ArrayAdapter(activity, Android.Resource.Layout.SimpleSpinnerDropDownItem, tmpDiscoveredBy);
 			adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
 			statusSpinner.Adapter = adapter;
+		}
+
+		public static void CreateMainOptionsMenu(this Activity activity, IMenu menu, int currItem)
+		{
+			activity.MenuInflater.Inflate(Resource.Menu.TopMenu, menu);
+			var rIds = new int[] { Resource.Id.DashboardIcon, Resource.Id.ListIcon, Resource.Id.ButtonIcon };
+			foreach (var id in rIds) {
+				var item = menu.FindItem(id);
+				if (id == currItem) {
+					item.Icon.SetColorFilter(GlobalConstants.DefaultColors.Red.GetAndroidColor(), PorterDuff.Mode.SrcIn);
+					item.SetEnabled(false);
+				} else {
+					item.Icon.SetColorFilter(GlobalConstants.DefaultColors.Black.GetAndroidColor(), PorterDuff.Mode.SrcIn);
+					item.SetEnabled(true);
+				}
+			}
+			if (Session.User.GetUserRoleType() != UserRoleType.Admin) {
+				menu.RemoveGroup(Resource.Id.AdminGroup);
+			}
 		}
 	}
 }

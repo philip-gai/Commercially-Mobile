@@ -14,7 +14,6 @@ namespace Commercially
 			const string completed = "completed";
 			const string cancelled = "cancelled";
 
-
 			switch (status.ToLower()) {
 				case NewStr:
 					return RequestStatusType.New;

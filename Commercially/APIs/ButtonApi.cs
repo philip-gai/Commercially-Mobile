@@ -30,5 +30,11 @@ namespace Commercially
 			var resp = HttpRequest.MakeRequest(HttpRequestMethodType.POST, Url + buttonId + "/pair", jsonBody.ToString(), "Bearer " + Session.OAuth.access_token);
 			return resp;
 		}
+
+		public static string DeleteButton(string buttonId)
+		{
+			var resp = HttpRequest.MakeRequest(HttpRequestMethodType.DELETE, Url + buttonId, "", "Bearer " + Session.OAuth.access_token);
+			return resp;
+		}
 	}
 }

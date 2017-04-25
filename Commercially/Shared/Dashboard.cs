@@ -5,10 +5,9 @@ namespace Commercially
 {
 	public class Dashboard
 	{
-		public Request[][] RequestLists;
-		public readonly static RequestStatusType[] RequestTypes = { RequestStatusType.Assigned, RequestStatusType.Completed, RequestStatusType.Cancelled };
+		public Request[] RequestList;
+		public readonly static RequestStatusType StartType = RequestStatusType.New;
 		public readonly static string[] SectionTitles = { Localizable.Labels.MyTasks, RequestStatusType.Completed.ToString(), RequestStatusType.Cancelled.ToString() };
-		public readonly static int[] SectionToArray = new int[SectionTitles.Length];
 		public const double HeaderHeight = 50;
 		public const double RowHeight = 88;
 		public const double RowAlphaDouble = 0.33;
@@ -20,12 +19,16 @@ namespace Commercially
 			Session.TaskFactory.StartNew(delegate {
 				try {
 					Session.Requests = RequestApi.GetRequests();
-					RequestLists = Request.GetRequestLists(Session.Requests, Types);
+					RequestList = Request.GetRequestLists(Session.Requests, Types)[0];
 					OnSuccess.Invoke();
 				} catch (Exception e) {
 					IfException.Invoke(e);
 				}
 			});
+		}
+		public void GetRequests(RequestStatusType Type, Action OnSuccess, Action<Exception> IfException)
+		{
+			GetRequests(new RequestStatusType[] { Type }, OnSuccess, IfException);
 		}
 	}
 }

@@ -32,7 +32,7 @@ namespace Commercially.Droid
 
 		public override bool OnCreateOptionsMenu(IMenu menu)
 		{
-			MenuInflater.Inflate(Resource.Menu.TopMenu, menu);
+            this.CreateMainOptionsMenu(menu, Resource.Id.ButtonIcon);
 			return base.OnCreateOptionsMenu(menu);
 		}
 

@@ -72,5 +72,12 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:alpha="0.25" />
+        <Button
+            android:text="Delete"
+            android:id="@+id/deleteButton"
+            android:background="?android:attr/colorPrimary"
+            android:textColor="@android:color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
     </LinearLayout>
 </TableRow>

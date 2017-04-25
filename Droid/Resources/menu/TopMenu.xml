@@ -11,9 +11,12 @@
        android:icon="@drawable/list"
        app:showAsAction="ifRoom"
        android:title="Queue" />
-  <item
-       android:id="@+id/ButtonIcon"
-	   android:icon="@drawable/button"
-       app:showAsAction="ifRoom"
-       android:title="Buttons" />
+	<group
+		android:id="@+id/AdminGroup">
+  		<item
+      	 android:id="@+id/ButtonIcon"
+	   	 android:icon="@drawable/button"
+       	 app:showAsAction="ifRoom"
+         android:title="Buttons" />
+	</group>
 </menu>

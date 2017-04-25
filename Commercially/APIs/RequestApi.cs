@@ -15,12 +15,14 @@ namespace Commercially
 			return JsonConvert.DeserializeObject<List<Request>>(resp).ToArray();
 		}
 
-		public static string PatchRequest(string id, string body) {
+		public static string PatchRequest(string id, string body)
+		{
 			var resp = HttpRequest.MakeRequest(HttpRequestMethodType.PATCH, Url + id, body, "Bearer " + Session.OAuth.access_token);
 			return resp;
 		}
 
-		public static string UpdateRequest(string id, RequestStatusType newStatus) {
+		public static string UpdateRequest(string id, RequestStatusType newStatus)
+		{
 			string service = "";
 			switch (newStatus) {
 				case RequestStatusType.New:
@@ -44,25 +46,10 @@ namespace Commercially
 			return resp;
 		}
 
-		public static Request[] GetDummyRequests()
+		public static string DeleteRequest(string id)
 		{
-			var RequestList = new List<Request>();
-			for (int i = 0; i < 30; i++) {
-				RequestList.Add(Request.GetDummyRequest());
-			}
-			return RequestList.ToArray();
-		}
-
-		public static string GetDummyRequestsJson()
-		{
-			var requests = GetDummyRequests();
-			return JsonConvert.SerializeObject(requests);
-		}
-
-		public static Request[] GetOfflineRequests()
-		{
-			var resp = GetDummyRequestsJson();
-			return JsonConvert.DeserializeObject<Request[]>(resp);
+			var resp = HttpRequest.MakeRequest(HttpRequestMethodType.DELETE, Url + id, "", "Bearer " + Session.OAuth.access_token);
+			return resp;
 		}
 	}
 }

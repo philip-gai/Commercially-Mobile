@@ -92,38 +92,5 @@ namespace Commercially
 
 			return new Request[][] { NewList.ToArray(), AssignedList.ToArray(), CompletedList.ToArray(), CancelledList.ToArray() };
 		}
-
-		static int num = 1;
-		readonly static Random rand = new Random();
-		public static Request GetDummyRequest()
-		{
-			var DummyReq = new Request();
-			DummyReq._id = Guid.NewGuid().ToString();
-			DummyReq.description = "Replace the Toilet Paper";
-			DummyReq.time_received = DateTime.Now.ConvertToMilliseconds().ToString();
-			DummyReq.room = "Room " + num++;
-			DummyReq.button_id = Guid.NewGuid().ToString();
-			string status;
-			switch (rand.Next() % 4) {
-				case 0:
-					status = RequestStatusType.New.ToString().ToLower();
-					break;
-				case 1:
-					status = RequestStatusType.Assigned.ToString().ToLower();
-					break;
-				case 2:
-					status = RequestStatusType.Completed.ToString().ToLower();
-					break;
-				case 3:
-					status = RequestStatusType.Cancelled.ToString().ToLower();
-					break;
-				default:
-					status = null;
-					break;
-			}
-			DummyReq.status = status;
-			DummyReq.urgent = rand.Next() % 2 == 0;
-			return DummyReq;
-		}
 	}
 }

@@ -34,7 +34,7 @@ namespace Commercially.Droid
 
 		public override bool OnCreateOptionsMenu(IMenu menu)
 		{
-			MenuInflater.Inflate(Resource.Menu.TopMenu, menu);
+			this.CreateMainOptionsMenu(menu, Resource.Id.ListIcon);
 			return base.OnCreateOptionsMenu(menu);
 		}
 
@@ -72,6 +72,7 @@ namespace Commercially.Droid
 			Android.Graphics.Color color = RequestList.TableBackgroundColor.GetAndroidColor();
 			color.A = RequestList.RowAlphaByte;
 			rowView.SetBackgroundColor(color);
+			this.HideRequestStatusLabel(rowView);
 			return rowView;
 		}
 	}

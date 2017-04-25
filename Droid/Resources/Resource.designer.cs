@@ -1727,20 +1727,23 @@ namespace Commercially.Droid
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f0b008f
-			public const int ButtonIcon = 2131427471;
+			// aapt resource value: 0x7f0b0090
+			public const int AdminGroup = 2131427472;
+			
+			// aapt resource value: 0x7f0b0091
+			public const int ButtonIcon = 2131427473;
 			
 			// aapt resource value: 0x7f0b005d
 			public const int ButtonRow = 2131427421;
 			
-			// aapt resource value: 0x7f0b008d
-			public const int DashboardIcon = 2131427469;
+			// aapt resource value: 0x7f0b008e
+			public const int DashboardIcon = 2131427470;
 			
 			// aapt resource value: 0x7f0b0062
 			public const int EmailField = 2131427426;
 			
-			// aapt resource value: 0x7f0b008e
-			public const int ListIcon = 2131427470;
+			// aapt resource value: 0x7f0b008f
+			public const int ListIcon = 2131427471;
 			
 			// aapt resource value: 0x7f0b0064
 			public const int LoginButton = 2131427428;
@@ -1883,6 +1886,9 @@ namespace Commercially.Droid
 			// aapt resource value: 0x7f0b002a
 			public const int default_activity_button = 2131427370;
 			
+			// aapt resource value: 0x7f0b008a
+			public const int deleteButton = 2131427466;
+			
 			// aapt resource value: 0x7f0b0057
 			public const int descriptionField = 2131427415;
 			
@@ -1910,8 +1916,8 @@ namespace Commercially.Droid
 			// aapt resource value: 0x7f0b003d
 			public const int expanded_menu = 2131427389;
 			
-			// aapt resource value: 0x7f0b008c
-			public const int headerText = 2131427468;
+			// aapt resource value: 0x7f0b008d
+			public const int headerText = 2131427469;
 			
 			// aapt resource value: 0x7f0b0004
 			public const int home = 2131427332;
@@ -2105,8 +2111,8 @@ namespace Commercially.Droid
 			// aapt resource value: 0x7f0b000b
 			public const int tabMode = 2131427339;
 			
-			// aapt resource value: 0x7f0b008b
-			public const int tableLayout = 2131427467;
+			// aapt resource value: 0x7f0b008c
+			public const int tableLayout = 2131427468;
 			
 			// aapt resource value: 0x7f0b007a
 			public const int text = 2131427450;
@@ -2120,8 +2126,8 @@ namespace Commercially.Droid
 			// aapt resource value: 0x7f0b0034
 			public const int textSpacerNoTitle = 2131427380;
 			
-			// aapt resource value: 0x7f0b008a
-			public const int textView1 = 2131427466;
+			// aapt resource value: 0x7f0b008b
+			public const int textView1 = 2131427467;
 			
 			// aapt resource value: 0x7f0b0070
 			public const int time = 2131427440;

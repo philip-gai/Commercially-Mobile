@@ -23,7 +23,6 @@ namespace Commercially.iOS
 					NavigationController.ShowPrompt(Localizable.PromptMessages.ButtonsError);
 				});
 			});
-
 		}
 
 		public override void ViewDidLoad()

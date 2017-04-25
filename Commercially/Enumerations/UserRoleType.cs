@@ -4,7 +4,7 @@ namespace Commercially
 	public enum UserRoleType
 	{
 		Admin,
-		Manager,
+		//Manager,
 		Worker,
 		Tenant
 	}

@@ -1,7 +1,7 @@
 using System;
-using System.Threading.Tasks;
 using UIKit;
 using Commercially.iOS.Extensions;
+using System.Collections.Generic;
 
 namespace Commercially.iOS
 {
@@ -16,9 +16,22 @@ namespace Commercially.iOS
 			base.ViewDidLoad();
 			NavigationItem.HidesBackButton = true;
 			NavigationItem.SetTitleImage("Logo-Red-Toolbar");
-			NavigationItem.RightBarButtonItem = new UIBarButtonItem(UIImage.FromBundle("notification-Toolbar"), UIBarButtonItemStyle.Plain, (sender, e) => { });
-			NavigationItem.RightBarButtonItem.TintColor = GlobalConstants.DefaultColors.Red.GetUIColor();
 			Home.PrefetchData();
+			SetTabsForUser();
+		}
+
+		void SetTabsForUser()
+		{
+			if (Session.User.GetUserRoleType() != UserRoleType.Admin) {
+				var list = new List<UIViewController>(ViewControllers);
+				for (int i = 0; i < ViewControllers.Length; i++) {
+					var controller = ViewControllers[i];
+					if (controller is ButtonListController) {
+						list.RemoveAt(i);
+					}
+				}
+				SetViewControllers(list.ToArray(), true);
+			}
 		}
 	}
 }

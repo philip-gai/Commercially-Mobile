@@ -12,14 +12,6 @@ namespace Commercially.iOS
 
 		public RequestListController(IntPtr handle) : base(handle) { }
 
-		public override void ViewDidLoad()
-		{
-			base.ViewDidLoad();
-			TableView.DataSource = this;
-			TableView.Delegate = this;
-			TableView.RegisterNibForCellReuse(UINib.FromName(RequestCell.Key, null), RequestCell.Key);
-		}
-
 		public override void ViewWillAppear(bool animated)
 		{
 			base.ViewWillAppear(animated);
@@ -32,6 +24,14 @@ namespace Commercially.iOS
 					NavigationController.ShowPrompt(e.Message, 50);
 				});
 			});
+		}
+
+		public override void ViewDidLoad()
+		{
+			base.ViewDidLoad();
+			TableView.DataSource = this;
+			TableView.Delegate = this;
+			TableView.RegisterNibForCellReuse(UINib.FromName(RequestCell.Key, null), RequestCell.Key);
 		}
 
 		public override nint NumberOfSections(UITableView tableView)
@@ -83,6 +83,22 @@ namespace Commercially.iOS
 			var requestDetailsController = UINavigationControllerExtensions.GetViewController(GlobalConstants.Screens.RequestDetails) as RequestDetailsController;
 			NavigationController.PushViewController(requestDetailsController, true);
 			requestDetailsController.Request = SharedController.NewRequestList[indexPath.Row];
+		}
+
+		public override bool CanEditRow(UITableView tableView, NSIndexPath indexPath)
+		{
+			return Session.User.GetUserRoleType() == UserRoleType.Admin;
+		}
+
+		public override void CommitEditingStyle(UITableView tableView, UITableViewCellEditingStyle editingStyle, NSIndexPath indexPath)
+		{
+			switch (editingStyle) {
+				case UITableViewCellEditingStyle.Delete:
+					RequestApi.DeleteRequest(SharedController.NewRequestList[indexPath.Row]._id);
+					break;
+			}
+			ViewWillAppear(false);
+			ViewDidLoad();
 		}
 	}
 }
