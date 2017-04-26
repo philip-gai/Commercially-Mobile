@@ -15,12 +15,18 @@ namespace Commercially.Droid
 
 		TableLayout Table { get { return FindViewById<TableLayout>(Resource.Id.tableLayout); } }
 		LinearLayout Layout { get { return FindViewById<LinearLayout>(Resource.Id.mainLayout); } }
-		LinearLayout _ButtonLayout;
+
+		HorizontalScrollView _HeaderScrollView;
+		HorizontalScrollView HeaderScrollView {
+			get {
+				if (_HeaderScrollView != null) return _HeaderScrollView;
+				_HeaderScrollView = this.GetTopButtons(Dashboard.RequestTypes);
+				return _HeaderScrollView;
+			}
+		}
 		LinearLayout ButtonLayout {
 			get {
-				if (_ButtonLayout != null) return _ButtonLayout;
-				_ButtonLayout = this.GetDashboardHeader();
-				return _ButtonLayout;
+				return HeaderScrollView.FindViewById<LinearLayout>(Resource.Id.buttonLayout);
 			}
 		}
 
@@ -90,28 +96,35 @@ namespace Commercially.Droid
 
 		void InitializeButtons()
 		{
-			Layout.AddView(ButtonLayout, 0);
+			Layout.AddView(HeaderScrollView, 0);
 			foreach (var button in TopButtons) {
 				button.Click += TopButtonClick;
 			}
+			SetButtons(TopButtons[0]);
 		}
 
 		void TopButtonClick(object sender, EventArgs e)
 		{
 			CurrentType = GetRequestStatusType(sender);
-			var senderButton = sender as Button;
+			SetButtons(sender as Button);
+		}
+
+		void SetButtons(Button activeButton)
+		{
 			foreach (var button in TopButtons) {
-				button.SetTextColor(Dashboard.InactiveColor.GetAndroidColor());
+				button.SetTextColor(Dashboard.InactiveTextColor.GetAndroidColor());
+				button.BackgroundTintList = Android.Content.Res.ColorStateList.ValueOf(Dashboard.GetTypeColor(GetRequestStatusType(button)).GetAndroidColor());
 				button.Enabled = true;
 			}
-			senderButton.SetTextColor(SharedController.SectionColor.GetAndroidColor());
-			senderButton.Enabled = false;
+			activeButton.SetTextColor(SharedController.CurrentTypeColor.GetAndroidColor());
+			activeButton.BackgroundTintList = Android.Content.Res.ColorStateList.ValueOf(Dashboard.ActiveBackgroundColor.GetAndroidColor());
+			activeButton.Enabled = false;
 		}
 
 		RequestStatusType GetRequestStatusType(object sender)
 		{
 			var button = sender as Button;
-			foreach (var type in Dashboard.SectionTypes) {
+			foreach (var type in Dashboard.RequestTypes) {
 				if (type.ToString().Equals(button.Text)) {
 					return type;
 				}
@@ -121,19 +134,19 @@ namespace Commercially.Droid
 
 		View GetHeader()
 		{
-			string label = SharedController.SectionTitle;
+			string label = SharedController.CurrentTypeTitle;
 			if (SharedController.Requests != null) {
 				label += " (" + SharedController.Requests.Length + ")";
 			}
 			var header = this.GetSectionHeader(label);
-			header.SetBackgroundColor(SharedController.SectionColor.GetAndroidColor());
+			header.SetBackgroundColor(SharedController.CurrentTypeColor.GetAndroidColor());
 			return header;
 		}
 
 		TableRow GetTableRow(int row)
 		{
 			var rowView = this.GetRequestRow(SharedController.Requests[row]);
-			Android.Graphics.Color color = SharedController.SectionColor.GetAndroidColor();
+			Android.Graphics.Color color = SharedController.CurrentTypeColor.GetAndroidColor();
 			color.A = Dashboard.RowAlphaByte;
 			rowView.SetBackgroundColor(color);
 			this.HideRequestStatusLabel(rowView);

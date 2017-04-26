@@ -14,8 +14,11 @@ namespace Commercially
 
 		public ButtonType Type {
 			get {
-				if (!string.IsNullOrWhiteSpace(clientId)) return ButtonType.Paired;
-				if (clientId.Equals(GlobalConstants.Strings.Ignore)) return ButtonType.Ignored;
+				if (!string.IsNullOrWhiteSpace(clientId)) {
+					if (GlobalConstants.Strings.Ignore.Equals(clientId))
+						return ButtonType.Ignored;
+					return ButtonType.Paired;
+				}
 				return ButtonType.Discovered;
 			}
 		}

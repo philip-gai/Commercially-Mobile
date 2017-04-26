@@ -15,14 +15,21 @@ namespace Commercially.Droid
 
 		TableLayout Table { get { return FindViewById<TableLayout>(Resource.Id.tableLayout); } }
 		LinearLayout Layout { get { return FindViewById<LinearLayout>(Resource.Id.mainLayout); } }
-		LinearLayout _ButtonLayout;
-		LinearLayout ButtonLayout {
+
+		HorizontalScrollView _HeaderScrollView;
+		HorizontalScrollView HeaderScrollView {
 			get {
-				if (_ButtonLayout != null) return _ButtonLayout;
-				_ButtonLayout = this.GetButtonListHeader();
-				return _ButtonLayout;
+				if (_HeaderScrollView != null) return _HeaderScrollView;
+				_HeaderScrollView = this.GetTopButtons(ButtonList.ButtonTypes);
+				return _HeaderScrollView;
 			}
 		}
+		LinearLayout ButtonLayout {
+			get {
+				return HeaderScrollView.FindViewById<LinearLayout>(Resource.Id.buttonLayout);
+			}
+		}
+
 		Button[] _TopButtons;
 		Button[] TopButtons {
 			get {
@@ -87,22 +94,29 @@ namespace Commercially.Droid
 
 		void InitializeButtons()
 		{
-			Layout.AddView(ButtonLayout, 0);
+			Layout.AddView(HeaderScrollView, 0);
 			foreach (var button in TopButtons) {
 				button.Click += TopButtonClick;
 			}
+			SetButtons(TopButtons[0]);
 		}
 
 		void TopButtonClick(object sender, EventArgs e)
 		{
 			CurrentType = GetButtonType(sender);
-			var senderButton = sender as Button;
+			SetButtons(sender as Button);
+		}
+
+		void SetButtons(Button activeButton)
+		{
 			foreach (var button in TopButtons) {
-				button.SetTextColor(ButtonList.InactiveColor.GetAndroidColor());
+				button.SetTextColor(ButtonList.InactiveTextColor.GetAndroidColor());
+				button.BackgroundTintList = Android.Content.Res.ColorStateList.ValueOf(ButtonList.GetTypeColor(GetButtonType(button)).GetAndroidColor());
 				button.Enabled = true;
 			}
-			senderButton.SetTextColor(ButtonList.ActiveColor.GetAndroidColor());
-			senderButton.Enabled = false;
+			activeButton.SetTextColor(SharedController.CurrentTypeColor.GetAndroidColor());
+			activeButton.BackgroundTintList = Android.Content.Res.ColorStateList.ValueOf(ButtonList.ActiveBackgroundColor.GetAndroidColor());
+			activeButton.Enabled = false;
 		}
 
 		ButtonType GetButtonType(object sender)
@@ -118,19 +132,19 @@ namespace Commercially.Droid
 
 		View GetHeader()
 		{
-			string label = SharedController.SectionTitle;
+			string label = SharedController.CurrentTypeTitle;
 			if (SharedController.Buttons != null) {
 				label += " (" + SharedController.Buttons.Length + ")";
 			}
 			var header = this.GetSectionHeader(label);
-			header.SetBackgroundColor(ButtonList.TableBackgroundColor.GetAndroidColor());
+			header.SetBackgroundColor(SharedController.CurrentTypeColor.GetAndroidColor());
 			return header;
 		}
 
 		TableRow GetTableRow(int row)
 		{
 			var rowView = this.GetButtonRow(SharedController.Buttons[row]);
-			Android.Graphics.Color color = ButtonList.TableBackgroundColor.GetAndroidColor();
+			Android.Graphics.Color color = SharedController.CurrentTypeColor.GetAndroidColor();
 			color.A = ButtonList.RowAlphaByte;
 			rowView.SetBackgroundColor(color);
 			return rowView;

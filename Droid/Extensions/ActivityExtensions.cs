@@ -41,30 +41,16 @@ namespace Commercially.Droid
 			return headerView;
 		}
 
-		public static LinearLayout GetDashboardHeader(this Activity activity)
+		public static HorizontalScrollView GetTopButtons<T>(this Activity activity, T[] array)
 		{
 			var inflater = (LayoutInflater)activity.GetSystemService(Context.LayoutInflaterService);
-			var headerView = (LinearLayout)inflater.Inflate(Resource.Layout.TableButtonHeader, null);
+			var headerView = (HorizontalScrollView)inflater.Inflate(Resource.Layout.TableButtonHeader, null);
+			var layout = headerView.FindViewById<LinearLayout>(Resource.Id.buttonLayout);
 
-			headerView.RemoveAllViews();
-			foreach (var type in Dashboard.SectionTypes) {
-				var button = (Button)inflater.Inflate(Resource.Id.topButton, null);
-				button.Text = type.ToString();
-				headerView.AddView(button);
-			}
-			return headerView;
-		}
-
-		public static LinearLayout GetButtonListHeader(this Activity activity)
-		{
-			var inflater = (LayoutInflater)activity.GetSystemService(Context.LayoutInflaterService);
-			var headerView = (LinearLayout)inflater.Inflate(Resource.Layout.TableButtonHeader, null);
-
-			headerView.RemoveAllViews();
-			foreach (var type in ButtonList.ButtonTypes) {
-				var button = (Button)inflater.Inflate(Resource.Id.topButton, null);
-				button.Text = type.ToString();
-				headerView.AddView(button);
+			foreach (var obj in array) {
+				var button = (Button)inflater.Inflate(Resource.Layout.TopButton, null);
+				button.Text = obj.ToString();
+				layout.AddView(button);
 			}
 			return headerView;
 		}

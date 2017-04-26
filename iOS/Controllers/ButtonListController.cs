@@ -31,12 +31,12 @@ namespace Commercially.iOS
 			TableView.DataSource = this;
 			TableView.Delegate = this;
 			TableView.RegisterNibForCellReuse(UINib.FromName(ButtonCell.Key, null), ButtonCell.Key);
-
+			SetButtons(PairedButton);
 		}
 
 		public override nint NumberOfSections(UITableView tableView)
 		{
-			return SharedController.Buttons == null ? 0 : SharedController.Buttons.Length == 0 ? 0 : 1;
+			return 1;
 		}
 
 		public override nint RowsInSection(UITableView tableView, nint section)
@@ -57,11 +57,11 @@ namespace Commercially.iOS
 		public override UIView GetViewForHeader(UITableView tableView, nint section)
 		{
 			var HeaderView = new UIView(new CGRect(0, 0, tableView.Frame.Size.Width, (nfloat)ButtonList.HeaderHeight));
-			HeaderView.BackgroundColor = ButtonList.TableBackgroundColor.GetUIColor();
+			HeaderView.BackgroundColor = SharedController.CurrentTypeColor.GetUIColor();
 
 			var Frame = new CGRect(10, 0, HeaderView.Frame.Width, (nfloat)ButtonList.HeaderHeight);
 			var Label = new UILabel(Frame);
-			Label.Text = SharedController.SectionTitle;
+			Label.Text = SharedController.CurrentTypeTitle;
 			if (SharedController.Buttons != null) {
 				Label.Text += " (" + SharedController.Buttons.Length + ")";
 			}
@@ -73,7 +73,7 @@ namespace Commercially.iOS
 		{
 			var cell = tableView.DequeueReusableCell(ButtonCell.Key, indexPath) as ButtonCell;
 			cell.Button = SharedController.Buttons[indexPath.Row];
-			cell.BackgroundColor = ButtonList.TableBackgroundColor.GetUIColor().ColorWithAlpha((nfloat)ButtonList.RowAlphaDouble);
+			cell.BackgroundColor = SharedController.CurrentTypeColor.GetUIColor().ColorWithAlpha((nfloat)ButtonList.RowAlphaDouble);
 			return cell;
 		}
 
@@ -87,13 +87,20 @@ namespace Commercially.iOS
 		partial void TopButtonTouchUpInside(UIButton sender)
 		{
 			CurrentType = GetButtonType(sender);
+			SetButtons(sender);
+		}
+
+		void SetButtons(UIButton activeButton)
+		{
 			var buttons = new UIButton[] { PairedButton, DiscoveredButton, IgnoredButton };
 			foreach (var button in buttons) {
-				button.SetTitleColor(ButtonList.InactiveColor.GetUIColor(), UIControlState.Normal);
+				button.SetTitleColor(ButtonList.InactiveTextColor.GetUIColor(), UIControlState.Normal);
+				button.BackgroundColor = ButtonList.GetTypeColor(GetButtonType(button)).GetUIColor();
 				button.Enabled = true;
 			}
-			sender.SetTitleColor(ButtonList.ActiveColor.GetUIColor(), UIControlState.Normal);
-			sender.Enabled = false;
+			activeButton.SetTitleColor(SharedController.CurrentTypeColor.GetUIColor(), UIControlState.Normal);
+			activeButton.BackgroundColor = ButtonList.ActiveBackgroundColor.GetUIColor();
+			activeButton.Enabled = false;
 		}
 
 		ButtonType GetButtonType(UIButton sender)

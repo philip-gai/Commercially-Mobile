@@ -1727,17 +1727,17 @@ namespace Commercially.Droid
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f0b0091
-			public const int AdminGroup = 2131427473;
-			
 			// aapt resource value: 0x7f0b0092
-			public const int ButtonIcon = 2131427474;
+			public const int AdminGroup = 2131427474;
+			
+			// aapt resource value: 0x7f0b0093
+			public const int ButtonIcon = 2131427475;
 			
 			// aapt resource value: 0x7f0b005d
 			public const int ButtonRow = 2131427421;
 			
-			// aapt resource value: 0x7f0b0090
-			public const int DashboardIcon = 2131427472;
+			// aapt resource value: 0x7f0b0091
+			public const int DashboardIcon = 2131427473;
 			
 			// aapt resource value: 0x7f0b0062
 			public const int EmailField = 2131427426;
@@ -1837,6 +1837,9 @@ namespace Commercially.Droid
 			
 			// aapt resource value: 0x7f0b0022
 			public const int bottom = 2131427362;
+			
+			// aapt resource value: 0x7f0b008e
+			public const int buttonLayout = 2131427470;
 			
 			// aapt resource value: 0x7f0b002e
 			public const int buttonPanel = 2131427374;
@@ -2147,8 +2150,8 @@ namespace Commercially.Droid
 			// aapt resource value: 0x7f0b0023
 			public const int top = 2131427363;
 			
-			// aapt resource value: 0x7f0b008e
-			public const int topButton = 2131427470;
+			// aapt resource value: 0x7f0b0090
+			public const int topButton = 2131427472;
 			
 			// aapt resource value: 0x7f0b0039
 			public const int topPanel = 2131427385;
@@ -2373,6 +2376,9 @@ namespace Commercially.Droid
 			
 			// aapt resource value: 0x7f040037
 			public const int TableSectionHeader = 2130968631;
+			
+			// aapt resource value: 0x7f040038
+			public const int TopButton = 2130968632;
 			
 			static Layout()
 			{

@@ -31,12 +31,12 @@ namespace Commercially.iOS
 			TableView.DataSource = this;
 			TableView.Delegate = this;
 			TableView.RegisterNibForCellReuse(UINib.FromName(RequestCell.Key, null), RequestCell.Key);
-			NewButton.Enabled = false;
+			SetButtons(NewButton);
 		}
 
 		public override nint NumberOfSections(UITableView tableView)
 		{
-			return SharedController.Requests == null ? 0 : SharedController.Requests.Length == 0 ? 0 : 1;
+			return 1;
 		}
 
 		public override nint RowsInSection(UITableView tableView, nint section)
@@ -57,11 +57,11 @@ namespace Commercially.iOS
 		public override UIView GetViewForHeader(UITableView tableView, nint section)
 		{
 			var HeaderView = new UIView(new CGRect(0, 0, tableView.Frame.Size.Width, Dashboard.HeaderHeight));
-			HeaderView.BackgroundColor = SharedController.SectionColor.GetUIColor();
+			HeaderView.BackgroundColor = SharedController.CurrentTypeColor.GetUIColor();
 
 			var Frame = new CGRect(10, 0, HeaderView.Frame.Width, Dashboard.HeaderHeight);
 			var Label = new UILabel(Frame);
-			Label.Text = SharedController.SectionTitle;
+			Label.Text = SharedController.CurrentTypeTitle;
 			if (SharedController.Requests != null) {
 				Label.Text += " (" + SharedController.Requests.Length + ")";
 			}
@@ -73,7 +73,7 @@ namespace Commercially.iOS
 		{
 			var cell = tableView.DequeueReusableCell(RequestCell.Key, indexPath) as RequestCell;
 			cell.Request = SharedController.Requests[indexPath.Row];
-			cell.BackgroundColor = SharedController.SectionColor.GetUIColor().ColorWithAlpha((nfloat)Dashboard.RowAlphaDouble);
+			cell.BackgroundColor = SharedController.CurrentTypeColor.GetUIColor().ColorWithAlpha((nfloat)Dashboard.RowAlphaDouble);
 			return cell;
 		}
 
@@ -102,13 +102,20 @@ namespace Commercially.iOS
 		partial void TopButtonTouchUpInside(UIButton sender)
 		{
 			CurrentType = GetRequestStatusType(sender);
+			SetButtons(sender);
+		}
+
+		void SetButtons(UIButton activeButton)
+		{
 			var buttons = new UIButton[] { NewButton, AssignedButton, CompletedButton, CancelledButton };
 			foreach (var button in buttons) {
-				button.SetTitleColor(Dashboard.InactiveColor.GetUIColor(), UIControlState.Normal);
+				button.SetTitleColor(Dashboard.InactiveTextColor.GetUIColor(), UIControlState.Normal);
+				button.BackgroundColor = Dashboard.GetTypeColor(GetRequestStatusType(button)).GetUIColor();
 				button.Enabled = true;
 			}
-			sender.SetTitleColor(SharedController.SectionColor.GetUIColor(), UIControlState.Normal);
-			sender.Enabled = false;
+			activeButton.SetTitleColor(SharedController.CurrentTypeColor.GetUIColor(), UIControlState.Normal);
+			activeButton.BackgroundColor = Dashboard.ActiveBackgroundColor.GetUIColor();
+			activeButton.Enabled = false;
 		}
 
 		RequestStatusType GetRequestStatusType(UIButton sender)

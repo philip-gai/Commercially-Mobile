@@ -26,5 +26,7 @@
         android:layout_height="100dp"
         android:id="@+id/dismissButton"
         android:textColor="?android:attr/colorPrimary"
-        android:background="@android:color/white" />
+        style="@style/Widget.AppCompat.Button.Colored"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        app:backgroundTint="@android:color/white" />
 </LinearLayout>
