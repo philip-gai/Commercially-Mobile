@@ -86,7 +86,6 @@
     <Compile Include="Activities\DashboardActivity.cs" />
     <Compile Include="Extensions\ColorExtensions.cs" />
     <Compile Include="Fragments\PromptDialogFragment.cs" />
-    <Compile Include="Activities\RequestListActivity.cs" />
     <Compile Include="Extensions\ActivityExtensions.cs" />
     <Compile Include="Activities\SplashActivity.cs" />
     <Compile Include="Activities\ButtonListActivity.cs" />

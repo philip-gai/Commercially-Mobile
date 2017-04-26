@@ -38,7 +38,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Shared\Dashboard.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Shared\Home.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Main.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Shared\RequestList.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Shared\ButtonList.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Shared\RequestDetails.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Shared\StatusPicker.cs" />

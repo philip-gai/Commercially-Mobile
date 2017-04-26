@@ -17,7 +17,7 @@ namespace Commercially
 		bool StatusChanged {
 			get {
 				if (SelectedStatus == null) return false;
-				return !Request.status.ToString().Equals(SelectedStatus);
+				return !Request.status.ToString().Equals(SelectedStatus.ToLower());
 			}
 		}
 		public string DescriptionText {

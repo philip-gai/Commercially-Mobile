@@ -35,7 +35,6 @@ namespace Commercially.Droid
 		{
 			var inflater = (LayoutInflater)activity.GetSystemService(Context.LayoutInflaterService);
 			var headerView = (TableRow)inflater.Inflate(Resource.Layout.TableSectionHeader, null);
-			headerView.SetBackgroundColor(RequestList.TableBackgroundColor.GetAndroidColor());
 			var headerLabel = headerView.FindViewById<TextView>(Resource.Id.headerText);
 			headerLabel.Text = label;
 			return headerView;

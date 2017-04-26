@@ -229,7 +229,6 @@
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
     <InterfaceDefinition Include="Storyboards\Dashboard.storyboard" />
     <InterfaceDefinition Include="Storyboards\RequestDetails.storyboard" />
-    <InterfaceDefinition Include="Storyboards\RequestList.storyboard" />
     <InterfaceDefinition Include="Storyboards\ButtonList.storyboard" />
     <InterfaceDefinition Include="Custom Classes\Cells\ButtonCell.xib" />
     <InterfaceDefinition Include="Storyboards\ButtonDetails.storyboard" />
@@ -302,10 +301,6 @@
       <DependentUpon>RequestDetailsController.cs</DependentUpon>
     </Compile>
     <Compile Include="Custom Classes\Picker Views\StatusPickerViewModel.cs" />
-    <Compile Include="Controllers\RequestListController.cs" />
-    <Compile Include="Controllers\RequestListController.designer.cs">
-      <DependentUpon>RequestListController.cs</DependentUpon>
-    </Compile>
     <Compile Include="Extensions\UIPickerViewExtensions.cs" />
     <Compile Include="Custom Classes\Delegates\PickerDelegate.cs" />
     <Compile Include="Custom Classes\Cells\ButtonCell.cs" />
