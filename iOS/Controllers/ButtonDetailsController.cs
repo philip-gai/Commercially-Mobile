@@ -46,10 +46,10 @@ namespace Commercially.iOS
 					jsonBody.Add("description", DescriptionField.Text);
 				}
 				if (jsonBody.Count > 0) {
-					ButtonApi.PatchButton(SharedController.Button.bluetooth_id, jsonBody.ToString());
+					FlicButtonApi.PatchButton(SharedController.Button.bluetooth_id, jsonBody.ToString());
 				}
 				if (SharedController.PickerChanged(ClientPickerView.Model.GetTitle(ClientPickerView, 0, 0))) {
-					ButtonApi.PairButton(SharedController.Button.bluetooth_id, Client.FindClient(SharedController.SelectedClient, Session.Clients).clientId);
+					FlicButtonApi.PairButton(SharedController.Button.bluetooth_id, Client.FindClient(SharedController.SelectedClient, Session.Clients).clientId);
 				}
 			} catch (Exception) {
 				NavigationController.ShowPrompt(Localizable.PromptMessages.ButtonSaveError);

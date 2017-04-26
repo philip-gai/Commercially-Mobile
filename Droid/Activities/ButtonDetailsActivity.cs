@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -105,10 +105,10 @@ namespace Commercially.Droid
 					jsonBody.Add("description", DescriptionField.Text);
 				}
 				if (jsonBody.Count > 0) {
-					ButtonApi.PatchButton(SharedController.Button.bluetooth_id, jsonBody.ToString());
+					FlicButtonApi.PatchButton(SharedController.Button.bluetooth_id, jsonBody.ToString());
 				}
 				if (SharedController.PickerChanged(ClientSpinner.GetItemAtPosition(0).ToString())) {
-					ButtonApi.PairButton(SharedController.Button.bluetooth_id, Client.FindClient(SharedController.SelectedClient, Session.Clients).clientId);
+					FlicButtonApi.PairButton(SharedController.Button.bluetooth_id, Client.FindClient(SharedController.SelectedClient, Session.Clients).clientId);
 				}
 			} catch (Exception) {
 				this.ShowPrompt(Localizable.PromptMessages.ButtonSaveError);

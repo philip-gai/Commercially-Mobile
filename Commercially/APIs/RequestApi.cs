@@ -6,18 +6,36 @@ namespace Commercially
 {
 	public static class RequestApi
 	{
-		const string Endpoint = "/api/requests/";
-		readonly static string Url = HttpRequest.GetRequestUrl(Endpoint);
+		readonly static string Url = HttpRequest.GetRequestUrl("/api/requests/");
+		static string AuthHeader {
+			get {
+				return "Bearer " + Session.OAuth.access_token;
+			}
+		}
 
 		public static Request[] GetRequests()
 		{
-			var resp = HttpRequest.MakeRequest(HttpRequestMethodType.GET, Url, "", "Bearer " + Session.OAuth.access_token);
+			var resp = HttpRequest.MakeRequest(HttpRequestMethodType.GET, Url, "", AuthHeader);
 			return JsonConvert.DeserializeObject<List<Request>>(resp).ToArray();
+		}
+
+		public static Request[] GetRequests(RequestStatusType type)
+		{
+			var requests = GetRequests();
+			if (requests == null || requests.Length <= 0) return null;
+			var list = new List<Request>();
+			foreach (var request in requests) {
+				if (request.Type == type) {
+					list.Add(request);
+				}
+			}
+			list.Reverse();
+			return list.ToArray();
 		}
 
 		public static string PatchRequest(string id, string body)
 		{
-			var resp = HttpRequest.MakeRequest(HttpRequestMethodType.PATCH, Url + id, body, "Bearer " + Session.OAuth.access_token);
+			var resp = HttpRequest.MakeRequest(HttpRequestMethodType.PATCH, Url + id, body, AuthHeader);
 			return resp;
 		}
 
@@ -31,7 +49,7 @@ namespace Commercially
 					jsonBody.Add("assignedTo", "");
 					jsonBody.Add("time_scheduled", "");
 					jsonBody.Add("time_completed", "");
-					return HttpRequest.MakeRequest(HttpRequestMethodType.PATCH, Url + id, jsonBody.ToString(), "Bearer " + Session.OAuth.access_token);
+					return HttpRequest.MakeRequest(HttpRequestMethodType.PATCH, Url + id, jsonBody.ToString(), AuthHeader);
 				case RequestStatusType.Assigned:
 					service = "/claim";
 					break;
@@ -42,13 +60,13 @@ namespace Commercially
 					service = "/cancel";
 					break;
 			}
-			var resp = HttpRequest.MakeRequest(HttpRequestMethodType.POST, Url + id + service, "", "Bearer " + Session.OAuth.access_token);
+			var resp = HttpRequest.MakeRequest(HttpRequestMethodType.POST, Url + id + service, "", AuthHeader);
 			return resp;
 		}
 
 		public static string DeleteRequest(string id)
 		{
-			var resp = HttpRequest.MakeRequest(HttpRequestMethodType.DELETE, Url + id, "", "Bearer " + Session.OAuth.access_token);
+			var resp = HttpRequest.MakeRequest(HttpRequestMethodType.DELETE, Url + id, "", AuthHeader);
 			return resp;
 		}
 	}

@@ -39,7 +39,7 @@ namespace Commercially
 		{
 			Session.TaskFactory.StartNew(delegate {
 				try {
-					Requests = Request.GetRequests(CurrentType);
+					Requests = RequestApi.GetRequests(CurrentType);
 					OnSuccess.Invoke();
 				} catch (Exception e) {
 					IfException.Invoke(e);

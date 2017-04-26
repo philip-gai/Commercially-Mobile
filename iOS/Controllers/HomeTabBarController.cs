@@ -22,12 +22,14 @@ namespace Commercially.iOS
 
 		void SetTabsForUser()
 		{
-			if (Session.User.GetUserRoleType() != UserRoleType.Admin) {
+			if (Session.User.Type != UserRoleType.Admin) {
 				var list = new List<UIViewController>(ViewControllers);
+				int count = 0;
 				for (int i = 0; i < ViewControllers.Length; i++) {
 					var controller = ViewControllers[i];
-					if (controller is ButtonListController) {
-						list.RemoveAt(i);
+					if (controller is ButtonListController || controller is UserListController) {
+						list.RemoveAt(i-count);
+						count++;
 					}
 				}
 				SetViewControllers(list.ToArray(), true);

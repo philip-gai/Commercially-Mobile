@@ -81,7 +81,7 @@ namespace Commercially.Droid
 				intent.PutExtra(typeof(Request).Name, JsonConvert.SerializeObject(request));
 				activity.StartActivity(intent);
 			};
-			if (Session.User.GetUserRoleType() == UserRoleType.Admin) {
+			if (Session.User.Type == UserRoleType.Admin) {
 				rowView.LongClick += (object sender, View.LongClickEventArgs e) => {
 					switch (deleteButton.Visibility) {
 						case ViewStates.Gone:
@@ -158,7 +158,7 @@ namespace Commercially.Droid
 					item.SetEnabled(true);
 				}
 			}
-			if (Session.User.GetUserRoleType() != UserRoleType.Admin) {
+			if (Session.User.Type != UserRoleType.Admin) {
 				menu.RemoveGroup(Resource.Id.AdminGroup);
 			}
 		}

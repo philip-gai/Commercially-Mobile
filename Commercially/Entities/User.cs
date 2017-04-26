@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 
-namespace Commercially {
+namespace Commercially
+{
 	[Serializable]
-	public class User {
-		public User() {
-		}
+	public class User
+	{
 		public string _id { get; set; }
 		public string firstname { get; set; }
 		public string lastname { get; set; }
@@ -14,17 +15,25 @@ namespace Commercially {
 		public string role { get; set; }
 		public string username { get; set; }
 
-		public UserRoleType GetUserRoleType() {
-			if (role.Equals(UserRoleType.Admin.ToString())) {
-				return UserRoleType.Admin;	
+		public UserRoleType Type {
+			get {
+				if (role.Equals(UserRoleType.Admin.ToString(), StringComparison.CurrentCultureIgnoreCase)) {
+					return UserRoleType.Admin;
+				}
+				if (role.Equals(UserRoleType.Worker.ToString(), StringComparison.CurrentCultureIgnoreCase)) {
+					return UserRoleType.Worker;
+				}
+				if (role.Equals(UserRoleType.Tenant.ToString(), StringComparison.CurrentCultureIgnoreCase)) {
+					return UserRoleType.Tenant;
+				}
+				return UserRoleType.Worker;
 			}
-			if (role.Equals(UserRoleType.Worker.ToString())) {
-				return UserRoleType.Worker;	
+		}
+
+		internal UserRoleType GetUserRoleType {
+			get {
+				throw new NotImplementedException();
 			}
-			if (role.Equals(UserRoleType.Tenant.ToString())) {
-				return UserRoleType.Tenant;	
-			}
-			return UserRoleType.Worker;
 		}
 	}
 }

@@ -10,6 +10,7 @@
 			public const string ButtonSaveError = FriendlyStart + "Changes to this button were unable to save.";
 			public const string RequestSaveError = FriendlyStart + "Changes to this request were unable to save.";
 			public const string AssignError = FriendlyStart + "Assiging the request was unsuccessful.";
+			public const string UsersError = FriendlyStart + "Users were unable to load.";
 		}
 		public struct ExceptionMessages {
 			public const string CannotConnectServer = "Cannot connect to server";

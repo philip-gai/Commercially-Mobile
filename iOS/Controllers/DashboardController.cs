@@ -86,7 +86,7 @@ namespace Commercially.iOS
 
 		public override bool CanEditRow(UITableView tableView, NSIndexPath indexPath)
 		{
-			return Session.User.GetUserRoleType() == UserRoleType.Admin;
+			return Session.User.Type == UserRoleType.Admin;
 		}
 
 		public override void CommitEditingStyle(UITableView tableView, UITableViewCellEditingStyle editingStyle, NSIndexPath indexPath)

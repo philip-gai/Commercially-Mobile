@@ -28,7 +28,7 @@ namespace Commercially.iOS
 			// Call Post to change request status string
 			// Post for time that status was changed
 			try {
-				RequestApi.UpdateRequest(SharedController.Request._id, (RequestStatusType)SharedController.SelectedStatus.GetStatus());
+				RequestApi.UpdateRequest(SharedController.Request._id, Request.GetStatusType(SharedController.SelectedStatus));
 			} catch (Exception) {
 				NavigationController.ShowPrompt(Localizable.PromptMessages.RequestSaveError);
 				return;

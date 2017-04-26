@@ -118,7 +118,6 @@
     <ImageAsset Include="Assets.xcassets\Logo-Black.imageset\capital-letter-c-with-a-chevron-arrow-on-top %282%29~universal%402x.png" />
     <ImageAsset Include="Assets.xcassets\Logo-Black.imageset\capital-letter-c-with-a-chevron-arrow-on-top %282%29~universal%403x.png" />
     <ImageAsset Include="Assets.xcassets\Logo-Green.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\user.imageset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\error.imageset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\list-TabBar.imageset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\Logo-Pink.imageset\Contents.json" />
@@ -158,9 +157,6 @@
     <ImageAsset Include="Assets.xcassets\error.imageset\ic_priority_high_48pt.png" />
     <ImageAsset Include="Assets.xcassets\error.imageset\ic_priority_high_48pt_3x.png" />
     <ImageAsset Include="Assets.xcassets\error.imageset\ic_priority_high_48pt_2x.png" />
-    <ImageAsset Include="Assets.xcassets\user.imageset\ic_person_48pt.png" />
-    <ImageAsset Include="Assets.xcassets\user.imageset\ic_person_48pt_2x.png" />
-    <ImageAsset Include="Assets.xcassets\user.imageset\ic_person_48pt_3x.png" />
     <ImageAsset Include="Assets.xcassets\dashboard-TabBar.imageset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\dashboard-TabBar.imageset\ic_dashboard_48pt_3x~universal%401x.png" />
     <ImageAsset Include="Assets.xcassets\dashboard-TabBar.imageset\ic_dashboard_48pt_3x~universal%402x.png" />
@@ -179,6 +175,13 @@
     <ImageAsset Include="Assets.xcassets\list-TabBar.imageset\list-TabBar~universal%401x.png" />
     <ImageAsset Include="Assets.xcassets\list-TabBar.imageset\list-TabBar~universal%402x.png" />
     <ImageAsset Include="Assets.xcassets\list-TabBar.imageset\list-TabBar~universal%403x.png" />
+    <ImageAsset Include="Assets.xcassets\user-TabBar.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\user-TabBar.imageset\ic_person_48pt.png" />
+    <ImageAsset Include="Assets.xcassets\user-TabBar.imageset\ic_person_48pt_2x.png" />
+    <ImageAsset Include="Assets.xcassets\user-TabBar.imageset\ic_person_48pt_3x.png" />
+    <ImageAsset Include="Assets.xcassets\user-TabBar.imageset\ic_person_48pt_3x~universal%403x.png" />
+    <ImageAsset Include="Assets.xcassets\user-TabBar.imageset\ic_person_48pt_3x~universal%402x.png" />
+    <ImageAsset Include="Assets.xcassets\user-TabBar.imageset\ic_person_48pt_3x~universal%401x.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
@@ -198,7 +201,6 @@
     <Folder Include="Extensions\" />
     <Folder Include="Utilities\" />
     <Folder Include="Custom Classes\Buttons\" />
-    <Folder Include="Assets.xcassets\user.imageset\" />
     <Folder Include="Assets.xcassets\error.imageset\" />
     <Folder Include="Custom Classes\Navigation\" />
     <Folder Include="Assets.xcassets\list-TabBar.imageset\" />
@@ -220,6 +222,7 @@
     <Folder Include="Assets.xcassets\dashboard-TabBar.imageset\" />
     <Folder Include="Assets.xcassets\notification-Toolbar.imageset\" />
     <Folder Include="Assets.xcassets\Logo-Red-Toolbar.imageset\" />
+    <Folder Include="Assets.xcassets\user-TabBar.imageset\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Storyboards\Login.storyboard" />
@@ -233,6 +236,8 @@
     <InterfaceDefinition Include="Custom Classes\Cells\ButtonCell.xib" />
     <InterfaceDefinition Include="Storyboards\ButtonDetails.storyboard" />
     <InterfaceDefinition Include="Storyboards\Main.storyboard" />
+    <InterfaceDefinition Include="Storyboards\UserList.storyboard" />
+    <InterfaceDefinition Include="Custom Classes\Cells\UserCell.xib" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Entitlements.plist" />
@@ -318,6 +323,14 @@
     <Compile Include="Extensions\UITextFieldExtensions.cs" />
     <Compile Include="Custom Classes\Picker Views\ClientPickerViewModel.cs" />
     <Compile Include="Custom Classes\Controllers\KeyboardController.cs" />
+    <Compile Include="Controllers\UserListController.cs" />
+    <Compile Include="Controllers\UserListController.designer.cs">
+      <DependentUpon>UserListController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Custom Classes\Cells\UserCell.cs" />
+    <Compile Include="Custom Classes\Cells\UserCell.designer.cs">
+      <DependentUpon>UserCell.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="..\Commercially\Commercially.projitems" Label="Shared" Condition="Exists('..\Commercially\Commercially.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

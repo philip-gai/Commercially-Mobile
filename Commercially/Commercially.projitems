@@ -28,11 +28,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)Enumerations\UserRoleType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enumerations\RequestStatusType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enumerations\HttpRequestMethodType.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Extensions\StringExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\DateTimeExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\GlobalConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants\Localizable.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)APIs\ButtonApi.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)APIs\FlicButtonApi.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\Client.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)APIs\ClientApi.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Shared\Dashboard.cs" />
@@ -43,6 +42,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Shared\StatusPicker.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Shared\ButtonDetails.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enumerations\ButtonType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Shared\UserList.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Entities\" />

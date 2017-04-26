@@ -32,19 +32,5 @@ namespace Commercially
 			}
 			return clients;
 		}
-
-		public static FlicButton[] GetButtons(ButtonType type)
-		{
-			var buttons = ButtonApi.GetButtons();
-			if (buttons == null || buttons.Length <= 0) return null;
-			var list = new List<FlicButton>();
-			foreach (var button in buttons) {
-				if (button.Type == type) {
-					list.Add(button);
-				}
-			}
-			list.Reverse();
-			return list.ToArray();
-		}
 	}
 }

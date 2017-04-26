@@ -20,10 +20,27 @@ namespace Commercially
 		public string description { get; set; }
 		public string assignedTo { get; set; }
 
-		public RequestStatusType? Type {
+		public RequestStatusType Type {
 			get {
-				return status.GetStatus();
+				return GetStatusType(status);
 			}
+		}
+
+		public static RequestStatusType GetStatusType(string status)
+		{
+			if (status.Equals(RequestStatusType.New.ToString(), StringComparison.CurrentCultureIgnoreCase)) {
+				return RequestStatusType.New;
+			}
+			if (status.Equals(RequestStatusType.Assigned.ToString(), StringComparison.CurrentCultureIgnoreCase)) {
+				return RequestStatusType.Assigned;
+			}
+			if (status.Equals(RequestStatusType.Completed.ToString(), StringComparison.CurrentCultureIgnoreCase)) {
+				return RequestStatusType.Completed;
+			}
+			if (status.Equals(RequestStatusType.Cancelled.ToString(), StringComparison.CurrentCultureIgnoreCase)) {
+				return RequestStatusType.Cancelled;
+			}
+			return RequestStatusType.New;
 		}
 
 		public DateTime? GetTime(TimeType type)
@@ -41,20 +58,6 @@ namespace Commercially
 					break;
 			}
 			return time;
-		}
-
-		public static Request[] GetRequests(RequestStatusType type)
-		{
-			var requests = RequestApi.GetRequests();
-			if (requests == null || requests.Length <= 0) return null;
-			var list = new List<Request>();
-			foreach (var request in requests) {
-				if (request.Type == type) {
-					list.Add(request);
-				}
-			}
-			list.Reverse();
-			return list.ToArray();
 		}
 	}
 }

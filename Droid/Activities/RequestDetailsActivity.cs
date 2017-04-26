@@ -105,7 +105,7 @@ namespace Commercially.Droid
 		{
 			var saveButton = sender as Button;
 			try {
-				RequestApi.UpdateRequest(SharedController.Request._id, (RequestStatusType)SharedController.SelectedStatus.GetStatus());
+				RequestApi.UpdateRequest(SharedController.Request._id, Request.GetStatusType(SharedController.SelectedStatus));
 			} catch (Exception) {
 				this.ShowPrompt(Localizable.PromptMessages.RequestSaveError);
 				return;

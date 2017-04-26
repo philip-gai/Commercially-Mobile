@@ -27,9 +27,7 @@ namespace Commercially.iOS
 				ButtonLabel.Text = value.bluetooth_id;
 				var tmpClient = Client.FindClient(Button.clientId, Session.Clients);
 				ClientLabel.Text = tmpClient != null && tmpClient.friendlyName != null ? tmpClient.friendlyName : value.clientId;
-				if (string.IsNullOrWhiteSpace(value.clientId)) {
-					ClientLabel.Hidden = true;
-				}
+				ClientLabel.Hidden = string.IsNullOrWhiteSpace(value.clientId);
 				DescriptionLabel.Text = value.description;
 				LocationLabel.Text = value.room;
 			}
