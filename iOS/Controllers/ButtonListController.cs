@@ -8,21 +8,21 @@ namespace Commercially.iOS
 {
 	public partial class ButtonListController : UITableViewController
 	{
+		readonly ButtonList SharedController = new ButtonList();
+
 		public ButtonListController(IntPtr handle) : base(handle) { }
+
+		ButtonType CurrentType {
+			set {
+				SharedController.CurrentType = value;
+				GetButtons();
+			}
+		}
 
 		public override void ViewWillAppear(bool animated)
 		{
 			base.ViewWillAppear(animated);
-
-			ButtonList.GetButtons(delegate {
-				InvokeOnMainThread(delegate {
-					TableView.ReloadData();
-				});
-			}, (Exception e) => {
-				InvokeOnMainThread(delegate {
-					NavigationController.ShowPrompt(Localizable.PromptMessages.ButtonsError);
-				});
-			});
+			GetButtons();
 		}
 
 		public override void ViewDidLoad()
@@ -31,16 +31,17 @@ namespace Commercially.iOS
 			TableView.DataSource = this;
 			TableView.Delegate = this;
 			TableView.RegisterNibForCellReuse(UINib.FromName(ButtonCell.Key, null), ButtonCell.Key);
+
 		}
 
 		public override nint NumberOfSections(UITableView tableView)
 		{
-			return Session.Buttons == null ? 0 : Session.Buttons.Length == 0 ? 0 : 1;
+			return SharedController.Buttons == null ? 0 : SharedController.Buttons.Length == 0 ? 0 : 1;
 		}
 
 		public override nint RowsInSection(UITableView tableView, nint section)
 		{
-			return Session.Buttons == null ? 0 : Session.Buttons.Length;
+			return SharedController.Buttons == null ? 0 : SharedController.Buttons.Length;
 		}
 
 		public override nfloat GetHeightForHeader(UITableView tableView, nint section)
@@ -60,9 +61,9 @@ namespace Commercially.iOS
 
 			var Frame = new CGRect(10, 0, HeaderView.Frame.Width, (nfloat)ButtonList.HeaderHeight);
 			var Label = new UILabel(Frame);
-			Label.Text = "Buttons";
-			if (Session.Buttons != null) {
-				Label.Text += " (" + Session.Buttons.Length + ")";
+			Label.Text = SharedController.SectionTitle;
+			if (SharedController.Buttons != null) {
+				Label.Text += " (" + SharedController.Buttons.Length + ")";
 			}
 			HeaderView.AddSubview(Label);
 			return HeaderView;
@@ -71,7 +72,7 @@ namespace Commercially.iOS
 		public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
 		{
 			var cell = tableView.DequeueReusableCell(ButtonCell.Key, indexPath) as ButtonCell;
-			cell.Button = Session.Buttons[indexPath.Row];
+			cell.Button = SharedController.Buttons[indexPath.Row];
 			cell.BackgroundColor = ButtonList.TableBackgroundColor.GetUIColor().ColorWithAlpha((nfloat)ButtonList.RowAlphaDouble);
 			return cell;
 		}
@@ -80,7 +81,40 @@ namespace Commercially.iOS
 		{
 			var buttonDetailsController = UINavigationControllerExtensions.GetViewController(GlobalConstants.Screens.ButtonDetails) as ButtonDetailsController;
 			NavigationController.PushViewController(buttonDetailsController, true);
-			buttonDetailsController.Button = Session.Buttons[indexPath.Row];
+			buttonDetailsController.Button = SharedController.Buttons[indexPath.Row];
+		}
+
+		partial void TopButtonTouchUpInside(UIButton sender)
+		{
+			CurrentType = GetButtonType(sender);
+			var buttons = new UIButton[] { PairedButton, DiscoveredButton, IgnoredButton };
+			foreach (var button in buttons) {
+				button.SetTitleColor(ButtonList.InactiveColor.GetUIColor(), UIControlState.Normal);
+				button.Enabled = true;
+			}
+			sender.SetTitleColor(ButtonList.ActiveColor.GetUIColor(), UIControlState.Normal);
+			sender.Enabled = false;
+		}
+
+		ButtonType GetButtonType(UIButton sender)
+		{
+			if (sender == PairedButton) return ButtonType.Paired;
+			if (sender == DiscoveredButton) return ButtonType.Discovered;
+			if (sender == IgnoredButton) return ButtonType.Ignored;
+			return ButtonType.Paired;
+		}
+
+		void GetButtons()
+		{
+			SharedController.GetButtons(delegate {
+				InvokeOnMainThread(delegate {
+					TableView.ReloadData();
+				});
+			}, (Exception e) => {
+				InvokeOnMainThread(delegate {
+					NavigationController.ShowPrompt(Localizable.PromptMessages.ButtonsError);
+				});
+			});
 		}
 	}
 }

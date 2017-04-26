@@ -15,8 +15,7 @@ namespace Commercially
 		{
 			Session.TaskFactory.StartNew(delegate {
 				try {
-					Session.Requests = RequestApi.GetRequests();
-					NewRequestList = Request.GetRequestLists(Session.Requests, new RequestStatusType[] { RequestStatusType.New })[0];
+					NewRequestList = Request.GetRequests(RequestStatusType.New);
 					OnSuccess.Invoke();
 				} catch (Exception e) {
 					IfException.Invoke(e);

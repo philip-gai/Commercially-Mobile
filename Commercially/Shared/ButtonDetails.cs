@@ -52,7 +52,7 @@ namespace Commercially
 		public string ClientIdText {
 			get {
 				var tmpClient = Client.FindClient(Button.clientId, Session.Clients);
-				return tmpClient != null && tmpClient.friendlyName != null ? tmpClient.friendlyName : Button.clientId; ;
+				return tmpClient != null && tmpClient.friendlyName != null ? tmpClient.friendlyName : Button.clientId;
 			}
 		}
 

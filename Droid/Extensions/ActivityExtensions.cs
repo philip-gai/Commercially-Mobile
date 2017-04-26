@@ -18,10 +18,6 @@ namespace Commercially.Droid
 					if (activity is DashboardActivity) return;
 					activity.StartActivity(new Intent(activity, typeof(DashboardActivity)));
 					break;
-				case Resource.Id.ListIcon:
-					if (activity is RequestListActivity) return;
-					activity.StartActivity(new Intent(activity, typeof(RequestListActivity)));
-					break;
 				case Resource.Id.ButtonIcon:
 					if (activity is ButtonListActivity) return;
 					activity.StartActivity(new Intent(activity, typeof(ButtonListActivity)));
@@ -35,13 +31,41 @@ namespace Commercially.Droid
 			newFragment.Show(activity.FragmentManager, message);
 		}
 
-		public static View GetSectionHeader(this Activity activity, string label)
+		public static TableRow GetSectionHeader(this Activity activity, string label)
 		{
 			var inflater = (LayoutInflater)activity.GetSystemService(Context.LayoutInflaterService);
 			var headerView = (TableRow)inflater.Inflate(Resource.Layout.TableSectionHeader, null);
 			headerView.SetBackgroundColor(RequestList.TableBackgroundColor.GetAndroidColor());
 			var headerLabel = headerView.FindViewById<TextView>(Resource.Id.headerText);
 			headerLabel.Text = label;
+			return headerView;
+		}
+
+		public static LinearLayout GetDashboardHeader(this Activity activity)
+		{
+			var inflater = (LayoutInflater)activity.GetSystemService(Context.LayoutInflaterService);
+			var headerView = (LinearLayout)inflater.Inflate(Resource.Layout.TableButtonHeader, null);
+
+			headerView.RemoveAllViews();
+			foreach (var type in Dashboard.SectionTypes) {
+				var button = (Button)inflater.Inflate(Resource.Id.topButton, null);
+				button.Text = type.ToString();
+				headerView.AddView(button);
+			}
+			return headerView;
+		}
+
+		public static LinearLayout GetButtonListHeader(this Activity activity)
+		{
+			var inflater = (LayoutInflater)activity.GetSystemService(Context.LayoutInflaterService);
+			var headerView = (LinearLayout)inflater.Inflate(Resource.Layout.TableButtonHeader, null);
+
+			headerView.RemoveAllViews();
+			foreach (var type in ButtonList.ButtonTypes) {
+				var button = (Button)inflater.Inflate(Resource.Id.topButton, null);
+				button.Text = type.ToString();
+				headerView.AddView(button);
+			}
 			return headerView;
 		}
 
@@ -58,7 +82,7 @@ namespace Commercially.Droid
 			description.Text = request.description;
 			locationLabel.Text = request.room;
 			timeLabel.Text = request.GetTime(Request.TimeType.Received)?.ToShortTimeString();
-			statusLabel.Text = request.GetStatus().ToString();
+			statusLabel.Text = request.Type.ToString();
 			urgentIndicator.Visibility = request.urgent ? ViewStates.Visible : ViewStates.Gone;
 			deleteButton.Visibility = ViewStates.Gone;
 			deleteButton.Click += (object sender, EventArgs e) => {
@@ -138,7 +162,7 @@ namespace Commercially.Droid
 		public static void CreateMainOptionsMenu(this Activity activity, IMenu menu, int currItem)
 		{
 			activity.MenuInflater.Inflate(Resource.Menu.TopMenu, menu);
-			var rIds = new int[] { Resource.Id.DashboardIcon, Resource.Id.ListIcon, Resource.Id.ButtonIcon };
+			var rIds = new int[] { Resource.Id.DashboardIcon, Resource.Id.ButtonIcon };
 			foreach (var id in rIds) {
 				var item = menu.FindItem(id);
 				if (id == currItem) {

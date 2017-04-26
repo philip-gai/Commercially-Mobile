@@ -26,15 +26,11 @@ namespace Commercially.iOS
 				_Request = value;
 				LocationLabel.Text = value.room;
 				TimeLabel.Text = value.GetTime(Request.TimeType.Received)?.ToShortTimeString();
-				StatusLabel.Text = _Request.GetStatus().ToString();
+				StatusLabel.Text = _Request.Type.ToString();
+				StatusLabel.Hidden = true;
 				UrgentIndicator.Hidden = !value.urgent;
 				Message.Text = value.description;
 			}
-		}
-
-		public void SetStatusLabelIsHidden(bool isHidden)
-		{
-			StatusLabel.Hidden = isHidden;
 		}
 	}
 }

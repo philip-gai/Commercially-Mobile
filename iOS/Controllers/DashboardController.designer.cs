@@ -30,21 +30,9 @@ namespace Commercially.iOS
         [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton NewButton { get; set; }
 
-        [Action ("AssignedButtonTouchUpInside:")]
+        [Action ("TopButtonTouchUpInside:")]
         [GeneratedCode ("iOS Designer", "1.0")]
-        partial void AssignedButtonTouchUpInside (UIKit.UIButton sender);
-
-        [Action ("CancelledButtonTouchUpInside:")]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        partial void CancelledButtonTouchUpInside (UIKit.UIButton sender);
-
-        [Action ("CompletedButtonTouchUpInside:")]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        partial void CompletedButtonTouchUpInside (UIKit.UIButton sender);
-
-        [Action ("NewButtonTouchUpInside:")]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        partial void NewButtonTouchUpInside (UIKit.UIButton sender);
+        partial void TopButtonTouchUpInside (UIKit.UIButton sender);
 
         void ReleaseDesignerOutlets ()
         {

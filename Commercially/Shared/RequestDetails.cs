@@ -17,7 +17,7 @@ namespace Commercially
 		bool StatusChanged {
 			get {
 				if (SelectedStatus == null) return false;
-				return !Request.GetStatus().ToString().Equals(SelectedStatus);
+				return !Request.status.ToString().Equals(SelectedStatus);
 			}
 		}
 		public string DescriptionText {
@@ -37,7 +37,7 @@ namespace Commercially
 		}
 		public string StatusText {
 			get {
-				return Request.GetStatus().ToString();	
+				return Request.Type.ToString();	
 			}
 		}
 		public bool AssignedToIsHidden {
@@ -73,7 +73,7 @@ namespace Commercially
 		}
 		public bool AssignButtonIsHidden {
 			get {
-				return Request.GetStatus() != RequestStatusType.New;
+				return Request.Type != RequestStatusType.New;
 			}
 		}
 		public bool SaveButtonIsHidden {
@@ -88,7 +88,7 @@ namespace Commercially
 		}
 		public bool StatusInputIsHidden {
 			get {
-				return !IsMyRequest || (Request.GetStatus() == RequestStatusType.Completed || Request.GetStatus() == RequestStatusType.Cancelled);
+				return !IsMyRequest || (Request.Type == RequestStatusType.Completed || Request.Type == RequestStatusType.Cancelled);
 			}
 		}
 		public bool StatusLabelIsHidden {

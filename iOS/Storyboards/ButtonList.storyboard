@@ -1,35 +1,103 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="j2M-Xq-NOz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="j2M-Xq-NOz">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Buttons-->
         <scene sceneID="CmE-94-m8j">
             <objects>
-                <tableViewController id="j2M-Xq-NOz" sceneMemberID="viewController" customClass="ButtonListController">
+                <tableViewController id="j2M-Xq-NOz" customClass="ButtonListController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="JEK-Nz-toZ">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="separatorColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
+                        <scrollView key="tableHeaderView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="gy7-5I-epO">
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="50"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MjW-cZ-88n" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="0.0" width="280" height="50"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="7db-xh-ion" misplaced="YES">
+                                            <rect key="frame" x="10" y="0.0" width="260" height="50"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="Cfj-L5-CKj" fixedFrame="YES">
+                                                    <rect key="frame" x="0.0" y="0.0" width="54" height="50"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                                    <state key="normal" title="Paired">
+                                                        <color key="titleColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <connections>
+                                                        <action selector="TopButtonTouchUpInside:" destination="j2M-Xq-NOz" id="3" eventType="touchUpInside"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="7ND-Qf-1xL" fixedFrame="YES">
+                                                    <rect key="frame" x="77" y="0.0" width="95" height="50"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                                    <state key="normal" title="Discovered">
+                                                        <color key="titleColor" red="1" green="0.33191886539999998" blue="0.24120634790000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <connections>
+                                                        <action selector="TopButtonTouchUpInside:" destination="j2M-Xq-NOz" id="4" eventType="touchUpInside"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="2xy-ef-Qgv" fixedFrame="YES">
+                                                    <rect key="frame" x="194" y="0.0" width="66" height="50"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                                    <state key="normal" title="Ignored">
+                                                        <color key="titleColor" red="1" green="0.33191886539999998" blue="0.24120634790000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <connections>
+                                                        <action selector="TopButtonTouchUpInside:" destination="j2M-Xq-NOz" id="5" eventType="touchUpInside"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstItem="7db-xh-ion" firstAttribute="top" secondItem="MjW-cZ-88n" secondAttribute="top" id="Dg1-sv-B4M"/>
+                                        <constraint firstItem="7db-xh-ion" firstAttribute="height" secondItem="MjW-cZ-88n" secondAttribute="height" id="ItG-Fn-JaK"/>
+                                        <constraint firstAttribute="trailing" secondItem="7db-xh-ion" secondAttribute="trailing" constant="10" id="Ym6-aW-chY"/>
+                                        <constraint firstItem="7db-xh-ion" firstAttribute="leading" secondItem="MjW-cZ-88n" secondAttribute="leading" constant="10" id="f5B-dg-p7h"/>
+                                        <constraint firstAttribute="bottom" secondItem="7db-xh-ion" secondAttribute="bottom" id="tYH-iY-nRC"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="MjW-cZ-88n" firstAttribute="leading" secondItem="gy7-5I-epO" secondAttribute="leading" id="3zg-gQ-6rb"/>
+                                <constraint firstAttribute="trailing" secondItem="MjW-cZ-88n" secondAttribute="trailing" id="N7j-Xp-RWI"/>
+                                <constraint firstAttribute="bottom" secondItem="MjW-cZ-88n" secondAttribute="bottom" id="ZZO-tO-mCM"/>
+                                <constraint firstItem="MjW-cZ-88n" firstAttribute="top" secondItem="gy7-5I-epO" secondAttribute="top" id="qQL-Sg-swD"/>
+                                <constraint firstItem="MjW-cZ-88n" firstAttribute="height" secondItem="gy7-5I-epO" secondAttribute="height" id="wEK-0e-OnE"/>
+                            </constraints>
+                            <inset key="scrollIndicatorInsets" minX="2" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </scrollView>
                         <sections/>
                         <connections>
                             <outlet property="dataSource" destination="j2M-Xq-NOz" id="eBo-Ro-pGO"/>
                             <outlet property="delegate" destination="j2M-Xq-NOz" id="9VW-Sr-xrq"/>
                         </connections>
-                        <prototypes/>
                     </tableView>
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <tabBarItem key="tabBarItem" title="Buttons" image="button-TabBar" id="e9S-HV-497"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                    <connections/>
+                    <connections>
+                        <outlet property="PairedButton" destination="Cfj-L5-CKj" id="name-outlet-Cfj-L5-CKj"/>
+                        <outlet property="DiscoveredButton" destination="7ND-Qf-1xL" id="name-outlet-7ND-Qf-1xL"/>
+                        <outlet property="IgnoredButton" destination="2xy-ef-Qgv" id="name-outlet-2xy-ef-Qgv"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k2q-jd-mRU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -37,14 +105,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="list-TabBar" width="25" height="25"/>
+        <image name="button-TabBar" width="24" height="24"/>
         <image name="Logo-White" width="170.666672" height="170.666672"/>
         <image name="Logo-Black" width="170.666672" height="170.666672"/>
-        <image name="user" width="20" height="22"/>
-        <image name="error" width="139" height="122"/>
-        <image name="dashboard" width="25" height="25"/>
-        <image name="notification" width="22" height="22"/>
-        <image name="list" width="25" height="25"/>
         <image name="Logo-Orange" width="170.666672" height="170.666672"/>
         <image name="Logo-Yellow" width="170.666672" height="170.666672"/>
         <image name="Logo-Green" width="170.666672" height="170.666672"/>
@@ -53,6 +116,11 @@
         <image name="Logo-Purple" width="170.666672" height="170.666672"/>
         <image name="Logo-Pink" width="170.666672" height="170.666672"/>
         <image name="Logo-Red" width="170.666672" height="170.666672"/>
-        <image name="button-TabBar" width="25" height="25"/>
+        <image name="error" width="48" height="48"/>
+        <image name="user" width="48" height="48"/>
+        <image name="dashboard-TabBar" width="25" height="25"/>
+        <image name="notification-Toolbar" width="48" height="48"/>
+        <image name="Logo-Red-Toolbar" width="25" height="25"/>
+        <image name="list-TabBar" width="25" height="25"/>
     </resources>
 </document>

@@ -91,7 +91,7 @@ namespace Commercially.iOS
 			StaticStatusLabel.TextColor = RequestDetails.StaticStatusDefault.GetUIColor();
 			if (!SharedController.StatusInputIsHidden) {
 				// Scroll to current status in picker view
-				StatusPickerView.ScrollToTitle(SharedController.Request.GetStatus().ToString());
+				StatusPickerView.ScrollToTitle(SharedController.Request.Type.ToString());
 				StaticStatusLabel.TextColor = RequestDetails.StaticStatusEdit.GetUIColor();
 			}
 		}

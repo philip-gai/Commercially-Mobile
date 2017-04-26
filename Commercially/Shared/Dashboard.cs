@@ -5,30 +5,40 @@ namespace Commercially
 {
 	public class Dashboard
 	{
-		public Request[] RequestList;
-		public readonly static RequestStatusType StartType = RequestStatusType.New;
-		public readonly static string[] SectionTitles = { Localizable.Labels.MyTasks, RequestStatusType.Completed.ToString(), RequestStatusType.Cancelled.ToString() };
+		public Request[] Requests;
+		public RequestStatusType CurrentType = RequestStatusType.New;
 		public const double HeaderHeight = 50;
 		public const double RowHeight = 88;
 		public const double RowAlphaDouble = 0.33;
 		public const byte RowAlphaByte = 0x54;
-		public readonly static Color[] SectionBackgroundColors = { GlobalConstants.DefaultColors.Yellow, GlobalConstants.DefaultColors.Green, GlobalConstants.DefaultColors.Purple };
+		public readonly static Color InactiveColor = GlobalConstants.DefaultColors.Black;
 
-		public void GetRequests(RequestStatusType[] Types, Action OnSuccess, Action<Exception> IfException)
+		public readonly static RequestStatusType[] SectionTypes = { RequestStatusType.New, RequestStatusType.Assigned, RequestStatusType.Completed, RequestStatusType.Cancelled };
+		readonly static Color[] SectionBackgroundColors = { GlobalConstants.DefaultColors.Red, GlobalConstants.DefaultColors.Yellow, GlobalConstants.DefaultColors.Green, GlobalConstants.DefaultColors.Purple };
+
+		public string SectionTitle {
+			get {
+				return Array.Find(SectionTypes, (RequestStatusType type) => { return type == CurrentType; }).ToString();
+			}
+		}
+
+		public Color SectionColor {
+			get {
+				var index = Array.IndexOf(SectionTypes, CurrentType);
+				return SectionBackgroundColors[index];
+			}
+		}
+
+		public void GetRequests(Action OnSuccess, Action<Exception> IfException)
 		{
 			Session.TaskFactory.StartNew(delegate {
 				try {
-					Session.Requests = RequestApi.GetRequests();
-					RequestList = Request.GetRequestLists(Session.Requests, Types)[0];
+					Requests = Request.GetRequests(CurrentType);
 					OnSuccess.Invoke();
 				} catch (Exception e) {
 					IfException.Invoke(e);
 				}
 			});
-		}
-		public void GetRequests(RequestStatusType Type, Action OnSuccess, Action<Exception> IfException)
-		{
-			GetRequests(new RequestStatusType[] { Type }, OnSuccess, IfException);
 		}
 	}
 }

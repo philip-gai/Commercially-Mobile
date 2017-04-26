@@ -11,6 +11,20 @@ namespace Commercially
 
 		public string room { get; set; }
 		public string time_received { get; set; }
+		public string time_completed { get; set; }
+		public string time_scheduled { get; set; }
+		public string status { get; set; }
+		public string button_id { get; set; }
+		public bool urgent { get; set; }
+		public string _id { get; set; }
+		public string description { get; set; }
+		public string assignedTo { get; set; }
+
+		public RequestStatusType? Type {
+			get {
+				return status.GetStatus();
+			}
+		}
 
 		public DateTime? GetTime(TimeType type)
 		{
@@ -28,69 +42,19 @@ namespace Commercially
 			}
 			return time;
 		}
-		public string time_completed { get; set; }
-		public string time_scheduled { get; set; }
-		public string status { get; set; }
-		public string button_id { get; set; }
-		public bool urgent { get; set; }
-		public string _id { get; set; }
-		public string description { get; set; }
-		public string assignedTo { get; set; }
 
-		public RequestStatusType? GetStatus()
+		public static Request[] GetRequests(RequestStatusType type)
 		{
-			return status.GetStatus();
-		}
-
-		public static Request[][] GetRequestLists(Request[] requests, RequestStatusType[] Types = null)
-		{
+			var requests = RequestApi.GetRequests();
 			if (requests == null || requests.Length <= 0) return null;
-			var NewList = new List<Request>();
-			var AssignedList = new List<Request>();
-			var CancelledList = new List<Request>();
-			var CompletedList = new List<Request>();
-			foreach (Request request in requests) {
-				switch (request.GetStatus()) {
-					case RequestStatusType.New:
-						NewList.Add(request);
-						break;
-					case RequestStatusType.Assigned:
-						AssignedList.Add(request);
-						break;
-					case RequestStatusType.Completed:
-						CompletedList.Add(request);
-						break;
-					case RequestStatusType.Cancelled:
-						CancelledList.Add(request);
-						break;
+			var list = new List<Request>();
+			foreach (var request in requests) {
+				if (request.Type == type) {
+					list.Add(request);
 				}
 			}
-			if (Types != null) {
-				var RequestLists = new List<List<Request>>();
-				foreach (RequestStatusType type in Types) {
-					switch (type) {
-						case RequestStatusType.New:
-							NewList.Reverse();
-							RequestLists.Add(NewList);
-							break;
-						case RequestStatusType.Assigned:
-							AssignedList.Reverse();
-							RequestLists.Add(AssignedList);
-							break;
-						case RequestStatusType.Completed:
-							CompletedList.Reverse();
-							RequestLists.Add(CompletedList);
-							break;
-						case RequestStatusType.Cancelled:
-							CancelledList.Reverse();
-							RequestLists.Add(CancelledList);
-							break;
-					}
-				}
-				return RequestLists.Select(list => list.ToArray()).ToArray();
-			}
-
-			return new Request[][] { NewList.ToArray(), AssignedList.ToArray(), CompletedList.ToArray(), CancelledList.ToArray() };
+			list.Reverse();
+			return list.ToArray();
 		}
 	}
 }

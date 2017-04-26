@@ -34,7 +34,7 @@ namespace Commercially.Droid
 
 		public override bool OnCreateOptionsMenu(IMenu menu)
 		{
-			this.CreateMainOptionsMenu(menu, Resource.Id.ListIcon);
+			//this.CreateMainOptionsMenu(menu, Resource.Id.ListIcon);
 			return base.OnCreateOptionsMenu(menu);
 		}
 

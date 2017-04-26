@@ -73,7 +73,6 @@ namespace Commercially.iOS
 		{
 			var cell = tableView.DequeueReusableCell(RequestCell.Key, indexPath) as RequestCell;
 			cell.Request = SharedController.NewRequestList[indexPath.Row];
-			cell.SetStatusLabelIsHidden(true);
 			cell.BackgroundColor = RequestList.TableBackgroundColor.GetUIColor().ColorWithAlpha((nfloat)RequestList.RowAlphaDouble);
 			return cell;
 		}
@@ -98,7 +97,6 @@ namespace Commercially.iOS
 					break;
 			}
 			ViewWillAppear(false);
-			ViewDidLoad();
 		}
 	}
 }

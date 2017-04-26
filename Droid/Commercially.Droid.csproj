@@ -183,6 +183,7 @@
     <AndroidResource Include="Resources\layout\RequestDetails.axml" />
     <AndroidResource Include="Resources\layout\ButtonDetails.axml" />
     <AndroidResource Include="Resources\values\status_array.xml" />
+    <AndroidResource Include="Resources\layout\TableButtonHeader.axml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable-hdpi\" />

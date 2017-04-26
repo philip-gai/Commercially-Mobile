@@ -1,8 +1,6 @@
 using System;
-using System.Threading;
-using System.Threading.Tasks;
+using System.Collections.Generic;
 using Android.App;
-using Android.Graphics;
 using Android.OS;
 using Android.Support.V7.App;
 using Android.Views;
@@ -13,9 +11,41 @@ namespace Commercially.Droid
 	[Activity(Label = "DashboardActivity")]
 	public class DashboardActivity : AppCompatActivity
 	{
-		readonly Dashboard sharedController = new Dashboard();
+		readonly Dashboard SharedController = new Dashboard();
 
 		TableLayout Table { get { return FindViewById<TableLayout>(Resource.Id.tableLayout); } }
+		LinearLayout Layout { get { return FindViewById<LinearLayout>(Resource.Id.mainLayout); } }
+		LinearLayout _ButtonLayout;
+		LinearLayout ButtonLayout {
+			get {
+				if (_ButtonLayout != null) return _ButtonLayout;
+				_ButtonLayout = this.GetDashboardHeader();
+				return _ButtonLayout;
+			}
+		}
+
+		Button[] _TopButtons;
+		Button[] TopButtons {
+			get {
+				if (_TopButtons != null) return _TopButtons;
+				var list = new List<Button>();
+				for (int i = 0; i < ButtonLayout.ChildCount; i++) {
+					var view = ButtonLayout.GetChildAt(i);
+					if (view is Button) {
+						list.Add((view as Button));
+					}
+				}
+				_TopButtons = list.ToArray();
+				return _TopButtons;
+			}
+		}
+
+		RequestStatusType CurrentType {
+			set {
+				SharedController.CurrentType = value;
+				GetRequests();
+			}
+		}
 
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
@@ -24,17 +54,15 @@ namespace Commercially.Droid
 			this.SetSupportActionBarDefault();
 			Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
 
+			InitializeButtons();
+
 			Home.PrefetchData();
 		}
 
 		protected override void OnResume()
 		{
 			base.OnResume();
-			sharedController.GetRequests(
-				Dashboard.StartType,
-				delegate { RunOnUiThread(delegate { InitializeTable(); }); },
-				(Exception e) => { RunOnUiThread(delegate { this.ShowPrompt(Localizable.PromptMessages.RequestsError); }); }
-			);
+			GetRequests();
 		}
 
 		public override bool OnCreateOptionsMenu(IMenu menu)
@@ -52,33 +80,72 @@ namespace Commercially.Droid
 		void InitializeTable()
 		{
 			Table.RemoveAllViews();
-			var header = GetHeader(0);
+			var header = GetHeader();
 			Table.AddView(header);
-			for (int row = 0; row < sharedController.RequestList.Length; row++) {
-				var tableRow = GetTableRow(row, 0);
+			for (int row = 0; row < SharedController.Requests.Length; row++) {
+				var tableRow = GetTableRow(row);
 				Table.AddView(tableRow);
 			}
 		}
 
-		View GetHeader(int section)
+		void InitializeButtons()
 		{
-			string label = Dashboard.SectionTitles[section];
-			if (sharedController.RequestList != null) {
-				label += " (" + sharedController.RequestList.Length + ")";
+			Layout.AddView(ButtonLayout, 0);
+			foreach (var button in TopButtons) {
+				button.Click += TopButtonClick;
+			}
+		}
+
+		void TopButtonClick(object sender, EventArgs e)
+		{
+			CurrentType = GetRequestStatusType(sender);
+			var senderButton = sender as Button;
+			foreach (var button in TopButtons) {
+				button.SetTextColor(Dashboard.InactiveColor.GetAndroidColor());
+				button.Enabled = true;
+			}
+			senderButton.SetTextColor(SharedController.SectionColor.GetAndroidColor());
+			senderButton.Enabled = false;
+		}
+
+		RequestStatusType GetRequestStatusType(object sender)
+		{
+			var button = sender as Button;
+			foreach (var type in Dashboard.SectionTypes) {
+				if (type.ToString().Equals(button.Text)) {
+					return type;
+				}
+			}
+			return RequestStatusType.New;
+		}
+
+		View GetHeader()
+		{
+			string label = SharedController.SectionTitle;
+			if (SharedController.Requests != null) {
+				label += " (" + SharedController.Requests.Length + ")";
 			}
 			var header = this.GetSectionHeader(label);
-			header.SetBackgroundColor(Dashboard.SectionBackgroundColors[section].GetAndroidColor());
+			header.SetBackgroundColor(SharedController.SectionColor.GetAndroidColor());
 			return header;
 		}
 
-		TableRow GetTableRow(int row, int section)
+		TableRow GetTableRow(int row)
 		{
-			var rowView = this.GetRequestRow(sharedController.RequestList[row]);
-			Android.Graphics.Color color = Dashboard.SectionBackgroundColors[section].GetAndroidColor();
+			var rowView = this.GetRequestRow(SharedController.Requests[row]);
+			Android.Graphics.Color color = SharedController.SectionColor.GetAndroidColor();
 			color.A = Dashboard.RowAlphaByte;
 			rowView.SetBackgroundColor(color);
 			this.HideRequestStatusLabel(rowView);
 			return rowView;
+		}
+
+		public void GetRequests()
+		{
+			SharedController.GetRequests(
+				delegate { RunOnUiThread(delegate { InitializeTable(); }); },
+				(Exception e) => { RunOnUiThread(delegate { this.ShowPrompt(Localizable.PromptMessages.RequestsError); }); }
+			);
 		}
 	}
 }

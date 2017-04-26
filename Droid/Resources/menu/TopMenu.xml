@@ -6,11 +6,6 @@
        android:icon="@drawable/dashboard"
        app:showAsAction="ifRoom"
        android:title="Dashboard" />
-  <item
-       android:id="@+id/ListIcon"
-       android:icon="@drawable/list"
-       app:showAsAction="ifRoom"
-       android:title="Queue" />
 	<group
 		android:id="@+id/AdminGroup">
   		<item

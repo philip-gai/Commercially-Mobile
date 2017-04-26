@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:minWidth="25px"
+    android:minHeight="25px"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <Button
+        android:text="New"
+        android:id="@+id/topButton"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginRight="20dp"
+        android:textColor="?android:attr/colorPrimary"
+        android:background="@android:color/white" />
+</LinearLayout>

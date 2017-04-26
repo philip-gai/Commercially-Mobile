@@ -37,7 +37,7 @@
                                                     </state>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <connections>
-                                                        <action selector="NewButtonTouchUpInside:" destination="9XG-YL-Zrj" id="3" eventType="touchUpInside"/>
+                                                        <action selector="TopButtonTouchUpInside:" destination="9XG-YL-Zrj" id="10" eventType="touchUpInside"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="zjy-Nd-ONn" fixedFrame="YES">
@@ -48,7 +48,7 @@
                                                     </state>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <connections>
-                                                        <action selector="AssignedButtonTouchUpInside:" destination="9XG-YL-Zrj" id="4" eventType="touchUpInside"/>
+                                                        <action selector="TopButtonTouchUpInside:" destination="9XG-YL-Zrj" id="11" eventType="touchUpInside"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="ELP-O9-MIX" fixedFrame="YES">
@@ -59,7 +59,7 @@
                                                     </state>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <connections>
-                                                        <action selector="CompletedButtonTouchUpInside:" destination="9XG-YL-Zrj" id="5" eventType="touchUpInside"/>
+                                                        <action selector="TopButtonTouchUpInside:" destination="9XG-YL-Zrj" id="12" eventType="touchUpInside"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="ufZ-Xe-duM" fixedFrame="YES">
@@ -70,7 +70,7 @@
                                                     </state>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <connections>
-                                                        <action selector="CancelledButtonTouchUpInside:" destination="9XG-YL-Zrj" id="6" eventType="touchUpInside"/>
+                                                        <action selector="TopButtonTouchUpInside:" destination="9XG-YL-Zrj" id="13" eventType="touchUpInside"/>
                                                     </connections>
                                                 </button>
                                             </subviews>

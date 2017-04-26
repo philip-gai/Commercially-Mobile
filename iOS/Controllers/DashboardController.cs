@@ -12,18 +12,17 @@ namespace Commercially.iOS
 
 		public DashboardController(IntPtr handle) : base(handle) { }
 
+		RequestStatusType CurrentType {
+			set {
+				SharedController.CurrentType = value;
+				GetRequests();
+			}
+		}
+
 		public override void ViewWillAppear(bool animated)
 		{
 			base.ViewWillAppear(animated);
-			SharedController.GetRequests(Dashboard.StartType, delegate {
-				InvokeOnMainThread(delegate {
-					TableView.ReloadData();
-				});
-			}, (Exception) => {
-				InvokeOnMainThread(delegate {
-					NavigationController.ShowPrompt(Localizable.PromptMessages.RequestsError);
-				});
-			});
+			GetRequests();
 		}
 
 		public override void ViewDidLoad()
@@ -32,16 +31,17 @@ namespace Commercially.iOS
 			TableView.DataSource = this;
 			TableView.Delegate = this;
 			TableView.RegisterNibForCellReuse(UINib.FromName(RequestCell.Key, null), RequestCell.Key);
+			NewButton.Enabled = false;
 		}
 
 		public override nint NumberOfSections(UITableView tableView)
 		{
-			return SharedController.RequestList == null ? 0 : SharedController.RequestList.Length == 0 ? 0 : 1;
+			return SharedController.Requests == null ? 0 : SharedController.Requests.Length == 0 ? 0 : 1;
 		}
 
 		public override nint RowsInSection(UITableView tableView, nint section)
 		{
-			return SharedController.RequestList == null ? 0 : SharedController.RequestList.Length;
+			return SharedController.Requests == null ? 0 : SharedController.Requests.Length;
 		}
 
 		public override nfloat GetHeightForHeader(UITableView tableView, nint section)
@@ -57,25 +57,23 @@ namespace Commercially.iOS
 		public override UIView GetViewForHeader(UITableView tableView, nint section)
 		{
 			var HeaderView = new UIView(new CGRect(0, 0, tableView.Frame.Size.Width, Dashboard.HeaderHeight));
-			HeaderView.BackgroundColor = Dashboard.SectionBackgroundColors[section].GetUIColor();
+			HeaderView.BackgroundColor = SharedController.SectionColor.GetUIColor();
 
 			var Frame = new CGRect(10, 0, HeaderView.Frame.Width, Dashboard.HeaderHeight);
 			var Label = new UILabel(Frame);
-			Label.Text = Dashboard.SectionTitles[section];
-			if (SharedController.RequestList != null) {
-				Label.Text += " (" + SharedController.RequestList.Length + ")";
+			Label.Text = SharedController.SectionTitle;
+			if (SharedController.Requests != null) {
+				Label.Text += " (" + SharedController.Requests.Length + ")";
 			}
 			HeaderView.AddSubview(Label);
-
 			return HeaderView;
 		}
 
 		public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
 		{
 			var cell = tableView.DequeueReusableCell(RequestCell.Key, indexPath) as RequestCell;
-			cell.Request = SharedController.RequestList[indexPath.Row];
-			cell.SetStatusLabelIsHidden(true);
-			cell.BackgroundColor = Dashboard.SectionBackgroundColors[indexPath.Section].GetUIColor().ColorWithAlpha((nfloat)Dashboard.RowAlphaDouble);
+			cell.Request = SharedController.Requests[indexPath.Row];
+			cell.BackgroundColor = SharedController.SectionColor.GetUIColor().ColorWithAlpha((nfloat)Dashboard.RowAlphaDouble);
 			return cell;
 		}
 
@@ -83,7 +81,7 @@ namespace Commercially.iOS
 		{
 			var requestDetailsController = UINavigationControllerExtensions.GetViewController(GlobalConstants.Screens.RequestDetails) as RequestDetailsController;
 			NavigationController.PushViewController(requestDetailsController, true);
-			requestDetailsController.Request = SharedController.RequestList[indexPath.Row];
+			requestDetailsController.Request = SharedController.Requests[indexPath.Row];
 		}
 
 		public override bool CanEditRow(UITableView tableView, NSIndexPath indexPath)
@@ -95,32 +93,39 @@ namespace Commercially.iOS
 		{
 			switch (editingStyle) {
 				case UITableViewCellEditingStyle.Delete:
-					RequestApi.DeleteRequest(SharedController.RequestList[indexPath.Row]._id);
+					RequestApi.DeleteRequest(SharedController.Requests[indexPath.Row]._id);
 					break;
 			}
 			ViewWillAppear(false);
-			ViewDidLoad();
 		}
 
-		partial void NewButtonTouchUpInside(UIButton sender)
+		partial void TopButtonTouchUpInside(UIButton sender)
 		{
-			throw new NotImplementedException();
+			CurrentType = GetRequestStatusType(sender);
+			var buttons = new UIButton[] { NewButton, AssignedButton, CompletedButton, CancelledButton };
+			foreach (var button in buttons) {
+				button.SetTitleColor(Dashboard.InactiveColor.GetUIColor(), UIControlState.Normal);
+				button.Enabled = true;
+			}
+			sender.SetTitleColor(SharedController.SectionColor.GetUIColor(), UIControlState.Normal);
+			sender.Enabled = false;
 		}
 
-		partial void AssignedButtonTouchUpInside(UIButton sender)
+		RequestStatusType GetRequestStatusType(UIButton sender)
 		{
-			throw new NotImplementedException();
+			if (sender == NewButton) return RequestStatusType.New;
+			if (sender == AssignedButton) return RequestStatusType.Assigned;
+			if (sender == CompletedButton) return RequestStatusType.Completed;
+			if (sender == CancelledButton) return RequestStatusType.Cancelled;
+			return RequestStatusType.New;
 		}
 
-		partial void CompletedButtonTouchUpInside(UIButton sender)
+		void GetRequests()
 		{
-			throw new NotImplementedException();
-
-		}
-
-		partial void CancelledButtonTouchUpInside(UIButton sender)
-		{
-			throw new NotImplementedException();
+			SharedController.GetRequests(
+				delegate { InvokeOnMainThread(delegate { TableView.ReloadData(); }); },
+				(Exception obj) => { InvokeOnMainThread(delegate { NavigationController.ShowPrompt(Localizable.PromptMessages.RequestsError); }); }
+			);
 		}
 	}
 }
