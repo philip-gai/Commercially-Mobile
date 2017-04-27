@@ -5,7 +5,7 @@ using CoreGraphics;
 
 namespace Commercially.iOS
 {
-	public partial class UserDetailsController : UIViewController
+	public partial class UserDetailsController : UITableViewController
 	{
 		readonly UserDetails SharedController = new UserDetails();
 
@@ -32,16 +32,18 @@ namespace Commercially.iOS
 		void InitializeView()
 		{
 			if (SharedController.User == null) return;
-			RequestsTableView.Source = new UserRequestTableSource(this);
+			TableView.Source = new UserRequestTableSource(this);
 			FirstLastLabel.Text = SharedController.FirstLastText;
 			EmailLabel.Text = SharedController.EmailText;
+			PhoneLabel.Text = SharedController.PhoneText;
+			PhoneLabel.Hidden = SharedController.PhoneLabelIsHidden;
 		}
 
 		void GetRequests()
 		{
 			SharedController.GetRequests(delegate {
 				InvokeOnMainThread(delegate {
-					RequestsTableView.ReloadData();
+					TableView.ReloadData();
 				});
 			}, (Exception e) => {
 				InvokeOnMainThread(delegate {
@@ -62,7 +64,7 @@ namespace Commercially.iOS
 			public UserRequestTableSource(UserDetailsController controller)
 			{
 				Controller = controller;
-				Controller.RequestsTableView.RegisterNibForCellReuse(UINib.FromName(UserCell.Key, null), UserCell.Key);
+				Controller.TableView.RegisterNibForCellReuse(UINib.FromName(RequestCell.Key, null), RequestCell.Key);
 			}
 
 			public override nint NumberOfSections(UITableView tableView)
@@ -88,10 +90,10 @@ namespace Commercially.iOS
 			public override UIView GetViewForHeader(UITableView tableView, nint section)
 			{
 				var HeaderView = new UIView(new CGRect(0, 0, tableView.Frame.Size.Width, (nfloat)UserDetails.HeaderHeight));
-				HeaderView.BackgroundColor = UserDetails.TableHeaderColor.GetUIColor();
-
 				var Frame = new CGRect(10, 0, HeaderView.Frame.Width, (nfloat)UserDetails.HeaderHeight);
 				var Label = new UILabel(Frame);
+
+				HeaderView.BackgroundColor = UserDetails.TableHeaderColor.GetUIColor();
 				Label.Text = UserDetails.HeaderTitle;
 				if (SharedController.Requests != null) {
 					Label.Text += " (" + SharedController.Requests.Length + ")";

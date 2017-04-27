@@ -36,7 +36,7 @@ namespace Commercially
 			var requests = GetRequests();
 			if (requests == null || requests.Length <= 0) return null;
 			var list = Array.FindAll(requests, (Request request) => {
-				return request.assignedTo == user.username;
+				return request.assignedTo == user.username && request.Type == RequestStatusType.Assigned;
 			});
 			Array.Reverse(list);
 			return list;

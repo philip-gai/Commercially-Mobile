@@ -109,10 +109,10 @@ namespace Commercially.iOS
 			public override UIView GetViewForHeader(UITableView tableView, nint section)
 			{
 				var HeaderView = new UIView(new CGRect(0, 0, tableView.Frame.Size.Width, (nfloat)ButtonList.HeaderHeight));
-				HeaderView.BackgroundColor = SharedController.CurrentTypeColor.GetUIColor();
-
 				var Frame = new CGRect(10, 0, HeaderView.Frame.Width, (nfloat)ButtonList.HeaderHeight);
 				var Label = new UILabel(Frame);
+
+				HeaderView.BackgroundColor = SharedController.CurrentTypeColor.GetUIColor();
 				Label.Text = SharedController.CurrentTypeTitle;
 				if (SharedController.Buttons != null) {
 					Label.Text += " (" + SharedController.Buttons.Length + ")";

@@ -24,7 +24,7 @@ namespace Commercially.iOS
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITableView RequestsTableView { get; set; }
+        UIKit.UILabel PhoneLabel { get; set; }
 
         void ReleaseDesignerOutlets ()
         {
@@ -38,9 +38,9 @@ namespace Commercially.iOS
                 FirstLastLabel = null;
             }
 
-            if (RequestsTableView != null) {
-                RequestsTableView.Dispose ();
-                RequestsTableView = null;
+            if (PhoneLabel != null) {
+                PhoneLabel.Dispose ();
+                PhoneLabel = null;
             }
         }
     }

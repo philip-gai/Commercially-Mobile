@@ -9,8 +9,8 @@ namespace Commercially
 		public const double RowHeight = 88;
 		public const double RowAlphaDouble = 0.33;
 		public const byte RowAlphaByte = 0x54;
-		public readonly static string HeaderTitle = RequestStatusType.New.ToString();
-		public readonly static Color TableHeaderColor = GlobalConstants.DefaultColors.Red;
+		public readonly static string HeaderTitle = RequestStatusType.Assigned.ToString();
+		public readonly static Color TableHeaderColor = GlobalConstants.DefaultColors.Yellow;
 
 		public string FirstLastText {
 			get {
@@ -21,6 +21,18 @@ namespace Commercially
 		public string EmailText {
 			get {
 				return User.username;
+			}
+		}
+
+		public string PhoneText {
+			get {
+				return User.phone;
+			}
+		}
+
+		public bool PhoneLabelIsHidden {
+			get {
+				return string.IsNullOrWhiteSpace(User.phone);
 			}
 		}
 
