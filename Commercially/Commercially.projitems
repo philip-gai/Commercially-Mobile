@@ -34,7 +34,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)APIs\FlicButtonApi.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\Client.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)APIs\ClientApi.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Shared\Dashboard.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Shared\RequestList.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Shared\Home.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Main.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Shared\ButtonList.cs" />
@@ -43,6 +43,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)Shared\ButtonDetails.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enumerations\ButtonType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Shared\UserList.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Shared\UserTableRow.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Shared\ButtonTableRow.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Shared\RequestTableRow.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Shared\UserDetails.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Entities\" />

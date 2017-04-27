@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ButtonRow"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_margin="10dp">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+            <TextView
+                android:text="Last, Name"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/lastFirstText"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical" />
+            <TextView
+                android:text="Email"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/emailText"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical" />
+        </LinearLayout>
+        <ImageView
+            android:src="@drawable/chevronRight"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:alpha="0.25" />
+    </LinearLayout>
+</TableRow>

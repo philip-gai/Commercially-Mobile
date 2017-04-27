@@ -2,7 +2,7 @@
 using Foundation;
 using UIKit;
 
-namespace Commercially.iOS.Extensions
+namespace Commercially.iOS
 {
 	public static class UITextFieldExtensions
 	{

@@ -47,19 +47,16 @@ namespace Commercially
 		{
 			var users = GetUsers();
 			if (users == null || users.Length <= 0) return null;
-			var list = new List<User>();
-			foreach (var user in users) {
-				if (user.Type == type) {
-					list.Add(user);
-				}
-			}
-			list.Sort((User x, User y) => {
+			var list = Array.FindAll(users, (User user) => {
+				return user.Type == type;
+			});
+			Array.Sort(list, (User x, User y) => {
 				if (x.lastname != null && y.lastname != null) {
 					return string.Compare(x.lastname, y.lastname, StringComparison.Ordinal);
 				}
-				return string.Compare(x.email, y.email, StringComparison.Ordinal);
+				return string.Compare(x.username, y.username, StringComparison.Ordinal);
 			});
-			return list.ToArray();
+			return list;
 		}
 	}
 }

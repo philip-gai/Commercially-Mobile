@@ -8,10 +8,10 @@ using Android.Widget;
 
 namespace Commercially.Droid
 {
-	[Activity(Label = "DashboardActivity")]
-	public class DashboardActivity : AppCompatActivity
+	[Activity(Label = "RequestListActivity")]
+	public class RequestListActivity : AppCompatActivity
 	{
-		readonly Dashboard SharedController = new Dashboard();
+		readonly RequestList SharedController = new RequestList();
 
 		TableLayout Table { get { return FindViewById<TableLayout>(Resource.Id.tableLayout); } }
 		LinearLayout Layout { get { return FindViewById<LinearLayout>(Resource.Id.mainLayout); } }
@@ -20,7 +20,7 @@ namespace Commercially.Droid
 		HorizontalScrollView HeaderScrollView {
 			get {
 				if (_HeaderScrollView != null) return _HeaderScrollView;
-				_HeaderScrollView = this.GetTopButtons(Dashboard.RequestTypes);
+				_HeaderScrollView = this.GetTopButtons(RequestList.RequestTypes);
 				return _HeaderScrollView;
 			}
 		}
@@ -112,20 +112,20 @@ namespace Commercially.Droid
 		void SetButtons(Button activeButton)
 		{
 			foreach (var button in TopButtons) {
-				button.SetTextColor(Dashboard.InactiveTextColor.GetAndroidColor());
-				button.BackgroundTintList = Android.Content.Res.ColorStateList.ValueOf(Dashboard.GetTypeColor(GetRequestStatusType(button)).GetAndroidColor());
+				button.SetTextColor(RequestList.InactiveTextColor.GetAndroidColor());
+				button.BackgroundTintList = Android.Content.Res.ColorStateList.ValueOf(RequestList.GetTypeColor(GetRequestStatusType(button)).GetAndroidColor());
 				button.Enabled = true;
 			}
 			activeButton.SetTextColor(SharedController.CurrentTypeColor.GetAndroidColor());
-			activeButton.BackgroundTintList = Android.Content.Res.ColorStateList.ValueOf(Dashboard.ActiveBackgroundColor.GetAndroidColor());
+			activeButton.BackgroundTintList = Android.Content.Res.ColorStateList.ValueOf(RequestList.ActiveBackgroundColor.GetAndroidColor());
 			activeButton.Enabled = false;
 		}
 
 		RequestStatusType GetRequestStatusType(object sender)
 		{
 			var button = sender as Button;
-			foreach (var type in Dashboard.RequestTypes) {
-				if (type.ToString().Equals(button.Text)) {
+			foreach (var type in RequestList.RequestTypes) {
+				if (type.ToString().Equals(button.Text, StringComparison.CurrentCultureIgnoreCase)) {
 					return type;
 				}
 			}
@@ -145,9 +145,9 @@ namespace Commercially.Droid
 
 		TableRow GetTableRow(int row)
 		{
-			var rowView = this.GetRequestRow(SharedController.Requests[row]);
+			var rowView = this.GetTableRow(SharedController.Requests[row]);
 			Android.Graphics.Color color = SharedController.CurrentTypeColor.GetAndroidColor();
-			color.A = Dashboard.RowAlphaByte;
+			color.A = RequestList.RowAlphaByte;
 			rowView.SetBackgroundColor(color);
 			this.HideRequestStatusLabel(rowView);
 			return rowView;

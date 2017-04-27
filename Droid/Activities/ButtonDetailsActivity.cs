@@ -33,14 +33,14 @@ namespace Commercially.Droid
 		bool LocationChanged {
 			get {
 				if (SharedController.Button.room == null) return !string.IsNullOrWhiteSpace(LocationField.Text);
-				return !SharedController.Button.room.Equals(LocationField.Text);
+				return !SharedController.Button.room.Equals(LocationField.Text, StringComparison.CurrentCultureIgnoreCase);
 			}
 		}
 
 		bool DescriptionChanged {
 			get {
 				if (SharedController.Button.description == null) return !string.IsNullOrWhiteSpace(DescriptionField.Text);
-				return !SharedController.Button.description.Equals(DescriptionField.Text);
+				return !SharedController.Button.description.Equals(DescriptionField.Text, StringComparison.CurrentCultureIgnoreCase);
 			}
 		}
 
@@ -72,9 +72,9 @@ namespace Commercially.Droid
 			this.InitializeClientSpinner(SharedController.Button);
 			ClientIdText.Text = SharedController.ClientIdText;
 
-			ClientIdText.Visibility = SharedController.ClientIdIsHidden ? ViewStates.Gone : ViewStates.Visible;
-			PairLayout.Visibility = SharedController.PairStackIsHidden ? ViewStates.Gone : ViewStates.Visible;
-			SaveButton.Visibility = ViewStates.Gone;
+			ClientIdText.Hidden(SharedController.ClientIdIsHidden);
+			PairLayout.Hidden(SharedController.PairStackIsHidden);
+			SaveButton.Hidden(true);
 
 			ClientSpinner.ItemSelected += ClientSpinnerItemSelected;
 			LocationField.TextChanged += OnTextChanged;
@@ -86,12 +86,12 @@ namespace Commercially.Droid
 		{
 			var adapter = (sender as Spinner).Adapter;
 			SharedController.SelectedClient = adapter.GetItem(e.Position).ToString();
-			SaveButton.Visibility = IsChanged ? ViewStates.Visible : ViewStates.Gone;
+			SaveButton.Hidden(!IsChanged);
 		}
 
 		void OnTextChanged(object sender, TextChangedEventArgs e)
 		{
-			SaveButton.Visibility = IsChanged ? ViewStates.Visible : ViewStates.Gone;
+			SaveButton.Hidden(!IsChanged);
 		}
 
 		void SaveButtonClick(object sender, EventArgs e)
@@ -114,7 +114,7 @@ namespace Commercially.Droid
 				this.ShowPrompt(Localizable.PromptMessages.ButtonSaveError);
 				return;
 			}
-			SaveButton.Visibility = ViewStates.Gone;
+			SaveButton.Hidden(true);
 			Finish();
 		}
 	}

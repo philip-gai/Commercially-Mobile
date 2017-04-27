@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Android.App;
 using Android.Widget;
 using Android.OS;
@@ -32,7 +32,7 @@ namespace Commercially.Droid
 				var response = UserApi.LoginUser(EmailField.Text, PasswordField.Text);
 				Session.OAuth = new OAuthResponse(response);
 				Session.User = UserApi.GetCurrentUser();
-				StartActivity(new Intent(this, typeof(DashboardActivity)));
+				StartActivity(new Intent(this, typeof(RequestListActivity)));
 			} catch (Exception) {
 				this.ShowPrompt(Localizable.PromptMessages.LoginError);
 			}

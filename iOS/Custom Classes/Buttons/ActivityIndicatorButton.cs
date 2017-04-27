@@ -1,8 +1,8 @@
 using System;
 using UIKit;
-using Commercially.iOS.Extensions;
 
-namespace Commercially.iOS {
+namespace Commercially.iOS
+{
 	public partial class ActivityIndicatorButton : UIButton {
 		string TitleText = "";
 		UIActivityIndicatorView LoadingIndicator = new UIActivityIndicatorView();

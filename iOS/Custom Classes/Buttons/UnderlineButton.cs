@@ -43,7 +43,7 @@ namespace Commercially.iOS {
 		}
 
 		public virtual bool IsValid() {
-			return !TitleLabel.Text.Equals(OriginalText);
+			return !TitleLabel.Text.Equals(OriginalText, StringComparison.CurrentCultureIgnoreCase);
 		}
 	}
 }

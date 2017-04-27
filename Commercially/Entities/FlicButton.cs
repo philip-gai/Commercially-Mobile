@@ -15,7 +15,7 @@ namespace Commercially
 		public ButtonType Type {
 			get {
 				if (!string.IsNullOrWhiteSpace(clientId)) {
-					if (GlobalConstants.Strings.Ignore.Equals(clientId))
+					if (GlobalConstants.Strings.Ignore.Equals(clientId, StringComparison.CurrentCultureIgnoreCase))
 						return ButtonType.Ignored;
 					return ButtonType.Paired;
 				}

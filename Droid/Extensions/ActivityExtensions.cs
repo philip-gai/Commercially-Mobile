@@ -1,4 +1,4 @@
-﻿using Android.App;
+using Android.App;
 using Android.Content;
 using Android.Views;
 using Android.Widget;
@@ -6,22 +6,43 @@ using Newtonsoft.Json;
 
 using System;
 using Android.Graphics;
+using Android.Support.V7.App;
 
 namespace Commercially.Droid
 {
 	public static class ActivityExtensions
 	{
+
+		public static void CreateMainOptionsMenu(this Activity activity, IMenu menu, int currItem)
+		{
+			activity.MenuInflater.Inflate(Resource.Menu.TopMenu, menu);
+			var rIds = new int[] { Resource.Id.DashboardIcon, Resource.Id.ButtonIcon, Resource.Id.UserIcon };
+			foreach (var id in rIds) {
+				var item = menu.FindItem(id);
+				if (id == currItem) {
+					item.Icon.SetColorFilter(GlobalConstants.DefaultColors.Red.GetAndroidColor(), PorterDuff.Mode.SrcIn);
+					item.SetEnabled(false);
+				} else {
+					item.Icon.SetColorFilter(GlobalConstants.DefaultColors.Black.GetAndroidColor(), PorterDuff.Mode.SrcIn);
+					item.SetEnabled(true);
+				}
+			}
+			if (Session.User.Type != UserRoleType.Admin) {
+				menu.RemoveGroup(Resource.Id.AdminGroup);
+			}
+		}
+
 		public static void StartActivityMenuItem(this Activity activity, IMenuItem item)
 		{
-			switch (item.ItemId) {
-				case Resource.Id.DashboardIcon:
-					if (activity is DashboardActivity) return;
-					activity.StartActivity(new Intent(activity, typeof(DashboardActivity)));
-					break;
-				case Resource.Id.ButtonIcon:
-					if (activity is ButtonListActivity) return;
-					activity.StartActivity(new Intent(activity, typeof(ButtonListActivity)));
-					break;
+			int[] icons = { Resource.Id.DashboardIcon, Resource.Id.ButtonIcon, Resource.Id.UserIcon };
+			Type[] activityTypes = { typeof(RequestListActivity), typeof(ButtonListActivity), typeof(UserListActivity) };
+
+			for (int i = 0; i < icons.Length; i++) {
+				if (icons[i] == item.ItemId) {
+					var activityType = activityTypes[i];
+					if (typeof(Activity) == activityType) { return; }
+					activity.StartActivity(new Intent(activity, activityType));
+				}
 			}
 		}
 
@@ -29,15 +50,6 @@ namespace Commercially.Droid
 		{
 			var newFragment = new PromptDialogFragment(message);
 			newFragment.Show(activity.FragmentManager, message);
-		}
-
-		public static TableRow GetSectionHeader(this Activity activity, string label)
-		{
-			var inflater = (LayoutInflater)activity.GetSystemService(Context.LayoutInflaterService);
-			var headerView = (TableRow)inflater.Inflate(Resource.Layout.TableSectionHeader, null);
-			var headerLabel = headerView.FindViewById<TextView>(Resource.Id.headerText);
-			headerLabel.Text = label;
-			return headerView;
 		}
 
 		public static HorizontalScrollView GetTopButtons<T>(this Activity activity, T[] array)
@@ -54,22 +66,37 @@ namespace Commercially.Droid
 			return headerView;
 		}
 
-		public static TableRow GetRequestRow(this Activity activity, Request request)
+		public static TableRow GetSectionHeader(this Activity activity, string label)
+		{
+			var inflater = (LayoutInflater)activity.GetSystemService(Context.LayoutInflaterService);
+			var headerView = (TableRow)inflater.Inflate(Resource.Layout.TableSectionHeader, null);
+			var headerLabel = headerView.FindViewById<TextView>(Resource.Id.headerText);
+			headerLabel.Text = label;
+			return headerView;
+		}
+
+		public static TableRow GetTableRow(this Activity activity, Request request)
 		{
 			var inflater = (LayoutInflater)activity.GetSystemService(Context.LayoutInflaterService);
 			var rowView = (TableRow)inflater.Inflate(Resource.Layout.RequestRow, null);
-			var description = rowView.FindViewById<TextView>(Resource.Id.descriptionText);
+			var descriptionLabel = rowView.FindViewById<TextView>(Resource.Id.descriptionText);
 			var locationLabel = rowView.FindViewById<TextView>(Resource.Id.locationText);
 			var timeLabel = rowView.FindViewById<TextView>(Resource.Id.timeText);
 			var statusLabel = rowView.FindViewById<TextView>(Resource.Id.statusText);
 			var urgentIndicator = rowView.FindViewById(Resource.Id.urgentIndicator);
 			var deleteButton = rowView.FindViewById<Button>(Resource.Id.deleteButton);
-			description.Text = request.description;
-			locationLabel.Text = request.room;
-			timeLabel.Text = request.GetTime(Request.TimeType.Received)?.ToShortTimeString();
-			statusLabel.Text = request.Type.ToString();
-			urgentIndicator.Visibility = request.urgent ? ViewStates.Visible : ViewStates.Gone;
-			deleteButton.Visibility = ViewStates.Gone;
+
+			var SharedRow = new RequestTableRow(request);
+			locationLabel.Text = SharedRow.LocationText;
+			timeLabel.Text = SharedRow.TimeText;
+			statusLabel.Text = SharedRow.StatusText;
+			statusLabel.Hidden(SharedRow.StatusLabelIsHidden);
+			urgentIndicator.Hidden(SharedRow.UrgentIndicatorIsHidden);
+			descriptionLabel.Text = SharedRow.DescriptionText;
+
+			urgentIndicator.Hidden(request.urgent);
+			deleteButton.Hidden(true);
+
 			deleteButton.Click += (object sender, EventArgs e) => {
 				RequestApi.DeleteRequest(request._id);
 				var table = activity.FindViewById<TableLayout>(Resource.Id.tableLayout);
@@ -83,26 +110,13 @@ namespace Commercially.Droid
 			};
 			if (Session.User.Type == UserRoleType.Admin) {
 				rowView.LongClick += (object sender, View.LongClickEventArgs e) => {
-					switch (deleteButton.Visibility) {
-						case ViewStates.Gone:
-							deleteButton.Visibility = ViewStates.Visible;
-							break;
-						case ViewStates.Visible:
-							deleteButton.Visibility = ViewStates.Gone;
-							break;
-					}
+					deleteButton.ToggleVisibility();
 				};
 			}
 			return rowView;
 		}
 
-		public static void HideRequestStatusLabel(this Activity activity, TableRow rowView)
-		{
-			var statusLabel = rowView.FindViewById<TextView>(Resource.Id.statusText);
-			statusLabel.Visibility = ViewStates.Gone;
-		}
-
-		public static TableRow GetButtonRow(this Activity activity, FlicButton button)
+		public static TableRow GetTableRow(this Activity activity, FlicButton button)
 		{
 			var inflater = (LayoutInflater)activity.GetSystemService(Context.LayoutInflaterService);
 			var rowView = (TableRow)inflater.Inflate(Resource.Layout.ButtonRow, null);
@@ -111,17 +125,44 @@ namespace Commercially.Droid
 			var descriptionLabel = rowView.FindViewById<TextView>(Resource.Id.descriptionText);
 			var locationLabel = rowView.FindViewById<TextView>(Resource.Id.locationText);
 
-			buttonLabel.Text = button.bluetooth_id;
-			var tmpClient = Client.FindClient(button.clientId, Session.Clients);
-			clientLabel.Text = tmpClient != null && tmpClient.friendlyName != null ? tmpClient.friendlyName : button.clientId;
-			descriptionLabel.Text = button.description;
-			locationLabel.Text = button.room;
+			var sharedRow = new ButtonTableRow(button);
+			buttonLabel.Text = sharedRow.ButtonText;
+			clientLabel.Text = sharedRow.ClientText;
+			descriptionLabel.Text = sharedRow.DescriptionText;
+			locationLabel.Text = sharedRow.LocationText;
+
 			rowView.Click += (object sender, EventArgs e) => {
 				var intent = new Intent(activity, typeof(ButtonDetailsActivity));
 				intent.PutExtra(typeof(FlicButton).Name, JsonConvert.SerializeObject(button));
 				activity.StartActivity(intent);
 			};
 			return rowView;
+		}
+
+		public static TableRow GetTableRow(this Activity activity, User user)
+		{
+			var inflater = (LayoutInflater)activity.GetSystemService(Context.LayoutInflaterService);
+			var rowView = (TableRow)inflater.Inflate(Resource.Layout.UserRow, null);
+			var lastFirstLabel = rowView.FindViewById<TextView>(Resource.Id.lastFirstText);
+			var emailLabel = rowView.FindViewById<TextView>(Resource.Id.emailText);
+
+			var sharedRow = new UserTableRow(user);
+			lastFirstLabel.Hidden(sharedRow.LastFirstNameLabelIsHidden);
+			lastFirstLabel.Text = sharedRow.LastFirstNameText;
+			emailLabel.Text = sharedRow.EmailText;
+
+			rowView.Click += (object sender, EventArgs e) => {
+				var intent = new Intent(activity, typeof(ButtonDetailsActivity));
+				intent.PutExtra(typeof(FlicButton).Name, JsonConvert.SerializeObject(user));
+				activity.StartActivity(intent);
+			};
+			return rowView;
+		}
+
+		public static void HideRequestStatusLabel(this Activity activity, TableRow rowView)
+		{
+			var statusLabel = rowView.FindViewById<TextView>(Resource.Id.statusText);
+			statusLabel.Hidden(true);
 		}
 
 		public static void InitializeStatusSpinner(this Activity activity)
@@ -142,25 +183,6 @@ namespace Commercially.Droid
 			var adapter = new ArrayAdapter(activity, Android.Resource.Layout.SimpleSpinnerDropDownItem, tmpDiscoveredBy);
 			adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
 			statusSpinner.Adapter = adapter;
-		}
-
-		public static void CreateMainOptionsMenu(this Activity activity, IMenu menu, int currItem)
-		{
-			activity.MenuInflater.Inflate(Resource.Menu.TopMenu, menu);
-			var rIds = new int[] { Resource.Id.DashboardIcon, Resource.Id.ButtonIcon };
-			foreach (var id in rIds) {
-				var item = menu.FindItem(id);
-				if (id == currItem) {
-					item.Icon.SetColorFilter(GlobalConstants.DefaultColors.Red.GetAndroidColor(), PorterDuff.Mode.SrcIn);
-					item.SetEnabled(false);
-				} else {
-					item.Icon.SetColorFilter(GlobalConstants.DefaultColors.Black.GetAndroidColor(), PorterDuff.Mode.SrcIn);
-					item.SetEnabled(true);
-				}
-			}
-			if (Session.User.Type != UserRoleType.Admin) {
-				menu.RemoveGroup(Resource.Id.AdminGroup);
-			}
 		}
 	}
 }

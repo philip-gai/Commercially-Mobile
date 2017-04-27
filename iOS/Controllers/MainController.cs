@@ -1,10 +1,9 @@
-using Foundation;
 using System;
+using Foundation;
 using UIKit;
-using CoreGraphics;
-using Commercially.iOS.Extensions;
 
-namespace Commercially.iOS {
+namespace Commercially.iOS
+{
 	public partial class MainController : UINavigationController {
 		NSObject pushToken, popToken, hidePromptToken;
 

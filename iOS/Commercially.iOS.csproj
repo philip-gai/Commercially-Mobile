@@ -197,7 +197,6 @@
     <Folder Include="Custom Classes\Controllers\" />
     <Folder Include="Custom Classes\Cells\" />
     <Folder Include="Custom Classes\Delegates\" />
-    <Folder Include="Custom Classes\Data Sources\" />
     <Folder Include="Extensions\" />
     <Folder Include="Utilities\" />
     <Folder Include="Custom Classes\Buttons\" />
@@ -230,7 +229,7 @@
     <InterfaceDefinition Include="Storyboards\Home.storyboard" />
     <InterfaceDefinition Include="Custom Classes\Cells\RequestCell.xib" />
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
-    <InterfaceDefinition Include="Storyboards\Dashboard.storyboard" />
+    <InterfaceDefinition Include="Storyboards\RequestList.storyboard" />
     <InterfaceDefinition Include="Storyboards\RequestDetails.storyboard" />
     <InterfaceDefinition Include="Storyboards\ButtonList.storyboard" />
     <InterfaceDefinition Include="Custom Classes\Cells\ButtonCell.xib" />
@@ -238,6 +237,7 @@
     <InterfaceDefinition Include="Storyboards\Main.storyboard" />
     <InterfaceDefinition Include="Storyboards\UserList.storyboard" />
     <InterfaceDefinition Include="Custom Classes\Cells\UserCell.xib" />
+    <InterfaceDefinition Include="Storyboards\UserDetails.storyboard" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Entitlements.plist" />
@@ -296,9 +296,9 @@
     <Compile Include="Controllers\HomeTabBarController.designer.cs">
       <DependentUpon>HomeTabBarController.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controllers\DashboardController.cs" />
-    <Compile Include="Controllers\DashboardController.designer.cs">
-      <DependentUpon>DashboardController.cs</DependentUpon>
+    <Compile Include="Controllers\RequestListController.cs" />
+    <Compile Include="Controllers\RequestListController.designer.cs">
+      <DependentUpon>RequestListController.cs</DependentUpon>
     </Compile>
     <Compile Include="Extensions\ColorExtensions.cs" />
     <Compile Include="Controllers\RequestDetailsController.cs" />
@@ -330,6 +330,10 @@
     <Compile Include="Custom Classes\Cells\UserCell.cs" />
     <Compile Include="Custom Classes\Cells\UserCell.designer.cs">
       <DependentUpon>UserCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\UserDetailsController.cs" />
+    <Compile Include="Controllers\UserDetailsController.designer.cs">
+      <DependentUpon>UserDetailsController.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <Import Project="..\Commercially\Commercially.projitems" Label="Shared" Condition="Exists('..\Commercially\Commercially.projitems')" />

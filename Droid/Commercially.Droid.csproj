@@ -83,7 +83,7 @@
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Activities\LoginActivity.cs" />
-    <Compile Include="Activities\DashboardActivity.cs" />
+    <Compile Include="Activities\RequestListActivity.cs" />
     <Compile Include="Extensions\ColorExtensions.cs" />
     <Compile Include="Fragments\PromptDialogFragment.cs" />
     <Compile Include="Extensions\ActivityExtensions.cs" />
@@ -92,6 +92,8 @@
     <Compile Include="Activities\RequestDetailsActivity.cs" />
     <Compile Include="Activities\ButtonDetailsActivity.cs" />
     <Compile Include="Extensions\AppCompatActivityExtensions.cs" />
+    <Compile Include="Activities\UserListActivity.cs" />
+    <Compile Include="Extensions\ViewExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -184,6 +186,7 @@
     <AndroidResource Include="Resources\values\status_array.xml" />
     <AndroidResource Include="Resources\layout\TableButtonHeader.axml" />
     <AndroidResource Include="Resources\layout\TopButton.axml" />
+    <AndroidResource Include="Resources\layout\UserRow.axml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable-hdpi\" />

@@ -1,7 +1,5 @@
 using System;
 using UIKit;
-using Newtonsoft.Json.Linq;
-using Commercially.iOS.Extensions;
 
 namespace Commercially.iOS
 {

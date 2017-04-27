@@ -2,9 +2,12 @@
 using UIKit;
 using CoreGraphics;
 
-namespace Commercially.iOS.Extensions {
-	public static class UIViewExtensions {
-		public static UIView AddUnderlineView(this UIView view, UIView subview, UIColor color) {
+namespace Commercially.iOS
+{
+	public static class UIViewExtensions
+	{
+		public static UIView AddUnderlineView(this UIView view, UIView subview, UIColor color)
+		{
 			CGRect Bounds = subview.ConvertRectToView(subview.Bounds, view);
 			nfloat LineWidth = subview.Frame.Width;
 			if (subview is UITextField && subview.Superview is UIStackView) {
@@ -20,7 +23,8 @@ namespace Commercially.iOS.Extensions {
 			return lineView;
 		}
 
-		public static nfloat GetConstraintConstant(this UIView view, NSLayoutAttribute attribute) {
+		public static nfloat GetConstraintConstant(this UIView view, NSLayoutAttribute attribute)
+		{
 			foreach (NSLayoutConstraint constraint in view.Constraints) {
 				if (constraint.FirstAttribute == attribute || constraint.SecondAttribute == attribute) {
 					return constraint.Constant;
@@ -29,7 +33,8 @@ namespace Commercially.iOS.Extensions {
 			throw new NoConstraintMatchingException(Localizable.ExceptionMessages.NoConstraint);
 		}
 
-		public static UIView GetFirstResponder(this UIView view) {
+		public static UIView GetFirstResponder(this UIView view)
+		{
 			foreach (UIView subview in view.Subviews) {
 				if (view.IsFirstResponder) {
 					return view;
@@ -47,14 +52,16 @@ namespace Commercially.iOS.Extensions {
 			return null;
 		}
 
-		public static void SetBackgroundFromImageName(this UIView view, string imageName) {
+		public static void SetBackgroundFromImageName(this UIView view, string imageName)
+		{
 			var image = UIImage.FromFile(imageName);
 			var backgroundView = new UIImageView(image);
 			view.SetAnchorsToEdges(backgroundView);
 			view.SendSubviewToBack(backgroundView);
 		}
 
-		public static void SetAnchorsToEdges(this UIView view, UIView subview) {
+		public static void SetAnchorsToEdges(this UIView view, UIView subview)
+		{
 			UILayoutGuide margins = view.LayoutMarginsGuide;
 			subview.LeadingAnchor.ConstraintEqualTo(margins.LeadingAnchor).Active = true;
 			subview.TrailingAnchor.ConstraintEqualTo(margins.TrailingAnchor).Active = true;
@@ -62,12 +69,14 @@ namespace Commercially.iOS.Extensions {
 			subview.TopAnchor.ConstraintEqualTo(margins.TopAnchor).Active = true;
 		}
 
-		public static void HideKeyboardWhenTapped(this UIView view) {
+		public static void HideKeyboardWhenTapped(this UIView view)
+		{
 			var tap = new UITapGestureRecognizer((obj) => { view.EndEditing(true); });
 			view.AddGestureRecognizer(tap);
 		}
 
-		public static void RemoveHideKeyboardWhenTapped(this UIView view) {
+		public static void RemoveHideKeyboardWhenTapped(this UIView view)
+		{
 			foreach (UIGestureRecognizer recognizer in view.GestureRecognizers) {
 				if (recognizer is UITapGestureRecognizer) {
 					view.RemoveGestureRecognizer(recognizer);
@@ -77,7 +86,8 @@ namespace Commercially.iOS.Extensions {
 		}
 
 		public enum ScaleType { Width, Height };
-		public static void ScaleView(this UIView view, ScaleType type, double newValue) {
+		public static void ScaleView(this UIView view, ScaleType type, double newValue)
+		{
 			nfloat nfNewValue = (nfloat)newValue;
 			nfloat width = nfNewValue;
 			nfloat height = nfNewValue;
@@ -87,7 +97,7 @@ namespace Commercially.iOS.Extensions {
 					break;
 				case ScaleType.Height:
 					width = (nfNewValue / view.Bounds.Height) * view.Bounds.Width;
-					break;	
+					break;
 			}
 			view.Frame = new CGRect(view.Frame.X, view.Frame.Y, width, height);
 		}

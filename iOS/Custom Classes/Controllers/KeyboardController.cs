@@ -1,7 +1,6 @@
 ﻿using System;
-using UIKit;
-using Commercially.iOS.Extensions;
 using Foundation;
+using UIKit;
 
 namespace Commercially.iOS
 {

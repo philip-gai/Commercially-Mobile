@@ -3,11 +3,14 @@ using System;
 using Foundation;
 using CoreGraphics;
 
-namespace Commercially.iOS.Extensions {
-	public static class UIViewControllerExtensions {
+namespace Commercially.iOS
+{
+	public static class UIViewControllerExtensions
+	{
 		public enum KeyboardActionType { Show, Hide };
 
-		public static void KeyboardDid(this UIViewController controller, KeyboardActionType Type, NSNotification notification) {
+		public static void KeyboardDid(this UIViewController controller, KeyboardActionType Type, NSNotification notification)
+		{
 			CGRect KeyboardFrame = (notification.UserInfo[UIKeyboard.FrameEndUserInfoKey] as NSValue).CGRectValue;
 
 			UIView view = controller.View;

@@ -7,6 +7,8 @@ namespace Commercially.iOS
 {
 	public partial class UserCell : UITableViewCell
 	{
+		UserTableRow SharedRow;
+
 		public static readonly NSString Key = new NSString("UserCell");
 		public static readonly UINib Nib;
 
@@ -17,18 +19,15 @@ namespace Commercially.iOS
 
 		protected UserCell(IntPtr handle) : base(handle) { }
 
-		User _User;
 		public User User {
 			get {
-				return _User;
+				return SharedRow.User;
 			}
 			set {
-				_User = value;
-				LastFirstNameLabel.Hidden = string.IsNullOrWhiteSpace(value.firstname) || string.IsNullOrWhiteSpace(value.lastname);
-				if (!LastFirstNameLabel.Hidden) {
-					LastFirstNameLabel.Text = value.lastname + ", " + value.firstname;
-				}
-				EmailLabel.Text = value.email;
+				SharedRow = new UserTableRow(value);
+				LastFirstNameLabel.Hidden = SharedRow.LastFirstNameLabelIsHidden;
+				LastFirstNameLabel.Text = SharedRow.LastFirstNameText;
+				EmailLabel.Text = SharedRow.EmailText;
 			}
 		}
 	}

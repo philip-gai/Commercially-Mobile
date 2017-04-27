@@ -29,11 +29,5 @@ namespace Commercially
 				return UserRoleType.Worker;
 			}
 		}
-
-		internal UserRoleType GetUserRoleType {
-			get {
-				throw new NotImplementedException();
-			}
-		}
 	}
 }

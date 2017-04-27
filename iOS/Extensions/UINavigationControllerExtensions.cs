@@ -1,9 +1,8 @@
 ﻿using System;
 using Foundation;
 using UIKit;
-using CoreGraphics;
 
-namespace Commercially.iOS.Extensions
+namespace Commercially.iOS
 {
 	public static class UINavigationControllerExtensions
 	{

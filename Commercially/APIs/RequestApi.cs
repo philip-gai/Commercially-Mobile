@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -23,14 +24,22 @@ namespace Commercially
 		{
 			var requests = GetRequests();
 			if (requests == null || requests.Length <= 0) return null;
-			var list = new List<Request>();
-			foreach (var request in requests) {
-				if (request.Type == type) {
-					list.Add(request);
-				}
-			}
-			list.Reverse();
-			return list.ToArray();
+			var list = Array.FindAll(requests, (Request request) => {
+				return request.Type == type;
+			});
+			Array.Reverse(list);
+			return list;
+		}
+
+		public static Request[] GetRequests(User user)
+		{
+			var requests = GetRequests();
+			if (requests == null || requests.Length <= 0) return null;
+			var list = Array.FindAll(requests, (Request request) => {
+				return request.assignedTo == user.username;
+			});
+			Array.Reverse(list);
+			return list;
 		}
 
 		public static string PatchRequest(string id, string body)

@@ -3,10 +3,10 @@ namespace Commercially
 {
 	public class ButtonDetails
 	{
-		public const double AnimationDuration = 0.25;
-
 		public FlicButton Button;
 		public string SelectedClient;
+
+		public const double AnimationDuration = 0.25;
 
 		bool IsPaired {
 			get {
@@ -14,21 +14,22 @@ namespace Commercially
 			}
 		}
 
-		public bool PickerChanged(string originalTitle) {
+		public bool PickerChanged(string originalTitle)
+		{
 			if (SelectedClient == null) return false;
-			return !originalTitle.Equals(SelectedClient);
+			return !originalTitle.Equals(SelectedClient, StringComparison.CurrentCultureIgnoreCase);
 		}
 
 		public bool LocationChanged(string locationText)
 		{
 			if (Button.room == null) return !string.IsNullOrWhiteSpace(locationText);
-			return !Button.room.Equals(locationText);
+			return !Button.room.Equals(locationText, StringComparison.CurrentCultureIgnoreCase);
 		}
 
 		public bool DescriptionChanged(string descriptionText)
 		{
 			if (Button.description == null) return !string.IsNullOrWhiteSpace(descriptionText);
-			return !Button.description.Equals(descriptionText);
+			return !Button.description.Equals(descriptionText, StringComparison.CurrentCultureIgnoreCase);
 		}
 
 		public string LocationFieldText {

@@ -1,6 +1,5 @@
 ﻿using System;
 using UIKit;
-using Commercially.iOS.Extensions;
 
 namespace Commercially.iOS {
 	public abstract class UnderlineViewController : UIViewController {

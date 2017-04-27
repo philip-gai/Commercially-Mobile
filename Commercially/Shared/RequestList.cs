@@ -3,7 +3,7 @@ using System.Threading;
 
 namespace Commercially
 {
-	public class Dashboard
+	public class RequestList
 	{
 		public Request[] Requests;
 		public RequestStatusType CurrentType = RequestStatusType.New;
@@ -30,7 +30,8 @@ namespace Commercially
 			}
 		}
 
-		public static Color GetTypeColor(RequestStatusType type) {
+		public static Color GetTypeColor(RequestStatusType type)
+		{
 			var index = Array.IndexOf(RequestTypes, type);
 			return TypeBackgroundColors[index];
 		}

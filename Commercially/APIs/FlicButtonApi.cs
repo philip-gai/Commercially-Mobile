@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -25,14 +26,11 @@ namespace Commercially
 		{
 			var buttons = GetButtons();
 			if (buttons == null || buttons.Length <= 0) return null;
-			var list = new List<FlicButton>();
-			foreach (var button in buttons) {
-				if (button.Type == type) {
-					list.Add(button);
-				}
-			}
-			list.Reverse();
-			return list.ToArray();
+			var list = Array.FindAll(buttons, (FlicButton button) => {
+				return button.Type == type;
+			});
+			Array.Reverse(list);
+			return list;
 		}
 
 		public static string PatchButton(string buttonId, string body)

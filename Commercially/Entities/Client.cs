@@ -11,7 +11,9 @@ namespace Commercially
 		public static Client FindClient(string clientInfo, Client[] clients)
 		{
 			foreach (Client tmpClient in clients) {
-				if (tmpClient.clientId.Equals(clientInfo) || !string.IsNullOrWhiteSpace(tmpClient.friendlyName) && tmpClient.friendlyName.Equals(clientInfo)) {
+				if (tmpClient.clientId.Equals(clientInfo, StringComparison.CurrentCultureIgnoreCase) ||
+				    !string.IsNullOrWhiteSpace(tmpClient.friendlyName) &&
+				    tmpClient.friendlyName.Equals(clientInfo, StringComparison.CurrentCultureIgnoreCase)) {
 					return tmpClient;
 				}
 			}

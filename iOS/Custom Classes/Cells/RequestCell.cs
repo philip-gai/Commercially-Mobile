@@ -7,6 +7,8 @@ namespace Commercially.iOS
 {
 	public partial class RequestCell : UITableViewCell
 	{
+		RequestTableRow SharedRow;
+
 		public static readonly NSString Key = new NSString("RequestCell");
 		public static readonly UINib Nib;
 
@@ -17,19 +19,18 @@ namespace Commercially.iOS
 
 		protected RequestCell(IntPtr handle) : base(handle) { }
 
-		Request _Request;
 		public Request Request {
 			get {
-				return _Request;
+				return SharedRow.Request;
 			}
 			set {
-				_Request = value;
-				LocationLabel.Text = value.room;
-				TimeLabel.Text = value.GetTime(Request.TimeType.Received)?.ToShortTimeString();
-				StatusLabel.Text = _Request.Type.ToString();
-				StatusLabel.Hidden = true;
-				UrgentIndicator.Hidden = !value.urgent;
-				Message.Text = value.description;
+				SharedRow = new RequestTableRow(value);
+				LocationLabel.Text = SharedRow.LocationText;
+				TimeLabel.Text = SharedRow.TimeText;
+				StatusLabel.Text = SharedRow.StatusText;
+				StatusLabel.Hidden = SharedRow.StatusLabelIsHidden;
+				UrgentIndicator.Hidden = SharedRow.UrgentIndicatorIsHidden;
+				Message.Text = SharedRow.DescriptionText;
 			}
 		}
 	}

@@ -7,6 +7,8 @@ namespace Commercially.iOS
 {
 	public partial class ButtonCell : UITableViewCell
 	{
+		ButtonTableRow SharedRow;
+
 		public static readonly NSString Key = new NSString("ButtonCell");
 		public static readonly UINib Nib;
 
@@ -17,19 +19,17 @@ namespace Commercially.iOS
 
 		protected ButtonCell(IntPtr handle) : base(handle) { }
 
-		FlicButton _Button;
 		public FlicButton Button {
 			get {
-				return _Button;
+				return SharedRow.Button;
 			}
 			set {
-				_Button = value;
-				ButtonLabel.Text = value.bluetooth_id;
-				var tmpClient = Client.FindClient(Button.clientId, Session.Clients);
-				ClientLabel.Text = tmpClient != null && tmpClient.friendlyName != null ? tmpClient.friendlyName : value.clientId;
-				ClientLabel.Hidden = string.IsNullOrWhiteSpace(value.clientId);
-				DescriptionLabel.Text = value.description;
-				LocationLabel.Text = value.room;
+				SharedRow = new ButtonTableRow(value);
+				ButtonLabel.Text = SharedRow.ButtonText;
+				ClientLabel.Text = SharedRow.ClientText;
+				ClientLabel.Hidden = SharedRow.ClientLabelIsHidden;
+				DescriptionLabel.Text = SharedRow.DescriptionText;
+				LocationLabel.Text = SharedRow.LocationText;
 			}
 		}
 	}

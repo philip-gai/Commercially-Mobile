@@ -11,8 +11,8 @@ using UIKit;
 
 namespace Commercially.iOS
 {
-    [Register ("DashboardController")]
-    partial class DashboardController
+    [Register ("RequestListController")]
+    partial class RequestListController
     {
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]

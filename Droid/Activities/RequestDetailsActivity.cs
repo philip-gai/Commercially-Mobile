@@ -70,12 +70,12 @@ namespace Commercially.Droid
 
 		void InitializeVisibility()
 		{
-			UrgentIndicator.Visibility = SharedController.UrgentIndicatorIsHidden ? ViewStates.Gone : ViewStates.Visible;
-			AssignedToText.Visibility = SharedController.AssignedToIsHidden ? ViewStates.Gone : ViewStates.Visible;
-			AssignButton.Visibility = SharedController.AssignButtonIsHidden ? ViewStates.Gone : ViewStates.Visible;
-			SaveButton.Visibility = SharedController.SaveButtonIsHidden ? ViewStates.Gone : ViewStates.Visible;
-			StatusSpinner.Visibility = SharedController.StatusInputIsHidden ? ViewStates.Gone : ViewStates.Visible;
-			StatusText.Visibility = SharedController.StatusLabelIsHidden ? ViewStates.Gone : ViewStates.Visible;
+			UrgentIndicator.Hidden(SharedController.UrgentIndicatorIsHidden);
+			AssignedToText.Hidden(SharedController.AssignedToIsHidden);
+			AssignButton.Hidden(SharedController.AssignButtonIsHidden);
+			SaveButton.Hidden(SharedController.SaveButtonIsHidden);
+			StatusSpinner.Hidden(SharedController.StatusInputIsHidden);
+			StatusText.Hidden(SharedController.StatusLabelIsHidden);
 		}
 
 		void InitializeSpinner()
@@ -98,7 +98,7 @@ namespace Commercially.Droid
 		{
 			var adapter = (sender as Spinner).Adapter;
 			SharedController.SelectedStatus = adapter.GetItem(e.Position).ToString();
-			SaveButton.Visibility = SharedController.SaveButtonIsHidden ? ViewStates.Gone : ViewStates.Visible;
+			SaveButton.Hidden(SharedController.SaveButtonIsHidden);
 		}
 
 		void SaveButtonClick(object sender, EventArgs e)
@@ -110,7 +110,7 @@ namespace Commercially.Droid
 				this.ShowPrompt(Localizable.PromptMessages.RequestSaveError);
 				return;
 			}
-			saveButton.Visibility = ViewStates.Gone;
+			saveButton.Hidden(true);
 			Finish();
 		}
 
@@ -125,7 +125,7 @@ namespace Commercially.Droid
 				return;
 			}
 
-			assignButton.Visibility = ViewStates.Gone;
+			assignButton.Hidden(true);
 			Finish();
 		}
 	}
