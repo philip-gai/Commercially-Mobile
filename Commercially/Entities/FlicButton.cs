@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 
 namespace Commercially
 {
@@ -23,14 +22,10 @@ namespace Commercially
 			}
 		}
 
-		public static Client[] GetDiscoveredByClients(FlicButton Button)
-		{
-			if (Button == null || Button.discoveredBy == null || Session.Clients == null) return null;
-			Client[] clients = new Client[Button.discoveredBy.Length];
-			for (int i = 0; i < Button.discoveredBy.Length; i++) {
-				clients[i] = Client.FindClient(Button.discoveredBy[i], Session.Clients);
+		public Client[] DiscoveredByClients {
+			get {
+				return Client.FindClients(discoveredBy);
 			}
-			return clients;
 		}
 	}
 }

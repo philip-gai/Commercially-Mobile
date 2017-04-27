@@ -1,5 +1,4 @@
-﻿using System;
-namespace Commercially
+﻿namespace Commercially
 {
 	public class ButtonTableRow
 	{
@@ -18,7 +17,7 @@ namespace Commercially
 
 		public string ClientText {
 			get {
-				var tmpClient = Client.FindClient(Button.clientId, Session.Clients);
+				var tmpClient = Client.FindClient(Button.clientId);
 				return tmpClient != null && tmpClient.friendlyName != null ? tmpClient.friendlyName : Button.clientId;
 			}
 		}

@@ -1,5 +1,4 @@
 using System;
-using Newtonsoft.Json.Linq;
 using UIKit;
 
 namespace Commercially.iOS
@@ -37,19 +36,8 @@ namespace Commercially.iOS
 		partial void SaveButtonPress(UIButton sender)
 		{
 			try {
-				var jsonBody = new JObject();
-				if (SharedController.LocationChanged(LocationField.Text) && LocationField.Text != null) {
-					jsonBody.Add("room", LocationField.Text);
-				}
-				if (SharedController.DescriptionChanged(DescriptionField.Text) && DescriptionField.Text != null) {
-					jsonBody.Add("description", DescriptionField.Text);
-				}
-				if (jsonBody.Count > 0) {
-					FlicButtonApi.PatchButton(SharedController.Button.bluetooth_id, jsonBody.ToString());
-				}
-				if (SharedController.PickerChanged(ClientPickerView.Model.GetTitle(ClientPickerView, 0, 0))) {
-					FlicButtonApi.PairButton(SharedController.Button.bluetooth_id, Client.FindClient(SharedController.SelectedClient, Session.Clients).clientId);
-				}
+				SharedController.SaveButtonPress(LocationField.Text, DescriptionField.Text,
+												 ClientPickerView.Model.GetTitle(ClientPickerView, 0, 0));
 			} catch (Exception) {
 				NavigationController.ShowPrompt(Localizable.PromptMessages.ButtonSaveError);
 				return;
@@ -72,7 +60,7 @@ namespace Commercially.iOS
 			DescriptionField.EditingChanged += OnFieldChange;
 			ClientIdLabel.Hidden = SharedController.ClientIdIsHidden;
 			PairStack.Hidden = SharedController.PairStackIsHidden;
-			ClientPickerView.Model = new ClientPickerViewModel(FlicButton.GetDiscoveredByClients(SharedController.Button), OnPickerChange);
+			ClientPickerView.Model = new ClientPickerViewModel(SharedController.Button, OnPickerChange);
 			ClientIdLabel.Text = SharedController.ClientIdText;
 			SaveButton.Hidden = true;
 		}

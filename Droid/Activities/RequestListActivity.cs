@@ -61,8 +61,6 @@ namespace Commercially.Droid
 			Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
 
 			InitializeButtons();
-
-			Home.PrefetchData();
 		}
 
 		protected override void OnResume()

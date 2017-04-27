@@ -7,7 +7,6 @@ using Android.Text;
 using Android.Views;
 using Android.Widget;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace Commercially.Droid
 {
@@ -22,7 +21,7 @@ namespace Commercially.Droid
 		TextView ClientIdText { get { return FindViewById<TextView>(Resource.Id.clientIdText); } }
 		Button SaveButton { get { return FindViewById<Button>(Resource.Id.saveButton); } }
 		LinearLayout PairLayout { get { return FindViewById<LinearLayout>(Resource.Id.pairLayout); } }
-		Spinner ClientSpinner { get { return FindViewById<Spinner>(Resource.Id.clientSpinner); } }
+		Spinner ClientSpinner;
 
 		bool IsChanged {
 			get {
@@ -69,17 +68,18 @@ namespace Commercially.Droid
 			LocationField.Text = SharedController.LocationFieldText;
 			DescriptionField.Text = SharedController.DescriptionFieldText;
 			BluetoothIdText.Text = SharedController.BluetoothIdText;
-			this.InitializeClientSpinner(SharedController.Button);
 			ClientIdText.Text = SharedController.ClientIdText;
 
 			ClientIdText.Hidden(SharedController.ClientIdIsHidden);
 			PairLayout.Hidden(SharedController.PairStackIsHidden);
 			SaveButton.Hidden(true);
 
-			ClientSpinner.ItemSelected += ClientSpinnerItemSelected;
 			LocationField.TextChanged += OnTextChanged;
 			DescriptionField.TextChanged += OnTextChanged;
 			SaveButton.Click += SaveButtonClick;
+
+			ClientSpinner = this.GetClientSpinner(SharedController.Button);
+			ClientSpinner.ItemSelected += ClientSpinnerItemSelected;
 		}
 
 		void ClientSpinnerItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
@@ -97,19 +97,8 @@ namespace Commercially.Droid
 		void SaveButtonClick(object sender, EventArgs e)
 		{
 			try {
-				var jsonBody = new JObject();
-				if (SharedController.LocationChanged(LocationField.Text) && LocationField.Text != null) {
-					jsonBody.Add("room", LocationField.Text);
-				}
-				if (SharedController.DescriptionChanged(DescriptionField.Text) && DescriptionField.Text != null) {
-					jsonBody.Add("description", DescriptionField.Text);
-				}
-				if (jsonBody.Count > 0) {
-					FlicButtonApi.PatchButton(SharedController.Button.bluetooth_id, jsonBody.ToString());
-				}
-				if (SharedController.PickerChanged(ClientSpinner.GetItemAtPosition(0).ToString())) {
-					FlicButtonApi.PairButton(SharedController.Button.bluetooth_id, Client.FindClient(SharedController.SelectedClient, Session.Clients).clientId);
-				}
+				SharedController.SaveButtonPress(LocationField.Text, DescriptionField.Text,
+												 ClientSpinner.GetItemAtPosition(0).ToString());
 			} catch (Exception) {
 				this.ShowPrompt(Localizable.PromptMessages.ButtonSaveError);
 				return;

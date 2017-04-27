@@ -157,24 +157,22 @@ namespace Commercially.Droid
 			return rowView;
 		}
 
-		public static void InitializeStatusSpinner(this Activity activity)
+		public static Spinner GetStatusSpinner(this Activity activity)
 		{
 			Spinner statusSpinner = activity.FindViewById<Spinner>(Resource.Id.statusSpinner);
 			var adapter = ArrayAdapter.CreateFromResource(activity, Resource.Array.status_array, Android.Resource.Layout.SimpleSpinnerDropDownItem);
 			adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
 			statusSpinner.Adapter = adapter;
+			return statusSpinner;
 		}
 
-		public static void InitializeClientSpinner(this Activity activity, FlicButton button)
+		public static Spinner GetClientSpinner(this Activity activity, FlicButton button)
 		{
 			Spinner statusSpinner = activity.FindViewById<Spinner>(Resource.Id.clientSpinner);
-			string[] tmpDiscoveredBy = new string[button.discoveredBy.Length + 2];
-			tmpDiscoveredBy[0] = Localizable.Labels.NoneOption;
-			tmpDiscoveredBy[1] = GlobalConstants.Strings.Ignore;
-			button.discoveredBy.CopyTo(tmpDiscoveredBy, 2);
-			var adapter = new ArrayAdapter(activity, Android.Resource.Layout.SimpleSpinnerDropDownItem, tmpDiscoveredBy);
+			var adapter = new ArrayAdapter(activity, Android.Resource.Layout.SimpleSpinnerDropDownItem, ButtonDetails.GetPickerOptions(button));
 			adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
 			statusSpinner.Adapter = adapter;
+			return statusSpinner;
 		}
 	}
 }

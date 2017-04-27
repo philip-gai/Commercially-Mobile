@@ -23,6 +23,7 @@ namespace Commercially.Droid
 		LinearLayout Layout { get { return FindViewById<LinearLayout>(Resource.Id.mainLayout); } }
 		TextView FirstLastText { get { return FindViewById<TextView>(Resource.Id.firstLastText); } }
 		TextView EmailText { get { return FindViewById<TextView>(Resource.Id.emailText); } }
+		TextView PhoneText { get { return FindViewById<TextView>(Resource.Id.phoneText); } }
 
 		LinearLayout _Table;
 		LinearLayout Table {
@@ -31,7 +32,7 @@ namespace Commercially.Droid
 				var inflater = (LayoutInflater)GetSystemService(LayoutInflaterService);
 				var table = (LinearLayout)inflater.Inflate(Resource.Layout.Table, null);
 				_Table = table;
-				return table;
+				return _Table;
 			}
 		}
 
@@ -59,6 +60,8 @@ namespace Commercially.Droid
 			if (SharedController.User == null) return;
 			FirstLastText.Text = SharedController.FirstLastText;
 			EmailText.Text = SharedController.EmailText;
+			PhoneText.Text = SharedController.PhoneText;
+			PhoneText.Hidden(SharedController.PhoneLabelIsHidden);
 		}
 
 		void InitializeTable()

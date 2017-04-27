@@ -15,7 +15,6 @@ namespace Commercially.iOS
 			base.ViewDidLoad();
 			NavigationItem.HidesBackButton = true;
 			NavigationItem.SetTitleImage("Logo-Red-Toolbar");
-			Home.PrefetchData();
 			SetTabsForUser();
 		}
 

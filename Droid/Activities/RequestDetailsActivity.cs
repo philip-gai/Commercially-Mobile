@@ -27,7 +27,7 @@ namespace Commercially.Droid
 		ImageView UrgentIndicator { get { return FindViewById<ImageView>(Resource.Id.urgentIndicator); } }
 		Button AssignButton { get { return FindViewById<Button>(Resource.Id.assignButton); } }
 		Button SaveButton { get { return FindViewById<Button>(Resource.Id.saveButton); } }
-		Spinner StatusSpinner { get { return FindViewById<Spinner>(Resource.Id.statusSpinner); } }
+		Spinner StatusSpinner;
 
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
@@ -51,10 +51,9 @@ namespace Commercially.Droid
 		{
 			if (SharedController.Request == null) return;
 			InitializeText();
-			InitializeVisibility();
 			InitializeSpinner();
+			InitializeVisibility();
 			InitializeActions();
-			StatusSpinner.SetSelection(((ArrayAdapter)StatusSpinner.Adapter).GetPosition(SharedController.StatusText));
 		}
 
 		void InitializeText()
@@ -68,6 +67,16 @@ namespace Commercially.Droid
 			CompletedTimeText.Text = SharedController.CompletedTimeText;
 		}
 
+		void InitializeSpinner()
+		{
+			StatusSpinner = this.GetStatusSpinner();
+			StatusSpinner.SetSelection(((ArrayAdapter)StatusSpinner.Adapter).GetPosition(SharedController.StatusText));
+			StaticStatusText.SetTextColor(RequestDetails.StaticStatusDefault.GetAndroidColor());
+			if (!SharedController.StatusInputIsHidden) {
+				StaticStatusText.SetTextColor(RequestDetails.StaticStatusEdit.GetAndroidColor());
+			}
+		}
+
 		void InitializeVisibility()
 		{
 			UrgentIndicator.Hidden(SharedController.UrgentIndicatorIsHidden);
@@ -76,15 +85,6 @@ namespace Commercially.Droid
 			SaveButton.Hidden(SharedController.SaveButtonIsHidden);
 			StatusSpinner.Hidden(SharedController.StatusInputIsHidden);
 			StatusText.Hidden(SharedController.StatusLabelIsHidden);
-		}
-
-		void InitializeSpinner()
-		{
-			this.InitializeStatusSpinner();
-			StaticStatusText.SetTextColor(RequestDetails.StaticStatusDefault.GetAndroidColor());
-			if (!SharedController.StatusInputIsHidden) {
-				StaticStatusText.SetTextColor(RequestDetails.StaticStatusEdit.GetAndroidColor());
-			}
 		}
 
 		void InitializeActions()

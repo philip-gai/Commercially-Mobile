@@ -5,15 +5,12 @@ namespace Commercially.iOS
 {
 	public class ClientPickerViewModel : UIPickerViewModel
 	{
-		readonly Client[] DiscoveredBy;
+		readonly string[] DiscoveredBy;
 		readonly Action<UIPickerView, nint, nint> OnSelect;
 
-		public ClientPickerViewModel(Client[] DiscoveredBy, Action<UIPickerView, nint, nint> OnSelect)
+		public ClientPickerViewModel(FlicButton button, Action<UIPickerView, nint, nint> OnSelect)
 		{
-			Client[] tmpArr = new Client[DiscoveredBy.Length + 1];
-			DiscoveredBy.CopyTo(tmpArr, 1);
-			tmpArr[0] = Client.FindClient(GlobalConstants.Strings.Ignore, Session.Clients);
-			this.DiscoveredBy = tmpArr;
+			DiscoveredBy = ButtonDetails.GetPickerOptions(button);
 			this.OnSelect = OnSelect;
 		}
 
@@ -24,16 +21,12 @@ namespace Commercially.iOS
 
 		public override nint GetRowsInComponent(UIPickerView pickerView, nint component)
 		{
-			return DiscoveredBy != null ? DiscoveredBy.Length+1 : 1;
+			return DiscoveredBy.Length;
 		}
 
 		public override string GetTitle(UIPickerView pickerView, nint row, nint component)
 		{
-			if (row == 0) {
-				return Localizable.Labels.NoneOption;
-			}
-			Client client = DiscoveredBy[row - 1];
-			return string.IsNullOrWhiteSpace(client.friendlyName) ? client.clientId : client.friendlyName;
+			return DiscoveredBy[row];
 		}
 
 		public override void Selected(UIPickerView pickerView, nint row, nint component)
