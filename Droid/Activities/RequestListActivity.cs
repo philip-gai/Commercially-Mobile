@@ -146,10 +146,7 @@ namespace Commercially.Droid
 		TableRow GetTableRow(int row)
 		{
 			var rowView = this.GetTableRow(SharedController.Requests[row]);
-			Android.Graphics.Color color = SharedController.CurrentTypeColor.GetAndroidColor();
-			color.A = RequestList.RowAlphaByte;
-			rowView.SetBackgroundColor(color);
-			this.HideRequestStatusLabel(rowView);
+			rowView.SetBackgroundColor(SharedController.CurrentTypeColor.ColorWithAlpha(RequestList.RowAlphaByte));
 			return rowView;
 		}
 

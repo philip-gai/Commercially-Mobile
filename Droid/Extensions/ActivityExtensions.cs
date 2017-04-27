@@ -1,12 +1,10 @@
+using System;
 using Android.App;
 using Android.Content;
+using Android.Graphics;
 using Android.Views;
 using Android.Widget;
 using Newtonsoft.Json;
-
-using System;
-using Android.Graphics;
-using Android.Support.V7.App;
 
 namespace Commercially.Droid
 {
@@ -152,17 +150,11 @@ namespace Commercially.Droid
 			emailLabel.Text = sharedRow.EmailText;
 
 			rowView.Click += (object sender, EventArgs e) => {
-				var intent = new Intent(activity, typeof(ButtonDetailsActivity));
-				intent.PutExtra(typeof(FlicButton).Name, JsonConvert.SerializeObject(user));
+				var intent = new Intent(activity, typeof(UserDetailsActivity));
+				intent.PutExtra(typeof(User).Name, JsonConvert.SerializeObject(user));
 				activity.StartActivity(intent);
 			};
 			return rowView;
-		}
-
-		public static void HideRequestStatusLabel(this Activity activity, TableRow rowView)
-		{
-			var statusLabel = rowView.FindViewById<TextView>(Resource.Id.statusText);
-			statusLabel.Hidden(true);
 		}
 
 		public static void InitializeStatusSpinner(this Activity activity)
