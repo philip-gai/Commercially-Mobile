@@ -192,6 +192,10 @@
     <AndroidResource Include="Resources\layout\UserRow.axml" />
     <AndroidResource Include="Resources\layout\UserDetails.axml" />
     <AndroidResource Include="Resources\layout\HorizontalLine.axml" />
+    <AndroidResource Include="Resources\drawable-hdpi\client.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\client.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\client.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\client.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable-hdpi\" />
