@@ -6,7 +6,7 @@ namespace Commercially
 		public FlicButton[] Buttons;
 		public ButtonType CurrentType = ButtonType.Paired;
 		public const double HeaderHeight = 50;
-		public const double RowHeight = 110;
+		public const double RowHeight = 88;
 		public const double RowAlphaDouble = 0.33;
 		public const byte RowAlphaByte = 0x54;
 		public readonly static Color InactiveTextColor = GlobalConstants.DefaultColors.White;

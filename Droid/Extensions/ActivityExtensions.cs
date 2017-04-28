@@ -97,8 +97,6 @@ namespace Commercially.Droid
 			statusLabel.Hidden(SharedRow.StatusLabelIsHidden);
 			urgentIndicator.Hidden(SharedRow.UrgentIndicatorIsHidden);
 			descriptionLabel.Text = SharedRow.DescriptionText;
-
-			urgentIndicator.Hidden(request.urgent);
 			deleteButton.Hidden(true);
 
 			deleteButton.Click += (object sender, EventArgs e) => {
