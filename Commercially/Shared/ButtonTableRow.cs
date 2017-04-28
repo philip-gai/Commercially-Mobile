@@ -11,7 +11,7 @@
 
 		public string ButtonText {
 			get {
-				return Button.bluetooth_id;
+				return Button.bluetooth_id.Substring(6);
 			}
 		}
 

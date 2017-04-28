@@ -96,6 +96,7 @@
     <Compile Include="Extensions\ViewExtensions.cs" />
     <Compile Include="Activities\UserDetailsActivity.cs" />
     <Compile Include="Extensions\AndroidColorExtensions.cs" />
+    <Compile Include="Extensions\LinearLayoutExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -190,6 +191,7 @@
     <AndroidResource Include="Resources\layout\TopButton.axml" />
     <AndroidResource Include="Resources\layout\UserRow.axml" />
     <AndroidResource Include="Resources\layout\UserDetails.axml" />
+    <AndroidResource Include="Resources\layout\HorizontalLine.axml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable-hdpi\" />

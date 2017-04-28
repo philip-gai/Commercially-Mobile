@@ -78,7 +78,7 @@ namespace Commercially.Droid
 			Table.AddView(header);
 			for (int row = 0; row < SharedController.Requests.Length; row++) {
 				var tableRow = GetTableRow(row);
-				Table.AddView(tableRow);
+				Table.AddViewWithUnderline(tableRow, this);
 			}
 		}
 

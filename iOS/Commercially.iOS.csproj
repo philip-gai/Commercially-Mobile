@@ -182,6 +182,10 @@
     <ImageAsset Include="Assets.xcassets\user-TabBar.imageset\ic_person_48pt_3x~universal%403x.png" />
     <ImageAsset Include="Assets.xcassets\user-TabBar.imageset\ic_person_48pt_3x~universal%402x.png" />
     <ImageAsset Include="Assets.xcassets\user-TabBar.imageset\ic_person_48pt_3x~universal%401x.png" />
+    <ImageAsset Include="Assets.xcassets\client-TabBar.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\client-TabBar.imageset\ic_computer_48pt_3x~universal%401x.png" />
+    <ImageAsset Include="Assets.xcassets\client-TabBar.imageset\ic_computer_48pt_3x~universal%402x.png" />
+    <ImageAsset Include="Assets.xcassets\client-TabBar.imageset\ic_computer_48pt_3x~universal%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
@@ -222,6 +226,7 @@
     <Folder Include="Assets.xcassets\notification-Toolbar.imageset\" />
     <Folder Include="Assets.xcassets\Logo-Red-Toolbar.imageset\" />
     <Folder Include="Assets.xcassets\user-TabBar.imageset\" />
+    <Folder Include="Assets.xcassets\client-TabBar.imageset\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Storyboards\Login.storyboard" />
@@ -238,6 +243,8 @@
     <InterfaceDefinition Include="Storyboards\UserList.storyboard" />
     <InterfaceDefinition Include="Custom Classes\Cells\UserCell.xib" />
     <InterfaceDefinition Include="Storyboards\UserDetails.storyboard" />
+    <InterfaceDefinition Include="Storyboards\ClientDetails.storyboard" />
+    <InterfaceDefinition Include="Storyboards\ClientList.storyboard" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Entitlements.plist" />
@@ -335,6 +342,11 @@
     <Compile Include="Controllers\UserDetailsController.designer.cs">
       <DependentUpon>UserDetailsController.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\ClientListController.cs" />
+    <Compile Include="Controllers\ClientListController.designer.cs">
+      <DependentUpon>ClientListController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Extensions\UITabBarControllerExtensions.cs" />
   </ItemGroup>
   <Import Project="..\Commercially\Commercially.projitems" Label="Shared" Condition="Exists('..\Commercially\Commercially.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Eqa-vA-1sP">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
@@ -23,6 +23,7 @@
                         <segue destination="SdG-ZK-UUN" kind="relationship" relationship="viewControllers" id="chE-8X-FNk"/>
                         <segue destination="4" kind="relationship" relationship="viewControllers" id="XRa-F9-Fgg"/>
                         <segue destination="9vD-Fa-xYi" kind="relationship" relationship="viewControllers" id="ZaH-ZW-pVO"/>
+                        <segue destination="10" kind="relationship" relationship="viewControllers" id="QN9-vF-rhK"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ECx-2D-KRn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -39,7 +40,7 @@
             </objects>
             <point key="canvasLocation" x="734" y="97"/>
         </scene>
-        <!--Dashboard-->
+        <!--RequestList-->
         <scene sceneID="kcY-xe-r0x">
             <objects>
                 <viewControllerPlaceholder storyboardName="RequestList" id="SdG-ZK-UUN" sceneMemberID="viewController">
@@ -59,24 +60,15 @@
             </objects>
             <point key="canvasLocation" x="384" y="199"/>
         </scene>
+        <!--ClientList-->
+        <scene sceneID="9">
+            <objects>
+                <viewControllerPlaceholder storyboardName="ClientList" id="10" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="qd8-gW-GmF"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="11" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="398" y="297"/>
+        </scene>
     </scenes>
-    <resources>
-        <image name="Logo-White" width="170.666672" height="170.666672"/>
-        <image name="Logo-Black" width="170.666672" height="170.666672"/>
-        <image name="Logo-Orange" width="170.666672" height="170.666672"/>
-        <image name="Logo-Yellow" width="170.666672" height="170.666672"/>
-        <image name="Logo-Green" width="170.666672" height="170.666672"/>
-        <image name="Logo-TealBlue" width="170.666672" height="170.666672"/>
-        <image name="Logo-Blue" width="170.666672" height="170.666672"/>
-        <image name="Logo-Purple" width="170.666672" height="170.666672"/>
-        <image name="Logo-Pink" width="170.666672" height="170.666672"/>
-        <image name="Logo-Red" width="170.666672" height="170.666672"/>
-        <image name="button-TabBar" width="24" height="24"/>
-        <image name="error" width="48" height="48"/>
-        <image name="dashboard-TabBar" width="25" height="25"/>
-        <image name="notification-Toolbar" width="48" height="48"/>
-        <image name="Logo-Red-Toolbar" width="25" height="25"/>
-        <image name="list-TabBar" width="25" height="25"/>
-        <image name="user-TabBar" width="48" height="48"/>
-    </resources>
 </document>

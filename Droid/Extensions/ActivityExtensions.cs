@@ -50,6 +50,12 @@ namespace Commercially.Droid
 			newFragment.Show(activity.FragmentManager, message);
 		}
 
+		public static View GetHorizontalLine(this Activity activity)
+		{
+			var inflater = (LayoutInflater)activity.GetSystemService(Context.LayoutInflaterService);
+			return inflater.Inflate(Resource.Layout.HorizontalLine, null);
+		}
+
 		public static HorizontalScrollView GetTopButtons<T>(this Activity activity, T[] array)
 		{
 			var inflater = (LayoutInflater)activity.GetSystemService(Context.LayoutInflaterService);
