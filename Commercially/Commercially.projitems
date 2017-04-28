@@ -46,6 +46,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Shared\ButtonTableRow.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Shared\RequestTableRow.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Shared\UserDetails.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Shared\ClientList.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Shared\ClientTableRow.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Shared\ClientDetails.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Entities\" />

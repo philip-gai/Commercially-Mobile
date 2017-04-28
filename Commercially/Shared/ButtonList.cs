@@ -22,8 +22,7 @@ namespace Commercially
 
 		public Color CurrentTypeColor {
 			get {
-				var index = Array.IndexOf(ButtonTypes, CurrentType);
-				return TypeBackgroundColors[index];
+				return GetTypeColor(CurrentType);
 			}
 		}
 

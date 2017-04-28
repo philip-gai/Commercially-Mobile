@@ -22,8 +22,7 @@ namespace Commercially
 
 		public Color CurrentTypeColor {
 			get {
-				var index = Array.IndexOf(UserRoleTypes, CurrentType);
-				return TypeBackgroundColors[index];
+				return GetTypeColor(CurrentType);
 			}
 		}
 

@@ -24,7 +24,7 @@ namespace Commercially
 
 		public Client[] DiscoveredByClients {
 			get {
-				return Client.FindClients(discoveredBy);
+				return ClientApi.GetClients(discoveredBy);
 			}
 		}
 	}

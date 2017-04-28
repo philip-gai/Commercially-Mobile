@@ -17,7 +17,7 @@
 
 		public string ClientText {
 			get {
-				var tmpClient = Client.FindClient(Button.clientId);
+				var tmpClient = ClientApi.GetClient(Button.clientId);
 				return tmpClient != null && tmpClient.friendlyName != null ? tmpClient.friendlyName : Button.clientId;
 			}
 		}

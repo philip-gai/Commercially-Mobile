@@ -51,10 +51,7 @@ namespace Commercially
 				return user.Type == type;
 			});
 			Array.Sort(list, (User x, User y) => {
-				if (x.lastname != null && y.lastname != null) {
-					return string.Compare(x.lastname, y.lastname, StringComparison.Ordinal);
-				}
-				return string.Compare(x.username, y.username, StringComparison.Ordinal);
+				return string.Compare(x.username, y.username);
 			});
 			return list;
 		}

@@ -45,6 +45,9 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <connections>
+                                                        <action selector="TopButtonTouchUpInside:" destination="7ST-L8-y4S" id="3" eventType="touchUpInside"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="6Vu-oY-dUB">
                                                     <rect key="frame" x="105" y="0.0" width="101" height="40"/>
@@ -62,6 +65,9 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <connections>
+                                                        <action selector="TopButtonTouchUpInside:" destination="7ST-L8-y4S" id="4" eventType="touchUpInside"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </stackView>

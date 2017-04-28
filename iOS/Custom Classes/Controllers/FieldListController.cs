@@ -2,8 +2,10 @@
 using UIKit;
 using Foundation;
 
-namespace Commercially.iOS {
-	public abstract class FieldListController : UnderlineViewController {
+namespace Commercially.iOS
+{
+	public abstract class FieldListController : UnderlineViewController
+	{
 		public abstract UIView[] FieldList { get; }
 		NSObject keyboardShowToken, keyboardHideToken;
 
@@ -20,7 +22,8 @@ namespace Commercially.iOS {
 			}
 		}
 
-		public override void ViewDidLoad() {
+		public override void ViewDidLoad()
+		{
 			base.ViewDidLoad();
 			View.HideKeyboardWhenTapped();
 			SetNextResponders();
@@ -29,42 +32,45 @@ namespace Commercially.iOS {
 			ScrollView.Bounces = false;
 		}
 
-		public override void ViewDidUnload() {
+		public override void ViewDidUnload()
+		{
 			base.ViewDidUnload();
 			Button.TouchUpInside -= ButtonTouchUpInside;
 			Button.TouchUpInside -= HandleKeyboardOnButtonTouch;
 		}
 
-		public override void ViewWillAppear(bool animated) {
+		public override void ViewWillAppear(bool animated)
+		{
 			base.ViewWillAppear(animated);
-			keyboardShowToken = NotificationHelper.ObserveNotification(UIKeyboard.DidShowNotification, HandleKeyboardDidShow);
-			keyboardHideToken = NotificationHelper.ObserveNotification(UIKeyboard.DidHideNotification, HandleKeyboardDidHide);
+			keyboardShowToken = UIKeyboard.Notifications.ObserveDidShow(HandleKeyboardDidShow);
+			keyboardHideToken = UIKeyboard.Notifications.ObserveDidHide(HandleKeyboardDidHide);
 		}
 
-		public override void ViewWillDisappear(bool animated) {
+		public override void ViewWillDisappear(bool animated)
+		{
 			base.ViewWillDisappear(animated);
 			View.EndEditing(true);
 			keyboardShowToken.Dispose();
 			keyboardHideToken.Dispose();
 		}
 
-		public override void ViewDidDisappear(bool animated) {
-			base.ViewDidDisappear(animated);
+		void HandleKeyboardDidShow(object sender, UIKeyboardEventArgs e)
+		{
+			this.KeyboardDid(UIViewControllerExtensions.KeyboardActionType.Show, e.FrameEnd);
 		}
 
-		void HandleKeyboardDidShow(NSNotification notification) {
-			this.KeyboardDid(UIViewControllerExtensions.KeyboardActionType.Show, notification);
+		void HandleKeyboardDidHide(object sender, UIKeyboardEventArgs e)
+		{
+			this.KeyboardDid(UIViewControllerExtensions.KeyboardActionType.Hide, e.FrameEnd);
 		}
 
-		void HandleKeyboardDidHide(NSNotification notification) {
-			this.KeyboardDid(UIViewControllerExtensions.KeyboardActionType.Hide, notification);
-		}
-
-		void HandleKeyboardOnButtonTouch(object sender, EventArgs events) {
+		void HandleKeyboardOnButtonTouch(object sender, EventArgs events)
+		{
 			View.EndEditing(true);
 		}
 
-		public bool CheckIfFieldsValid() {
+		public bool CheckIfFieldsValid()
+		{
 			bool fieldValid = true;
 			foreach (UIView view in FieldList) {
 				if (view is AbstractField) {
@@ -86,7 +92,8 @@ namespace Commercially.iOS {
 			return fieldValid;
 		}
 
-		public void ResetFields() {
+		public void ResetFields()
+		{
 			foreach (UIView view in FieldList) {
 				if (view is AbstractField) {
 					var field = view as AbstractField;
@@ -102,7 +109,8 @@ namespace Commercially.iOS {
 			}
 		}
 
-		void SetNextResponders() {
+		void SetNextResponders()
+		{
 			AbstractField previousField = null;
 			foreach (UIView view in FieldList) {
 				if (view is AbstractField) {

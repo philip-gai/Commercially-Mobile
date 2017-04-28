@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BcD-uv-GIV">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
@@ -13,43 +13,58 @@
         <scene sceneID="nkS-yb-Bf5">
             <objects>
                 <tableViewController id="BcD-uv-GIV" customClass="UserDetailsController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="zDE-yg-YgA">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="50" sectionFooterHeight="28" id="zDE-yg-YgA">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <stackView key="tableHeaderView" opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" id="IGA-PR-gBK">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="128"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="mzS-fH-4vq">
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="90"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First Last" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8YG-gf-OCo">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="42.5"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9sg-Z6-dbT">
-                                    <rect key="frame" x="0.0" y="42.5" width="375" height="43"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone Number" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iic-FH-Qng">
-                                    <rect key="frame" x="0.0" y="85.5" width="375" height="42.5"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="icR-Y1-J7P" misplaced="YES">
+                                    <rect key="frame" x="10" y="10" width="355" height="70"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First Last" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P9D-bU-3eK" fixedFrame="YES">
+                                            <rect key="frame" x="0.0" y="0.0" width="355" height="20"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JgX-Vi-7yt" fixedFrame="YES">
+                                            <rect key="frame" x="0.0" y="25" width="355" height="20"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone Number" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gHj-8k-l6i" fixedFrame="YES">
+                                            <rect key="frame" x="0.0" y="50" width="355" height="20"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </label>
+                                    </subviews>
+                                </stackView>
                             </subviews>
-                        </stackView>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="icR-Y1-J7P" firstAttribute="leading" secondItem="mzS-fH-4vq" secondAttribute="leading" constant="10" id="CxZ-QG-pzt"/>
+                                <constraint firstAttribute="bottom" secondItem="icR-Y1-J7P" secondAttribute="bottom" constant="10" id="be5-ld-8CD"/>
+                                <constraint firstAttribute="trailing" secondItem="icR-Y1-J7P" secondAttribute="trailing" constant="10" id="nzM-wh-ZGy"/>
+                                <constraint firstItem="icR-Y1-J7P" firstAttribute="top" secondItem="mzS-fH-4vq" secondAttribute="top" constant="10" id="vgE-NF-lub"/>
+                            </constraints>
+                        </view>
                         <connections>
                             <outlet property="dataSource" destination="BcD-uv-GIV" id="fUe-FJ-CuZ"/>
                             <outlet property="delegate" destination="BcD-uv-GIV" id="Czw-ax-Zir"/>
                         </connections>
                     </tableView>
                     <connections>
-                        <outlet property="EmailLabel" destination="9sg-Z6-dbT" id="name-outlet-9sg-Z6-dbT"/>
-                        <outlet property="FirstLastLabel" destination="8YG-gf-OCo" id="name-outlet-8YG-gf-OCo"/>
-                        <outlet property="PhoneLabel" destination="iic-FH-Qng" id="name-outlet-iic-FH-Qng"/>
+                        <outlet property="FirstLastLabel" destination="P9D-bU-3eK" id="name-outlet-P9D-bU-3eK"/>
+                        <outlet property="EmailLabel" destination="JgX-Vi-7yt" id="name-outlet-JgX-Vi-7yt"/>
+                        <outlet property="PhoneLabel" destination="gHj-8k-l6i" id="name-outlet-gHj-8k-l6i"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p27-lr-1Xi" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -57,4 +72,24 @@
             <point key="canvasLocation" x="268" y="142"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Logo-White" width="170.666672" height="170.666672"/>
+        <image name="Logo-Black" width="170.666672" height="170.666672"/>
+        <image name="Logo-Orange" width="170.666672" height="170.666672"/>
+        <image name="Logo-Yellow" width="170.666672" height="170.666672"/>
+        <image name="Logo-Green" width="170.666672" height="170.666672"/>
+        <image name="Logo-TealBlue" width="170.666672" height="170.666672"/>
+        <image name="Logo-Blue" width="170.666672" height="170.666672"/>
+        <image name="Logo-Purple" width="170.666672" height="170.666672"/>
+        <image name="Logo-Pink" width="170.666672" height="170.666672"/>
+        <image name="Logo-Red" width="170.666672" height="170.666672"/>
+        <image name="button-TabBar" width="24" height="24"/>
+        <image name="error" width="48" height="48"/>
+        <image name="dashboard-TabBar" width="25" height="25"/>
+        <image name="notification-Toolbar" width="48" height="48"/>
+        <image name="Logo-Red-Toolbar" width="25" height="25"/>
+        <image name="list-TabBar" width="25" height="25"/>
+        <image name="user-TabBar" width="48" height="48"/>
+        <image name="client-TabBar" width="25" height="25"/>
+    </resources>
 </document>

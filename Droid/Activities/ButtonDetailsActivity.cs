@@ -30,20 +30,6 @@ namespace Commercially.Droid
 			}
 		}
 
-		bool LocationChanged {
-			get {
-				if (SharedController.Button.room == null) return !string.IsNullOrWhiteSpace(LocationField.Text);
-				return !SharedController.Button.room.Equals(LocationField.Text, StringComparison.CurrentCultureIgnoreCase);
-			}
-		}
-
-		bool DescriptionChanged {
-			get {
-				if (SharedController.Button.description == null) return !string.IsNullOrWhiteSpace(DescriptionField.Text);
-				return !SharedController.Button.description.Equals(DescriptionField.Text, StringComparison.CurrentCultureIgnoreCase);
-			}
-		}
-
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
@@ -101,7 +87,7 @@ namespace Commercially.Droid
 				SharedController.SaveButtonPress(LocationField.Text, DescriptionField.Text,
 												 ClientSpinner.GetItemAtPosition(0).ToString());
 			} catch (Exception) {
-				this.ShowPrompt(Localizable.PromptMessages.ButtonSaveError);
+				this.ShowPrompt(Localizable.PromptMessages.ChangesSaveError);
 				return;
 			}
 			SaveButton.Hidden(true);

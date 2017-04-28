@@ -5,15 +5,15 @@ namespace Commercially.iOS
 {
 	public partial class ButtonDetailsController : KeyboardController
 	{
-		private readonly ButtonDetails SharedController = new ButtonDetails();
+		readonly ButtonDetails SharedController = new ButtonDetails();
+
+		public ButtonDetailsController(IntPtr handle) : base(handle) { }
 
 		public FlicButton Button {
 			set {
 				SharedController.Button = value;
 			}
 		}
-
-		public ButtonDetailsController(IntPtr handle) : base(handle) { }
 
 		bool IsChanged {
 			get {
@@ -39,7 +39,7 @@ namespace Commercially.iOS
 				SharedController.SaveButtonPress(LocationField.Text, DescriptionField.Text,
 												 ClientPickerView.Model.GetTitle(ClientPickerView, 0, 0));
 			} catch (Exception) {
-				NavigationController.ShowPrompt(Localizable.PromptMessages.ButtonSaveError);
+				NavigationController.ShowPrompt(Localizable.PromptMessages.ChangesSaveError);
 				return;
 			}
 			UIView.AnimateAsync(ButtonDetails.AnimationDuration, delegate {
@@ -51,15 +51,19 @@ namespace Commercially.iOS
 		void InitializeView()
 		{
 			if (SharedController.Button == null) return;
-			LocationField.ShouldReturn += (textField) => { LocationField.ResignFirstResponder(); return true; };
-			DescriptionField.ShouldReturn += (textField) => { DescriptionField.ResignFirstResponder(); return true; };
+
 			LocationField.Text = SharedController.LocationFieldText;
 			DescriptionField.Text = SharedController.DescriptionFieldText;
 			BluetoothIdLabel.Text = SharedController.BluetoothIdText;
-			LocationField.EditingChanged += OnFieldChange;
-			DescriptionField.EditingChanged += OnFieldChange;
+
+			LocationField.ShouldReturn += (textField) => { textField.ResignFirstResponder(); return true; };
+			DescriptionField.ShouldReturn += (textField) => { textField.ResignFirstResponder(); return true; };
+			LocationField.EditingDidEnd += FieldEditingDidEnd;
+			DescriptionField.EditingDidEnd += FieldEditingDidEnd;
+
 			ClientStack.Hidden = SharedController.ClientStackIsHidden;
 			PairStack.Hidden = SharedController.PairStackIsHidden;
+
 			ClientPickerView.Model = new ClientPickerViewModel(SharedController.Button, OnPickerChange);
 			ClientIdLabel.Text = SharedController.ClientIdText;
 			SaveButton.Hidden = true;
@@ -73,7 +77,7 @@ namespace Commercially.iOS
 			});
 		}
 
-		void OnFieldChange(object sender, EventArgs e)
+		void FieldEditingDidEnd(object sender, EventArgs e)
 		{
 			UIView.AnimateAsync(ButtonDetails.AnimationDuration, delegate {
 				SaveButton.Hidden = !IsChanged;

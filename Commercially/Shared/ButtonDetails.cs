@@ -19,19 +19,19 @@ namespace Commercially
 		public bool PickerChanged(string originalTitle)
 		{
 			if (SelectedClient == null) return false;
-			return !originalTitle.Equals(SelectedClient, StringComparison.CurrentCultureIgnoreCase);
+			return !originalTitle.Equals(SelectedClient);
 		}
 
 		public bool LocationChanged(string locationText)
 		{
 			if (Button.room == null) return !string.IsNullOrWhiteSpace(locationText);
-			return !Button.room.Equals(locationText, StringComparison.CurrentCultureIgnoreCase);
+			return !Button.room.Equals(locationText);
 		}
 
 		public bool DescriptionChanged(string descriptionText)
 		{
 			if (Button.description == null) return !string.IsNullOrWhiteSpace(descriptionText);
-			return !Button.description.Equals(descriptionText, StringComparison.CurrentCultureIgnoreCase);
+			return !Button.description.Equals(descriptionText);
 		}
 
 		public string LocationFieldText {
@@ -54,7 +54,7 @@ namespace Commercially
 
 		public string ClientIdText {
 			get {
-				var tmpClient = Client.FindClient(Button.clientId);
+				var tmpClient = ClientApi.GetClient(Button.clientId);
 				return tmpClient != null && tmpClient.friendlyName != null ? tmpClient.friendlyName : Button.clientId;
 			}
 		}
@@ -74,17 +74,17 @@ namespace Commercially
 		public void SaveButtonPress(string locationText, string descriptionText, string pickerValue)
 		{
 			var jsonBody = new JObject();
-			if (LocationChanged(locationText) && locationText != null) {
+			if (LocationChanged(locationText) &&  !string.IsNullOrWhiteSpace(locationText)) {
 				jsonBody.Add("room", locationText);
 			}
-			if (DescriptionChanged(descriptionText) && descriptionText != null) {
+			if (DescriptionChanged(descriptionText) && !string.IsNullOrWhiteSpace(descriptionText)) {
 				jsonBody.Add("description", descriptionText);
 			}
 			if (jsonBody.Count > 0) {
 				FlicButtonApi.PatchButton(Button.bluetooth_id, jsonBody.ToString());
 			}
 			if (PickerChanged(pickerValue)) {
-				FlicButtonApi.PairButton(Button.bluetooth_id, Client.FindClient(SelectedClient).clientId);
+				FlicButtonApi.PairButton(Button.bluetooth_id, ClientApi.GetClient(SelectedClient).clientId);
 			}
 		}
 

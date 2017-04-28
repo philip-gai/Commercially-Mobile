@@ -12,6 +12,7 @@
 			public const string RequestDetails = "RequestDetails";
 			public const string ButtonDetails = "ButtonDetails";
 			public const string UserDetails = "UserDetails";
+			public const string ClientDetails = "ClientDetails";
 		}
 		public struct DefaultColors
 		{

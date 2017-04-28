@@ -28,7 +28,7 @@ namespace Commercially.iOS
 			try {
 				RequestApi.UpdateRequest(SharedController.Request._id, Request.GetStatusType(SharedController.SelectedStatus));
 			} catch (Exception) {
-				NavigationController.ShowPrompt(Localizable.PromptMessages.RequestSaveError);
+				NavigationController.ShowPrompt(Localizable.PromptMessages.ChangesSaveError);
 				return;
 			}
 			UIView.AnimateAsync(RequestDetails.AnimationDuration, delegate {

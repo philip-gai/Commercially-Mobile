@@ -9,10 +9,8 @@ namespace Commercially.iOS
 	{
 		public enum KeyboardActionType { Show, Hide };
 
-		public static void KeyboardDid(this UIViewController controller, KeyboardActionType Type, NSNotification notification)
+		public static void KeyboardDid(this UIViewController controller, KeyboardActionType Type, CGRect KeyboardFrame)
 		{
-			CGRect KeyboardFrame = (notification.UserInfo[UIKeyboard.FrameEndUserInfoKey] as NSValue).CGRectValue;
-
 			UIView view = controller.View;
 			view.SetNeedsLayout();
 			view.LayoutIfNeeded();

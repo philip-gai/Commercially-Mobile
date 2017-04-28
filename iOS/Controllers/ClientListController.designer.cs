@@ -22,6 +22,10 @@ namespace Commercially.iOS
         [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton DiscoveredButton { get; set; }
 
+        [Action ("TopButtonTouchUpInside:")]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        partial void TopButtonTouchUpInside (UIKit.UIButton sender);
+
         void ReleaseDesignerOutlets ()
         {
             if (AuthorizedButton != null) {

@@ -245,6 +245,7 @@
     <InterfaceDefinition Include="Storyboards\UserDetails.storyboard" />
     <InterfaceDefinition Include="Storyboards\ClientDetails.storyboard" />
     <InterfaceDefinition Include="Storyboards\ClientList.storyboard" />
+    <InterfaceDefinition Include="Custom Classes\Cells\ClientCell.xib" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Entitlements.plist" />
@@ -319,10 +320,6 @@
     <Compile Include="Custom Classes\Cells\ButtonCell.designer.cs">
       <DependentUpon>ButtonCell.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controllers\ButtonListController.cs" />
-    <Compile Include="Controllers\ButtonListController.designer.cs">
-      <DependentUpon>ButtonListController.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controllers\ButtonDetailsController.cs" />
     <Compile Include="Controllers\ButtonDetailsController.designer.cs">
       <DependentUpon>ButtonDetailsController.cs</DependentUpon>
@@ -347,6 +344,16 @@
       <DependentUpon>ClientListController.cs</DependentUpon>
     </Compile>
     <Compile Include="Extensions\UITabBarControllerExtensions.cs" />
+    <Compile Include="Controllers\ButtonListController.cs" />
+    <Compile Include="Controllers\ButtonListController.designer.cs" />
+    <Compile Include="Custom Classes\Cells\ClientCell.cs" />
+    <Compile Include="Custom Classes\Cells\ClientCell.designer.cs">
+      <DependentUpon>ClientCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\ClientDetailsController.cs" />
+    <Compile Include="Controllers\ClientDetailsController.designer.cs">
+      <DependentUpon>ClientDetailsController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="..\Commercially\Commercially.projitems" Label="Shared" Condition="Exists('..\Commercially\Commercially.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

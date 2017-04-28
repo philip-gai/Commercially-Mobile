@@ -1,4 +1,4 @@
-﻿using Android.App;
+using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Support.V7.App;
@@ -107,7 +107,7 @@ namespace Commercially.Droid
 			try {
 				RequestApi.UpdateRequest(SharedController.Request._id, Request.GetStatusType(SharedController.SelectedStatus));
 			} catch (Exception) {
-				this.ShowPrompt(Localizable.PromptMessages.RequestSaveError);
+				this.ShowPrompt(Localizable.PromptMessages.ChangesSaveError);
 				return;
 			}
 			saveButton.Hidden(true);

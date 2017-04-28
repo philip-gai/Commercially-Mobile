@@ -28,8 +28,8 @@ namespace Commercially.iOS
 		public override void ViewWillAppear(bool animated)
 		{
 			base.ViewWillAppear(animated);
-			keyboardShowToken = NotificationHelper.ObserveNotification(UIKeyboard.DidShowNotification, HandleKeyboardDidShow);
-			keyboardHideToken = NotificationHelper.ObserveNotification(UIKeyboard.DidHideNotification, HandleKeyboardDidHide);
+			keyboardShowToken = UIKeyboard.Notifications.ObserveDidShow(HandleKeyboardDidShow);
+			keyboardHideToken = UIKeyboard.Notifications.ObserveDidHide(HandleKeyboardDidHide);
 		}
 
 		public override void ViewWillDisappear(bool animated)
@@ -40,14 +40,13 @@ namespace Commercially.iOS
 			keyboardHideToken.Dispose();
 		}
 
-		void HandleKeyboardDidShow(NSNotification notification)
+		void HandleKeyboardDidShow(object sender, UIKeyboardEventArgs e)
 		{
-			this.KeyboardDid(UIViewControllerExtensions.KeyboardActionType.Show, notification);
+			this.KeyboardDid(UIViewControllerExtensions.KeyboardActionType.Show, e.FrameEnd);
 		}
 
-		void HandleKeyboardDidHide(NSNotification notification)
-		{
-			this.KeyboardDid(UIViewControllerExtensions.KeyboardActionType.Hide, notification);
+		void HandleKeyboardDidHide(object sender, UIKeyboardEventArgs e) {
+			this.KeyboardDid(UIViewControllerExtensions.KeyboardActionType.Hide, e.FrameEnd);
 		}
 	}
 }
