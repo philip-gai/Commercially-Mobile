@@ -59,7 +59,7 @@ namespace Commercially
 			}
 		}
 
-		public bool ClientIdIsHidden {
+		public bool ClientStackIsHidden {
 			get {
 				return !IsPaired;
 			}

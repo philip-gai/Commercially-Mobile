@@ -21,6 +21,7 @@ namespace Commercially.Droid
 		TextView ClientIdText { get { return FindViewById<TextView>(Resource.Id.clientIdText); } }
 		Button SaveButton { get { return FindViewById<Button>(Resource.Id.saveButton); } }
 		LinearLayout PairLayout { get { return FindViewById<LinearLayout>(Resource.Id.pairLayout); } }
+		LinearLayout ClientLayout { get { return FindViewById<LinearLayout>(Resource.Id.clientLayout); } }
 		Spinner ClientSpinner;
 
 		bool IsChanged {
@@ -70,7 +71,7 @@ namespace Commercially.Droid
 			BluetoothIdText.Text = SharedController.BluetoothIdText;
 			ClientIdText.Text = SharedController.ClientIdText;
 
-			ClientIdText.Hidden(SharedController.ClientIdIsHidden);
+			ClientLayout.Hidden(SharedController.ClientStackIsHidden);
 			PairLayout.Hidden(SharedController.PairStackIsHidden);
 			SaveButton.Hidden(true);
 

@@ -28,6 +28,10 @@ namespace Commercially.iOS
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIStackView ClientStack { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UITextField DescriptionField { get; set; }
 
         [Outlet]
@@ -65,6 +69,11 @@ namespace Commercially.iOS
             if (ClientPickerView != null) {
                 ClientPickerView.Dispose ();
                 ClientPickerView = null;
+            }
+
+            if (ClientStack != null) {
+                ClientStack.Dispose ();
+                ClientStack = null;
             }
 
             if (DescriptionField != null) {

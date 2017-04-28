@@ -58,7 +58,7 @@ namespace Commercially.iOS
 			BluetoothIdLabel.Text = SharedController.BluetoothIdText;
 			LocationField.EditingChanged += OnFieldChange;
 			DescriptionField.EditingChanged += OnFieldChange;
-			ClientIdLabel.Hidden = SharedController.ClientIdIsHidden;
+			ClientStack.Hidden = SharedController.ClientStackIsHidden;
 			PairStack.Hidden = SharedController.PairStackIsHidden;
 			ClientPickerView.Model = new ClientPickerViewModel(SharedController.Button, OnPickerChange);
 			ClientIdLabel.Text = SharedController.ClientIdText;

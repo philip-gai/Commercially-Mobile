@@ -49,6 +49,12 @@ namespace Commercially.Droid
 			InitializeView();
 		}
 
+		protected override void OnResume()
+		{
+			base.OnResume();
+			GetRequests();
+		}
+
 		public override bool OnSupportNavigateUp()
 		{
 			Finish();
@@ -62,6 +68,7 @@ namespace Commercially.Droid
 			EmailText.Text = SharedController.EmailText;
 			PhoneText.Text = SharedController.PhoneText;
 			PhoneText.Hidden(SharedController.PhoneLabelIsHidden);
+			Layout.AddView(Table);
 		}
 
 		void InitializeTable()
@@ -73,7 +80,6 @@ namespace Commercially.Droid
 				var tableRow = GetTableRow(row);
 				Table.AddView(tableRow);
 			}
-			Layout.AddView(Table);
 		}
 
 		View GetHeader()
