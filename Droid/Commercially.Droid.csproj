@@ -90,13 +90,14 @@
     <Compile Include="Activities\SplashActivity.cs" />
     <Compile Include="Activities\ButtonListActivity.cs" />
     <Compile Include="Activities\RequestDetailsActivity.cs" />
-    <Compile Include="Activities\ButtonDetailsActivity.cs" />
     <Compile Include="Extensions\AppCompatActivityExtensions.cs" />
     <Compile Include="Activities\UserListActivity.cs" />
     <Compile Include="Extensions\ViewExtensions.cs" />
     <Compile Include="Activities\UserDetailsActivity.cs" />
     <Compile Include="Extensions\AndroidColorExtensions.cs" />
     <Compile Include="Extensions\LinearLayoutExtensions.cs" />
+    <Compile Include="Activities\ClientListActivity.cs" />
+    <Compile Include="Activities\ClientDetailsActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -196,6 +197,8 @@
     <AndroidResource Include="Resources\drawable-mdpi\client.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\client.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\client.png" />
+    <AndroidResource Include="Resources\layout\ClientRow.axml" />
+    <AndroidResource Include="Resources\layout\ClientDetails.axml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable-hdpi\" />

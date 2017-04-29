@@ -51,7 +51,6 @@ namespace Commercially.iOS
 			UIView.AnimateAsync(ClientDetails.AnimationDuration, delegate {
 				ButtonStack.Hidden = SaveButton.Hidden && AuthorizeButton.Hidden;
 			});
-			ViewDidLayoutSubviews();
 		}
 
 		void SaveButtonTouchUpInside(object sender, EventArgs e)

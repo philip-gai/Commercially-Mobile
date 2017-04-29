@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
 	  xmlns:app="http://schemas.android.com/apk/res-auto">
-  <item
-       android:id="@+id/DashboardIcon"
-       android:icon="@drawable/dashboard"
-       app:showAsAction="ifRoom"
-       android:title="Requests" />
 	<group
 		android:id="@+id/AdminGroup">
+		<item
+       	 android:id="@+id/DashboardIcon"
+       	 android:icon="@drawable/dashboard"
+       	 app:showAsAction="ifRoom"
+       	 android:title="Requests" />
   		<item
       	 android:id="@+id/ButtonIcon"
 	   	 android:icon="@drawable/button"
@@ -18,5 +18,10 @@
 	   	 android:icon="@drawable/user"
        	 app:showAsAction="ifRoom"
          android:title="Users" />
+		<item
+      	 android:id="@+id/ClientIcon"
+	   	 android:icon="@drawable/client"
+       	 app:showAsAction="ifRoom"
+         android:title="Clients" />
 	</group>
 </menu>

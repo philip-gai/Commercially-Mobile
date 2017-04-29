@@ -32,8 +32,8 @@ namespace Commercially.Droid
 
 		public static void StartActivityMenuItem(this Activity activity, IMenuItem item)
 		{
-			int[] icons = { Resource.Id.DashboardIcon, Resource.Id.ButtonIcon, Resource.Id.UserIcon };
-			Type[] activityTypes = { typeof(RequestListActivity), typeof(ButtonListActivity), typeof(UserListActivity) };
+			int[] icons = { Resource.Id.DashboardIcon, Resource.Id.ButtonIcon, Resource.Id.UserIcon, Resource.Id.ClientIcon };
+			Type[] activityTypes = { typeof(RequestListActivity), typeof(ButtonListActivity), typeof(UserListActivity), typeof(ClientListActivity) };
 
 			for (int i = 0; i < icons.Length; i++) {
 				if (icons[i] == item.ItemId) {
@@ -134,7 +134,7 @@ namespace Commercially.Droid
 			locationLabel.Text = sharedRow.LocationText;
 
 			rowView.Click += (object sender, EventArgs e) => {
-				var intent = new Intent(activity, typeof(ButtonDetailsActivity));
+				var intent = new Intent(activity, typeof(ClientDetailsActivity));
 				intent.PutExtra(typeof(FlicButton).Name, JsonConvert.SerializeObject(button));
 				activity.StartActivity(intent);
 			};
@@ -156,6 +156,26 @@ namespace Commercially.Droid
 			rowView.Click += (object sender, EventArgs e) => {
 				var intent = new Intent(activity, typeof(UserDetailsActivity));
 				intent.PutExtra(typeof(User).Name, JsonConvert.SerializeObject(user));
+				activity.StartActivity(intent);
+			};
+			return rowView;
+		}
+
+		public static TableRow GetTableRow(this Activity activity, Client client)
+		{
+			var inflater = (LayoutInflater)activity.GetSystemService(Context.LayoutInflaterService);
+			var rowView = (TableRow)inflater.Inflate(Resource.Layout.ClientRow, null);
+			var clientIdLabel = rowView.FindViewById<TextView>(Resource.Id.clientIdText);
+			var friendlyNameLabel = rowView.FindViewById<TextView>(Resource.Id.friendlyNameText);
+
+			var sharedRow = new ClientTableRow(client);
+			clientIdLabel.Text = sharedRow.IdText;
+			friendlyNameLabel.Text = sharedRow.FriendlyNameText;
+			friendlyNameLabel.Hidden(sharedRow.FriendlyNameLabelIsHidden);
+
+			rowView.Click += (object sender, EventArgs e) => {
+				var intent = new Intent(activity, typeof(ClientDetailsActivity));
+				intent.PutExtra(typeof(Client).Name, JsonConvert.SerializeObject(client));
 				activity.StartActivity(intent);
 			};
 			return rowView;

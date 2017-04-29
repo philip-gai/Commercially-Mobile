@@ -39,7 +39,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Shared\ButtonList.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Shared\RequestDetails.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Shared\StatusPicker.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Shared\ButtonDetails.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enumerations\ButtonType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Shared\UserList.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Shared\UserTableRow.cs" />
@@ -48,6 +47,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Shared\UserDetails.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Shared\ClientList.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Shared\ClientTableRow.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Shared\ButtonDetails.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Shared\ClientDetails.cs" />
   </ItemGroup>
   <ItemGroup>

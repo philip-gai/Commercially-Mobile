@@ -11,6 +11,7 @@ namespace Commercially
 		public const byte RowAlphaByte = 0x54;
 		public readonly static Color InactiveTextColor = GlobalConstants.DefaultColors.White;
 		public readonly static Color ActiveBackgroundColor = GlobalConstants.DefaultColors.White;
+		public readonly static string[] ButtonLabels = { "Authorized", "Discovered" };
 		readonly static Color[] TypeBackgroundColors = { GlobalConstants.DefaultColors.Red, GlobalConstants.DefaultColors.Yellow };
 
 		public string CurrentTypeTitle {
