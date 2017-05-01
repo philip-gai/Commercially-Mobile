@@ -35,10 +35,11 @@ namespace Commercially.iOS
 			if (SharedController.User == null) return;
 			TableView.Source = new UserRequestTableSource(this);
 			NameField.Text = SharedController.NameText;
-			NameField.ResignOnReturn();
 			EmailField.Text = SharedController.EmailText;
-			EmailField.ResignOnReturn();
 			PhoneField.Text = SharedController.PhoneText;
+
+			NameField.ResignOnReturn();
+			EmailField.ResignOnReturn();
 			PhoneField.ResignOnReturn();
 
 			PhoneField.Hidden = SharedController.PhoneFieldIsHidden;
@@ -81,13 +82,19 @@ namespace Commercially.iOS
 		{
 			try {
 				SharedController.SaveButtonPress(NameField.Text, EmailField.Text, PhoneField.Text);
-			} catch (Exception ex) {
+			} catch (Exception) {
 				NavigationController.ShowPrompt(Localizable.PromptMessages.ChangesSaveError);
 				return;
 			}
 
 			SaveButton.Hidden = true;
-			NavigationController.PopViewController(true);
+			if (Session.User.Type == UserRoleType.Admin) {
+				NavigationController.PopViewController(true);
+			} else {
+				NavigationController.ShowPrompt("Your changes were successfully saved!");
+				Session.User = UserApi.GetCurrentUser();
+				User = Session.User;
+			}
 		}
 
 		class UserRequestTableSource : UITableViewSource

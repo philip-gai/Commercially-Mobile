@@ -1730,23 +1730,23 @@ namespace Commercially.Droid
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f0b009d
-			public const int AdminGroup = 2131427485;
-			
 			// aapt resource value: 0x7f0b009f
-			public const int ButtonIcon = 2131427487;
+			public const int AdminGroup = 2131427487;
+			
+			// aapt resource value: 0x7f0b00a1
+			public const int ButtonIcon = 2131427489;
 			
 			// aapt resource value: 0x7f0b005e
 			public const int ButtonRow = 2131427422;
 			
-			// aapt resource value: 0x7f0b00a1
-			public const int ClientIcon = 2131427489;
+			// aapt resource value: 0x7f0b00a3
+			public const int ClientIcon = 2131427491;
 			
 			// aapt resource value: 0x7f0b0065
 			public const int ClientRow = 2131427429;
 			
-			// aapt resource value: 0x7f0b009e
-			public const int DashboardIcon = 2131427486;
+			// aapt resource value: 0x7f0b00a0
+			public const int DashboardIcon = 2131427488;
 			
 			// aapt resource value: 0x7f0b0067
 			public const int EmailField = 2131427431;
@@ -1760,8 +1760,8 @@ namespace Commercially.Droid
 			// aapt resource value: 0x7f0b0090
 			public const int RequestRow = 2131427472;
 			
-			// aapt resource value: 0x7f0b00a0
-			public const int UserIcon = 2131427488;
+			// aapt resource value: 0x7f0b00a2
+			public const int UserIcon = 2131427490;
 			
 			// aapt resource value: 0x7f0b0087
 			public const int acceptedTimeText = 2131427463;
@@ -1865,6 +1865,9 @@ namespace Commercially.Droid
 			// aapt resource value: 0x7f0b006e
 			public const int cancel_action = 2131427438;
 			
+			// aapt resource value: 0x7f0b009c
+			public const int changePasswordButton = 2131427484;
+			
 			// aapt resource value: 0x7f0b003e
 			public const int checkbox = 2131427390;
 			
@@ -1923,7 +1926,10 @@ namespace Commercially.Droid
 			public const int edit_query = 2131427401;
 			
 			// aapt resource value: 0x7f0b009a
-			public const int emailText = 2131427482;
+			public const int emailField = 2131427482;
+			
+			// aapt resource value: 0x7f0b009d
+			public const int emailText = 2131427485;
 			
 			// aapt resource value: 0x7f0b001b
 			public const int end = 2131427355;
@@ -1936,9 +1942,6 @@ namespace Commercially.Droid
 			
 			// aapt resource value: 0x7f0b003d
 			public const int expanded_menu = 2131427389;
-			
-			// aapt resource value: 0x7f0b0099
-			public const int firstLastText = 2131427481;
 			
 			// aapt resource value: 0x7f0b0063
 			public const int friendlyNameField = 2131427427;
@@ -1970,8 +1973,8 @@ namespace Commercially.Droid
 			// aapt resource value: 0x7f0b0077
 			public const int info = 2131427447;
 			
-			// aapt resource value: 0x7f0b009c
-			public const int lastFirstText = 2131427484;
+			// aapt resource value: 0x7f0b009e
+			public const int lastFirstText = 2131427486;
 			
 			// aapt resource value: 0x7f0b007c
 			public const int line1 = 2131427452;
@@ -2006,6 +2009,9 @@ namespace Commercially.Droid
 			// aapt resource value: 0x7f0b0014
 			public const int multiply = 2131427348;
 			
+			// aapt resource value: 0x7f0b0099
+			public const int nameField = 2131427481;
+			
 			// aapt resource value: 0x7f0b0020
 			public const int never = 2131427360;
 			
@@ -2031,7 +2037,7 @@ namespace Commercially.Droid
 			public const int parentPanel = 2131427376;
 			
 			// aapt resource value: 0x7f0b009b
-			public const int phoneText = 2131427483;
+			public const int phoneField = 2131427483;
 			
 			// aapt resource value: 0x7f0b0005
 			public const int progress_circular = 2131427333;

@@ -9,6 +9,7 @@ using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.V7.App;
+using Android.Text;
 using Android.Views;
 using Android.Widget;
 using Newtonsoft.Json;
@@ -21,9 +22,11 @@ namespace Commercially.Droid
 		readonly UserDetails SharedController = new UserDetails();
 
 		LinearLayout Layout { get { return FindViewById<LinearLayout>(Resource.Id.mainLayout); } }
-		TextView FirstLastText { get { return FindViewById<TextView>(Resource.Id.firstLastText); } }
-		TextView EmailText { get { return FindViewById<TextView>(Resource.Id.emailText); } }
-		TextView PhoneText { get { return FindViewById<TextView>(Resource.Id.phoneText); } }
+		EditText NameField { get { return FindViewById<EditText>(Resource.Id.nameField); } }
+		EditText EmailField { get { return FindViewById<EditText>(Resource.Id.emailField); } }
+		EditText PhoneField { get { return FindViewById<EditText>(Resource.Id.phoneField); } }
+		Button ChangePasswordButton { get { return FindViewById<Button>(Resource.Id.changePasswordButton); } }
+		Button SaveButton { get { return FindViewById<Button>(Resource.Id.saveButton); } }
 
 		LinearLayout _Table;
 		LinearLayout Table {
@@ -64,10 +67,26 @@ namespace Commercially.Droid
 		void InitializeView()
 		{
 			if (SharedController.User == null) return;
-			FirstLastText.Text = SharedController.NameText;
-			EmailText.Text = SharedController.EmailText;
-			PhoneText.Text = SharedController.PhoneText;
-			PhoneText.Hidden(SharedController.PhoneFieldIsHidden);
+			NameField.Text = SharedController.NameText;
+			EmailField.Text = SharedController.EmailText;
+			PhoneField.Text = SharedController.PhoneText;
+
+			SaveButton.Click += SaveButtonClick;
+			ChangePasswordButton.Click += ChangePasswordButtonClick;
+			PhoneField.Hidden(SharedController.PhoneFieldIsHidden);
+			SaveButton.Hidden(true);
+
+			if (!SharedController.IsEditable) {
+				NameField.Enabled = false;
+				EmailField.Enabled = false;
+				PhoneField.Enabled = false;
+				ChangePasswordButton.Hidden(true);
+			} else {
+				NameField.TextChanged += FieldTextChanged;
+				EmailField.TextChanged += FieldTextChanged;
+				PhoneField.TextChanged += FieldTextChanged;
+			}
+
 			Layout.AddView(Table);
 		}
 
@@ -80,6 +99,28 @@ namespace Commercially.Droid
 				var tableRow = GetTableRow(row);
 				Table.AddViewWithUnderline(tableRow, this);
 			}
+		}
+
+		void FieldTextChanged(object sender, TextChangedEventArgs e)
+		{
+			SaveButton.Hidden(!SharedController.FieldsChanged(NameField.Text, EmailField.Text, PhoneField.Text));
+		}
+
+		void SaveButtonClick(object sender, EventArgs e)
+		{
+			try {
+				SharedController.SaveButtonPress(NameField.Text, EmailField.Text, PhoneField.Text);
+			} catch (Exception) {
+				this.ShowPrompt(Localizable.PromptMessages.ChangesSaveError);
+				return;
+			}
+			SaveButton.Hidden(true);
+			Finish();
+		}
+
+		void ChangePasswordButtonClick(object sender, EventArgs e)
+		{
+
 		}
 
 		View GetHeader()

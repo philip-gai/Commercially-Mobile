@@ -15,7 +15,12 @@ namespace Commercially.iOS
 			base.ViewDidLoad();
 			NavigationItem.HidesBackButton = true;
 			NavigationItem.SetTitleImage("Logo-Red-Toolbar");
-			TabBar.Hidden = Session.User.Type != UserRoleType.Admin;
+			if (Session.User.Type != UserRoleType.Admin) {
+				var userController = UINavigationControllerExtensions.GetViewController(GlobalConstants.Screens.UserDetails) as UserDetailsController;
+				userController.User = Session.User;
+				ViewControllers = new UIViewController[] { UINavigationControllerExtensions.GetViewController(GlobalConstants.Screens.RequestList), userController };
+			}
+
 		}
 	}
 }

@@ -10,6 +10,7 @@
 			public const string Login = "Login";
 			public const string Prompt = "Prompt";
 			public const string RequestDetails = "RequestDetails";
+			public const string RequestList = "RequestList";
 			public const string ButtonDetails = "ButtonDetails";
 			public const string UserDetails = "UserDetails";
 			public const string ClientDetails = "ClientDetails";
