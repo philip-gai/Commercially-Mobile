@@ -6,22 +6,22 @@
 		<item
        	 android:id="@+id/DashboardIcon"
        	 android:icon="@drawable/dashboard"
-       	 app:showAsAction="ifRoom"
+       	 app:showAsAction="always"
        	 android:title="Requests" />
   		<item
       	 android:id="@+id/ButtonIcon"
 	   	 android:icon="@drawable/button"
-       	 app:showAsAction="ifRoom"
+       	 app:showAsAction="always"
          android:title="Buttons" />
 		<item
       	 android:id="@+id/UserIcon"
 	   	 android:icon="@drawable/user"
-       	 app:showAsAction="ifRoom"
+       	 app:showAsAction="always"
          android:title="Users" />
 		<item
       	 android:id="@+id/ClientIcon"
 	   	 android:icon="@drawable/client"
-       	 app:showAsAction="ifRoom"
+       	 app:showAsAction="always"
          android:title="Clients" />
 	</group>
 </menu>

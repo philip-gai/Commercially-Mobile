@@ -66,6 +66,7 @@ namespace Commercially.Droid
 		protected override void OnResume()
 		{
 			base.OnResume();
+            InvalidateOptionsMenu();
 			GetButtons();
 		}
 

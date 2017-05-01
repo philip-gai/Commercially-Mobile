@@ -14,7 +14,7 @@ namespace Commercially.Droid
 		public static void CreateMainOptionsMenu(this Activity activity, IMenu menu, int currItem)
 		{
 			activity.MenuInflater.Inflate(Resource.Menu.TopMenu, menu);
-			var rIds = new int[] { Resource.Id.DashboardIcon, Resource.Id.ButtonIcon, Resource.Id.UserIcon };
+			var rIds = new int[] { Resource.Id.DashboardIcon, Resource.Id.ButtonIcon, Resource.Id.UserIcon, Resource.Id.ClientIcon };
 			foreach (var id in rIds) {
 				var item = menu.FindItem(id);
 				if (id == currItem) {
@@ -30,6 +30,21 @@ namespace Commercially.Droid
 			}
 		}
 
+		static void ResetMenuItems(IMenu menu, int currItem)
+		{
+			var rIds = new int[] { Resource.Id.DashboardIcon, Resource.Id.ButtonIcon, Resource.Id.UserIcon, Resource.Id.ClientIcon };
+			foreach (var id in rIds) {
+				var item = menu.FindItem(id);
+				if (id == currItem) {
+					item.Icon.SetColorFilter(GlobalConstants.DefaultColors.Red.GetAndroidColor(), PorterDuff.Mode.SrcIn);
+					item.SetEnabled(false);
+				} else {
+					item.Icon.SetColorFilter(GlobalConstants.DefaultColors.Black.GetAndroidColor(), PorterDuff.Mode.SrcIn);
+					item.SetEnabled(true);
+				}
+			}
+		}
+
 		public static void StartActivityMenuItem(this Activity activity, IMenuItem item)
 		{
 			int[] icons = { Resource.Id.DashboardIcon, Resource.Id.ButtonIcon, Resource.Id.UserIcon, Resource.Id.ClientIcon };
@@ -39,7 +54,10 @@ namespace Commercially.Droid
 				if (icons[i] == item.ItemId) {
 					var activityType = activityTypes[i];
 					if (typeof(Activity) == activityType) { return; }
-					activity.StartActivity(new Intent(activity, activityType));
+					var intent = new Intent(activity, activityType);
+					intent.SetFlags(ActivityFlags.ReorderToFront);
+					activity.StartActivityIfNeeded(intent, 0);
+					item.Icon.SetColorFilter(GlobalConstants.DefaultColors.Red.GetAndroidColor(), PorterDuff.Mode.SrcIn);
 				}
 			}
 		}

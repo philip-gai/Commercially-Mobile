@@ -37,7 +37,7 @@
                     android:layout_marginRight="20dp"
                     android:ellipsize="start"
                     android:singleLine="true"
-                    android:gravity="center" />
+                    android:gravity="center_vertical" />
                 <TextView
                     android:text="Friendly Name"
                     android:textAppearance="?android:attr/textAppearanceMedium"
@@ -47,7 +47,7 @@
                     android:layout_weight="1"
                     android:ellipsize="end"
                     android:singleLine="true"
-                    android:gravity="center" />
+                    android:gravity="center_vertical" />
             </LinearLayout>
         </LinearLayout>
         <ImageView
