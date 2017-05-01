@@ -42,9 +42,8 @@ namespace Commercially.iOS
 				NavigationController.ShowPrompt(Localizable.PromptMessages.ChangesSaveError);
 				return;
 			}
-			UIView.AnimateAsync(ButtonDetails.AnimationDuration, delegate {
-				SaveButton.Hidden = true;
-			});
+
+			SaveButton.Hidden = true;
 			NavigationController.PopViewController(true);
 		}
 
@@ -56,8 +55,8 @@ namespace Commercially.iOS
 			DescriptionField.Text = SharedController.DescriptionFieldText;
 			BluetoothIdLabel.Text = SharedController.BluetoothIdText;
 
-			LocationField.ShouldReturn += (textField) => { textField.ResignFirstResponder(); return true; };
-			DescriptionField.ShouldReturn += (textField) => { textField.ResignFirstResponder(); return true; };
+			LocationField.ResignOnReturn();
+			DescriptionField.ResignOnReturn();
 			LocationField.EditingDidEnd += FieldEditingDidEnd;
 			DescriptionField.EditingDidEnd += FieldEditingDidEnd;
 

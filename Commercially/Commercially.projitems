@@ -49,6 +49,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Shared\ClientTableRow.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Shared\ButtonDetails.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Shared\ClientDetails.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\StringExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Entities\" />

@@ -5,9 +5,9 @@ namespace Commercially.Droid
 {
 	public static class ViewExtensions
 	{
-		public static void Hidden(this View view, bool hide)
+		public static void Hidden(this View view, bool hide, bool useGone = true)
 		{
-			view.Visibility = hide ? ViewStates.Gone : ViewStates.Visible;
+			view.Visibility = hide ? (useGone ? ViewStates.Gone :  ViewStates.Invisible) : ViewStates.Visible;
 		}
 
 		public static void ToggleVisibility(this View view)

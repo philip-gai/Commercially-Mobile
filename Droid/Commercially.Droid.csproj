@@ -98,6 +98,8 @@
     <Compile Include="Extensions\LinearLayoutExtensions.cs" />
     <Compile Include="Activities\ClientListActivity.cs" />
     <Compile Include="Activities\ClientDetailsActivity.cs" />
+    <Compile Include="Extensions\SpinnerExtensions.cs" />
+    <Compile Include="Activities\ButtonDetailsActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

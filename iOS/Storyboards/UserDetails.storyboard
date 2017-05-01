@@ -18,40 +18,65 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="mzS-fH-4vq">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="90"/>
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="275"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="icR-Y1-J7P" misplaced="YES">
-                                    <rect key="frame" x="10" y="10" width="355" height="70"/>
+                                    <rect key="frame" x="10" y="10" width="355" height="201"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First Last" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P9D-bU-3eK" fixedFrame="YES">
-                                            <rect key="frame" x="0.0" y="0.0" width="355" height="20"/>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="First Last" borderStyle="roundedRect" placeholder="First Last" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BlG-v3-QAn" fixedFrame="YES">
+                                            <rect key="frame" x="0.0" y="0.0" width="355" height="47"/>
+                                            <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
+                                            <textInputTraits key="textInputTraits"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JgX-Vi-7yt" fixedFrame="YES">
-                                            <rect key="frame" x="0.0" y="25" width="355" height="20"/>
+                                        </textField>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Email" borderStyle="roundedRect" placeholder="Email" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pbT-qx-Lcd" fixedFrame="YES">
+                                            <rect key="frame" x="0.0" y="52" width="355" height="46"/>
+                                            <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
+                                            <textInputTraits key="textInputTraits"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone Number" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gHj-8k-l6i" fixedFrame="YES">
-                                            <rect key="frame" x="0.0" y="50" width="355" height="20"/>
+                                        </textField>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Phone Number" borderStyle="roundedRect" placeholder="Phone Number" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rzg-K9-LsT" fixedFrame="YES">
+                                            <rect key="frame" x="0.0" y="103" width="355" height="47"/>
+                                            <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
+                                            <textInputTraits key="textInputTraits"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        </label>
+                                        </textField>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jif-93-CwB" misplaced="YES">
+                                            <rect key="frame" x="0.0" y="155" width="355" height="46"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="2Dn-aV-5Yd"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                            <state key="normal" title="Change Password">
+                                                <color key="titleColor" red="1" green="0.33191886539999998" blue="0.24120634790000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </state>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </button>
                                     </subviews>
                                 </stackView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HKu-BW-Tss" misplaced="YES">
+                                    <rect key="frame" x="10" y="221" width="355" height="44"/>
+                                    <color key="backgroundColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="8Cm-Nt-Xe3"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                    <state key="normal" title="Save Changes">
+                                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </state>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
+                                <constraint firstAttribute="bottom" secondItem="HKu-BW-Tss" secondAttribute="bottom" constant="10" id="4RY-3m-ePy"/>
                                 <constraint firstItem="icR-Y1-J7P" firstAttribute="leading" secondItem="mzS-fH-4vq" secondAttribute="leading" constant="10" id="CxZ-QG-pzt"/>
-                                <constraint firstAttribute="bottom" secondItem="icR-Y1-J7P" secondAttribute="bottom" constant="10" id="be5-ld-8CD"/>
+                                <constraint firstItem="HKu-BW-Tss" firstAttribute="leading" secondItem="mzS-fH-4vq" secondAttribute="leading" constant="10" id="Gfl-ea-7uv"/>
+                                <constraint firstItem="HKu-BW-Tss" firstAttribute="top" secondItem="icR-Y1-J7P" secondAttribute="bottom" constant="10" id="bW1-IP-zHx"/>
+                                <constraint firstAttribute="trailing" secondItem="HKu-BW-Tss" secondAttribute="trailing" constant="10" id="hcM-LW-qj1"/>
                                 <constraint firstAttribute="trailing" secondItem="icR-Y1-J7P" secondAttribute="trailing" constant="10" id="nzM-wh-ZGy"/>
                                 <constraint firstItem="icR-Y1-J7P" firstAttribute="top" secondItem="mzS-fH-4vq" secondAttribute="top" constant="10" id="vgE-NF-lub"/>
                             </constraints>
@@ -61,10 +86,13 @@
                             <outlet property="delegate" destination="BcD-uv-GIV" id="Czw-ax-Zir"/>
                         </connections>
                     </tableView>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
-                        <outlet property="FirstLastLabel" destination="P9D-bU-3eK" id="name-outlet-P9D-bU-3eK"/>
-                        <outlet property="EmailLabel" destination="JgX-Vi-7yt" id="name-outlet-JgX-Vi-7yt"/>
-                        <outlet property="PhoneLabel" destination="gHj-8k-l6i" id="name-outlet-gHj-8k-l6i"/>
+                        <outlet property="NameField" destination="BlG-v3-QAn" id="name-outlet-BlG-v3-QAn"/>
+                        <outlet property="EmailField" destination="pbT-qx-Lcd" id="name-outlet-pbT-qx-Lcd"/>
+                        <outlet property="PhoneField" destination="rzg-K9-LsT" id="name-outlet-rzg-K9-LsT"/>
+                        <outlet property="ChangePasswordButton" destination="Jif-93-CwB" id="name-outlet-Jif-93-CwB"/>
+                        <outlet property="SaveButton" destination="HKu-BW-Tss" id="name-outlet-HKu-BW-Tss"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p27-lr-1Xi" userLabel="First Responder" sceneMemberID="firstResponder"/>

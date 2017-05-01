@@ -121,6 +121,9 @@ namespace Commercially.Droid
 				RequestApi.DeleteRequest(request._id);
 				var table = activity.FindViewById<TableLayout>(Resource.Id.tableLayout);
 				table.RemoveView(rowView);
+				var intent = new Intent(activity, activity.GetType());
+				intent.SetFlags(ActivityFlags.ReorderToFront);
+				activity.StartActivityIfNeeded(intent, 0);
 			};
 
 			rowView.Click += (object sender, EventArgs e) => {
@@ -128,6 +131,7 @@ namespace Commercially.Droid
 				intent.PutExtra(typeof(Request).Name, JsonConvert.SerializeObject(request));
 				activity.StartActivity(intent);
 			};
+
 			if (Session.User.Type == UserRoleType.Admin) {
 				rowView.LongClick += (object sender, View.LongClickEventArgs e) => {
 					deleteButton.ToggleVisibility();
@@ -152,7 +156,7 @@ namespace Commercially.Droid
 			locationLabel.Text = sharedRow.LocationText;
 
 			rowView.Click += (object sender, EventArgs e) => {
-				var intent = new Intent(activity, typeof(ClientDetailsActivity));
+				var intent = new Intent(activity, typeof(ButtonDetailsActivity));
 				intent.PutExtra(typeof(FlicButton).Name, JsonConvert.SerializeObject(button));
 				activity.StartActivity(intent);
 			};
@@ -201,20 +205,29 @@ namespace Commercially.Droid
 
 		public static Spinner GetStatusSpinner(this Activity activity)
 		{
-			Spinner statusSpinner = activity.FindViewById<Spinner>(Resource.Id.statusSpinner);
+			Spinner spinner = activity.FindViewById<Spinner>(Resource.Id.statusSpinner);
 			var adapter = ArrayAdapter.CreateFromResource(activity, Resource.Array.status_array, Android.Resource.Layout.SimpleSpinnerDropDownItem);
 			adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
-			statusSpinner.Adapter = adapter;
-			return statusSpinner;
+			spinner.Adapter = adapter;
+			return spinner;
 		}
 
 		public static Spinner GetClientSpinner(this Activity activity, FlicButton button)
 		{
-			Spinner statusSpinner = activity.FindViewById<Spinner>(Resource.Id.clientSpinner);
+			Spinner spinner = activity.FindViewById<Spinner>(Resource.Id.clientSpinner);
 			var adapter = new ArrayAdapter(activity, Android.Resource.Layout.SimpleSpinnerDropDownItem, ButtonDetails.GetPickerOptions(button));
 			adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
-			statusSpinner.Adapter = adapter;
-			return statusSpinner;
+			spinner.Adapter = adapter;
+			return spinner;
+		}
+
+		public static Spinner GetUserSpinner(this Activity activity)
+		{
+			Spinner spinner = activity.FindViewById<Spinner>(Resource.Id.userSpinner);
+			var adapter = new ArrayAdapter(activity, Android.Resource.Layout.SimpleSpinnerDropDownItem, RequestDetails.GetUserPickerOptions());
+			adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
+			spinner.Adapter = adapter;
+			return spinner;
 		}
 	}
 }

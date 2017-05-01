@@ -131,6 +131,21 @@ namespace Commercially.iOS
 				Controller.NavigationController.PushViewController(controller, true);
 				controller.Request = SharedController.Requests[indexPath.Row];
 			}
+
+			public override bool CanEditRow(UITableView tableView, NSIndexPath indexPath)
+			{
+				return Session.User.Type == UserRoleType.Admin;
+			}
+
+			public override void CommitEditingStyle(UITableView tableView, UITableViewCellEditingStyle editingStyle, NSIndexPath indexPath)
+			{
+				switch (editingStyle) {
+					case UITableViewCellEditingStyle.Delete:
+						RequestApi.DeleteRequest(SharedController.Requests[indexPath.Row]._id);
+						break;
+				}
+				Controller.ViewWillAppear(false);
+			}
 		}
 	}
 }

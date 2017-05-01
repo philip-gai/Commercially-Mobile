@@ -21,6 +21,49 @@ namespace Commercially.iOS
 			InitializeView();
 		}
 
+		void InitializeView()
+		{
+			if (SharedController.Request == null) return;
+			InitializeText();
+			InitializeVisibility();
+			InitializeStatusPickers();
+		}
+
+		void InitializeText()
+		{
+			DescriptionLabel.Text = SharedController.DescriptionText;
+			RoomLabel.Text = SharedController.LocationText;
+			StatusLabel.Text = SharedController.StatusText;
+			AssignedToLabel.Text = SharedController.AssignedToText;
+			ReceivedTimeLabel.Text = SharedController.ReceivedTimeText;
+			AcceptedTimeLabel.Text = SharedController.AcceptedTimeText;
+			CompletedTimeLabel.Text = SharedController.CompletedTimeText;
+			StaticAssignLabel.TextColor = RequestDetails.EditTextColor.GetUIColor();
+		}
+
+		void InitializeVisibility()
+		{
+			UrgentIndicator.Hidden = SharedController.UrgentIndicatorIsHidden;
+			AssignedToLabel.Hidden = SharedController.AssignedToIsHidden;
+			AssignButton.Hidden = SharedController.AssignButtonIsHidden;
+			SaveButton.Hidden = SharedController.SaveButtonIsHidden;
+			ButtonStackView.Hidden = SharedController.ButtonStackIsHidden;
+			StatusPickerView.Hidden = SharedController.StatusInputIsHidden;
+			StatusLabel.Hidden = SharedController.StatusLabelIsHidden;
+			AssignPickerStack.Hidden = SharedController.UserPickerStackIsHidden;
+		}
+
+		void InitializeStatusPickers()
+		{
+			StatusPickerView.Model = new StatusPickerViewModel(OnPickerChange);
+			StatusPickerView.ScrollToTitle(SharedController.Request.Type.ToString());
+			StaticStatusLabel.TextColor = SharedController.StatusInputIsHidden ? RequestDetails.DefaultTextColor.GetUIColor() : RequestDetails.EditTextColor.GetUIColor();
+
+			UserPicker.Model = new UserPickerViewModel(OnPickerChange);
+			SharedController.SelectedUser = SharedController.StartingUser;
+			UserPicker.ScrollToTitle(SharedController.SelectedUser);
+		}
+
 		partial void SaveButtonPress(UIButton sender)
 		{
 			// Call Post to change request status string
@@ -32,9 +75,8 @@ namespace Commercially.iOS
 				NavigationController.ShowPrompt(Localizable.PromptMessages.ChangesSaveError);
 				return;
 			}
-			UIView.AnimateAsync(RequestDetails.AnimationDuration, delegate {
-				ButtonStackView.Hidden = AssignButton.Hidden;
-			});
+
+			ButtonStackView.Hidden = AssignButton.Hidden;
 			SaveButton.Hidden = true;
 			NavigationController.PopViewController(true);
 		}
@@ -55,47 +97,6 @@ namespace Commercially.iOS
 			NavigationController.PopViewController(true);
 		}
 
-		void InitializeView()
-		{
-			if (SharedController.Request == null) return;
-			InitializeText();
-			InitializeVisibility();
-			InitializeStatusPickers();
-		}
-
-		void InitializeText() {
-			DescriptionLabel.Text = SharedController.DescriptionText;
-			RoomLabel.Text = SharedController.LocationText;
-			StatusLabel.Text = SharedController.StatusText;
-			AssignedToLabel.Text = SharedController.AssignedToText;
-			ReceivedTimeLabel.Text = SharedController.ReceivedTimeText;
-			AcceptedTimeLabel.Text = SharedController.AcceptedTimeText;
-			CompletedTimeLabel.Text = SharedController.CompletedTimeText;
-		}
-
-		void InitializeVisibility() {
-			UrgentIndicator.Hidden = SharedController.UrgentIndicatorIsHidden;
-			AssignedToLabel.Hidden = SharedController.AssignedToIsHidden;
-			AssignButton.Hidden = SharedController.AssignButtonIsHidden;
-			SaveButton.Hidden = SharedController.SaveButtonIsHidden;
-			ButtonStackView.Hidden = SharedController.ButtonStackIsHidden;
-			StatusPickerView.Hidden = SharedController.StatusInputIsHidden;
-			StatusLabel.Hidden = SharedController.StatusLabelIsHidden;
-			UserPicker.Hidden = SharedController.UserPickerStackIsHidden;
-		}
-
-		void InitializeStatusPickers()
-		{
-			StatusPickerView.Model = new StatusPickerViewModel(OnPickerChange);
-			StaticStatusLabel.TextColor = RequestDetails.StaticStatusDefault.GetUIColor();
-			if (!SharedController.StatusInputIsHidden) {
-				// Scroll to current status in picker view
-				StatusPickerView.ScrollToTitle(SharedController.Request.Type.ToString());
-				StaticStatusLabel.TextColor = RequestDetails.StaticStatusEdit.GetUIColor();
-			}
-			UserPicker.Model = new UserPickerViewModel(OnPickerChange);
-		}
-
 		void OnPickerChange(UIPickerView pickerView, nint row, nint component)
 		{
 			if (pickerView == StatusPickerView) {
@@ -104,6 +105,7 @@ namespace Commercially.iOS
 				SharedController.SelectedUser = pickerView.Model.GetTitle(pickerView, row, component);
 			}
 			SaveButton.Hidden = SharedController.SaveButtonIsHidden;
+			AssignButton.Hidden = SharedController.AssignButtonIsHidden;
 			UIView.AnimateAsync(RequestDetails.AnimationDuration, delegate {
 				ButtonStackView.Hidden = SharedController.ButtonStackIsHidden;
 			});

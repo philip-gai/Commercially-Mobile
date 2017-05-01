@@ -16,31 +16,49 @@ namespace Commercially.iOS
     {
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UILabel EmailLabel { get; set; }
+        UIKit.UIButton ChangePasswordButton { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UILabel FirstLastLabel { get; set; }
+        UIKit.UITextField EmailField { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UILabel PhoneLabel { get; set; }
+        UIKit.UITextField NameField { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UITextField PhoneField { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIButton SaveButton { get; set; }
 
         void ReleaseDesignerOutlets ()
         {
-            if (EmailLabel != null) {
-                EmailLabel.Dispose ();
-                EmailLabel = null;
+            if (ChangePasswordButton != null) {
+                ChangePasswordButton.Dispose ();
+                ChangePasswordButton = null;
             }
 
-            if (FirstLastLabel != null) {
-                FirstLastLabel.Dispose ();
-                FirstLastLabel = null;
+            if (EmailField != null) {
+                EmailField.Dispose ();
+                EmailField = null;
             }
 
-            if (PhoneLabel != null) {
-                PhoneLabel.Dispose ();
-                PhoneLabel = null;
+            if (NameField != null) {
+                NameField.Dispose ();
+                NameField = null;
+            }
+
+            if (PhoneField != null) {
+                PhoneField.Dispose ();
+                PhoneField = null;
+            }
+
+            if (SaveButton != null) {
+                SaveButton.Dispose ();
+                SaveButton = null;
             }
         }
     }

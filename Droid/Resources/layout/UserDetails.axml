@@ -12,7 +12,11 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/mainLayout">
+            android:id="@+id/mainLayout"
+            android:paddingTop="10dp"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:layout_marginBottom="10dp">
             <TextView
                 android:text="First Last"
                 android:textAppearance="?android:attr/textAppearanceMedium"
@@ -20,7 +24,7 @@
                 android:id="@+id/firstLastText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp" />
+                android:layout_marginBottom="10dp" />
             <TextView
                 android:text="Email"
                 android:textAppearance="?android:attr/textAppearanceMedium"
@@ -28,8 +32,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/emailText"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
                 android:layout_marginBottom="10dp" />
             <TextView
                 android:text="Phone"
@@ -38,8 +40,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/phoneText"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
                 android:layout_marginBottom="10dp" />
         </LinearLayout>
     </ScrollView>

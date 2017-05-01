@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 
 namespace Commercially
@@ -10,14 +11,9 @@ namespace Commercially
 		public string SelectedUser;
 
 		public const double AnimationDuration = 0.25;
-		public static Color StaticStatusDefault = GlobalConstants.DefaultColors.Black;
-		public static Color StaticStatusEdit = GlobalConstants.DefaultColors.Red;
+		public static Color DefaultTextColor = GlobalConstants.DefaultColors.Black;
+		public static Color EditTextColor = GlobalConstants.DefaultColors.Red;
 
-		bool IsMyRequest {
-			get {
-				return Request.assignedTo != null && Request.assignedTo.Equals(Session.User.username, StringComparison.CurrentCultureIgnoreCase);
-			}
-		}
 		bool StatusChanged {
 			get {
 				if (SelectedStatus == null) return false;
@@ -27,8 +23,7 @@ namespace Commercially
 		bool UserChanged {
 			get {
 				if (SelectedUser == null) return false;
-				if (Request.assignedTo == null) return true;
-				return !Request.assignedTo.Equals(SelectedUser, StringComparison.CurrentCultureIgnoreCase);
+				return !SelectedUser.Equals(StartingUser, StringComparison.CurrentCultureIgnoreCase);
 			}
 		}
 		public string DescriptionText {
@@ -84,7 +79,7 @@ namespace Commercially
 		}
 		public bool AssignButtonIsHidden {
 			get {
-				return Request.Type != RequestStatusType.New;
+				return Request.Type != RequestStatusType.New || UserChanged;
 			}
 		}
 		public bool SaveButtonIsHidden {
@@ -99,7 +94,7 @@ namespace Commercially
 		}
 		public bool StatusInputIsHidden {
 			get {
-				return !IsMyRequest || (Request.Type == RequestStatusType.Completed || Request.Type == RequestStatusType.Cancelled);
+				return Request.Type != RequestStatusType.Assigned;
 			}
 		}
 		public bool StatusLabelIsHidden {
@@ -109,10 +104,14 @@ namespace Commercially
 		}
 		public bool UserPickerStackIsHidden {
 			get {
-				return Session.User.Type != UserRoleType.Admin;
+				return Session.User.Type != UserRoleType.Admin || Request.Type == RequestStatusType.Completed || Request.Type == RequestStatusType.Cancelled;
 			}
 		}
-
+		public string StartingUser {
+			get {
+				return string.IsNullOrWhiteSpace(Request.assignedTo) ? Localizable.Labels.NoneOption : Request.assignedTo;
+			}
+		}
 		public string SaveStatusChanges()
 		{
 			return StatusChanged ? RequestApi.UpdateRequest(Request._id, Request.GetStatusType(SelectedStatus)) : null;
@@ -134,8 +133,20 @@ namespace Commercially
 			return null;
 		}
 
-		public string AssignButtonPress() {
+		public string AssignButtonPress()
+		{
 			return RequestApi.UpdateRequest(Request._id, RequestStatusType.Assigned);
+		}
+
+		public static string[] GetUserPickerOptions()
+		{
+			var users = UserApi.GetUsers();
+			var usernameList = new List<string>();
+			usernameList.Add(Localizable.Labels.NoneOption);
+			foreach (var user in users) {
+				usernameList.Add(user.username);
+			}
+			return usernameList.ToArray();
 		}
 	}
 }

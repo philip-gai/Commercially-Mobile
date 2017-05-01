@@ -56,6 +56,10 @@ namespace Commercially.iOS
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel StaticAssignLabel { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UILabel StaticStatusLabel { get; set; }
 
         [Outlet]
@@ -132,6 +136,11 @@ namespace Commercially.iOS
             if (SaveButton != null) {
                 SaveButton.Dispose ();
                 SaveButton = null;
+            }
+
+            if (StaticAssignLabel != null) {
+                StaticAssignLabel.Dispose ();
+                StaticAssignLabel = null;
             }
 
             if (StaticStatusLabel != null) {

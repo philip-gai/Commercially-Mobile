@@ -10,14 +10,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:layout_margin="10dp">
+        android:layout_marginLeft="10dp">
         <LinearLayout
             android:orientation="vertical"
             android:minWidth="25px"
             android:minHeight="25px"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
             <TextView
                 android:text="Change the toilet paper"
                 android:textAppearance="?android:attr/textAppearanceMedium"
@@ -47,7 +49,7 @@
                     android:layout_weight="1"
                     android:ellipsize="end"
                     android:singleLine="true"
-                    android:layout_marginRight="20dp" />
+                    android:layout_marginRight="10dp" />
                 <TextView
                     android:text="10:00PM"
                     android:textAppearance="?android:attr/textAppearanceMedium"
@@ -58,7 +60,7 @@
                     android:layout_weight="1"
                     android:singleLine="true"
                     android:ellipsize="end"
-                    android:layout_marginRight="20dp" />
+                    android:layout_marginRight="10dp" />
                 <TextView
                     android:text="Open"
                     android:textAppearance="?android:attr/textAppearanceMedium"
@@ -69,7 +71,7 @@
                     android:layout_weight="1"
                     android:ellipsize="end"
                     android:singleLine="true"
-                    android:layout_marginRight="20dp" />
+                    android:layout_marginRight="10dp" />
                 <ImageView
                     android:src="@drawable/urgent"
                     android:layout_width="wrap_content"
@@ -82,7 +84,9 @@
             android:src="@drawable/chevronRight"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:alpha="0.25" />
+            android:alpha="0.25"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp" />
         <Button
             android:text="Delete"
             android:id="@+id/deleteButton"

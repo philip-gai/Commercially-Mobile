@@ -1,4 +1,5 @@
 using Foundation;
+
 using System;
 using UIKit;
 using CoreGraphics;
@@ -33,10 +34,27 @@ namespace Commercially.iOS
 		{
 			if (SharedController.User == null) return;
 			TableView.Source = new UserRequestTableSource(this);
-			FirstLastLabel.Text = SharedController.FirstLastText;
-			EmailLabel.Text = SharedController.EmailText;
-			PhoneLabel.Text = SharedController.PhoneText;
-			PhoneLabel.Hidden = SharedController.PhoneLabelIsHidden;
+			NameField.Text = SharedController.NameText;
+			NameField.ResignOnReturn();
+			EmailField.Text = SharedController.EmailText;
+			EmailField.ResignOnReturn();
+			PhoneField.Text = SharedController.PhoneText;
+			PhoneField.ResignOnReturn();
+
+			PhoneField.Hidden = SharedController.PhoneFieldIsHidden;
+			SaveButton.Hidden = true;
+			SaveButton.TouchUpInside += SaveButtonTouchUpInside;
+
+			if (!SharedController.IsEditable) {
+				NameField.DisguiseAsTextView();
+				EmailField.DisguiseAsTextView();
+				PhoneField.DisguiseAsTextView();
+				ChangePasswordButton.Hidden = true;
+			} else {
+				NameField.EditingDidEnd += FieldEditingDidEnd;
+				EmailField.EditingDidEnd += FieldEditingDidEnd;
+				PhoneField.EditingDidEnd += FieldEditingDidEnd;
+			}
 		}
 
 		void GetRequests()
@@ -50,6 +68,26 @@ namespace Commercially.iOS
 					NavigationController.ShowPrompt(Localizable.PromptMessages.RequestsError);
 				});
 			});
+		}
+
+		void FieldEditingDidEnd(object sender, EventArgs e)
+		{
+			UIView.AnimateAsync(ButtonDetails.AnimationDuration, delegate {
+				SaveButton.Hidden = !SharedController.FieldsChanged(NameField.Text, EmailField.Text, PhoneField.Text);
+			});
+		}
+
+		void SaveButtonTouchUpInside(object sender, EventArgs e)
+		{
+			try {
+				SharedController.SaveButtonPress(NameField.Text, EmailField.Text, PhoneField.Text);
+			} catch (Exception ex) {
+				NavigationController.ShowPrompt(Localizable.PromptMessages.ChangesSaveError);
+				return;
+			}
+
+			SaveButton.Hidden = true;
+			NavigationController.PopViewController(true);
 		}
 
 		class UserRequestTableSource : UITableViewSource

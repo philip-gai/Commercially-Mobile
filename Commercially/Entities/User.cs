@@ -7,6 +7,7 @@ namespace Commercially
 	public class User
 	{
 		public string _id { get; set; }
+		public string id { get; set; }
 		public string firstname { get; set; }
 		public string lastname { get; set; }
 		public string email { get; set; }

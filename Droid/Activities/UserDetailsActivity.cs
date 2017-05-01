@@ -1,4 +1,4 @@
-﻿
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -64,10 +64,10 @@ namespace Commercially.Droid
 		void InitializeView()
 		{
 			if (SharedController.User == null) return;
-			FirstLastText.Text = SharedController.FirstLastText;
+			FirstLastText.Text = SharedController.NameText;
 			EmailText.Text = SharedController.EmailText;
 			PhoneText.Text = SharedController.PhoneText;
-			PhoneText.Hidden(SharedController.PhoneLabelIsHidden);
+			PhoneText.Hidden(SharedController.PhoneFieldIsHidden);
 			Layout.AddView(Table);
 		}
 

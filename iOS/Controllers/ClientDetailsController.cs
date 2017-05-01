@@ -38,7 +38,7 @@ namespace Commercially.iOS
 			SaveButton.Hidden = true;
 			AuthorizeButton.Hidden = SharedController.AuthorizeButtonIsHidden;
 
-			FriendlyNameField.ShouldReturn += (textField) => { textField.ResignFirstResponder(); return true; };
+			FriendlyNameField.ResignOnReturn();
 			FriendlyNameField.EditingDidEnd += FieldEditingDidEnd;
 
 			SaveButton.TouchUpInside += SaveButtonTouchUpInside;
@@ -62,9 +62,7 @@ namespace Commercially.iOS
 				return;
 			}
 			SaveButton.Hidden = true;
-			UIView.AnimateAsync(ClientDetails.AnimationDuration, delegate {
-				ButtonStack.Hidden = AuthorizeButton.Hidden;
-			});
+			ButtonStack.Hidden = AuthorizeButton.Hidden;
 			NavigationController.PopViewController(true);
 		}
 

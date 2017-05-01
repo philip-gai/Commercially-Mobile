@@ -10,7 +10,7 @@ namespace Commercially
 	{
 		readonly static string AuthUrl = HttpRequest.GetRequestUrl("/user/token");
 		readonly static string CurrUserUrl = HttpRequest.GetRequestUrl("/api/currentuser");
-		readonly static string UserUrl = HttpRequest.GetRequestUrl("/api/users");
+		readonly static string UserUrl = HttpRequest.GetRequestUrl("/api/users/");
 		static string AuthHeader {
 			get {
 				return "Bearer " + Session.OAuth.access_token;
@@ -54,6 +54,12 @@ namespace Commercially
 				return string.Compare(x.username, y.username);
 			});
 			return list;
+		}
+
+		public static string PatchUser(string id, string body)
+		{
+			var resp = HttpRequest.MakeRequest(HttpRequestMethodType.PATCH, UserUrl + id, body, AuthHeader);
+			return resp;
 		}
 	}
 }
