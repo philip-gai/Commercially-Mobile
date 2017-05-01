@@ -33,7 +33,9 @@ namespace Commercially.iOS
 		void InitializeView()
 		{
 			if (SharedController.User == null) return;
-			TableView.Source = new UserRequestTableSource(this);
+			if (Session.User.Type == UserRoleType.Admin) {
+				TableView.Source = new UserRequestTableSource(this);
+			}
 			NameField.Text = SharedController.NameText;
 			EmailField.Text = SharedController.EmailText;
 			PhoneField.Text = SharedController.PhoneText;
