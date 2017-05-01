@@ -354,6 +354,7 @@
     <Compile Include="Controllers\ClientDetailsController.designer.cs">
       <DependentUpon>ClientDetailsController.cs</DependentUpon>
     </Compile>
+    <Compile Include="Custom Classes\Picker Views\UserPickerViewModel.cs" />
   </ItemGroup>
   <Import Project="..\Commercially\Commercially.projitems" Label="Shared" Condition="Exists('..\Commercially\Commercially.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

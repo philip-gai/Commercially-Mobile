@@ -28,6 +28,10 @@ namespace Commercially.iOS
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIStackView AssignPickerStack { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIStackView ButtonStackView { get; set; }
 
         [Outlet]
@@ -66,6 +70,10 @@ namespace Commercially.iOS
         [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIImageView UrgentIndicator { get; set; }
 
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIPickerView UserPicker { get; set; }
+
         [Action ("AssignButtonPress:")]
         [GeneratedCode ("iOS Designer", "1.0")]
         partial void AssignButtonPress (UIKit.UIButton sender);
@@ -89,6 +97,11 @@ namespace Commercially.iOS
             if (AssignedToLabel != null) {
                 AssignedToLabel.Dispose ();
                 AssignedToLabel = null;
+            }
+
+            if (AssignPickerStack != null) {
+                AssignPickerStack.Dispose ();
+                AssignPickerStack = null;
             }
 
             if (ButtonStackView != null) {
@@ -139,6 +152,11 @@ namespace Commercially.iOS
             if (UrgentIndicator != null) {
                 UrgentIndicator.Dispose ();
                 UrgentIndicator = null;
+            }
+
+            if (UserPicker != null) {
+                UserPicker.Dispose ();
+                UserPicker = null;
             }
         }
     }

@@ -1,10 +1,13 @@
 ﻿using System;
+using Newtonsoft.Json.Linq;
+
 namespace Commercially
 {
 	public class RequestDetails
 	{
 		public Request Request;
 		public string SelectedStatus;
+		public string SelectedUser;
 
 		public const double AnimationDuration = 0.25;
 		public static Color StaticStatusDefault = GlobalConstants.DefaultColors.Black;
@@ -19,6 +22,13 @@ namespace Commercially
 			get {
 				if (SelectedStatus == null) return false;
 				return !Request.status.Equals(SelectedStatus, StringComparison.CurrentCultureIgnoreCase);
+			}
+		}
+		bool UserChanged {
+			get {
+				if (SelectedUser == null) return false;
+				if (Request.assignedTo == null) return true;
+				return !Request.assignedTo.Equals(SelectedUser, StringComparison.CurrentCultureIgnoreCase);
 			}
 		}
 		public string DescriptionText {
@@ -79,12 +89,12 @@ namespace Commercially
 		}
 		public bool SaveButtonIsHidden {
 			get {
-				return !StatusChanged;
+				return !StatusChanged && !UserChanged;
 			}
 		}
 		public bool ButtonStackIsHidden {
 			get {
-				return AssignButtonIsHidden && !StatusChanged;
+				return AssignButtonIsHidden && !StatusChanged && !UserChanged;
 			}
 		}
 		public bool StatusInputIsHidden {
@@ -96,6 +106,36 @@ namespace Commercially
 			get {
 				return !StatusInputIsHidden;
 			}
+		}
+		public bool UserPickerStackIsHidden {
+			get {
+				return Session.User.Type != UserRoleType.Admin;
+			}
+		}
+
+		public string SaveStatusChanges()
+		{
+			return StatusChanged ? RequestApi.UpdateRequest(Request._id, Request.GetStatusType(SelectedStatus)) : null;
+		}
+
+		public string SaveUserChanges()
+		{
+			if (UserChanged) {
+				var jsonBody = new JObject();
+				if (SelectedUser.Equals(Localizable.Labels.NoneOption, StringComparison.CurrentCultureIgnoreCase)) {
+					SelectedStatus = RequestStatusType.New.ToString();
+					return SaveStatusChanges();
+				}
+				jsonBody.Add("assignedTo", SelectedUser);
+				jsonBody.Add("status", RequestStatusType.Assigned.ToString().ToLower());
+				jsonBody.Add("time_scheduled", DateTime.Now.ConvertToMilliseconds());
+				return RequestApi.PatchRequest(Request._id, jsonBody.ToString());
+			}
+			return null;
+		}
+
+		public string AssignButtonPress() {
+			return RequestApi.UpdateRequest(Request._id, RequestStatusType.Assigned);
 		}
 	}
 }

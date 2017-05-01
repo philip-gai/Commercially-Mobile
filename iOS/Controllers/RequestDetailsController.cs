@@ -26,7 +26,8 @@ namespace Commercially.iOS
 			// Call Post to change request status string
 			// Post for time that status was changed
 			try {
-				RequestApi.UpdateRequest(SharedController.Request._id, Request.GetStatusType(SharedController.SelectedStatus));
+				SharedController.SaveStatusChanges();
+				SharedController.SaveUserChanges();
 			} catch (Exception) {
 				NavigationController.ShowPrompt(Localizable.PromptMessages.ChangesSaveError);
 				return;
@@ -40,9 +41,8 @@ namespace Commercially.iOS
 
 		partial void AssignButtonPress(UIButton sender)
 		{
-			// Call Post to change button ownedBy value to this user's email in DB
 			try {
-				RequestApi.UpdateRequest(SharedController.Request._id, RequestStatusType.Assigned);
+				SharedController.AssignButtonPress();
 			} catch (Exception) {
 				NavigationController.ShowPrompt(Localizable.PromptMessages.AssignError);
 				return;
@@ -60,7 +60,7 @@ namespace Commercially.iOS
 			if (SharedController.Request == null) return;
 			InitializeText();
 			InitializeVisibility();
-			InitializeStatusPicker();
+			InitializeStatusPickers();
 		}
 
 		void InitializeText() {
@@ -81,9 +81,10 @@ namespace Commercially.iOS
 			ButtonStackView.Hidden = SharedController.ButtonStackIsHidden;
 			StatusPickerView.Hidden = SharedController.StatusInputIsHidden;
 			StatusLabel.Hidden = SharedController.StatusLabelIsHidden;
+			UserPicker.Hidden = SharedController.UserPickerStackIsHidden;
 		}
 
-		void InitializeStatusPicker()
+		void InitializeStatusPickers()
 		{
 			StatusPickerView.Model = new StatusPickerViewModel(OnPickerChange);
 			StaticStatusLabel.TextColor = RequestDetails.StaticStatusDefault.GetUIColor();
@@ -92,11 +93,16 @@ namespace Commercially.iOS
 				StatusPickerView.ScrollToTitle(SharedController.Request.Type.ToString());
 				StaticStatusLabel.TextColor = RequestDetails.StaticStatusEdit.GetUIColor();
 			}
+			UserPicker.Model = new UserPickerViewModel(OnPickerChange);
 		}
 
 		void OnPickerChange(UIPickerView pickerView, nint row, nint component)
 		{
-			SharedController.SelectedStatus = pickerView.Model.GetTitle(pickerView, row, component);
+			if (pickerView == StatusPickerView) {
+				SharedController.SelectedStatus = pickerView.Model.GetTitle(pickerView, row, component);
+			} else if (pickerView == UserPicker) {
+				SharedController.SelectedUser = pickerView.Model.GetTitle(pickerView, row, component);
+			}
 			SaveButton.Hidden = SharedController.SaveButtonIsHidden;
 			UIView.AnimateAsync(RequestDetails.AnimationDuration, delegate {
 				ButtonStackView.Hidden = SharedController.ButtonStackIsHidden;
