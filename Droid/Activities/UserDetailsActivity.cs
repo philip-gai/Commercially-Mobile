@@ -25,6 +25,9 @@ namespace Commercially.Droid
 		EditText NameField { get { return FindViewById<EditText>(Resource.Id.nameField); } }
 		EditText EmailField { get { return FindViewById<EditText>(Resource.Id.emailField); } }
 		EditText PhoneField { get { return FindViewById<EditText>(Resource.Id.phoneField); } }
+		EditText OldPasswordField { get { return FindViewById<EditText>(Resource.Id.oldPasswordField); } }
+		EditText NewPasswordField { get { return FindViewById<EditText>(Resource.Id.newPasswordField); } }
+		EditText RepeatNewPasswordField { get { return FindViewById<EditText>(Resource.Id.repeatNewPasswordField); } }
 		Button ChangePasswordButton { get { return FindViewById<Button>(Resource.Id.changePasswordButton); } }
 		Button SaveButton { get { return FindViewById<Button>(Resource.Id.saveButton); } }
 
@@ -75,6 +78,9 @@ namespace Commercially.Droid
 			ChangePasswordButton.Click += ChangePasswordButtonClick;
 			PhoneField.Hidden(SharedController.PhoneFieldIsHidden);
 			SaveButton.Hidden(true);
+			OldPasswordField.Hidden(true);
+			NewPasswordField.Hidden(true);
+			RepeatNewPasswordField.Hidden(true);
 
 			if (!SharedController.IsEditable) {
 				NameField.Enabled = false;
@@ -85,6 +91,8 @@ namespace Commercially.Droid
 				NameField.TextChanged += FieldTextChanged;
 				EmailField.TextChanged += FieldTextChanged;
 				PhoneField.TextChanged += FieldTextChanged;
+				NewPasswordField.TextChanged += FieldTextChanged;
+				RepeatNewPasswordField.TextChanged += FieldTextChanged;
 			}
 
 			Layout.AddView(Table);
@@ -103,15 +111,23 @@ namespace Commercially.Droid
 
 		void FieldTextChanged(object sender, TextChangedEventArgs e)
 		{
-			SaveButton.Hidden(!SharedController.FieldsChanged(NameField.Text, EmailField.Text, PhoneField.Text));
+			SaveButton.Hidden(!SharedController.FieldsChanged(NameField.Text, EmailField.Text,
+															  PhoneField.Text, NewPasswordField.Text,
+															  RepeatNewPasswordField.Text));
 		}
 
 		void SaveButtonClick(object sender, EventArgs e)
 		{
 			try {
-				SharedController.SaveButtonPress(NameField.Text, EmailField.Text, PhoneField.Text);
+				SharedController.SaveButtonPress(NameField.Text, EmailField.Text,
+												 PhoneField.Text, OldPasswordField.Text,
+												 NewPasswordField.Text, RepeatNewPasswordField.Text);
 			} catch (Exception) {
-				this.ShowPrompt(Localizable.PromptMessages.ChangesSaveError);
+				if (UserDetails.PasswordsChanged(NewPasswordField.Text, RepeatNewPasswordField.Text)) {
+					this.ShowPrompt(Localizable.PromptMessages.InvalidPassword);
+				} else {
+					this.ShowPrompt(Localizable.PromptMessages.ChangesSaveError);
+				}
 				return;
 			}
 			SaveButton.Hidden(true);
@@ -120,7 +136,9 @@ namespace Commercially.Droid
 
 		void ChangePasswordButtonClick(object sender, EventArgs e)
 		{
-
+			OldPasswordField.Hidden(OldPasswordField.Visibility == ViewStates.Visible);
+			NewPasswordField.Hidden(OldPasswordField.Visibility == ViewStates.Visible);
+			RepeatNewPasswordField.Hidden(OldPasswordField.Visibility == ViewStates.Visible);
 		}
 
 		View GetHeader()

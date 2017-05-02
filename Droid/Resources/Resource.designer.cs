@@ -1730,23 +1730,23 @@ namespace Commercially.Droid
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f0b009f
-			public const int AdminGroup = 2131427487;
+			// aapt resource value: 0x7f0b00a2
+			public const int AdminGroup = 2131427490;
 			
-			// aapt resource value: 0x7f0b00a1
-			public const int ButtonIcon = 2131427489;
+			// aapt resource value: 0x7f0b00a4
+			public const int ButtonIcon = 2131427492;
 			
 			// aapt resource value: 0x7f0b005e
 			public const int ButtonRow = 2131427422;
 			
-			// aapt resource value: 0x7f0b00a3
-			public const int ClientIcon = 2131427491;
+			// aapt resource value: 0x7f0b00a6
+			public const int ClientIcon = 2131427494;
 			
 			// aapt resource value: 0x7f0b0065
 			public const int ClientRow = 2131427429;
 			
-			// aapt resource value: 0x7f0b00a0
-			public const int DashboardIcon = 2131427488;
+			// aapt resource value: 0x7f0b00a3
+			public const int DashboardIcon = 2131427491;
 			
 			// aapt resource value: 0x7f0b0067
 			public const int EmailField = 2131427431;
@@ -1760,8 +1760,8 @@ namespace Commercially.Droid
 			// aapt resource value: 0x7f0b0090
 			public const int RequestRow = 2131427472;
 			
-			// aapt resource value: 0x7f0b00a2
-			public const int UserIcon = 2131427490;
+			// aapt resource value: 0x7f0b00a5
+			public const int UserIcon = 2131427493;
 			
 			// aapt resource value: 0x7f0b0087
 			public const int acceptedTimeText = 2131427463;
@@ -1928,8 +1928,8 @@ namespace Commercially.Droid
 			// aapt resource value: 0x7f0b009a
 			public const int emailField = 2131427482;
 			
-			// aapt resource value: 0x7f0b009d
-			public const int emailText = 2131427485;
+			// aapt resource value: 0x7f0b00a0
+			public const int emailText = 2131427488;
 			
 			// aapt resource value: 0x7f0b001b
 			public const int end = 2131427355;
@@ -1973,8 +1973,8 @@ namespace Commercially.Droid
 			// aapt resource value: 0x7f0b0077
 			public const int info = 2131427447;
 			
-			// aapt resource value: 0x7f0b009e
-			public const int lastFirstText = 2131427486;
+			// aapt resource value: 0x7f0b00a1
+			public const int lastFirstText = 2131427489;
 			
 			// aapt resource value: 0x7f0b007c
 			public const int line1 = 2131427452;
@@ -2015,6 +2015,9 @@ namespace Commercially.Droid
 			// aapt resource value: 0x7f0b0020
 			public const int never = 2131427360;
 			
+			// aapt resource value: 0x7f0b009e
+			public const int newPasswordField = 2131427486;
+			
 			// aapt resource value: 0x7f0b000e
 			public const int none = 2131427342;
 			
@@ -2029,6 +2032,9 @@ namespace Commercially.Droid
 			
 			// aapt resource value: 0x7f0b0072
 			public const int notification_main_column_container = 2131427442;
+			
+			// aapt resource value: 0x7f0b009d
+			public const int oldPasswordField = 2131427485;
 			
 			// aapt resource value: 0x7f0b005b
 			public const int pairLayout = 2131427419;
@@ -2053,6 +2059,9 @@ namespace Commercially.Droid
 			
 			// aapt resource value: 0x7f0b0086
 			public const int receivedTimeText = 2131427462;
+			
+			// aapt resource value: 0x7f0b009f
+			public const int repeatNewPasswordField = 2131427487;
 			
 			// aapt resource value: 0x7f0b0078
 			public const int right_icon = 2131427448;

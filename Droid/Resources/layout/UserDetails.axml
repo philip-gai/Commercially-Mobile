@@ -53,6 +53,27 @@
                 android:autoText="false"
                 app:backgroundTint="@android:color/white"
                 android:textColor="?android:attr/colorPrimary" />
+            <EditText
+                android:layout_width="match_parent"
+                android:id="@+id/oldPasswordField"
+                android:hint="Old Password"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center" />
+            <EditText
+                android:layout_width="match_parent"
+                android:id="@+id/newPasswordField"
+                android:hint="New Password"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center" />
+            <EditText
+                android:layout_width="match_parent"
+                android:id="@+id/repeatNewPasswordField"
+                android:hint="Repeat New Password"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center" />
             <Button
                 android:text="Save Changes"
                 android:layout_width="match_parent"

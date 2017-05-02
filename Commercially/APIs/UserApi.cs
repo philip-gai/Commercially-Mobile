@@ -61,5 +61,10 @@ namespace Commercially
 			var resp = HttpRequest.MakeRequest(HttpRequestMethodType.PATCH, UserUrl + id, body, AuthHeader);
 			return resp;
 		}
+
+		public static string ChangePassword(string id, string body) {
+			var resp = HttpRequest.MakeRequest(HttpRequestMethodType.POST, UserUrl + id + "/changePassword", body, AuthHeader);
+			return resp;
+		}
 	}
 }

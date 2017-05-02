@@ -28,7 +28,19 @@ namespace Commercially.iOS
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UITextField NewPasswordField { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UITextField OldPasswordField { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UITextField PhoneField { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UITextField RepeatNewPasswordField { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -51,9 +63,24 @@ namespace Commercially.iOS
                 NameField = null;
             }
 
+            if (NewPasswordField != null) {
+                NewPasswordField.Dispose ();
+                NewPasswordField = null;
+            }
+
+            if (OldPasswordField != null) {
+                OldPasswordField.Dispose ();
+                OldPasswordField = null;
+            }
+
             if (PhoneField != null) {
                 PhoneField.Dispose ();
                 PhoneField = null;
+            }
+
+            if (RepeatNewPasswordField != null) {
+                RepeatNewPasswordField.Dispose ();
+                RepeatNewPasswordField = null;
             }
 
             if (SaveButton != null) {

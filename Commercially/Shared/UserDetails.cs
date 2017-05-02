@@ -45,22 +45,35 @@ namespace Commercially
 			}
 		}
 
-		public bool NameChanged(string name)
+		bool NameChanged(string name)
 		{
 			if (string.IsNullOrWhiteSpace(User.firstname) || string.IsNullOrWhiteSpace(User.lastname)) return !string.IsNullOrWhiteSpace(name);
 			return !name.Equals(User.firstname + " " + User.lastname);
 		}
 
-		public bool EmailChanged(string email)
+		bool EmailChanged(string email)
 		{
 			if (string.IsNullOrWhiteSpace(User.username)) return !string.IsNullOrWhiteSpace(email);
 			return !email.Equals(User.username);
 		}
 
-		public bool PhoneChanged(string phone)
+		bool PhoneChanged(string phone)
 		{
 			if (string.IsNullOrWhiteSpace(User.phone)) return !string.IsNullOrWhiteSpace(phone);
 			return !phone.Equals(User.phone);
+		}
+
+		public static bool PasswordsChanged(string password, string repeatPassword)
+		{
+			return !string.IsNullOrWhiteSpace(password) || !string.IsNullOrWhiteSpace(repeatPassword);
+		}
+
+		bool PasswordsMatch(string password, string repeatPassword)
+		{
+			if (!string.IsNullOrWhiteSpace(password) && !string.IsNullOrWhiteSpace(repeatPassword)) {
+				return password.Equals(repeatPassword);
+			}
+			return false;
 		}
 
 		public void GetRequests(Action OnSuccess, Action<Exception> IfException)
@@ -75,13 +88,14 @@ namespace Commercially
 			});
 		}
 
-		public bool FieldsChanged(string name, string email, string phone)
+		public bool FieldsChanged(string name, string email, string phone, string password, string repeatPassword)
 		{
-			return NameChanged(name) || EmailChanged(email) || PhoneChanged(phone);
+			return NameChanged(name) || EmailChanged(email) || PhoneChanged(phone) || PasswordsChanged(password, repeatPassword);
 		}
 
-		public string SaveButtonPress(string name, string email, string phone)
+		public string SaveButtonPress(string name, string email, string phone, string oldPassword, string newPassword, string repeatNewPassword)
 		{
+			string result = "";
 			var jsonBody = new JObject();
 			if (NameChanged(name) && name.Split(' ').Length >= 2) {
 				string[] names = name.Split(' ');
@@ -103,7 +117,15 @@ namespace Commercially
 					jsonBody.Add("phone", numbers);
 				}
 			}
-			return UserApi.PatchUser(User.id, jsonBody.ToString());
+			result += UserApi.PatchUser(User.id, jsonBody.ToString());
+			if (PasswordsChanged(newPassword, repeatNewPassword) && PasswordsMatch(newPassword, repeatNewPassword)
+			    && !string.IsNullOrWhiteSpace(oldPassword) && Validator.Password(newPassword)) {
+				jsonBody = new JObject();
+				jsonBody.Add("old_password", oldPassword);
+				jsonBody.Add("new_password", newPassword);
+				result += UserApi.ChangePassword(User.id, jsonBody.ToString());
+			}
+			return result;
 		}
 	}
 }

@@ -14,6 +14,7 @@ namespace Commercially
 			public const string AssignError = FriendlyStart + "Assiging the request was unsuccessful.";
 			public const string UsersError = FriendlyStart + "Users were unable to load.";
 			public static string ClientsError = FriendlyStart + "Clients were unable to load.";
+			public static string SaveSuccess = "Your changes were successfully saved!";
 		}
 		public struct ExceptionMessages
 		{
