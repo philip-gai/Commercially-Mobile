@@ -84,8 +84,10 @@ namespace Commercially.Droid
 		void SaveButtonClick(object sender, EventArgs e)
 		{
 			try {
-				SharedController.SaveButtonPress(LocationField.Text, DescriptionField.Text,
-												 ClientSpinner.GetItemAtPosition(0).ToString());
+				if (SharedController.SaveButtonPress(LocationField.Text, DescriptionField.Text,
+													ClientSpinner.GetItemAtPosition(0).ToString()) == true) {
+					this.ShowPrompt(Localizable.PromptMessages.PressAndHoldButton);
+				}
 			} catch (Exception) {
 				this.ShowPrompt(Localizable.PromptMessages.ChangesSaveError);
 				return;

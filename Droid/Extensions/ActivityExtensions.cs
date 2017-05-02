@@ -26,7 +26,8 @@ namespace Commercially.Droid
 				}
 			}
 			if (Session.User.Type != UserRoleType.Admin) {
-				menu.RemoveGroup(Resource.Id.AdminGroup);
+				menu.RemoveItem(Resource.Id.ButtonIcon);
+				menu.RemoveItem(Resource.Id.ClientIcon);
 			}
 		}
 
@@ -53,7 +54,11 @@ namespace Commercially.Droid
 			for (int i = 0; i < icons.Length; i++) {
 				if (icons[i] == item.ItemId) {
 					var activityType = activityTypes[i];
-					if (typeof(Activity) == activityType) { return; }
+					bool isNonAdminUserDetails = Session.User.Type != UserRoleType.Admin && activityType == typeof(UserListActivity);
+					if (isNonAdminUserDetails) {
+						activityType = typeof(UserDetailsActivity);
+					}
+					if (typeof(Activity) == activityType) return;
 					var intent = new Intent(activity, activityType);
 					intent.SetFlags(ActivityFlags.ReorderToFront);
 					activity.StartActivityIfNeeded(intent, 0);

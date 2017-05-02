@@ -59,21 +59,24 @@
                 android:hint="Old Password"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:gravity="center" />
+                android:gravity="center"
+                android:inputType="textPassword" />
             <EditText
                 android:layout_width="match_parent"
                 android:id="@+id/newPasswordField"
                 android:hint="New Password"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:gravity="center" />
+                android:gravity="center"
+                android:inputType="textPassword" />
             <EditText
                 android:layout_width="match_parent"
                 android:id="@+id/repeatNewPasswordField"
                 android:hint="Repeat New Password"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:gravity="center" />
+                android:gravity="center"
+                android:inputType="textPassword" />
             <Button
                 android:text="Save Changes"
                 android:layout_width="match_parent"

@@ -48,23 +48,46 @@ namespace Commercially.Droid
 			base.OnCreate(savedInstanceState);
 			SetContentView(Resource.Layout.UserDetails);
 			Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
-			this.ShowBackArrow();
+			if (Session.User.Type == UserRoleType.Admin) {
+				this.ShowBackArrow();
+				var user = JsonConvert.DeserializeObject<User>(Intent.GetStringExtra(typeof(User).Name));
+				SharedController.User = user;
+			} else {
+				this.SetSupportActionBarDefault();
+				Session.User = UserApi.GetCurrentUser();
+				SharedController.User = Session.User;
+			}
+            InitializeView();
+		}
 
-			var user = JsonConvert.DeserializeObject<User>(Intent.GetStringExtra(typeof(User).Name));
-			SharedController.User = user;
-			InitializeView();
+		public override bool OnCreateOptionsMenu(IMenu menu)
+		{
+			this.CreateMainOptionsMenu(menu, Resource.Id.UserIcon);
+			return base.OnCreateOptionsMenu(menu);
+		}
+
+		public override bool OnOptionsItemSelected(IMenuItem item)
+		{
+			this.StartActivityMenuItem(item);
+			return base.OnOptionsItemSelected(item);
 		}
 
 		protected override void OnResume()
 		{
 			base.OnResume();
-			GetRequests();
+			InvalidateOptionsMenu();
+			if (Session.User.Type == UserRoleType.Admin) {
+				GetRequests();
+			}
 		}
 
 		public override bool OnSupportNavigateUp()
 		{
-			Finish();
-			return true;
+			if (Session.User.Type == UserRoleType.Admin) {
+				Finish();
+				return true;
+			}
+			return base.OnSupportNavigateUp();
 		}
 
 		void InitializeView()
@@ -86,7 +109,6 @@ namespace Commercially.Droid
 				NameField.Enabled = false;
 				EmailField.Enabled = false;
 				PhoneField.Enabled = false;
-				ChangePasswordButton.Hidden(true);
 			} else {
 				NameField.TextChanged += FieldTextChanged;
 				EmailField.TextChanged += FieldTextChanged;
@@ -94,6 +116,8 @@ namespace Commercially.Droid
 				NewPasswordField.TextChanged += FieldTextChanged;
 				RepeatNewPasswordField.TextChanged += FieldTextChanged;
 			}
+
+			ChangePasswordButton.Hidden(!SharedController.User.id.Equals(Session.User.id));
 
 			Layout.AddView(Table);
 		}
@@ -131,14 +155,23 @@ namespace Commercially.Droid
 				return;
 			}
 			SaveButton.Hidden(true);
-			Finish();
+			OldPasswordField.Hidden(true);
+			NewPasswordField.Hidden(true);
+			RepeatNewPasswordField.Hidden(true);
+			if (Session.User.Type == UserRoleType.Admin) {
+                Finish();
+			} else {
+				this.ShowPrompt(Localizable.PromptMessages.SaveSuccess);
+				Session.User = UserApi.GetCurrentUser();
+				SharedController.User = Session.User;
+			}
 		}
 
 		void ChangePasswordButtonClick(object sender, EventArgs e)
 		{
 			OldPasswordField.Hidden(OldPasswordField.Visibility == ViewStates.Visible);
-			NewPasswordField.Hidden(OldPasswordField.Visibility == ViewStates.Visible);
-			RepeatNewPasswordField.Hidden(OldPasswordField.Visibility == ViewStates.Visible);
+			NewPasswordField.Hidden(NewPasswordField.Visibility == ViewStates.Visible);
+			RepeatNewPasswordField.Hidden(RepeatNewPasswordField.Visibility == ViewStates.Visible);
 		}
 
 		View GetHeader()

@@ -36,8 +36,10 @@ namespace Commercially.iOS
 		partial void SaveButtonPress(UIButton sender)
 		{
 			try {
-				SharedController.SaveButtonPress(LocationField.Text, DescriptionField.Text,
-												 ClientPickerView.Model.GetTitle(ClientPickerView, 0, 0));
+				if (SharedController.SaveButtonPress(LocationField.Text, DescriptionField.Text,
+													ClientPickerView.Model.GetTitle(ClientPickerView, 0, 0)) == true) {
+ 					NavigationController.ShowPrompt(Localizable.PromptMessages.PressAndHoldButton);	
+				}
 			} catch (Exception) {
 				NavigationController.ShowPrompt(Localizable.PromptMessages.ChangesSaveError);
 				return;

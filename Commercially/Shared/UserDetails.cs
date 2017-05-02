@@ -117,13 +117,18 @@ namespace Commercially
 					jsonBody.Add("phone", numbers);
 				}
 			}
-			result += UserApi.PatchUser(User.id, jsonBody.ToString());
+			if (jsonBody.Count > 0) {
+				result += UserApi.PatchUser(User.id, jsonBody.ToString());
+			}
 			if (PasswordsChanged(newPassword, repeatNewPassword) && PasswordsMatch(newPassword, repeatNewPassword)
 			    && !string.IsNullOrWhiteSpace(oldPassword) && Validator.Password(newPassword)) {
 				jsonBody = new JObject();
 				jsonBody.Add("old_password", oldPassword);
 				jsonBody.Add("new_password", newPassword);
 				result += UserApi.ChangePassword(User.id, jsonBody.ToString());
+			}
+			if (string.IsNullOrWhiteSpace(result)) {
+				throw new Exception("No changes were made");
 			}
 			return result;
 		}

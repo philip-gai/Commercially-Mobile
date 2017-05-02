@@ -70,7 +70,7 @@ namespace Commercially
 			}
 		}
 
-		public void SaveButtonPress(string locationText, string descriptionText, string pickerValue)
+		public bool SaveButtonPress(string locationText, string descriptionText, string pickerValue)
 		{
 			var jsonBody = new JObject();
 			if (LocationChanged(locationText) &&  !string.IsNullOrWhiteSpace(locationText)) {
@@ -84,7 +84,9 @@ namespace Commercially
 			}
 			if (PickerChanged(pickerValue)) {
 				FlicButtonApi.PairButton(Button.bluetooth_id, ClientApi.GetClient(SelectedClient).clientId);
+				return true;
 			}
+			return false;
 		}
 
 		public static string[] GetPickerOptions(FlicButton button)

@@ -59,7 +59,6 @@ namespace Commercially.iOS
 				NameField.DisguiseAsTextView();
 				EmailField.DisguiseAsTextView();
 				PhoneField.DisguiseAsTextView();
-				ChangePasswordButton.Hidden = true;
 			} else {
 				NameField.EditingDidEnd += FieldEditingDidEnd;
 				EmailField.EditingDidEnd += FieldEditingDidEnd;
@@ -67,6 +66,8 @@ namespace Commercially.iOS
 				NewPasswordField.EditingDidEnd += FieldEditingDidEnd;
 				RepeatNewPasswordField.EditingDidEnd += FieldEditingDidEnd;
 			}
+
+			ChangePasswordButton.Hidden = SharedController.User != Session.User;
 		}
 
 		void GetRequests()
@@ -112,6 +113,9 @@ namespace Commercially.iOS
 			}
 
 			SaveButton.Hidden = true;
+			OldPasswordField.Hidden = true;
+			NewPasswordField.Hidden = true;
+			RepeatNewPasswordField.Hidden = true;
 			if (Session.User.Type == UserRoleType.Admin) {
 				NavigationController.PopViewController(true);
 			} else {

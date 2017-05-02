@@ -1730,23 +1730,20 @@ namespace Commercially.Droid
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f0b00a2
-			public const int AdminGroup = 2131427490;
-			
-			// aapt resource value: 0x7f0b00a4
-			public const int ButtonIcon = 2131427492;
+			// aapt resource value: 0x7f0b00a3
+			public const int ButtonIcon = 2131427491;
 			
 			// aapt resource value: 0x7f0b005e
 			public const int ButtonRow = 2131427422;
 			
-			// aapt resource value: 0x7f0b00a6
-			public const int ClientIcon = 2131427494;
+			// aapt resource value: 0x7f0b00a5
+			public const int ClientIcon = 2131427493;
 			
 			// aapt resource value: 0x7f0b0065
 			public const int ClientRow = 2131427429;
 			
-			// aapt resource value: 0x7f0b00a3
-			public const int DashboardIcon = 2131427491;
+			// aapt resource value: 0x7f0b00a2
+			public const int DashboardIcon = 2131427490;
 			
 			// aapt resource value: 0x7f0b0067
 			public const int EmailField = 2131427431;
@@ -1760,8 +1757,8 @@ namespace Commercially.Droid
 			// aapt resource value: 0x7f0b0090
 			public const int RequestRow = 2131427472;
 			
-			// aapt resource value: 0x7f0b00a5
-			public const int UserIcon = 2131427493;
+			// aapt resource value: 0x7f0b00a4
+			public const int UserIcon = 2131427492;
 			
 			// aapt resource value: 0x7f0b0087
 			public const int acceptedTimeText = 2131427463;

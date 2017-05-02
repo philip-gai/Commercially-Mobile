@@ -9,12 +9,13 @@ namespace Commercially
 			public const string InvalidPassword = FriendlyStart + "Check that your password is valid.";
 			public const string LoginError = FriendlyStart + "Check your email address or password.";
 			public const string ButtonsError = FriendlyStart + "Buttons were unable to load.";
-			public const string RequestsError = FriendlyStart + "FlicButton requests were unable to load.";
+			public const string RequestsError = FriendlyStart + "Requests were unable to load.";
 			public const string ChangesSaveError = FriendlyStart + "Changes were unable to save.";
 			public const string AssignError = FriendlyStart + "Assiging the request was unsuccessful.";
 			public const string UsersError = FriendlyStart + "Users were unable to load.";
 			public static string ClientsError = FriendlyStart + "Clients were unable to load.";
 			public static string SaveSuccess = "Your changes were successfully saved!";
+			public const string PressAndHoldButton = "Press and hold the button for 7 seconds to pair.";
 		}
 		public struct ExceptionMessages
 		{
