@@ -1,12 +1,12 @@
 ﻿using System;
 using UIKit;
-using Commercially.iOS.Extensions;
 
 namespace Commercially.iOS {
 	public abstract class UnderlineViewController : UIViewController {
 		public abstract UIView[] UnderlineViews { get; }
 		public abstract UIView ViewForUnderlines { get; }
 		public abstract bool ShowNavigationBar { get; }
+		public abstract UIColor UnderlineColor { get; }
 
 		static int IsDoneLayoutSubviews = 1;
 		int LayoutCount = 0;
@@ -15,16 +15,12 @@ namespace Commercially.iOS {
 
 		public override void ViewWillAppear(bool animated) {
 			base.ViewWillAppear(animated);
-			if (ShowNavigationBar) {
-				NavigationController.SetNavigationBarHidden(false, false);
-			}
+			NavigationController.SetNavigationBarHidden(!ShowNavigationBar, false);
 		}
 
 		public override void ViewWillDisappear(bool animated) {
 			base.ViewWillDisappear(animated);
-			if (ShowNavigationBar) {
-				NavigationController.SetNavigationBarHidden(true, false);
-			}
+			NavigationController.SetNavigationBarHidden(false, false);
 		}
 
 		public override void ViewDidLayoutSubviews() {
@@ -38,19 +34,19 @@ namespace Commercially.iOS {
 		void SetLines() {
 			if (UnderlineViews == null) return;
 			foreach (UIView view in UnderlineViews) {
-				UIView lineView = ViewForUnderlines.AddUnderlineView(view, LocalConstants.LineColor);
+				UIView lineView = ViewForUnderlines.AddUnderlineView(view, UnderlineColor);
 				if (view is UnderlineField) {
 					var field = view as UnderlineField;
 					if (field.GetUnderlineView() != null && field.GetUnderlineView().IsDescendantOfView(View)) {
 						field.GetUnderlineView().RemoveFromSuperview();
 					}
-					field.SetUnderlineView(lineView);
+					field.SetUnderlineView(lineView, UnderlineColor);
 				} else if (view is UnderlineButton) {
 					var button = view as UnderlineButton;
 					if (button.GetUnderlineView() != null && button.GetUnderlineView().IsDescendantOfView(View)) {
 						button.GetUnderlineView().RemoveFromSuperview();
 					}
-					button.SetUnderlineView(lineView);
+					button.SetUnderlineView(lineView, UnderlineColor);
 				}
 			}
 		}

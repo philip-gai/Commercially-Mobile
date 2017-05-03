@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="300dp"
+    android:layout_height="300dp">
+    <ImageView
+        android:src="@drawable/logored"
+        android:id="@+id/logoView"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:background="@android:color/white" />
+    <TextView
+        android:text="Medium Text"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/promptMessage"
+        android:background="?android:attr/colorPrimary"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:padding="10dp"
+        android:layout_width="300dp"
+        android:layout_height="100dp" />
+    <Button
+        android:text="Dismiss"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:id="@+id/dismissButton"
+        android:textColor="?android:attr/colorPrimary"
+        style="@style/Widget.AppCompat.Button.Colored"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        app:backgroundTint="@android:color/white" />
+</LinearLayout>

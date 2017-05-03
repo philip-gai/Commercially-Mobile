@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
@@ -21,8 +20,6 @@
     <CodesignKey>iPhone Developer</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
     <MtouchFastDev>true</MtouchFastDev>
-    <MtouchUseSGen>true</MtouchUseSGen>
-    <MtouchUseRefCounting>true</MtouchUseRefCounting>
     <IOSDebuggerPort>51470</IOSDebuggerPort>
     <MtouchLink>None</MtouchLink>
     <MtouchArch>x86_64</MtouchArch>
@@ -37,8 +34,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodesignKey>iPhone Developer</CodesignKey>
-    <MtouchUseSGen>true</MtouchUseSGen>
-    <MtouchUseRefCounting>true</MtouchUseRefCounting>
     <MtouchFloat32>true</MtouchFloat32>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchLink>SdkOnly</MtouchLink>
@@ -54,8 +49,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodesignKey>iPhone Developer</CodesignKey>
-    <MtouchUseSGen>true</MtouchUseSGen>
-    <MtouchUseRefCounting>true</MtouchUseRefCounting>
     <MtouchLink>None</MtouchLink>
     <MtouchArch>x86_64</MtouchArch>
     <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
@@ -74,8 +67,6 @@
     <DeviceSpecificBuild>true</DeviceSpecificBuild>
     <MtouchDebug>true</MtouchDebug>
     <MtouchFastDev>true</MtouchFastDev>
-    <MtouchUseSGen>true</MtouchUseSGen>
-    <MtouchUseRefCounting>true</MtouchUseRefCounting>
     <MtouchFloat32>true</MtouchFloat32>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchLink>SdkOnly</MtouchLink>
@@ -92,21 +83,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="Microsoft.AspNetCore.Cryptography.Internal">
-      <HintPath>..\packages\Microsoft.AspNetCore.Cryptography.Internal.1.1.0\lib\netstandard1.3\Microsoft.AspNetCore.Cryptography.Internal.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AspNetCore.Cryptography.KeyDerivation">
-      <HintPath>..\packages\Microsoft.AspNetCore.Cryptography.KeyDerivation.1.1.0\lib\netstandard1.3\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll</HintPath>
-    </Reference>
-    <Reference Include="BouncyCastle">
-      <HintPath>..\packages\MimeKit.1.10.1\lib\Xamarin.iOS10\BouncyCastle.dll</HintPath>
-    </Reference>
-    <Reference Include="MimeKit">
-      <HintPath>..\packages\MimeKit.1.10.1\lib\Xamarin.iOS10\MimeKit.dll</HintPath>
-    </Reference>
-    <Reference Include="MailKit">
-      <HintPath>..\packages\MailKit.1.10.2\lib\Xamarin.iOS10\MailKit.dll</HintPath>
-    </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -114,7 +91,6 @@
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-40.png" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-40%402x.png" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-40%403x.png" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-60%402x.png" />
@@ -141,17 +117,75 @@
     <ImageAsset Include="Assets.xcassets\Logo-Black.imageset\capital-letter-c-with-a-chevron-arrow-on-top %282%29~universal%401x.png" />
     <ImageAsset Include="Assets.xcassets\Logo-Black.imageset\capital-letter-c-with-a-chevron-arrow-on-top %282%29~universal%402x.png" />
     <ImageAsset Include="Assets.xcassets\Logo-Black.imageset\capital-letter-c-with-a-chevron-arrow-on-top %282%29~universal%403x.png" />
-    <ImageAsset Include="Assets.xcassets\Logo-Blue.imageset\capital-letter-c-with-a-chevron-arrow-on-top %283%29~universal%401x.png" />
-    <ImageAsset Include="Assets.xcassets\Logo-Blue.imageset\capital-letter-c-with-a-chevron-arrow-on-top %283%29~universal%402x.png" />
-    <ImageAsset Include="Assets.xcassets\Logo-Blue.imageset\capital-letter-c-with-a-chevron-arrow-on-top %283%29~universal%403x.png" />
     <ImageAsset Include="Assets.xcassets\Logo-Green.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\Logo-Red.imageset\capital-letter-c-with-a-chevron-arrow-on-top %281%29~universal%401x.png" />
-    <ImageAsset Include="Assets.xcassets\Logo-Red.imageset\capital-letter-c-with-a-chevron-arrow-on-top %281%29~universal%402x.png" />
-    <ImageAsset Include="Assets.xcassets\Logo-Red.imageset\capital-letter-c-with-a-chevron-arrow-on-top %281%29~universal%403x.png" />
-    <ImageAsset Include="Assets.xcassets\Logo-Green.imageset\capital-letter-c-with-a-chevron-arrow-on-top~universal%401x.png" />
-    <ImageAsset Include="Assets.xcassets\Logo-Green.imageset\capital-letter-c-with-a-chevron-arrow-on-top~universal%402x.png" />
-    <ImageAsset Include="Assets.xcassets\Logo-Green.imageset\capital-letter-c-with-a-chevron-arrow-on-top~universal%403x.png" />
-    <ImageAsset Include="Assets.xcassets\LaunchImage.launchimage\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\error.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\list-TabBar.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\Logo-Pink.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\Logo-Orange.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\Logo-Orange.imageset\capital-letter-c-with-a-chevron-arrow-on-top %281%29~universal%401x.png" />
+    <ImageAsset Include="Assets.xcassets\Logo-Orange.imageset\capital-letter-c-with-a-chevron-arrow-on-top %281%29~universal%402x.png" />
+    <ImageAsset Include="Assets.xcassets\Logo-Orange.imageset\capital-letter-c-with-a-chevron-arrow-on-top %281%29~universal%403x.png" />
+    <ImageAsset Include="Assets.xcassets\Logo-Yellow.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\Logo-Yellow.imageset\capital-letter-c-with-a-chevron-arrow-on-top %282%29~universal%401x.png" />
+    <ImageAsset Include="Assets.xcassets\Logo-Yellow.imageset\capital-letter-c-with-a-chevron-arrow-on-top %282%29~universal%402x.png" />
+    <ImageAsset Include="Assets.xcassets\Logo-Yellow.imageset\capital-letter-c-with-a-chevron-arrow-on-top %282%29~universal%403x.png" />
+    <ImageAsset Include="Assets.xcassets\Logo-Green.imageset\capital-letter-c-with-a-chevron-arrow-on-top %283%29~universal%401x.png" />
+    <ImageAsset Include="Assets.xcassets\Logo-Green.imageset\capital-letter-c-with-a-chevron-arrow-on-top %283%29~universal%402x.png" />
+    <ImageAsset Include="Assets.xcassets\Logo-Green.imageset\capital-letter-c-with-a-chevron-arrow-on-top %283%29~universal%403x.png" />
+    <ImageAsset Include="Assets.xcassets\Logo-TealBlue.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\Logo-TealBlue.imageset\capital-letter-c-with-a-chevron-arrow-on-top %284%29~universal%401x.png" />
+    <ImageAsset Include="Assets.xcassets\Logo-TealBlue.imageset\capital-letter-c-with-a-chevron-arrow-on-top %284%29~universal%402x.png" />
+    <ImageAsset Include="Assets.xcassets\Logo-TealBlue.imageset\capital-letter-c-with-a-chevron-arrow-on-top %284%29~universal%403x.png" />
+    <ImageAsset Include="Assets.xcassets\Logo-Blue.imageset\capital-letter-c-with-a-chevron-arrow-on-top %285%29~universal%401x.png" />
+    <ImageAsset Include="Assets.xcassets\Logo-Blue.imageset\capital-letter-c-with-a-chevron-arrow-on-top %285%29~universal%402x.png" />
+    <ImageAsset Include="Assets.xcassets\Logo-Blue.imageset\capital-letter-c-with-a-chevron-arrow-on-top %285%29~universal%403x.png" />
+    <ImageAsset Include="Assets.xcassets\Logo-Purple.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\Logo-Purple.imageset\capital-letter-c-with-a-chevron-arrow-on-top %286%29~universal%401x.png" />
+    <ImageAsset Include="Assets.xcassets\Logo-Purple.imageset\capital-letter-c-with-a-chevron-arrow-on-top %286%29~universal%402x.png" />
+    <ImageAsset Include="Assets.xcassets\Logo-Purple.imageset\capital-letter-c-with-a-chevron-arrow-on-top %286%29~universal%403x.png" />
+    <ImageAsset Include="Assets.xcassets\Logo-Pink.imageset\capital-letter-c-with-a-chevron-arrow-on-top %287%29~universal%401x.png" />
+    <ImageAsset Include="Assets.xcassets\Logo-Pink.imageset\capital-letter-c-with-a-chevron-arrow-on-top %287%29~universal%402x.png" />
+    <ImageAsset Include="Assets.xcassets\Logo-Pink.imageset\capital-letter-c-with-a-chevron-arrow-on-top %287%29~universal%403x.png" />
+    <ImageAsset Include="Assets.xcassets\Logo-Red.imageset\capital-letter-c-with-a-chevron-arrow-on-top~universal%401x.png" />
+    <ImageAsset Include="Assets.xcassets\Logo-Red.imageset\capital-letter-c-with-a-chevron-arrow-on-top~universal%402x.png" />
+    <ImageAsset Include="Assets.xcassets\Logo-Red.imageset\capital-letter-c-with-a-chevron-arrow-on-top~universal%403x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-40.png" />
+    <ImageAsset Include="Assets.xcassets\button-TabBar.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\button-TabBar.imageset\ic_radio_button_checked.png" />
+    <ImageAsset Include="Assets.xcassets\button-TabBar.imageset\ic_radio_button_checked_2x.png" />
+    <ImageAsset Include="Assets.xcassets\button-TabBar.imageset\ic_radio_button_checked_3x.png" />
+    <ImageAsset Include="Assets.xcassets\error.imageset\ic_priority_high_48pt.png" />
+    <ImageAsset Include="Assets.xcassets\error.imageset\ic_priority_high_48pt_3x.png" />
+    <ImageAsset Include="Assets.xcassets\error.imageset\ic_priority_high_48pt_2x.png" />
+    <ImageAsset Include="Assets.xcassets\dashboard-TabBar.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\dashboard-TabBar.imageset\ic_dashboard_48pt_3x~universal%401x.png" />
+    <ImageAsset Include="Assets.xcassets\dashboard-TabBar.imageset\ic_dashboard_48pt_3x~universal%402x.png" />
+    <ImageAsset Include="Assets.xcassets\dashboard-TabBar.imageset\ic_dashboard_48pt_3x~universal%403x.png" />
+    <ImageAsset Include="Assets.xcassets\notification-Toolbar.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\notification-Toolbar.imageset\ic_notifications_48pt.png" />
+    <ImageAsset Include="Assets.xcassets\notification-Toolbar.imageset\ic_notifications_48pt_2x.png" />
+    <ImageAsset Include="Assets.xcassets\notification-Toolbar.imageset\ic_notifications_48pt_3x.png" />
+    <ImageAsset Include="Assets.xcassets\notification-Toolbar.imageset\ic_notifications_48pt_3x~universal%401x.png" />
+    <ImageAsset Include="Assets.xcassets\notification-Toolbar.imageset\ic_notifications_48pt_3x~universal%402x.png" />
+    <ImageAsset Include="Assets.xcassets\notification-Toolbar.imageset\ic_notifications_48pt_3x~universal%403x.png" />
+    <ImageAsset Include="Assets.xcassets\Logo-Red-Toolbar.imageset\capital-letter-c-with-a-chevron-arrow-on-top %281%29~universal%401x.png" />
+    <ImageAsset Include="Assets.xcassets\Logo-Red-Toolbar.imageset\capital-letter-c-with-a-chevron-arrow-on-top %281%29~universal%402x.png" />
+    <ImageAsset Include="Assets.xcassets\Logo-Red-Toolbar.imageset\capital-letter-c-with-a-chevron-arrow-on-top %281%29~universal%403x.png" />
+    <ImageAsset Include="Assets.xcassets\Logo-Red-Toolbar.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\list-TabBar.imageset\list-TabBar~universal%401x.png" />
+    <ImageAsset Include="Assets.xcassets\list-TabBar.imageset\list-TabBar~universal%402x.png" />
+    <ImageAsset Include="Assets.xcassets\list-TabBar.imageset\list-TabBar~universal%403x.png" />
+    <ImageAsset Include="Assets.xcassets\user-TabBar.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\user-TabBar.imageset\ic_person_48pt.png" />
+    <ImageAsset Include="Assets.xcassets\user-TabBar.imageset\ic_person_48pt_2x.png" />
+    <ImageAsset Include="Assets.xcassets\user-TabBar.imageset\ic_person_48pt_3x.png" />
+    <ImageAsset Include="Assets.xcassets\user-TabBar.imageset\ic_person_48pt_3x~universal%403x.png" />
+    <ImageAsset Include="Assets.xcassets\user-TabBar.imageset\ic_person_48pt_3x~universal%402x.png" />
+    <ImageAsset Include="Assets.xcassets\user-TabBar.imageset\ic_person_48pt_3x~universal%401x.png" />
+    <ImageAsset Include="Assets.xcassets\client-TabBar.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\client-TabBar.imageset\ic_computer_48pt_3x~universal%401x.png" />
+    <ImageAsset Include="Assets.xcassets\client-TabBar.imageset\ic_computer_48pt_3x~universal%402x.png" />
+    <ImageAsset Include="Assets.xcassets\client-TabBar.imageset\ic_computer_48pt_3x~universal%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
@@ -167,36 +201,61 @@
     <Folder Include="Custom Classes\Controllers\" />
     <Folder Include="Custom Classes\Cells\" />
     <Folder Include="Custom Classes\Delegates\" />
-    <Folder Include="Custom Classes\Data Sources\" />
     <Folder Include="Extensions\" />
     <Folder Include="Utilities\" />
     <Folder Include="Custom Classes\Buttons\" />
+    <Folder Include="Assets.xcassets\error.imageset\" />
+    <Folder Include="Custom Classes\Navigation\" />
+    <Folder Include="Assets.xcassets\list-TabBar.imageset\" />
+    <Folder Include="Assets.xcassets\list.imageset\" />
+    <Folder Include="Assets.xcassets\blurredBg-1.imageset\" />
+    <Folder Include="Assets.xcassets\blurredBg-2.imageset\" />
+    <Folder Include="Assets.xcassets\blurredBg-3.imageset\" />
+    <Folder Include="Assets.xcassets\blurredBg-4.imageset\" />
+    <Folder Include="Assets.xcassets\blurredBg-6.imageset\" />
+    <Folder Include="Assets.xcassets\blurredBg-3.imageset\" />
+    <Folder Include="Assets.xcassets\blurredBg-4.imageset\" />
+    <Folder Include="Assets.xcassets\Logo-Pink.imageset\" />
+    <Folder Include="Assets.xcassets\Logo-Orange.imageset\" />
+    <Folder Include="Assets.xcassets\Logo-Yellow.imageset\" />
+    <Folder Include="Assets.xcassets\Logo-TealBlue.imageset\" />
+    <Folder Include="Assets.xcassets\Logo-Purple.imageset\" />
+    <Folder Include="Custom Classes\Picker Views\" />
+    <Folder Include="Assets.xcassets\button-TabBar.imageset\" />
+    <Folder Include="Assets.xcassets\dashboard-TabBar.imageset\" />
+    <Folder Include="Assets.xcassets\notification-Toolbar.imageset\" />
+    <Folder Include="Assets.xcassets\Logo-Red-Toolbar.imageset\" />
+    <Folder Include="Assets.xcassets\user-TabBar.imageset\" />
+    <Folder Include="Assets.xcassets\client-TabBar.imageset\" />
   </ItemGroup>
   <ItemGroup>
-    <InterfaceDefinition Include="Storyboards\RequestList.storyboard" />
-    <InterfaceDefinition Include="Storyboards\Main.storyboard" />
     <InterfaceDefinition Include="Storyboards\Login.storyboard" />
-    <InterfaceDefinition Include="Storyboards\LaunchScreen.storyboard" />
     <InterfaceDefinition Include="Storyboards\Prompt.storyboard" />
-    <InterfaceDefinition Include="Storyboards\Dashboard.storyboard" />
     <InterfaceDefinition Include="Storyboards\Home.storyboard" />
+    <InterfaceDefinition Include="Custom Classes\Cells\RequestCell.xib" />
+    <InterfaceDefinition Include="LaunchScreen.storyboard" />
+    <InterfaceDefinition Include="Storyboards\RequestList.storyboard" />
+    <InterfaceDefinition Include="Storyboards\RequestDetails.storyboard" />
+    <InterfaceDefinition Include="Storyboards\ButtonList.storyboard" />
+    <InterfaceDefinition Include="Custom Classes\Cells\ButtonCell.xib" />
+    <InterfaceDefinition Include="Storyboards\ButtonDetails.storyboard" />
+    <InterfaceDefinition Include="Storyboards\Main.storyboard" />
+    <InterfaceDefinition Include="Storyboards\UserList.storyboard" />
+    <InterfaceDefinition Include="Custom Classes\Cells\UserCell.xib" />
+    <InterfaceDefinition Include="Storyboards\UserDetails.storyboard" />
+    <InterfaceDefinition Include="Storyboards\ClientDetails.storyboard" />
+    <InterfaceDefinition Include="Storyboards\ClientList.storyboard" />
+    <InterfaceDefinition Include="Custom Classes\Cells\ClientCell.xib" />
+    <InterfaceDefinition Include="Storyboards\UserCreate.storyboard" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Info.plist" />
     <None Include="Entitlements.plist" />
+    <None Include="Info.plist" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
-    <Compile Include="Controllers\HomeViewController.cs" />
-    <Compile Include="Controllers\HomeViewController.designer.cs">
-      <DependentUpon>HomeViewController.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controllers\RequestListTableViewController.cs" />
-    <Compile Include="Controllers\RequestListTableViewController.designer.cs">
-      <DependentUpon>RequestListTableViewController.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\LoginController.designer.cs">
       <DependentUpon>LoginController.cs</DependentUpon>
@@ -209,12 +268,7 @@
     <Compile Include="Custom Classes\Controllers\NavigationBarTableViewController.cs" />
     <Compile Include="Custom Classes\Controllers\NavigationBarViewController.cs" />
     <Compile Include="Custom Classes\Controllers\FieldListController.cs" />
-    <Compile Include="Custom Classes\Delegates\RequestListTableViewDelegate.cs" />
     <Compile Include="Custom Classes\Delegates\UnderlineFieldDelegate.cs" />
-    <Compile Include="Custom Classes\Cells\RequestCell.cs" />
-    <Compile Include="Custom Classes\Cells\RequestCell.designer.cs">
-      <DependentUpon>RequestCell.cs</DependentUpon>
-    </Compile>
     <Compile Include="Custom Classes\Controllers\UnderlineViewController.cs" />
     <Compile Include="Extensions\UIActivityIndicatorViewExtensions.cs" />
     <Compile Include="Extensions\UINavigationControllerExtensions.cs" />
@@ -239,16 +293,75 @@
     <Compile Include="Controllers\PromptController.designer.cs" />
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Controllers\MainController.designer.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <XamarinComponentReference Include="json.net">
-      <Version>7.0.1</Version>
-      <Visible>False</Visible>
-    </XamarinComponentReference>
-    <XamarinComponentReference Include="mailkit">
-      <Version>1.8.1</Version>
-      <Visible>False</Visible>
-    </XamarinComponentReference>
+    <Compile Include="Custom Classes\Cells\RequestCell.cs" />
+    <Compile Include="Custom Classes\Cells\RequestCell.designer.cs">
+      <DependentUpon>RequestCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Custom Classes\Navigation\BackBarItem.cs" />
+    <Compile Include="Custom Classes\Navigation\BackBarItem.designer.cs" />
+    <Compile Include="Custom Classes\Navigation\ClearNavigationBar.cs" />
+    <Compile Include="Custom Classes\Navigation\ClearNavigationBar.designer.cs" />
+    <Compile Include="Controllers\HomeTabBarController.cs" />
+    <Compile Include="Controllers\HomeTabBarController.designer.cs">
+      <DependentUpon>HomeTabBarController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\RequestListController.cs" />
+    <Compile Include="Controllers\RequestListController.designer.cs">
+      <DependentUpon>RequestListController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Extensions\ColorExtensions.cs" />
+    <Compile Include="Controllers\RequestDetailsController.cs" />
+    <Compile Include="Controllers\RequestDetailsController.designer.cs">
+      <DependentUpon>RequestDetailsController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Custom Classes\Picker Views\StatusPickerModel.cs" />
+    <Compile Include="Extensions\UIPickerViewExtensions.cs" />
+    <Compile Include="Custom Classes\Delegates\PickerDelegate.cs" />
+    <Compile Include="Custom Classes\Cells\ButtonCell.cs" />
+    <Compile Include="Custom Classes\Cells\ButtonCell.designer.cs">
+      <DependentUpon>ButtonCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\ButtonDetailsController.cs" />
+    <Compile Include="Controllers\ButtonDetailsController.designer.cs">
+      <DependentUpon>ButtonDetailsController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Extensions\UITextFieldExtensions.cs" />
+    <Compile Include="Custom Classes\Picker Views\ClientPickerViewModel.cs" />
+    <Compile Include="Custom Classes\Controllers\KeyboardController.cs" />
+    <Compile Include="Controllers\UserListController.cs" />
+    <Compile Include="Controllers\UserListController.designer.cs">
+      <DependentUpon>UserListController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Custom Classes\Cells\UserCell.cs" />
+    <Compile Include="Custom Classes\Cells\UserCell.designer.cs">
+      <DependentUpon>UserCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\UserDetailsController.cs" />
+    <Compile Include="Controllers\UserDetailsController.designer.cs">
+      <DependentUpon>UserDetailsController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\ClientListController.cs" />
+    <Compile Include="Controllers\ClientListController.designer.cs">
+      <DependentUpon>ClientListController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Extensions\UITabBarControllerExtensions.cs" />
+    <Compile Include="Controllers\ButtonListController.cs" />
+    <Compile Include="Controllers\ButtonListController.designer.cs" />
+    <Compile Include="Custom Classes\Cells\ClientCell.cs" />
+    <Compile Include="Custom Classes\Cells\ClientCell.designer.cs">
+      <DependentUpon>ClientCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\ClientDetailsController.cs" />
+    <Compile Include="Controllers\ClientDetailsController.designer.cs">
+      <DependentUpon>ClientDetailsController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Custom Classes\Picker Views\UserPickerViewModel.cs" />
+    <Compile Include="Custom Classes\Controllers\KeyboardTableController.cs" />
+    <Compile Include="Controllers\UserCreateController.cs" />
+    <Compile Include="Controllers\UserCreateController.designer.cs">
+      <DependentUpon>UserCreateController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Custom Classes\Picker Views\UserRolePickerModel.cs" />
   </ItemGroup>
   <Import Project="..\Commercially\Commercially.projitems" Label="Shared" Condition="Exists('..\Commercially\Commercially.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

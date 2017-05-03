@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
+    <ScrollView
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/mainLayout"
+            android:paddingTop="10dp"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:layout_marginBottom="10dp">
+            <EditText
+                android:layout_width="match_parent"
+                android:id="@+id/nameField"
+                android:hint="First Last"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="First Last"
+                android:gravity="center"
+                android:textStyle="bold" />
+            <EditText
+                android:layout_width="match_parent"
+                android:id="@+id/usernameField"
+                android:hint="Username"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Username"
+                android:gravity="center" />
+            <EditText
+                android:layout_width="match_parent"
+                android:id="@+id/emailField"
+                android:hint="Email"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Email"
+                android:gravity="center" />
+            <EditText
+                android:layout_width="match_parent"
+                android:id="@+id/phoneField"
+                android:hint="Phone"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Phone"
+                android:gravity="center" />
+            <Button xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:text="Change Password"
+                android:layout_width="match_parent"
+                android:id="@+id/changePasswordButton"
+                android:layout_height="66dp"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:autoText="false"
+                app:backgroundTint="@android:color/white"
+                android:textColor="?android:attr/colorPrimary" />
+            <EditText
+                android:layout_width="match_parent"
+                android:id="@+id/oldPasswordField"
+                android:hint="Old Password"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:inputType="textPassword" />
+            <EditText
+                android:layout_width="match_parent"
+                android:id="@+id/newPasswordField"
+                android:hint="New Password"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:inputType="textPassword" />
+            <EditText
+                android:layout_width="match_parent"
+                android:id="@+id/repeatNewPasswordField"
+                android:hint="Repeat New Password"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:inputType="textPassword" />
+            <Button
+                android:text="Save Changes"
+                android:layout_width="match_parent"
+                android:id="@+id/saveButton"
+                android:layout_height="66dp"
+                android:textColor="@android:color/white"
+                style="@style/Widget.AppCompat.Button.Colored" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

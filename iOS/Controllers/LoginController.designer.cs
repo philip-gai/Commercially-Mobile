@@ -16,7 +16,7 @@ namespace Commercially.iOS
     {
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        Commercially.iOS.EmailField EmailField { get; set; }
+        Commercially.iOS.UnderlineField EmailField { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]

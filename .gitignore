@@ -14,7 +14,6 @@ Makefile.in
 *.suo
 *.cache
 *.pidb
-*.userprefs
 *.usertasks
 config.log
 config.make
@@ -39,4 +38,4 @@ Thumbs.db
 # dotCover
 *.dotCover
 
-iOS/Resources/Assets.xcassets/Image.imageset/Contents.json
+Commercially.userprefs

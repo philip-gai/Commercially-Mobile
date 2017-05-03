@@ -5,7 +5,7 @@
 	<key>CFBundleName</key>
 	<string>Commercially</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.commercially</string>
+	<string>com.Commercially.CommerciallyNow</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
@@ -41,6 +41,6 @@
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
 	<key>UILaunchStoryboardName</key>
-	<string>Storyboards/LaunchScreen</string>
+	<string>LaunchScreen</string>
 </dict>
 </plist>

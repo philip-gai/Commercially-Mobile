@@ -1,17 +1,31 @@
-﻿using System;
+using System;
+
 namespace Commercially
 {
+	[Serializable]
 	public class FlicButton
 	{
-		public FlicButton(string BluetoothId) {
-			this.BluetoothId = BluetoothId;
+		public string description { get; set; }
+		public string bluetooth_id { get; set; }
+		public string room { get; set; }
+		public string clientId { get; set; }
+		public string[] discoveredBy { get; set; }
+
+		public ButtonType Type {
+			get {
+				if (!string.IsNullOrWhiteSpace(clientId)) {
+					if (GlobalConstants.Strings.Ignore.Equals(clientId, StringComparison.CurrentCultureIgnoreCase))
+						return ButtonType.Ignored;
+					return ButtonType.Paired;
+				}
+				return ButtonType.Discovered;
+			}
 		}
-		public FlicButton(string Message, string BluetoothId)
-		{
-			this.Message = Message;
-			this.BluetoothId = BluetoothId;
+
+		public Client[] DiscoveredByClients {
+			get {
+				return ClientApi.GetClients(discoveredBy);
+			}
 		}
-		public string Message { get; set; }
-		public string BluetoothId { get; set; }
 	}
 }

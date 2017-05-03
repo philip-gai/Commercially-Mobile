@@ -3,13 +3,14 @@ using System;
 using Foundation;
 using CoreGraphics;
 
-namespace Commercially.iOS.Extensions {
-	public static class UIViewControllerExtensions {
+namespace Commercially.iOS
+{
+	public static class UIViewControllerExtensions
+	{
 		public enum KeyboardActionType { Show, Hide };
 
-		public static void KeyboardDid(this UIViewController controller, KeyboardActionType Type, NSNotification notification, AbstractField field) {
-			CGRect KeyboardFrame = (notification.UserInfo[UIKeyboard.FrameEndUserInfoKey] as NSValue).CGRectValue;
-
+		public static void KeyboardDid(this UIViewController controller, KeyboardActionType Type, CGRect KeyboardFrame)
+		{
 			UIView view = controller.View;
 			view.SetNeedsLayout();
 			view.LayoutIfNeeded();
@@ -18,6 +19,11 @@ namespace Commercially.iOS.Extensions {
 			var scrollViewFrame = new CGRect();
 			if (controller is FieldListController) {
 				var inputView = controller as FieldListController;
+				scrollView = inputView.ScrollView;
+				scrollViewFrame = scrollView.ConvertRectToView(scrollView.Bounds, view);
+			}
+			if (controller is KeyboardController) {
+				var inputView = controller as KeyboardController;
 				scrollView = inputView.ScrollView;
 				scrollViewFrame = scrollView.ConvertRectToView(scrollView.Bounds, view);
 			}
@@ -36,6 +42,7 @@ namespace Commercially.iOS.Extensions {
 					break;
 			}
 
+			var field = controller.View.GetActiveField();
 			if (field == null) return;
 			scrollView.ScrollRectToVisible(field.Bounds, true);
 		}

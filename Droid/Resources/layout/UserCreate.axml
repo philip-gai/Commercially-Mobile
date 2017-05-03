@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:minWidth="25px"
+    android:minHeight="25px"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:orientation="vertical"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="vertical"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_margin="10dp">
+            <TextView
+                android:text="Name"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:layout_weight="1" />
+            <EditText
+                android:layout_width="match_parent"
+                android:id="@+id/nameField"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:hint="First Last"
+                android:layout_weight="1" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_margin="10dp">
+            <TextView
+                android:text="Username"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:layout_weight="1" />
+            <EditText
+                android:layout_width="match_parent"
+                android:id="@+id/usernameField"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:hint="first_last"
+                android:layout_weight="1" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_margin="10dp">
+            <TextView
+                android:text="Role"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:layout_weight="1" />
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/userRoleSpinner"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:textAlignment="center" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_margin="10dp">
+            <TextView
+                android:text="Email"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:layout_weight="1" />
+            <EditText
+                android:layout_width="match_parent"
+                android:id="@+id/emailField"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:hint="optional"
+                android:layout_weight="1"
+                android:inputType="textEmailAddress" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_margin="10dp">
+            <TextView
+                android:text="Phone Number"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:layout_weight="1" />
+            <EditText
+                android:layout_width="match_parent"
+                android:id="@+id/phoneField"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:hint="optional"
+                android:layout_weight="1" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_margin="10dp">
+            <TextView
+                android:text="Password"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:layout_weight="1" />
+            <EditText
+                android:layout_width="match_parent"
+                android:id="@+id/passwordField"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:hint="password"
+                android:layout_weight="1"
+                android:inputType="textPassword" />
+            <EditText
+                android:layout_width="match_parent"
+                android:id="@+id/verifyPasswordField"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:hint="verify password"
+                android:layout_weight="1"
+                android:inputType="textPassword" />
+        </LinearLayout>
+        <Button
+            android:text="Create User"
+            android:layout_width="match_parent"
+            android:id="@+id/createUserButton"
+            android:layout_height="100dp"
+            android:textColor="@android:color/white"
+            style="@style/Widget.AppCompat.Button.Colored" />
+    </LinearLayout>
+</ScrollView>

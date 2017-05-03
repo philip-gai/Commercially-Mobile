@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="7ST-L8-y4S">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Clients-->
+        <scene sceneID="pYK-Kd-Hjo">
+            <objects>
+                <tableViewController id="7ST-L8-y4S" sceneMemberID="viewController" customClass="ClientListController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="jP9-2m-bA0">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="separatorColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
+                        <scrollView key="tableHeaderView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="KV8-Yf-S76">
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="50"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iRg-WL-Gs5">
+                                    <rect key="frame" x="0.0" y="0.0" width="216" height="50"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="zCn-jI-NgI">
+                                            <rect key="frame" x="5" y="5" width="206" height="40"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="BhS-mq-zOV">
+                                                    <rect key="frame" x="0.0" y="0.0" width="98" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="70" id="8lH-n9-fXI"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <inset key="contentEdgeInsets" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
+                                                    <state key="normal" title="Authorized">
+                                                        <color key="titleColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <real key="value" value="2"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <connections>
+                                                        <action selector="TopButtonTouchUpInside:" destination="7ST-L8-y4S" id="3" eventType="touchUpInside"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="6Vu-oY-dUB">
+                                                    <rect key="frame" x="105" y="0.0" width="101" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="70" id="zcf-Pi-TB0"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <inset key="contentEdgeInsets" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
+                                                    <state key="normal" title="Discovered">
+                                                        <color key="titleColor" red="1" green="0.33191886539999998" blue="0.24120634790000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <real key="value" value="2"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <connections>
+                                                        <action selector="TopButtonTouchUpInside:" destination="7ST-L8-y4S" id="4" eventType="touchUpInside"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="zCn-jI-NgI" secondAttribute="bottom" constant="5" id="0Jg-Mb-ERv"/>
+                                        <constraint firstItem="zCn-jI-NgI" firstAttribute="leading" secondItem="iRg-WL-Gs5" secondAttribute="leading" constant="5" id="DzH-QM-xGA"/>
+                                        <constraint firstAttribute="trailing" secondItem="zCn-jI-NgI" secondAttribute="trailing" constant="5" id="eFw-Vm-Vmk"/>
+                                        <constraint firstItem="zCn-jI-NgI" firstAttribute="top" secondItem="iRg-WL-Gs5" secondAttribute="top" constant="5" id="puZ-5i-Rgl"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="iRg-WL-Gs5" firstAttribute="top" secondItem="KV8-Yf-S76" secondAttribute="top" id="1Mx-6q-hxV"/>
+                                <constraint firstItem="iRg-WL-Gs5" firstAttribute="height" secondItem="KV8-Yf-S76" secondAttribute="height" id="412-hz-ndN"/>
+                                <constraint firstItem="iRg-WL-Gs5" firstAttribute="leading" secondItem="KV8-Yf-S76" secondAttribute="leading" id="5RN-bm-Iav"/>
+                                <constraint firstAttribute="trailing" secondItem="iRg-WL-Gs5" secondAttribute="trailing" id="U6n-Ao-wiS"/>
+                                <constraint firstAttribute="bottom" secondItem="iRg-WL-Gs5" secondAttribute="bottom" id="bSa-5T-doP"/>
+                            </constraints>
+                            <inset key="scrollIndicatorInsets" minX="2" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </scrollView>
+                        <sections/>
+                        <connections>
+                            <outlet property="dataSource" destination="7ST-L8-y4S" id="0Zj-4l-iZ5"/>
+                            <outlet property="delegate" destination="7ST-L8-y4S" id="u2M-51-6lk"/>
+                        </connections>
+                    </tableView>
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
+                    <tabBarItem key="tabBarItem" title="Clients" image="client-TabBar" id="440-1Z-1mO"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="AuthorizedButton" destination="BhS-mq-zOV" id="name-outlet-BhS-mq-zOV"/>
+                        <outlet property="DiscoveredButton" destination="6Vu-oY-dUB" id="name-outlet-6Vu-oY-dUB"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="921-8f-2Ub" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="114" y="132"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Logo-White" width="170.666672" height="170.666672"/>
+        <image name="Logo-Black" width="170.666672" height="170.666672"/>
+        <image name="Logo-Orange" width="170.666672" height="170.666672"/>
+        <image name="Logo-Yellow" width="170.666672" height="170.666672"/>
+        <image name="Logo-Green" width="170.666672" height="170.666672"/>
+        <image name="Logo-TealBlue" width="170.666672" height="170.666672"/>
+        <image name="Logo-Blue" width="170.666672" height="170.666672"/>
+        <image name="Logo-Purple" width="170.666672" height="170.666672"/>
+        <image name="Logo-Pink" width="170.666672" height="170.666672"/>
+        <image name="Logo-Red" width="170.666672" height="170.666672"/>
+        <image name="button-TabBar" width="24" height="24"/>
+        <image name="error" width="48" height="48"/>
+        <image name="dashboard-TabBar" width="25" height="25"/>
+        <image name="notification-Toolbar" width="48" height="48"/>
+        <image name="Logo-Red-Toolbar" width="25" height="25"/>
+        <image name="list-TabBar" width="25" height="25"/>
+        <image name="user-TabBar" width="48" height="48"/>
+        <image name="client-TabBar" width="25" height="25"/>
+    </resources>
+</document>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="mMM-ME-O5A">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Users-->
+        <scene sceneID="9ZD-M3-SEu">
+            <objects>
+                <tableViewController id="mMM-ME-O5A" customClass="UserListController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="ODj-pG-V0y">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="separatorColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
+                        <scrollView key="tableHeaderView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="OUC-Tg-Unh">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="amN-s2-2RH">
+                                    <rect key="frame" x="0.0" y="0.0" width="246" height="50"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="lsd-Oj-B6T">
+                                            <rect key="frame" x="5" y="5" width="236" height="40"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="BNy-qN-6wt">
+                                                    <rect key="frame" x="0.0" y="0.0" width="77" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="70" id="lX2-GX-9uo"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <inset key="contentEdgeInsets" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
+                                                    <state key="normal" title="Workers">
+                                                        <color key="titleColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <real key="value" value="2"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="TopButtonTouchUpInside:" destination="mMM-ME-O5A" eventType="touchUpInside" id="3"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="GR0-UN-xNj">
+                                                    <rect key="frame" x="84" y="0.0" width="74" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="70" id="FAS-mX-wOK"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <inset key="contentEdgeInsets" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
+                                                    <state key="normal" title="Tenants">
+                                                        <color key="titleColor" red="1" green="0.33191886539999998" blue="0.24120634790000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <real key="value" value="2"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="TopButtonTouchUpInside:" destination="mMM-ME-O5A" eventType="touchUpInside" id="4"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="QUl-4q-TLc">
+                                                    <rect key="frame" x="165" y="0.0" width="71" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="70" id="52r-dV-jqC"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <inset key="contentEdgeInsets" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
+                                                    <state key="normal" title="Admins">
+                                                        <color key="titleColor" red="1" green="0.33191886539999998" blue="0.24120634790000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <real key="value" value="2"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="TopButtonTouchUpInside:" destination="mMM-ME-O5A" eventType="touchUpInside" id="5"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstItem="lsd-Oj-B6T" firstAttribute="leading" secondItem="amN-s2-2RH" secondAttribute="leading" constant="5" id="KIO-D5-ul0"/>
+                                        <constraint firstItem="lsd-Oj-B6T" firstAttribute="top" secondItem="amN-s2-2RH" secondAttribute="top" constant="5" id="Mvi-sg-3HH"/>
+                                        <constraint firstAttribute="trailing" secondItem="lsd-Oj-B6T" secondAttribute="trailing" constant="5" id="hfp-iM-LTW"/>
+                                        <constraint firstAttribute="bottom" secondItem="lsd-Oj-B6T" secondAttribute="bottom" constant="5" id="w8I-Sh-lLi"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="amN-s2-2RH" firstAttribute="leading" secondItem="OUC-Tg-Unh" secondAttribute="leading" id="7xh-G7-scf"/>
+                                <constraint firstAttribute="trailing" secondItem="amN-s2-2RH" secondAttribute="trailing" id="VRs-8K-eYZ"/>
+                                <constraint firstItem="amN-s2-2RH" firstAttribute="top" secondItem="OUC-Tg-Unh" secondAttribute="top" id="b3A-2Q-IRu"/>
+                                <constraint firstItem="amN-s2-2RH" firstAttribute="height" secondItem="OUC-Tg-Unh" secondAttribute="height" id="iSg-rK-day"/>
+                                <constraint firstAttribute="bottom" secondItem="amN-s2-2RH" secondAttribute="bottom" id="v7P-lU-SQ9"/>
+                            </constraints>
+                            <inset key="scrollIndicatorInsets" minX="2" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </scrollView>
+                        <sections/>
+                        <connections>
+                            <outlet property="dataSource" destination="mMM-ME-O5A" id="SAm-eb-RRR"/>
+                            <outlet property="delegate" destination="mMM-ME-O5A" id="CeO-H2-taH"/>
+                        </connections>
+                    </tableView>
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
+                    <tabBarItem key="tabBarItem" title="Users" image="user-TabBar" id="2Jy-cW-fNB"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="AdminsButton" destination="QUl-4q-TLc" id="name-outlet-QUl-4q-TLc"/>
+                        <outlet property="TenantsButton" destination="GR0-UN-xNj" id="name-outlet-GR0-UN-xNj"/>
+                        <outlet property="WorkersButton" destination="BNy-qN-6wt" id="name-outlet-BNy-qN-6wt"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dEc-bA-YCa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="114" y="132"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="user-TabBar" width="25" height="25"/>
+    </resources>
+</document>

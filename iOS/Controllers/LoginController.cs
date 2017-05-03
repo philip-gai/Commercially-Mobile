@@ -1,10 +1,10 @@
-using Foundation;
 using System;
 using UIKit;
-using Commercially.iOS.Extensions;
 
-namespace Commercially.iOS {
-	public partial class LoginController : FieldListController {
+namespace Commercially.iOS
+{
+	public partial class LoginController : FieldListController
+	{
 		public LoginController(IntPtr handle) : base(handle) { }
 
 		public override UIView[] FieldList {
@@ -26,31 +26,44 @@ namespace Commercially.iOS {
 		}
 		public override UIView[] UnderlineViews {
 			get {
-				return null;
+				return new UIView[] { EmailField, PasswordField };
 			}
 		}
 
 		public override UIView ViewForUnderlines {
 			get {
-				return null;
+				return KeyboardScrollView;
 			}
 		}
 
 		public override bool ShowNavigationBar {
 			get {
-				return true;
+				return false;
 			}
 		}
 
-		public override void ButtonTouchUpInside(object sender, EventArgs events) {
+		public override UIColor UnderlineColor {
+			get {
+				return GlobalConstants.DefaultColors.Red.GetUIColor().ColorWithAlpha((nfloat)0.25);
+			}
+		}
+
+		public override void ButtonTouchUpInside(object sender, EventArgs events)
+		{
 			if (CheckIfFieldsValid()) {
-				// Check if user exists in DB
-				// Grab user information and cache / store in Session Data
+				try {
+					var response = UserApi.LoginUser(EmailField.Text, PasswordField.Text);
+					Session.OAuth = new OAuthResponse(response);
+					Session.User = UserApi.GetCurrentUser();
+					NavigationController.GetAndActOnViewController(GlobalConstants.Screens.Home);
+				} catch (Exception) {
+					NavigationController.ShowPrompt(Localizable.PromptMessages.LoginError);
+				}
 			} else {
 				if (!EmailField.IsValidInput()) {
-					NavigationController.ShowPrompt(GlobalConstants.Prompts.InvalidEmail);
-				} else if (!PasswordField.IsValidInput()) { 
-					NavigationController.ShowPrompt(GlobalConstants.Prompts.InvalidPassword);
+					NavigationController.ShowPrompt(Localizable.PromptMessages.InvalidEmail);
+				} else if (!PasswordField.IsValidInput()) {
+					NavigationController.ShowPrompt(Localizable.PromptMessages.InvalidPassword);
 				}
 			}
 		}

@@ -1,55 +1,72 @@
 ﻿using System.Net;
+using System.Net.Http;
 using System.IO;
 using System.Text;
 
-namespace Commercially {
-	public static class HttpRequest {
-		public static string GetRequestUrl(string Endpoint) {
-			return GlobalConstants.ServerUrl + ":" + GlobalConstants.ServerPort + Endpoint;
+namespace Commercially
+{
+	public static class HttpRequest
+	{
+		public static string GetRequestUrl(string Endpoint)
+		{
+			return "https://" + GlobalConstants.ServerUrl + ":" + GlobalConstants.ServerPort + Endpoint;
 		}
 
-		public static string MakeRequest(HttpRequestMethodType Type, string url, string body = "") {
-			var request = WebRequest.Create(url);
+		public static string MakeRequest(HttpRequestMethodType Type, string url, string body = "", string authHeader = "", string contentType = "")
+		{
+			var request = (HttpWebRequest)WebRequest.Create(url);
+			request.Headers.Add("Authorization", authHeader);
 			switch (Type) {
 				case HttpRequestMethodType.GET:
 					request.Method = WebRequestMethods.Http.Get;
 					break;
 				case HttpRequestMethodType.POST:
 					request.Method = WebRequestMethods.Http.Post;
+					request.ContentType = @"application/json";
 					break;
 				case HttpRequestMethodType.PUT:
 					request.Method = WebRequestMethods.Http.Put;
 					break;
 				case HttpRequestMethodType.PATCH:
-					request.Method = WebRequestMethods.Http.Post;
+					request.Method = "PATCH";
+					request.Expect = "False";
+					request.ContentType = @"application/json";
 					request.Headers.Add("X-Http-Method-Override", "PATCH");
 					break;
 				case HttpRequestMethodType.DELETE:
 					request.Method = "DELETE";
 					break;
 			}
+			if (!string.IsNullOrWhiteSpace(contentType)) {
+				request.ContentType = contentType;
+			}
 			try {
 				if (Type == HttpRequestMethodType.POST || Type == HttpRequestMethodType.PUT || Type == HttpRequestMethodType.PATCH) {
 					var encoding = new UTF8Encoding();
-					byte[] byteArray = encoding.GetBytes(body);
+					var byteArray = encoding.GetBytes(body);
 					request.ContentLength = byteArray.Length;
-					request.ContentType = @"application/json";
-					using (Stream dataStream = request.GetRequestStream()) {
+					using (Stream dataStream = request.GetRequestStream()) {	// THIS line causing hangup when can't connect to server
 						dataStream.Write(byteArray, 0, byteArray.Length);
 					}
 				}
-				WebResponse response = request.GetResponse();
+				var response = request.GetResponse() as HttpWebResponse;
 				using (Stream responseStream = response.GetResponseStream()) {
 					var reader = new StreamReader(responseStream, Encoding.UTF8);
-					string json = reader.ReadToEnd();
+					var json = reader.ReadToEnd();
 					return json;
 				}
 			} catch (WebException ex) {
 				WebResponse errorResponse = ex.Response;
-				if (errorResponse == null) throw new ConnectionException(Localizable.ExceptionMessages.CannotConnectServer);
+				if (errorResponse == null)
+				{
+					if (ex != null) { 
+						throw new ConnectionException(ex.Message);
+					}
+					throw new ConnectionException(Localizable.ExceptionMessages.CannotConnectServer);
+				}
 				using (Stream responseStream = errorResponse.GetResponseStream()) {
 					var reader = new StreamReader(responseStream, Encoding.GetEncoding("utf-8"));
-					string errorText = reader.ReadToEnd();
+					var errorText = reader.ReadToEnd();
 					throw new ErrorResponseException(errorText);
 				}
 			}

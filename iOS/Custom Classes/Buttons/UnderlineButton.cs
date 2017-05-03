@@ -5,6 +5,8 @@ using UIKit;
 namespace Commercially.iOS {
 	public partial class UnderlineButton : UIButton {
 		UIView UnderlineView;
+		UIColor UnderlineColor;
+
 		string _OriginalText;
 		public string OriginalText {
 			get {
@@ -19,8 +21,9 @@ namespace Commercially.iOS {
 			_OriginalText = TitleLabel.Text;
 		}
 
-		public void SetUnderlineView(UIView view) {
+		public void SetUnderlineView(UIView view, UIColor UnderlineColor) {
 			UnderlineView = view;
+			this.UnderlineColor = UnderlineColor;
 		}
 
 		public UIView GetUnderlineView() {
@@ -33,14 +36,14 @@ namespace Commercially.iOS {
 
 		public void SetLineColor(bool valid) {
 			if (valid) {
-				UnderlineView.BackgroundColor = LocalConstants.LineColor;
+				UnderlineView.BackgroundColor = UnderlineColor;
 			} else {
 				UnderlineView.BackgroundColor = LocalConstants.LineIncompleteColor;
 			}
 		}
 
 		public virtual bool IsValid() {
-			return !TitleLabel.Text.Equals(OriginalText);
+			return !TitleLabel.Text.Equals(OriginalText, StringComparison.CurrentCultureIgnoreCase);
 		}
 	}
 }
