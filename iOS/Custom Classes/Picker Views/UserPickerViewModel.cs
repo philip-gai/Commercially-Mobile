@@ -6,11 +6,12 @@ namespace Commercially.iOS
 {
 	public class UserPickerViewModel : UIPickerViewModel
 	{
-		readonly static string[] Users = GetUsernames();
+		readonly string[] Users;
 		readonly Action<UIPickerView, nint, nint> OnSelect;
 
 		public UserPickerViewModel(Action<UIPickerView, nint, nint> OnSelect)
 		{
+			Users = RequestDetails.GetUserPickerOptions();
 			this.OnSelect = OnSelect;
 		}
 
@@ -32,17 +33,6 @@ namespace Commercially.iOS
 		public override void Selected(UIPickerView pickerView, nint row, nint component)
 		{
 			OnSelect(pickerView, row, component);
-		}
-
-		static string[] GetUsernames()
-		{
-			var users = UserApi.GetUsers();
-			var usernameList = new List<string>();
-			usernameList.Add(Localizable.Labels.NoneOption);
-			foreach (var user in users) {
-				usernameList.Add(user.username);
-			}
-			return usernameList.ToArray();
 		}
 	}
 }

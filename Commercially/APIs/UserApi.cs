@@ -62,7 +62,20 @@ namespace Commercially
 			return resp;
 		}
 
-		public static string ChangePassword(string id, string body) {
+		public static string PostUser(string body)
+		{
+			var resp = HttpRequest.MakeRequest(HttpRequestMethodType.POST, UserUrl, body, AuthHeader);
+			return resp;
+		}
+
+		public static string DeleteUser(string id)
+		{
+			var resp = HttpRequest.MakeRequest(HttpRequestMethodType.DELETE, UserUrl + id, "", AuthHeader);
+			return resp;
+		}
+
+		public static string ChangePassword(string id, string body)
+		{
 			var resp = HttpRequest.MakeRequest(HttpRequestMethodType.POST, UserUrl + id + "/changePassword", body, AuthHeader);
 			return resp;
 		}

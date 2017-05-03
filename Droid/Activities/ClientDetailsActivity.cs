@@ -76,7 +76,7 @@ namespace Commercially.Droid
 			try {
 				SharedController.AuthorizeButtonPress();
 			} catch (Exception) {
-				this.ShowPrompt(Localizable.PromptMessages.ChangesSaveError);
+				this.ShowPrompt(Localizable.PromptMessages.AuthorizeError);
 				return;
 			}
 			AuthorizeButton.Hidden(true);

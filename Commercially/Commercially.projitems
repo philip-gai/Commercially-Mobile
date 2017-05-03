@@ -50,6 +50,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Shared\ButtonDetails.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Shared\ClientDetails.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\StringExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Shared\UserRolePicker.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Shared\UserCreate.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Entities\" />

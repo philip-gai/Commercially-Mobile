@@ -71,7 +71,7 @@ namespace Commercially.iOS
 			try {
 				SharedController.AuthorizeButtonPress();
 			} catch (Exception) {
-				NavigationController.ShowPrompt(Localizable.PromptMessages.ChangesSaveError);
+				NavigationController.ShowPrompt(Localizable.PromptMessages.AuthorizeError);
 				return;
 			}
 			AuthorizeButton.Hidden = true;

@@ -4,18 +4,23 @@ namespace Commercially
 	{
 		public struct PromptMessages
 		{
-			public const string FriendlyStart = "Oops! ";
-			public const string InvalidEmail = FriendlyStart + "Check that your email is valid.";
-			public const string InvalidPassword = FriendlyStart + "Check that your password is valid.";
-			public const string LoginError = FriendlyStart + "Check your email address or password.";
-			public const string ButtonsError = FriendlyStart + "Buttons were unable to load.";
-			public const string RequestsError = FriendlyStart + "Requests were unable to load.";
-			public const string ChangesSaveError = FriendlyStart + "Changes were unable to save.";
-			public const string AssignError = FriendlyStart + "Assiging the request was unsuccessful.";
-			public const string UsersError = FriendlyStart + "Users were unable to load.";
-			public static string ClientsError = FriendlyStart + "Clients were unable to load.";
-			public static string SaveSuccess = "Your changes were successfully saved!";
-			public const string PressAndHoldButton = "Press and hold the button for 7 seconds to pair.";
+			public const string Oops = "Oops! ";
+			public const string Success = "Success! ";
+			public const string InvalidEmail = Oops + "Check that your email is valid.";
+			public const string InvalidPassword = Oops + "Check that your password is valid.";
+			public const string LoginError = Oops + "Check your email address or password.";
+			public const string ButtonsError = Oops + "Buttons were unable to load.";
+			public const string RequestsError = Oops + "Requests were unable to load.";
+			public const string ChangesSaveError = Oops + "Changes were unable to save.";
+			public const string AuthorizeError = Oops + "Unable to authorize this client.";
+			public const string AssignError = Oops + "Assiging the request was unsuccessful.";
+			public const string UsersError = Oops + "Users were unable to load.";
+			public static string ClientsError = Oops + "Clients were unable to load.";
+			public static string SaveSuccess = Success + "Your changes were successfully saved.";
+			public const string PressAndHoldButton = "Press and hold the button for 10 seconds to pair.";
+			public const string CannotCreateUser = Oops + "One or more fields was improperly filled out.";
+			public const string UserCreateSuccess = Success + "You have created a new user.";
+			public const string DeleteError = Oops + "Deletion failed.";
 		}
 		public struct ExceptionMessages
 		{

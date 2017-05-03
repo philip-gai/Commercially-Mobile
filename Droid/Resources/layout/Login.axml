@@ -22,7 +22,7 @@
         <EditText
             android:layout_width="match_parent"
             android:id="@+id/EmailField"
-            android:hint="email"
+            android:hint="username"
             android:textColorHint="?android:attr/colorPrimary"
             android:textColor="?android:attr/colorPrimary"
             android:inputType="textEmailAddress"

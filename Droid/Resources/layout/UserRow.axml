@@ -2,22 +2,23 @@
 <TableRow xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/ButtonRow"
     android:layout_height="88dp"
-    android:layout_width="match_parent">
+    android:layout_width="match_parent"
+    android:minHeight="88dp">
     <LinearLayout
         android:orientation="horizontal"
         android:minWidth="25px"
         android:minHeight="25px"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:layout_margin="10dp">
+        android:layout_weight="1">
         <LinearLayout
             android:orientation="horizontal"
             android:minWidth="25px"
             android:minHeight="25px"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:layout_margin="10dp">
             <TextView
                 android:text="Email"
                 android:textAppearance="?android:attr/textAppearanceMedium"
@@ -46,5 +47,12 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:alpha="0.25" />
+        <Button
+            android:text="Delete"
+            android:id="@+id/deleteButton"
+            android:textColor="@android:color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            style="@style/Widget.AppCompat.Button.Colored" />
     </LinearLayout>
 </TableRow>

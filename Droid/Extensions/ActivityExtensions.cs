@@ -14,14 +14,14 @@ namespace Commercially.Droid
 		public static void CreateMainOptionsMenu(this Activity activity, IMenu menu, int currItem)
 		{
 			activity.MenuInflater.Inflate(Resource.Menu.TopMenu, menu);
-			var rIds = new int[] { Resource.Id.DashboardIcon, Resource.Id.ButtonIcon, Resource.Id.UserIcon, Resource.Id.ClientIcon };
+			var rIds = new int[] { Resource.Id.DashboardIcon, Resource.Id.ButtonIcon, Resource.Id.UserIcon, Resource.Id.ClientIcon, Resource.Id.CreateUser };
 			foreach (var id in rIds) {
 				var item = menu.FindItem(id);
 				if (id == currItem) {
-					item.Icon.SetColorFilter(GlobalConstants.DefaultColors.Red.GetAndroidColor(), PorterDuff.Mode.SrcIn);
+					item.Icon?.SetColorFilter(GlobalConstants.DefaultColors.Red.GetAndroidColor(), PorterDuff.Mode.SrcIn);
 					item.SetEnabled(false);
 				} else {
-					item.Icon.SetColorFilter(GlobalConstants.DefaultColors.Black.GetAndroidColor(), PorterDuff.Mode.SrcIn);
+					item.Icon?.SetColorFilter(GlobalConstants.DefaultColors.Black.GetAndroidColor(), PorterDuff.Mode.SrcIn);
 					item.SetEnabled(true);
 				}
 			}
@@ -29,18 +29,21 @@ namespace Commercially.Droid
 				menu.RemoveItem(Resource.Id.ButtonIcon);
 				menu.RemoveItem(Resource.Id.ClientIcon);
 			}
+			if (activity.GetType() != typeof(UserListActivity)) {
+				menu.RemoveItem(Resource.Id.CreateUser);
+			}
 		}
 
 		static void ResetMenuItems(IMenu menu, int currItem)
 		{
-			var rIds = new int[] { Resource.Id.DashboardIcon, Resource.Id.ButtonIcon, Resource.Id.UserIcon, Resource.Id.ClientIcon };
+			var rIds = new int[] { Resource.Id.DashboardIcon, Resource.Id.ButtonIcon, Resource.Id.UserIcon, Resource.Id.ClientIcon, Resource.Id.CreateUser };
 			foreach (var id in rIds) {
 				var item = menu.FindItem(id);
 				if (id == currItem) {
-					item.Icon.SetColorFilter(GlobalConstants.DefaultColors.Red.GetAndroidColor(), PorterDuff.Mode.SrcIn);
+					item.Icon?.SetColorFilter(GlobalConstants.DefaultColors.Red.GetAndroidColor(), PorterDuff.Mode.SrcIn);
 					item.SetEnabled(false);
 				} else {
-					item.Icon.SetColorFilter(GlobalConstants.DefaultColors.Black.GetAndroidColor(), PorterDuff.Mode.SrcIn);
+					item.Icon?.SetColorFilter(GlobalConstants.DefaultColors.Black.GetAndroidColor(), PorterDuff.Mode.SrcIn);
 					item.SetEnabled(true);
 				}
 			}
@@ -48,8 +51,8 @@ namespace Commercially.Droid
 
 		public static void StartActivityMenuItem(this Activity activity, IMenuItem item)
 		{
-			int[] icons = { Resource.Id.DashboardIcon, Resource.Id.ButtonIcon, Resource.Id.UserIcon, Resource.Id.ClientIcon };
-			Type[] activityTypes = { typeof(RequestListActivity), typeof(ButtonListActivity), typeof(UserListActivity), typeof(ClientListActivity) };
+			int[] icons = { Resource.Id.DashboardIcon, Resource.Id.ButtonIcon, Resource.Id.UserIcon, Resource.Id.ClientIcon, Resource.Id.CreateUser };
+			Type[] activityTypes = { typeof(RequestListActivity), typeof(ButtonListActivity), typeof(UserListActivity), typeof(ClientListActivity), typeof(UserCreateActivity) };
 
 			for (int i = 0; i < icons.Length; i++) {
 				if (icons[i] == item.ItemId) {
@@ -62,7 +65,7 @@ namespace Commercially.Droid
 					var intent = new Intent(activity, activityType);
 					intent.SetFlags(ActivityFlags.ReorderToFront);
 					activity.StartActivityIfNeeded(intent, 0);
-					item.Icon.SetColorFilter(GlobalConstants.DefaultColors.Red.GetAndroidColor(), PorterDuff.Mode.SrcIn);
+					item.Icon?.SetColorFilter(GlobalConstants.DefaultColors.Red.GetAndroidColor(), PorterDuff.Mode.SrcIn);
 				}
 			}
 		}
@@ -120,28 +123,32 @@ namespace Commercially.Droid
 			statusLabel.Hidden(SharedRow.StatusLabelIsHidden);
 			urgentIndicator.Hidden(SharedRow.UrgentIndicatorIsHidden);
 			descriptionLabel.Text = SharedRow.DescriptionText;
-			deleteButton.Hidden(true);
 
+			deleteButton.Hidden(true);
 			deleteButton.Click += (object sender, EventArgs e) => {
-				RequestApi.DeleteRequest(request._id);
+				try {
+					RequestApi.DeleteRequest(request._id);
+				} catch (Exception) {
+					activity.ShowPrompt(Localizable.PromptMessages.DeleteError);
+					return;
+				}
 				var table = activity.FindViewById<TableLayout>(Resource.Id.tableLayout);
 				table.RemoveView(rowView);
 				var intent = new Intent(activity, activity.GetType());
 				intent.SetFlags(ActivityFlags.ReorderToFront);
 				activity.StartActivityIfNeeded(intent, 0);
 			};
+			if (Session.User.Type == UserRoleType.Admin) {
+				rowView.LongClick += (object sender, View.LongClickEventArgs e) => {
+					deleteButton.ToggleVisibility();
+				};
+			}
 
 			rowView.Click += (object sender, EventArgs e) => {
 				var intent = new Intent(activity, typeof(RequestDetailsActivity));
 				intent.PutExtra(typeof(Request).Name, JsonConvert.SerializeObject(request));
 				activity.StartActivity(intent);
 			};
-
-			if (Session.User.Type == UserRoleType.Admin) {
-				rowView.LongClick += (object sender, View.LongClickEventArgs e) => {
-					deleteButton.ToggleVisibility();
-				};
-			}
 			return rowView;
 		}
 
@@ -174,11 +181,32 @@ namespace Commercially.Droid
 			var rowView = (TableRow)inflater.Inflate(Resource.Layout.UserRow, null);
 			var lastFirstLabel = rowView.FindViewById<TextView>(Resource.Id.lastFirstText);
 			var emailLabel = rowView.FindViewById<TextView>(Resource.Id.emailText);
+			var deleteButton = rowView.FindViewById<Button>(Resource.Id.deleteButton);
 
 			var sharedRow = new UserTableRow(user);
 			lastFirstLabel.Hidden(sharedRow.LastFirstNameLabelIsHidden);
 			lastFirstLabel.Text = sharedRow.LastFirstNameText;
 			emailLabel.Text = sharedRow.EmailText;
+
+			deleteButton.Hidden(true);
+			deleteButton.Click += (object sender, EventArgs e) => {
+				try {
+					UserApi.DeleteUser(user.id);
+				} catch (Exception) {
+					activity.ShowPrompt(Localizable.PromptMessages.DeleteError);
+					return;
+				}
+				var table = activity.FindViewById<TableLayout>(Resource.Id.tableLayout);
+				table.RemoveView(rowView);
+				var intent = new Intent(activity, activity.GetType());
+				intent.SetFlags(ActivityFlags.ReorderToFront);
+				activity.StartActivityIfNeeded(intent, 0);
+			};
+			if (UserList.CanEditRow(user)) {
+				rowView.LongClick += (object sender, View.LongClickEventArgs e) => {
+					deleteButton.ToggleVisibility();
+				};
+			}
 
 			rowView.Click += (object sender, EventArgs e) => {
 				var intent = new Intent(activity, typeof(UserDetailsActivity));
@@ -211,7 +239,7 @@ namespace Commercially.Droid
 		public static Spinner GetStatusSpinner(this Activity activity)
 		{
 			Spinner spinner = activity.FindViewById<Spinner>(Resource.Id.statusSpinner);
-			var adapter = ArrayAdapter.CreateFromResource(activity, Resource.Array.status_array, Android.Resource.Layout.SimpleSpinnerDropDownItem);
+			var adapter = new ArrayAdapter(activity, Android.Resource.Layout.SimpleSpinnerDropDownItem, StatusPicker.Statuses);
 			adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
 			spinner.Adapter = adapter;
 			return spinner;
@@ -230,6 +258,16 @@ namespace Commercially.Droid
 		{
 			Spinner spinner = activity.FindViewById<Spinner>(Resource.Id.userSpinner);
 			var adapter = new ArrayAdapter(activity, Android.Resource.Layout.SimpleSpinnerDropDownItem, RequestDetails.GetUserPickerOptions());
+			adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
+			spinner.Adapter = adapter;
+			return spinner;
+		}
+
+
+		public static Spinner GetUserRoleSpinner(this Activity activity)
+		{
+			Spinner spinner = activity.FindViewById<Spinner>(Resource.Id.userRoleSpinner);
+			var adapter = new ArrayAdapter(activity, Android.Resource.Layout.SimpleSpinnerDropDownItem, UserRolePicker.Roles);
 			adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
 			spinner.Adapter = adapter;
 			return spinner;

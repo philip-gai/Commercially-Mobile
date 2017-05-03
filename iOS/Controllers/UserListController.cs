@@ -22,6 +22,8 @@ namespace Commercially.iOS
 		{
 			base.ViewWillAppear(animated);
 			GetUsers();
+			var addItem = new UIBarButtonItem(UIBarButtonSystemItem.Add, (object sender, EventArgs e) => { NavigationController.GetAndActOnViewController(GlobalConstants.Screens.UserCreate); });
+			TabBarController.NavigationItem.RightBarButtonItem = addItem;
 		}
 
 		public override void ViewDidLoad()
@@ -29,6 +31,12 @@ namespace Commercially.iOS
 			base.ViewDidLoad();
 			TableView.Source = new UserTableSource(this);
 			SetButtons(WorkersButton);
+		}
+
+		public override void ViewWillDisappear(bool animated)
+		{
+			base.ViewWillDisappear(animated);
+			TabBarController.NavigationItem.RightBarButtonItem = null;
 		}
 
 		partial void TopButtonTouchUpInside(UIButton sender)
@@ -134,6 +142,26 @@ namespace Commercially.iOS
 				var controller = UINavigationControllerExtensions.GetViewController(GlobalConstants.Screens.UserDetails) as UserDetailsController;
 				Controller.NavigationController.PushViewController(controller, true);
 				controller.User = SharedController.Users[indexPath.Row];
+			}
+
+			public override bool CanEditRow(UITableView tableView, NSIndexPath indexPath)
+			{
+				return Controller.SharedController.CanEditRow(indexPath.Row);
+			}
+
+			public override void CommitEditingStyle(UITableView tableView, UITableViewCellEditingStyle editingStyle, NSIndexPath indexPath)
+			{
+				switch (editingStyle) {
+					case UITableViewCellEditingStyle.Delete:
+						try {
+							UserApi.DeleteUser(SharedController.Users[indexPath.Row].id);
+						} catch (Exception) {
+							Controller.NavigationController.ShowPrompt(Localizable.PromptMessages.DeleteError);
+							return;
+						}
+						break;
+				}
+				Controller.ViewWillAppear(false);
 			}
 		}
 	}

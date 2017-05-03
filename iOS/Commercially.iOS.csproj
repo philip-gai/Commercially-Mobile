@@ -246,6 +246,7 @@
     <InterfaceDefinition Include="Storyboards\ClientDetails.storyboard" />
     <InterfaceDefinition Include="Storyboards\ClientList.storyboard" />
     <InterfaceDefinition Include="Custom Classes\Cells\ClientCell.xib" />
+    <InterfaceDefinition Include="Storyboards\UserCreate.storyboard" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Entitlements.plist" />
@@ -313,7 +314,7 @@
     <Compile Include="Controllers\RequestDetailsController.designer.cs">
       <DependentUpon>RequestDetailsController.cs</DependentUpon>
     </Compile>
-    <Compile Include="Custom Classes\Picker Views\StatusPickerViewModel.cs" />
+    <Compile Include="Custom Classes\Picker Views\StatusPickerModel.cs" />
     <Compile Include="Extensions\UIPickerViewExtensions.cs" />
     <Compile Include="Custom Classes\Delegates\PickerDelegate.cs" />
     <Compile Include="Custom Classes\Cells\ButtonCell.cs" />
@@ -356,6 +357,11 @@
     </Compile>
     <Compile Include="Custom Classes\Picker Views\UserPickerViewModel.cs" />
     <Compile Include="Custom Classes\Controllers\KeyboardTableController.cs" />
+    <Compile Include="Controllers\UserCreateController.cs" />
+    <Compile Include="Controllers\UserCreateController.designer.cs">
+      <DependentUpon>UserCreateController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Custom Classes\Picker Views\UserRolePickerModel.cs" />
   </ItemGroup>
   <Import Project="..\Commercially\Commercially.projitems" Label="Shared" Condition="Exists('..\Commercially\Commercially.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

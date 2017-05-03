@@ -55,7 +55,7 @@ namespace Commercially.iOS
 
 		void InitializeStatusPickers()
 		{
-			StatusPickerView.Model = new StatusPickerViewModel(OnPickerChange);
+			StatusPickerView.Model = new StatusPickerModel(OnPickerChange);
 			StatusPickerView.ScrollToTitle(SharedController.Request.Type.ToString());
 			StaticStatusLabel.TextColor = SharedController.StatusInputIsHidden ? RequestDetails.DefaultTextColor.GetUIColor() : RequestDetails.EditTextColor.GetUIColor();
 

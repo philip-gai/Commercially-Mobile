@@ -21,9 +21,15 @@ namespace Commercially
 			}
 		}
 
-		public string EmailText {
+		public string UsernameText {
 			get {
 				return User.username;
+			}
+		}
+
+		public string EmailText {
+			get {
+				return User.email;
 			}
 		}
 
@@ -33,15 +39,9 @@ namespace Commercially
 			}
 		}
 
-		public bool PhoneFieldIsHidden {
+		public bool ChangePasswordButtonIsHidden {
 			get {
-				return string.IsNullOrWhiteSpace(User.phone);
-			}
-		}
-
-		public bool IsEditable {
-			get {
-				return User == Session.User || Session.User.Type == UserRoleType.Admin;
+				return !User.id.Equals(Session.User.id);
 			}
 		}
 
@@ -51,10 +51,16 @@ namespace Commercially
 			return !name.Equals(User.firstname + " " + User.lastname);
 		}
 
+		bool UsernameChanged(string username)
+		{
+			if (string.IsNullOrWhiteSpace(User.username)) return !string.IsNullOrWhiteSpace(username);
+			return !username.Equals(User.username);
+		}
+
 		bool EmailChanged(string email)
 		{
-			if (string.IsNullOrWhiteSpace(User.username)) return !string.IsNullOrWhiteSpace(email);
-			return !email.Equals(User.username);
+			if (string.IsNullOrWhiteSpace(User.email)) return !string.IsNullOrWhiteSpace(email);
+			return !email.Equals(User.email);
 		}
 
 		bool PhoneChanged(string phone)
@@ -88,12 +94,12 @@ namespace Commercially
 			});
 		}
 
-		public bool FieldsChanged(string name, string email, string phone, string password, string repeatPassword)
+		public bool FieldsChanged(string name, string username, string email, string phone, string password, string repeatPassword)
 		{
-			return NameChanged(name) || EmailChanged(email) || PhoneChanged(phone) || PasswordsChanged(password, repeatPassword);
+			return NameChanged(name) || UsernameChanged(username) || EmailChanged(email) || PhoneChanged(phone) || PasswordsChanged(password, repeatPassword);
 		}
 
-		public string SaveButtonPress(string name, string email, string phone, string oldPassword, string newPassword, string repeatNewPassword)
+		public string SaveButtonPress(string name, string username, string email, string phone, string oldPassword, string newPassword, string repeatNewPassword)
 		{
 			string result = "";
 			var jsonBody = new JObject();
@@ -107,8 +113,10 @@ namespace Commercially
 				jsonBody.Add("firstname", firstName);
 				jsonBody.Add("lastname", lastName);
 			}
-			if (EmailChanged(email) && Validator.Email(email)) {
-				jsonBody.Add("username", email);
+			if (UsernameChanged(username)) {
+				jsonBody.Add("username", username);
+			}
+			if (EmailChanged(email)) {
 				jsonBody.Add("email", email);
 			}
 			if (PhoneChanged(phone)) {
@@ -121,7 +129,7 @@ namespace Commercially
 				result += UserApi.PatchUser(User.id, jsonBody.ToString());
 			}
 			if (PasswordsChanged(newPassword, repeatNewPassword) && PasswordsMatch(newPassword, repeatNewPassword)
-			    && !string.IsNullOrWhiteSpace(oldPassword) && Validator.Password(newPassword)) {
+				&& !string.IsNullOrWhiteSpace(oldPassword) && Validator.Password(newPassword)) {
 				jsonBody = new JObject();
 				jsonBody.Add("old_password", oldPassword);
 				jsonBody.Add("new_password", newPassword);

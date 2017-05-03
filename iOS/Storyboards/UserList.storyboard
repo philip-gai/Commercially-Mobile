@@ -115,10 +115,6 @@
                     </tableView>
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <tabBarItem key="tabBarItem" title="Users" image="user-TabBar" id="2Jy-cW-fNB"/>
-                    <navigationItem key="navigationItem" id="JIN-fq-aoJ">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="A8l-fX-g35"/>
-                    </navigationItem>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="AdminsButton" destination="QUl-4q-TLc" id="name-outlet-QUl-4q-TLc"/>

@@ -11,12 +11,12 @@ using UIKit;
 
 namespace Commercially.iOS
 {
-    [Register ("UserDetailsController")]
-    partial class UserDetailsController
+    [Register ("UserCreateController")]
+    partial class UserCreateController
     {
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIButton ChangePasswordButton { get; set; }
+        UIKit.UIButton CreateButton { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -24,15 +24,15 @@ namespace Commercially.iOS
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIScrollView KeyboardScrollView { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UITextField NameField { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField NewPasswordField { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField OldPasswordField { get; set; }
+        UIKit.UITextField PasswordField { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -40,21 +40,21 @@ namespace Commercially.iOS
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField RepeatNewPasswordField { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIButton SaveButton { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UITextField UsernameField { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIPickerView UserRoleTypePicker { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UITextField VerifyPasswordField { get; set; }
 
         void ReleaseDesignerOutlets ()
         {
-            if (ChangePasswordButton != null) {
-                ChangePasswordButton.Dispose ();
-                ChangePasswordButton = null;
+            if (CreateButton != null) {
+                CreateButton.Dispose ();
+                CreateButton = null;
             }
 
             if (EmailField != null) {
@@ -62,19 +62,19 @@ namespace Commercially.iOS
                 EmailField = null;
             }
 
+            if (KeyboardScrollView != null) {
+                KeyboardScrollView.Dispose ();
+                KeyboardScrollView = null;
+            }
+
             if (NameField != null) {
                 NameField.Dispose ();
                 NameField = null;
             }
 
-            if (NewPasswordField != null) {
-                NewPasswordField.Dispose ();
-                NewPasswordField = null;
-            }
-
-            if (OldPasswordField != null) {
-                OldPasswordField.Dispose ();
-                OldPasswordField = null;
+            if (PasswordField != null) {
+                PasswordField.Dispose ();
+                PasswordField = null;
             }
 
             if (PhoneField != null) {
@@ -82,19 +82,19 @@ namespace Commercially.iOS
                 PhoneField = null;
             }
 
-            if (RepeatNewPasswordField != null) {
-                RepeatNewPasswordField.Dispose ();
-                RepeatNewPasswordField = null;
-            }
-
-            if (SaveButton != null) {
-                SaveButton.Dispose ();
-                SaveButton = null;
-            }
-
             if (UsernameField != null) {
                 UsernameField.Dispose ();
                 UsernameField = null;
+            }
+
+            if (UserRoleTypePicker != null) {
+                UserRoleTypePicker.Dispose ();
+                UserRoleTypePicker = null;
+            }
+
+            if (VerifyPasswordField != null) {
+                VerifyPasswordField.Dispose ();
+                VerifyPasswordField = null;
             }
         }
     }

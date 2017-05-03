@@ -100,6 +100,7 @@
     <Compile Include="Activities\ClientDetailsActivity.cs" />
     <Compile Include="Extensions\SpinnerExtensions.cs" />
     <Compile Include="Activities\ButtonDetailsActivity.cs" />
+    <Compile Include="Activities\UserCreateActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -189,7 +190,6 @@
     <AndroidResource Include="Resources\layout\ButtonRow.axml" />
     <AndroidResource Include="Resources\layout\RequestDetails.axml" />
     <AndroidResource Include="Resources\layout\ButtonDetails.axml" />
-    <AndroidResource Include="Resources\values\status_array.xml" />
     <AndroidResource Include="Resources\layout\TableButtonHeader.axml" />
     <AndroidResource Include="Resources\layout\TopButton.axml" />
     <AndroidResource Include="Resources\layout\UserRow.axml" />
@@ -201,6 +201,7 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\client.png" />
     <AndroidResource Include="Resources\layout\ClientRow.axml" />
     <AndroidResource Include="Resources\layout\ClientDetails.axml" />
+    <AndroidResource Include="Resources\layout\UserCreate.axml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable-hdpi\" />

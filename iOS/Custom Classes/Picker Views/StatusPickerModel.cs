@@ -3,11 +3,11 @@ using UIKit;
 
 namespace Commercially.iOS
 {
-	public class StatusPickerViewModel : UIPickerViewModel
+	public class StatusPickerModel : UIPickerViewModel
 	{
 		readonly Action<UIPickerView, nint, nint> OnSelect;
 
-		public StatusPickerViewModel(Action<UIPickerView, nint, nint> OnSelect)
+		public StatusPickerModel(Action<UIPickerView, nint, nint> OnSelect)
 		{
 			this.OnSelect = OnSelect;
 		}

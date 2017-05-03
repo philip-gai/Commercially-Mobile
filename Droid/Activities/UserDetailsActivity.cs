@@ -23,6 +23,7 @@ namespace Commercially.Droid
 
 		LinearLayout Layout { get { return FindViewById<LinearLayout>(Resource.Id.mainLayout); } }
 		EditText NameField { get { return FindViewById<EditText>(Resource.Id.nameField); } }
+		EditText UsernameField { get { return FindViewById<EditText>(Resource.Id.usernameField); } }
 		EditText EmailField { get { return FindViewById<EditText>(Resource.Id.emailField); } }
 		EditText PhoneField { get { return FindViewById<EditText>(Resource.Id.phoneField); } }
 		EditText OldPasswordField { get { return FindViewById<EditText>(Resource.Id.oldPasswordField); } }
@@ -57,12 +58,14 @@ namespace Commercially.Droid
 				Session.User = UserApi.GetCurrentUser();
 				SharedController.User = Session.User;
 			}
-            InitializeView();
+			InitializeView();
 		}
 
 		public override bool OnCreateOptionsMenu(IMenu menu)
 		{
-			this.CreateMainOptionsMenu(menu, Resource.Id.UserIcon);
+			if (Session.User.Type != UserRoleType.Admin) {
+				this.CreateMainOptionsMenu(menu, Resource.Id.UserIcon);
+			}
 			return base.OnCreateOptionsMenu(menu);
 		}
 
@@ -93,33 +96,39 @@ namespace Commercially.Droid
 		void InitializeView()
 		{
 			if (SharedController.User == null) return;
+
+			InitializeFields();
+			InitializeVisibility();
+
+			if (Session.User.Type == UserRoleType.Admin) {
+				Layout.AddView(Table);
+			}
+			SaveButton.Click += SaveButtonClick;
+			ChangePasswordButton.Click += ChangePasswordButtonClick;
+		}
+
+		void InitializeFields()
+		{
 			NameField.Text = SharedController.NameText;
+			UsernameField.Text = SharedController.UsernameText;
 			EmailField.Text = SharedController.EmailText;
 			PhoneField.Text = SharedController.PhoneText;
 
-			SaveButton.Click += SaveButtonClick;
-			ChangePasswordButton.Click += ChangePasswordButtonClick;
-			PhoneField.Hidden(SharedController.PhoneFieldIsHidden);
+			NameField.TextChanged += FieldTextChanged;
+			UsernameField.TextChanged += FieldTextChanged;
+			EmailField.TextChanged += FieldTextChanged;
+			PhoneField.TextChanged += FieldTextChanged;
+			NewPasswordField.TextChanged += FieldTextChanged;
+			RepeatNewPasswordField.TextChanged += FieldTextChanged;
+		}
+
+		void InitializeVisibility()
+		{
 			SaveButton.Hidden(true);
 			OldPasswordField.Hidden(true);
 			NewPasswordField.Hidden(true);
 			RepeatNewPasswordField.Hidden(true);
-
-			if (!SharedController.IsEditable) {
-				NameField.Enabled = false;
-				EmailField.Enabled = false;
-				PhoneField.Enabled = false;
-			} else {
-				NameField.TextChanged += FieldTextChanged;
-				EmailField.TextChanged += FieldTextChanged;
-				PhoneField.TextChanged += FieldTextChanged;
-				NewPasswordField.TextChanged += FieldTextChanged;
-				RepeatNewPasswordField.TextChanged += FieldTextChanged;
-			}
-
-			ChangePasswordButton.Hidden(!SharedController.User.id.Equals(Session.User.id));
-
-			Layout.AddView(Table);
+			ChangePasswordButton.Hidden(SharedController.ChangePasswordButtonIsHidden);
 		}
 
 		void InitializeTable()
@@ -135,7 +144,7 @@ namespace Commercially.Droid
 
 		void FieldTextChanged(object sender, TextChangedEventArgs e)
 		{
-			SaveButton.Hidden(!SharedController.FieldsChanged(NameField.Text, EmailField.Text,
+			SaveButton.Hidden(!SharedController.FieldsChanged(NameField.Text, UsernameField.Text, EmailField.Text,
 															  PhoneField.Text, NewPasswordField.Text,
 															  RepeatNewPasswordField.Text));
 		}
@@ -143,7 +152,7 @@ namespace Commercially.Droid
 		void SaveButtonClick(object sender, EventArgs e)
 		{
 			try {
-				SharedController.SaveButtonPress(NameField.Text, EmailField.Text,
+				SharedController.SaveButtonPress(NameField.Text, UsernameField.Text, EmailField.Text,
 												 PhoneField.Text, OldPasswordField.Text,
 												 NewPasswordField.Text, RepeatNewPasswordField.Text);
 			} catch (Exception) {
@@ -159,7 +168,7 @@ namespace Commercially.Droid
 			NewPasswordField.Hidden(true);
 			RepeatNewPasswordField.Hidden(true);
 			if (Session.User.Type == UserRoleType.Admin) {
-                Finish();
+				Finish();
 			} else {
 				this.ShowPrompt(Localizable.PromptMessages.SaveSuccess);
 				Session.User = UserApi.GetCurrentUser();

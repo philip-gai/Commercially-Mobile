@@ -21,4 +21,8 @@
 	   	 android:icon="@drawable/client"
        	 app:showAsAction="always"
          android:title="Clients" />
+		<item
+      	 android:id="@+id/CreateUser"
+       	 app:showAsAction="never"
+         android:title="Create User" />
 </menu>

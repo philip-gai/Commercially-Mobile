@@ -8,6 +8,7 @@ namespace Commercially
 	public static class ClientApi
 	{
 		readonly static string Url = HttpRequest.GetRequestUrl("/api/clients/");
+		readonly static string AuthorizeUrl = HttpRequest.GetRequestUrl("/client/authorize/");
 		static string AuthHeader {
 			get {
 				return "Bearer " + Session.OAuth.access_token;
@@ -65,8 +66,8 @@ namespace Commercially
 			var body = new JObject();
 			body.Add("response_type", "code");
 			body.Add("redirect_uri", "/client/authSuccess");
-			var resp = HttpRequest.MakeRequest(HttpRequestMethodType.POST, Url + clientId, body.ToString(), AuthHeader);
-			return resp;
+			body.Add("client_id", clientId);
+			return HttpRequest.MakeRequest(HttpRequestMethodType.POST, AuthorizeUrl, body.ToString(), AuthHeader);
 		}
 	}
 }

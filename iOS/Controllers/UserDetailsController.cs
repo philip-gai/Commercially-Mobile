@@ -33,41 +33,47 @@ namespace Commercially.iOS
 		void InitializeView()
 		{
 			if (SharedController.User == null) return;
+
+            InitializeFields();
+			InitializeVisibility();
+
 			if (Session.User.Type == UserRoleType.Admin) {
 				TableView.Source = new UserRequestTableSource(this);
 			}
+			ChangePasswordButton.TouchUpInside += ChangePasswordButtonTouchUpInside;
+			SaveButton.TouchUpInside += SaveButtonTouchUpInside;
+		}
+
+		void InitializeFields()
+		{
 			NameField.Text = SharedController.NameText;
+			UsernameField.Text = SharedController.UsernameText;
 			EmailField.Text = SharedController.EmailText;
 			PhoneField.Text = SharedController.PhoneText;
 
 			NameField.ResignOnReturn();
+			UsernameField.ResignOnReturn();
 			EmailField.ResignOnReturn();
 			PhoneField.ResignOnReturn();
 			OldPasswordField.ShouldReturn += (UITextField textField) => { NewPasswordField.BecomeFirstResponder(); return true; };
 			NewPasswordField.ShouldReturn += (UITextField textField) => { RepeatNewPasswordField.BecomeFirstResponder(); return true; };
 			RepeatNewPasswordField.ResignOnReturn();
 
-			PhoneField.Hidden = SharedController.PhoneFieldIsHidden;
+			NameField.EditingDidEnd += FieldEditingDidEnd;
+			UsernameField.EditingDidEnd += FieldEditingDidEnd;
+			EmailField.EditingDidEnd += FieldEditingDidEnd;
+			PhoneField.EditingDidEnd += FieldEditingDidEnd;
+			NewPasswordField.EditingDidEnd += FieldEditingDidEnd;
+			RepeatNewPasswordField.EditingDidEnd += FieldEditingDidEnd;
+		}
+
+		void InitializeVisibility()
+		{
 			OldPasswordField.Hidden = true;
 			NewPasswordField.Hidden = true;
 			RepeatNewPasswordField.Hidden = true;
 			SaveButton.Hidden = true;
-			ChangePasswordButton.TouchUpInside += ChangePasswordButtonTouchUpInside;
-			SaveButton.TouchUpInside += SaveButtonTouchUpInside;
-
-			if (!SharedController.IsEditable) {
-				NameField.DisguiseAsTextView();
-				EmailField.DisguiseAsTextView();
-				PhoneField.DisguiseAsTextView();
-			} else {
-				NameField.EditingDidEnd += FieldEditingDidEnd;
-				EmailField.EditingDidEnd += FieldEditingDidEnd;
-				PhoneField.EditingDidEnd += FieldEditingDidEnd;
-				NewPasswordField.EditingDidEnd += FieldEditingDidEnd;
-				RepeatNewPasswordField.EditingDidEnd += FieldEditingDidEnd;
-			}
-
-			ChangePasswordButton.Hidden = SharedController.User != Session.User;
+			ChangePasswordButton.Hidden = SharedController.ChangePasswordButtonIsHidden;
 		}
 
 		void GetRequests()
@@ -86,7 +92,7 @@ namespace Commercially.iOS
 		void FieldEditingDidEnd(object sender, EventArgs e)
 		{
 			UIView.AnimateAsync(ButtonDetails.AnimationDuration, delegate {
-				SaveButton.Hidden = !SharedController.FieldsChanged(NameField.Text, EmailField.Text, PhoneField.Text,
+				SaveButton.Hidden = !SharedController.FieldsChanged(NameField.Text, UsernameField.Text, EmailField.Text, PhoneField.Text,
 																	NewPasswordField.Text, RepeatNewPasswordField.Text);
 			});
 		}
@@ -101,7 +107,7 @@ namespace Commercially.iOS
 		void SaveButtonTouchUpInside(object sender, EventArgs e)
 		{
 			try {
-				SharedController.SaveButtonPress(NameField.Text, EmailField.Text, PhoneField.Text,
+				SharedController.SaveButtonPress(NameField.Text, UsernameField.Text, EmailField.Text, PhoneField.Text,
 												 OldPasswordField.Text, NewPasswordField.Text, RepeatNewPasswordField.Text);
 			} catch (Exception) {
 				if (UserDetails.PasswordsChanged(NewPasswordField.Text, RepeatNewPasswordField.Text)) {

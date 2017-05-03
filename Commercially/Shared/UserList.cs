@@ -26,6 +26,16 @@ namespace Commercially
 			}
 		}
 
+		public bool CanEditRow(int row)
+		{
+			return CanEditRow(Users[row]);
+		}
+
+		public static bool CanEditRow(User user)
+		{
+			return Session.User.Type == UserRoleType.Admin && !user._id.Equals(Session.User._id);
+		}
+
 		public static Color GetTypeColor(UserRoleType type)
 		{
 			var index = Array.IndexOf(UserRoleTypes, type);

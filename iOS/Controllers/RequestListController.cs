@@ -141,7 +141,12 @@ namespace Commercially.iOS
 			{
 				switch (editingStyle) {
 					case UITableViewCellEditingStyle.Delete:
-						RequestApi.DeleteRequest(SharedController.Requests[indexPath.Row]._id);
+						try {
+							RequestApi.DeleteRequest(SharedController.Requests[indexPath.Row]._id);
+						} catch (Exception) {
+							Controller.NavigationController.ShowPrompt(Localizable.PromptMessages.DeleteError);
+							return;
+						}
 						break;
 				}
 				Controller.ViewWillAppear(false);
