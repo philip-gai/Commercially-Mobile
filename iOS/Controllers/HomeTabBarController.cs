@@ -16,11 +16,8 @@ namespace Commercially.iOS
 			NavigationItem.HidesBackButton = true;
 			NavigationItem.SetTitleImage("Logo-Red-Toolbar");
 			if (Session.User.Type != UserRoleType.Admin) {
-				var userController = UINavigationControllerExtensions.GetViewController(GlobalConstants.Screens.UserDetails) as UserDetailsController;
-				userController.User = Session.User;
-				ViewControllers = new UIViewController[] { UINavigationControllerExtensions.GetViewController(GlobalConstants.Screens.RequestList), userController };
+				ViewControllers = new UIViewController[] { UINavigationControllerExtensions.GetViewController(GlobalConstants.Screens.RequestList), UINavigationControllerExtensions.GetViewController(GlobalConstants.Screens.UserDetails) };
 			}
-
 		}
 	}
 }

@@ -21,20 +21,37 @@ namespace Commercially.iOS
 		public override void ViewWillAppear(bool animated)
 		{
 			base.ViewWillAppear(animated);
-			GetRequests();
+			if (Session.User.Type == UserRoleType.Admin) {
+				GetRequests();
+			} else {
+				Session.User = UserApi.GetCurrentUser();
+				SharedController.User = Session.User;
+			}
+			InitializeView();
 		}
 
-		public override void ViewDidLoad()
+		public override void ViewWillDisappear(bool animated)
 		{
-			base.ViewDidLoad();
-			InitializeView();
+			base.ViewWillDisappear(animated);
+			RemoveListeners();
+		}
+
+		void RemoveListeners() {
+			ChangePasswordButton.TouchUpInside -= ChangePasswordButtonTouchUpInside;
+			SaveButton.TouchUpInside -= SaveButtonTouchUpInside;
+			NameField.EditingDidEnd -= FieldEditingDidEnd;
+			UsernameField.EditingDidEnd -= FieldEditingDidEnd;
+			EmailField.EditingDidEnd -= FieldEditingDidEnd;
+			PhoneField.EditingDidEnd -= FieldEditingDidEnd;
+			NewPasswordField.EditingDidEnd -= FieldEditingDidEnd;
+			RepeatNewPasswordField.EditingDidEnd -= FieldEditingDidEnd;
 		}
 
 		void InitializeView()
 		{
 			if (SharedController.User == null) return;
 
-            InitializeFields();
+			InitializeFields();
 			InitializeVisibility();
 
 			if (Session.User.Type == UserRoleType.Admin) {

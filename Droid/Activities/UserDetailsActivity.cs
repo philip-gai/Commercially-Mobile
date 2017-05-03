@@ -55,10 +55,7 @@ namespace Commercially.Droid
 				SharedController.User = user;
 			} else {
 				this.SetSupportActionBarDefault();
-				Session.User = UserApi.GetCurrentUser();
-				SharedController.User = Session.User;
 			}
-			InitializeView();
 		}
 
 		public override bool OnCreateOptionsMenu(IMenu menu)
@@ -81,7 +78,28 @@ namespace Commercially.Droid
 			InvalidateOptionsMenu();
 			if (Session.User.Type == UserRoleType.Admin) {
 				GetRequests();
+			} else {
+				Session.User = UserApi.GetCurrentUser();
+				SharedController.User = Session.User;
 			}
+            InitializeView();
+		}
+
+		protected override void OnPause()
+		{
+			base.OnPause();
+			RemoveListeners();
+		}
+
+		void RemoveListeners() {
+			SaveButton.Click -= SaveButtonClick;
+			ChangePasswordButton.Click -= ChangePasswordButtonClick;
+			NameField.TextChanged -= FieldTextChanged;
+			UsernameField.TextChanged -= FieldTextChanged;
+			EmailField.TextChanged -= FieldTextChanged;
+			PhoneField.TextChanged -= FieldTextChanged;
+			NewPasswordField.TextChanged -= FieldTextChanged;
+			RepeatNewPasswordField.TextChanged -= FieldTextChanged;
 		}
 
 		public override bool OnSupportNavigateUp()
