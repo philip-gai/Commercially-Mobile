@@ -1,11 +1,23 @@
-﻿using System;
-using UIKit;
+﻿// Created by Philip Gai
+
+using System;
 using CoreGraphics;
+using UIKit;
 
 namespace Commercially.iOS
 {
+	/// <summary>
+	/// UIView extensions.
+	/// </summary>
 	public static class UIViewExtensions
 	{
+		/// <summary>
+		/// Adds the underline view.
+		/// </summary>
+		/// <returns>The underline view.</returns>
+		/// <param name="view">View.</param>
+		/// <param name="subview">Subview.</param>
+		/// <param name="color">Color.</param>
 		public static UIView AddUnderlineView(this UIView view, UIView subview, UIColor color)
 		{
 			CGRect Bounds = subview.ConvertRectToView(subview.Bounds, view);
@@ -23,6 +35,12 @@ namespace Commercially.iOS
 			return lineView;
 		}
 
+		/// <summary>
+		/// Gets the constraint constant.
+		/// </summary>
+		/// <returns>The constraint constant.</returns>
+		/// <param name="view">View.</param>
+		/// <param name="attribute">Attribute.</param>
 		public static nfloat GetConstraintConstant(this UIView view, NSLayoutAttribute attribute)
 		{
 			foreach (NSLayoutConstraint constraint in view.Constraints) {
@@ -33,6 +51,11 @@ namespace Commercially.iOS
 			throw new NoConstraintMatchingException(Localizable.ExceptionMessages.NoConstraint);
 		}
 
+		/// <summary>
+		/// Gets the first responder.
+		/// </summary>
+		/// <returns>The first responder.</returns>
+		/// <param name="view">View.</param>
 		public static UIView GetFirstResponder(this UIView view)
 		{
 			foreach (UIView subview in view.Subviews) {
@@ -43,6 +66,11 @@ namespace Commercially.iOS
 			return null;
 		}
 
+		/// <summary>
+		/// Gets the active field.
+		/// </summary>
+		/// <returns>The active field.</returns>
+		/// <param name="view">View.</param>
 		public static UITextField GetActiveField(this UIView view)
 		{
 			var FirstResponder = view.GetFirstResponder();
@@ -52,29 +80,20 @@ namespace Commercially.iOS
 			return null;
 		}
 
-		public static void SetBackgroundFromImageName(this UIView view, string imageName)
-		{
-			var image = UIImage.FromFile(imageName);
-			var backgroundView = new UIImageView(image);
-			view.SetAnchorsToEdges(backgroundView);
-			view.SendSubviewToBack(backgroundView);
-		}
-
-		public static void SetAnchorsToEdges(this UIView view, UIView subview)
-		{
-			UILayoutGuide margins = view.LayoutMarginsGuide;
-			subview.LeadingAnchor.ConstraintEqualTo(margins.LeadingAnchor).Active = true;
-			subview.TrailingAnchor.ConstraintEqualTo(margins.TrailingAnchor).Active = true;
-			subview.BottomAnchor.ConstraintEqualTo(margins.BottomAnchor).Active = true;
-			subview.TopAnchor.ConstraintEqualTo(margins.TopAnchor).Active = true;
-		}
-
+		/// <summary>
+		/// Hides the keyboard when tapped.
+		/// </summary>
+		/// <param name="view">View.</param>
 		public static void HideKeyboardWhenTapped(this UIView view)
 		{
 			var tap = new UITapGestureRecognizer((obj) => { view.EndEditing(true); });
 			view.AddGestureRecognizer(tap);
 		}
 
+		/// <summary>
+		/// Removes the hide keyboard when tapped.
+		/// </summary>
+		/// <param name="view">View.</param>
 		public static void RemoveHideKeyboardWhenTapped(this UIView view)
 		{
 			foreach (UIGestureRecognizer recognizer in view.GestureRecognizers) {
@@ -83,23 +102,6 @@ namespace Commercially.iOS
 					break;
 				}
 			}
-		}
-
-		public enum ScaleType { Width, Height };
-		public static void ScaleView(this UIView view, ScaleType type, double newValue)
-		{
-			nfloat nfNewValue = (nfloat)newValue;
-			nfloat width = nfNewValue;
-			nfloat height = nfNewValue;
-			switch (type) {
-				case ScaleType.Width:
-					height = (nfNewValue / view.Bounds.Width) * view.Bounds.Height;
-					break;
-				case ScaleType.Height:
-					width = (nfNewValue / view.Bounds.Height) * view.Bounds.Width;
-					break;
-			}
-			view.Frame = new CGRect(view.Frame.X, view.Frame.Y, width, height);
 		}
 	}
 }

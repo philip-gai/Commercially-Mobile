@@ -1,27 +1,38 @@
+// Created by Philip Gai
+
 using System;
 using UIKit;
 
-namespace Commercially.iOS {
-	public partial class UnderlineField : AbstractField {
+namespace Commercially.iOS
+{
+	/// <summary>
+	/// Underline field.
+	/// </summary>
+	public partial class UnderlineField : AbstractField
+	{
 		UIView UnderlineView;
 		UIColor UnderlineColor;
 
 		public UnderlineField(IntPtr handle) : base(handle) { }
 
-		public void SetUnderlineView(UIView view, UIColor UnderlineColor) {
+		public void SetUnderlineView(UIView view, UIColor UnderlineColor)
+		{
 			UnderlineView = view;
 			this.UnderlineColor = UnderlineColor;
 		}
 
-		public UIView GetUnderlineView() {
+		public UIView GetUnderlineView()
+		{
 			return UnderlineView;
 		}
 
-		public void ClearUnderlineView() {
+		public void ClearUnderlineView()
+		{
 			UnderlineView = null;
 		}
 
-		public void SetLineColor(bool valid) {
+		public void SetLineColor(bool valid)
+		{
 			if (UnderlineView == null) return;
 			if (valid) {
 				UnderlineView.BackgroundColor = UnderlineColor;
@@ -30,7 +41,8 @@ namespace Commercially.iOS {
 			}
 		}
 
-		public override void SetNextField(AbstractField nextResponder) {
+		public override void SetNextField(AbstractField nextResponder)
+		{
 			if (!(nextResponder is UnderlineField)) return;
 			NextField = nextResponder;
 			Delegate = new UnderlineFieldDelegate(this, (nextResponder as UnderlineField));

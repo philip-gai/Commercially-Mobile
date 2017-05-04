@@ -1,9 +1,18 @@
-﻿using Android.Support.V7.App;
+﻿// Created by Philip Gai
+
+using Android.Support.V7.App;
 
 namespace Commercially.Droid
 {
+	/// <summary>
+	/// App compat activity extensions.
+	/// </summary>
 	public static class AppCompatActivityExtensions
 	{
+		/// <summary>
+		/// Shows the back arrow.
+		/// </summary>
+		/// <param name="activity">Activity.</param>
 		public static void ShowBackArrow(this AppCompatActivity activity)
 		{
 			activity.SupportActionBar.SetDisplayHomeAsUpEnabled(true);
@@ -11,6 +20,11 @@ namespace Commercially.Droid
 			activity.SupportActionBar.SetDisplayShowTitleEnabled(false);
 		}
 
+		/// <summary>
+		/// Sets the support action bar default values.
+		/// </summary>
+		/// <param name="activity">Activity.</param>
+		/// <param name="title">Title.</param>
 		public static void SetSupportActionBarDefault(this AppCompatActivity activity, string title = "")
 		{
 			activity.SupportActionBar.Show();

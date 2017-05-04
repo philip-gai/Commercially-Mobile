@@ -1,19 +1,17 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+// Created by Philip Gai
 
+using System;
 using Android.App;
-using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
 
 namespace Commercially.Droid
 {
+	/// <summary>
+	/// User create activity.
+	/// </summary>
 	[Activity(Label = "UserCreateActivity")]
 	public class UserCreateActivity : AppCompatActivity
 	{
@@ -46,7 +44,7 @@ namespace Commercially.Droid
 		void CreateButtonClick(object sender, EventArgs e)
 		{
 			try {
-				UserCreate.CreateButtonPress(NameField.Text, UsernameField.Text,
+				UserCreateManager.OnCreateButtonPressHandler(NameField.Text, UsernameField.Text,
 											 UserRoleSpinner.SelectedItem.ToString(),
 											 EmailField.Text, PhoneField.Text, PasswordField.Text, VerifyPasswordField.Text);
 			} catch (Exception) {
@@ -54,7 +52,7 @@ namespace Commercially.Droid
 				return;
 			}
 
-            Finish();
+			Finish();
 		}
 	}
 }

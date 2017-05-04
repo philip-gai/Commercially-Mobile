@@ -1,9 +1,14 @@
-﻿using System;
+﻿// Created by Philip Gai
+
+using System;
 using Foundation;
 using UIKit;
 
 namespace Commercially.iOS
 {
+	/// <summary>
+	/// Keyboard controller.
+	/// </summary>
 	public abstract class KeyboardController : UIViewController
 	{
 		NSObject keyboardShowToken, keyboardHideToken;
@@ -45,7 +50,8 @@ namespace Commercially.iOS
 			this.KeyboardDid(UIViewControllerExtensions.KeyboardActionType.Show, e.FrameEnd);
 		}
 
-		void HandleKeyboardDidHide(object sender, UIKeyboardEventArgs e) {
+		void HandleKeyboardDidHide(object sender, UIKeyboardEventArgs e)
+		{
 			this.KeyboardDid(UIViewControllerExtensions.KeyboardActionType.Hide, e.FrameEnd);
 		}
 	}

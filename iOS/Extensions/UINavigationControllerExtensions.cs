@@ -1,13 +1,24 @@
-﻿using System;
+﻿// Created by Philip Gai
+
+using System;
 using Foundation;
 using UIKit;
 
 namespace Commercially.iOS
 {
+	/// <summary>
+	/// UINavigation controller extensions.
+	/// </summary>
 	public static class UINavigationControllerExtensions
 	{
 		public enum NavigationType { Push, Present };
 
+		/// <summary>
+		/// Gets and pushes or presents view controller.
+		/// </summary>
+		/// <param name="nav">Nav.</param>
+		/// <param name="nextController">Next controller.</param>
+		/// <param name="type">Type.</param>
 		public static void GetAndActOnViewController(this UINavigationController nav, UIViewController nextController, NavigationType type = NavigationType.Push)
 		{
 			switch (type) {
@@ -20,18 +31,35 @@ namespace Commercially.iOS
 			}
 		}
 
+		/// <summary>
+		/// Gets and pushes or presents view controller.
+		/// </summary>
+		/// <param name="nav">Nav.</param>
+		/// <param name="storyboardName">Storyboard name.</param>
+		/// <param name="type">Type.</param>
 		public static void GetAndActOnViewController(this UINavigationController nav, string storyboardName, NavigationType type = NavigationType.Push)
 		{
 			var nextController = GetViewController(storyboardName);
 			nav.GetAndActOnViewController(nextController, type);
 		}
 
+		/// <summary>
+		/// Gets and pushes or presents view controller.
+		/// </summary>
+		/// <param name="nav">Nav.</param>
+		/// <param name="notification">Notification.</param>
+		/// <param name="type">Type.</param>
 		public static void GetAndActOnViewController(this UINavigationController nav, NSNotification notification, NavigationType type = NavigationType.Push)
 		{
 			var storyboardName = notification.UserInfo[LocalConstants.Notifications.PushViewController.UserInfo].ToString();
 			nav.GetAndActOnViewController(storyboardName, type);
 		}
 
+		/// <summary>
+		/// Gets the view controller.
+		/// </summary>
+		/// <returns>The view controller.</returns>
+		/// <param name="storyboardName">Storyboard name.</param>
 		public static UIViewController GetViewController(string storyboardName)
 		{
 			var nextStoryboard = UIStoryboard.FromName(storyboardName, null);
@@ -39,6 +67,11 @@ namespace Commercially.iOS
 			return nextController;
 		}
 
+		/// <summary>
+		/// Pops to view controller.
+		/// </summary>
+		/// <param name="nav">Nav.</param>
+		/// <typeparam name="T">The 1st type parameter.</typeparam>
 		public static void PopToViewController<T>(this UINavigationController nav)
 		{
 			int index = -1;
@@ -54,6 +87,12 @@ namespace Commercially.iOS
 			}
 		}
 
+		/// <summary>
+		/// Shows the prompt.
+		/// </summary>
+		/// <param name="nav">Nav.</param>
+		/// <param name="promptInfo">Prompt info.</param>
+		/// <param name="length">Length.</param>
 		public static void ShowPrompt(this UINavigationController nav, string promptInfo, int length = -1)
 		{
 			string ellipses = "...";
@@ -65,6 +104,11 @@ namespace Commercially.iOS
 			nav.View.Alpha = (nfloat)0.5;
 		}
 
+		/// <summary>
+		/// Shows the prompt.
+		/// </summary>
+		/// <param name="nav">Nav.</param>
+		/// <param name="notification">Notification.</param>
 		public static void ShowPrompt(this UINavigationController nav, NSNotification notification)
 		{
 			var promptInfo = notification.UserInfo[LocalConstants.Notifications.ShowPrompt.UserInfo].ToString();

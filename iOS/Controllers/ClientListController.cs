@@ -1,3 +1,5 @@
+// Created by Philip Gai
+
 using Foundation;
 using System;
 using UIKit;
@@ -5,15 +7,18 @@ using CoreGraphics;
 
 namespace Commercially.iOS
 {
+	/// <summary>
+	/// Client list controller.
+	/// </summary>
 	public partial class ClientListController : UITableViewController
 	{
-		readonly ClientList SharedController = new ClientList();
+		readonly ClientListManager Manager = new ClientListManager();
 
 		public ClientListController(IntPtr handle) : base(handle) { }
 
 		bool CurrentType {
 			set {
-				SharedController.AuthorizedType = value;
+				Manager.AuthorizedListType = value;
 				GetClients();
 			}
 		}
@@ -27,13 +32,13 @@ namespace Commercially.iOS
 		public override void ViewDidLoad()
 		{
 			base.ViewDidLoad();
-			TableView.Source = new ButtonTableSource(this);
+			TableView.Source = new ClientTableSource(this);
 			SetButtons(AuthorizedButton);
 		}
 
 		partial void TopButtonTouchUpInside(UIButton sender)
 		{
-			CurrentType = GetButtonType(sender);
+			CurrentType = GetClientListType(sender);
 			SetButtons(sender);
 		}
 
@@ -41,23 +46,23 @@ namespace Commercially.iOS
 		{
 			var buttons = new UIButton[] { AuthorizedButton, DiscoveredButton };
 			foreach (var button in buttons) {
-				button.SetTitleColor(ClientList.InactiveTextColor.GetUIColor(), UIControlState.Normal);
-				button.BackgroundColor = ClientList.GetTypeColor(GetButtonType(button)).GetUIColor();
+				button.SetTitleColor(ClientListManager.InactiveTextColor.GetUIColor(), UIControlState.Normal);
+				button.BackgroundColor = ClientListManager.GetListTypeColor(GetClientListType(button)).GetUIColor();
 				button.Enabled = true;
 			}
-			activeButton.SetTitleColor(SharedController.CurrentTypeColor.GetUIColor(), UIControlState.Normal);
-			activeButton.BackgroundColor = ClientList.ActiveBackgroundColor.GetUIColor();
+			activeButton.SetTitleColor(Manager.CurrentListTypeColor.GetUIColor(), UIControlState.Normal);
+			activeButton.BackgroundColor = ClientListManager.ActiveBackgroundColor.GetUIColor();
 			activeButton.Enabled = false;
 		}
 
-		bool GetButtonType(UIButton sender)
+		bool GetClientListType(UIButton sender)
 		{
 			return sender == AuthorizedButton;
 		}
 
 		void GetClients()
 		{
-			SharedController.GetClients(delegate {
+			Manager.GetClients(delegate {
 				InvokeOnMainThread(delegate {
 					TableView.ReloadData();
 				});
@@ -68,16 +73,16 @@ namespace Commercially.iOS
 			});
 		}
 
-		class ButtonTableSource : UITableViewSource
+		class ClientTableSource : UITableViewSource
 		{
 			readonly ClientListController Controller;
-			ClientList SharedController {
+			ClientListManager Manager {
 				get {
-					return Controller.SharedController;
+					return Controller.Manager;
 				}
 			}
 
-			public ButtonTableSource(ClientListController controller)
+			public ClientTableSource(ClientListController controller)
 			{
 				Controller = controller;
 				Controller.TableView.RegisterNibForCellReuse(UINib.FromName(ClientCell.Key, null), ClientCell.Key);
@@ -91,29 +96,29 @@ namespace Commercially.iOS
 
 			public override nint RowsInSection(UITableView tableview, nint section)
 			{
-				return SharedController.Clients == null ? 0 : SharedController.Clients.Length;
+				return Manager.Clients == null ? 0 : Manager.Clients.Length;
 			}
 
 			public override nfloat GetHeightForHeader(UITableView tableView, nint section)
 			{
-				return (nfloat)ClientList.HeaderHeight;
+				return (nfloat)ClientListManager.TableHeaderHeight;
 			}
 
 			public override nfloat GetHeightForRow(UITableView tableView, NSIndexPath indexPath)
 			{
-				return (nfloat)ClientList.RowHeight;
+				return (nfloat)ClientListManager.TableRowHeight;
 			}
 
 			public override UIView GetViewForHeader(UITableView tableView, nint section)
 			{
-				var HeaderView = new UIView(new CGRect(0, 0, tableView.Frame.Size.Width, (nfloat)ClientList.HeaderHeight));
-				var Frame = new CGRect(10, 0, HeaderView.Frame.Width, (nfloat)ClientList.HeaderHeight);
+				var HeaderView = new UIView(new CGRect(0, 0, tableView.Frame.Size.Width, (nfloat)ClientListManager.TableHeaderHeight));
+				var Frame = new CGRect(10, 0, HeaderView.Frame.Width, (nfloat)ClientListManager.TableHeaderHeight);
 				var Label = new UILabel(Frame);
 
-				HeaderView.BackgroundColor = SharedController.CurrentTypeColor.GetUIColor();
-				Label.Text = SharedController.CurrentTypeTitle;
-				if (SharedController.Clients != null) {
-					Label.Text += " (" + SharedController.Clients.Length + ")";
+				HeaderView.BackgroundColor = Manager.CurrentListTypeColor.GetUIColor();
+				Label.Text = Manager.CurrentListTypeTitle;
+				if (Manager.Clients != null) {
+					Label.Text += " (" + Manager.Clients.Length + ")";
 				}
 				HeaderView.AddSubview(Label);
 				return HeaderView;
@@ -122,8 +127,8 @@ namespace Commercially.iOS
 			public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
 			{
 				var cell = tableView.DequeueReusableCell(ClientCell.Key, indexPath) as ClientCell;
-				cell.Client = SharedController.Clients[indexPath.Row];
-				cell.BackgroundColor = SharedController.CurrentTypeColor.GetUIColor().ColorWithAlpha((nfloat)ClientList.RowAlphaDouble);
+				cell.Client = Manager.Clients[indexPath.Row];
+				cell.BackgroundColor = Manager.CurrentListTypeColor.GetUIColor().ColorWithAlpha((nfloat)ClientListManager.TableRowAlphaDouble);
 				return cell;
 			}
 
@@ -131,7 +136,7 @@ namespace Commercially.iOS
 			{
 				var nextController = UINavigationControllerExtensions.GetViewController(GlobalConstants.Screens.ClientDetails) as ClientDetailsController;
 				Controller.NavigationController.PushViewController(nextController, true);
-				nextController.Client = SharedController.Clients[indexPath.Row];
+				nextController.Client = Manager.Clients[indexPath.Row];
 			}
 		}
 	}

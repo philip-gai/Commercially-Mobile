@@ -1,11 +1,19 @@
+// Created by Philip Gai
+
 using System;
 using UIKit;
 
-namespace Commercially.iOS {
-	public partial class EmailField : UnderlineField {
+namespace Commercially.iOS
+{
+	/// <summary>
+	/// Email field.
+	/// </summary>
+	public partial class EmailField : UnderlineField
+	{
 		public EmailField(IntPtr handle) : base(handle) { }
 
-		public override bool IsValidInput() {
+		public override bool IsValidInput()
+		{
 			return Validator.Email(Text);
 		}
 

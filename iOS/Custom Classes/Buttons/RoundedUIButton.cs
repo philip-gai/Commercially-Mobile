@@ -1,14 +1,22 @@
+// Created by Philip Gai
+
 using System;
 using UIKit;
 
-namespace Commercially.iOS {
-	public partial class RoundedUIButton : ActivityIndicatorButton {
+namespace Commercially.iOS
+{
+	/// <summary>
+	/// Rounded UI Button.
+	/// </summary>
+	public partial class RoundedUIButton : ActivityIndicatorButton
+	{
 		readonly static nfloat defaultCornerRadius = (nfloat)31;
 		readonly static nfloat borderWidth = (nfloat)0.7;
 
 		public RoundedUIButton(IntPtr handle) : base(handle) { }
 
-		public override void AwakeFromNib() {
+		public override void AwakeFromNib()
+		{
 			base.AwakeFromNib();
 			try {
 				Layer.CornerRadius = this.GetConstraintConstant(NSLayoutAttribute.Height) / 2;

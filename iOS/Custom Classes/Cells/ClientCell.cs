@@ -1,13 +1,17 @@
-﻿using System;
+// Created by Philip Gai
 
+using System;
 using Foundation;
 using UIKit;
 
 namespace Commercially.iOS
 {
+	/// <summary>
+	/// Client cell.
+	/// </summary>
 	public partial class ClientCell : UITableViewCell
 	{
-		ClientTableRow SharedRow;
+		ClientTableRowManager Manager;
 
 		public static readonly NSString Key = new NSString("ClientCell");
 		public static readonly UINib Nib;
@@ -21,13 +25,13 @@ namespace Commercially.iOS
 
 		public Client Client {
 			get {
-				return SharedRow.Client;
+				return Manager.Client;
 			}
 			set {
-				SharedRow = new ClientTableRow(value);
-				IdLabel.Text = SharedRow.IdText;
-				FriendlyNameLabel.Text = SharedRow.FriendlyNameText;
-				FriendlyNameLabel.Hidden = SharedRow.FriendlyNameLabelIsHidden;
+				Manager = new ClientTableRowManager(value);
+				IdLabel.Text = Manager.IdText;
+				FriendlyNameLabel.Text = Manager.FriendlyNameText;
+				FriendlyNameLabel.Hidden = Manager.FriendlyNameLabelIsHidden;
 			}
 		}
 	}

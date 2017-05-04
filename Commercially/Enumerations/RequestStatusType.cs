@@ -1,5 +1,10 @@
-﻿namespace Commercially
+﻿// Created by Philip Gai
+
+namespace Commercially
 {
+	/// <summary>
+	/// Request status type.
+	/// </summary>
 	public enum RequestStatusType
 	{
 		New,

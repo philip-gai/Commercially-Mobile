@@ -1,9 +1,14 @@
-﻿using System;
+﻿// Created by Philip Gai
+
+using System;
 using UIKit;
 using Foundation;
 
 namespace Commercially.iOS
 {
+	/// <summary>
+	/// Field list controller.
+	/// </summary>
 	public abstract class FieldListController : UnderlineViewController
 	{
 		public abstract UIView[] FieldList { get; }

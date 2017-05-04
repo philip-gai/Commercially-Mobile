@@ -1,18 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
+// Created by Philip Gai
+
+using System;
 using UIKit;
 
 namespace Commercially.iOS
 {
+	/// <summary>
+	/// User picker view model.
+	/// </summary>
 	public class UserPickerViewModel : UIPickerViewModel
 	{
 		readonly string[] Users;
-		readonly Action<UIPickerView, nint, nint> OnSelect;
+		readonly Action<UIPickerView, nint, nint> PickerSelected;
 
-		public UserPickerViewModel(Action<UIPickerView, nint, nint> OnSelect)
+		public UserPickerViewModel(Action<UIPickerView, nint, nint> PickerSelected)
 		{
-			Users = RequestDetails.GetUserPickerOptions();
-			this.OnSelect = OnSelect;
+			Users = RequestDetailsManager.GetUserPickerOptions();
+			this.PickerSelected = PickerSelected;
 		}
 
 		public override nint GetComponentCount(UIPickerView pickerView)
@@ -32,7 +36,7 @@ namespace Commercially.iOS
 
 		public override void Selected(UIPickerView pickerView, nint row, nint component)
 		{
-			OnSelect(pickerView, row, component);
+			PickerSelected(pickerView, row, component);
 		}
 	}
 }

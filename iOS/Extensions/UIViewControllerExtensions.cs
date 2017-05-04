@@ -1,14 +1,24 @@
-﻿using UIKit;
+﻿// Created by Philip Gai
+
 using System;
-using Foundation;
 using CoreGraphics;
+using UIKit;
 
 namespace Commercially.iOS
 {
+	/// <summary>
+	/// UIViewController extensions.
+	/// </summary>
 	public static class UIViewControllerExtensions
 	{
 		public enum KeyboardActionType { Show, Hide };
 
+		/// <summary>
+		/// Sets the scroll view if the keyboard is showing or hiding.
+		/// </summary>
+		/// <param name="controller">Controller.</param>
+		/// <param name="Type">Type.</param>
+		/// <param name="KeyboardFrame">Keyboard frame.</param>
 		public static void KeyboardDid(this UIViewController controller, KeyboardActionType Type, CGRect KeyboardFrame)
 		{
 			UIView view = controller.View;
