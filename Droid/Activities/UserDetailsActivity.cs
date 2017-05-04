@@ -1,13 +1,9 @@
+// Created by Philip Gai
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Support.V7.App;
 using Android.Text;
 using Android.Views;
@@ -16,10 +12,13 @@ using Newtonsoft.Json;
 
 namespace Commercially.Droid
 {
+	/// <summary>
+	/// User details activity.
+	/// </summary>
 	[Activity(Label = "UserDetailsActivity")]
 	public class UserDetailsActivity : AppCompatActivity
 	{
-		readonly UserDetails SharedController = new UserDetails();
+		readonly UserDetailsManager Manager = new UserDetailsManager();
 
 		LinearLayout Layout { get { return FindViewById<LinearLayout>(Resource.Id.mainLayout); } }
 		EditText NameField { get { return FindViewById<EditText>(Resource.Id.nameField); } }
@@ -52,7 +51,7 @@ namespace Commercially.Droid
 			if (Session.User.Type == UserRoleType.Admin) {
 				this.ShowBackArrow();
 				var user = JsonConvert.DeserializeObject<User>(Intent.GetStringExtra(typeof(User).Name));
-				SharedController.User = user;
+				Manager.User = user;
 			} else {
 				this.SetSupportActionBarDefault();
 			}
@@ -80,9 +79,9 @@ namespace Commercially.Droid
 				GetRequests();
 			} else {
 				Session.User = UserApi.GetCurrentUser();
-				SharedController.User = Session.User;
+				Manager.User = Session.User;
 			}
-            InitializeView();
+			InitializeView();
 		}
 
 		protected override void OnPause()
@@ -91,7 +90,8 @@ namespace Commercially.Droid
 			RemoveListeners();
 		}
 
-		void RemoveListeners() {
+		void RemoveListeners()
+		{
 			SaveButton.Click -= SaveButtonClick;
 			ChangePasswordButton.Click -= ChangePasswordButtonClick;
 			NameField.TextChanged -= FieldTextChanged;
@@ -113,7 +113,7 @@ namespace Commercially.Droid
 
 		void InitializeView()
 		{
-			if (SharedController.User == null) return;
+			if (Manager.User == null) return;
 
 			InitializeFields();
 			InitializeVisibility();
@@ -127,10 +127,10 @@ namespace Commercially.Droid
 
 		void InitializeFields()
 		{
-			NameField.Text = SharedController.NameText;
-			UsernameField.Text = SharedController.UsernameText;
-			EmailField.Text = SharedController.EmailText;
-			PhoneField.Text = SharedController.PhoneText;
+			NameField.Text = Manager.NameText;
+			UsernameField.Text = Manager.UsernameText;
+			EmailField.Text = Manager.EmailText;
+			PhoneField.Text = Manager.PhoneText;
 
 			NameField.TextChanged += FieldTextChanged;
 			UsernameField.TextChanged += FieldTextChanged;
@@ -146,15 +146,15 @@ namespace Commercially.Droid
 			OldPasswordField.Hidden(true);
 			NewPasswordField.Hidden(true);
 			RepeatNewPasswordField.Hidden(true);
-			ChangePasswordButton.Hidden(SharedController.ChangePasswordButtonIsHidden);
+			ChangePasswordButton.Hidden(Manager.ChangePasswordButtonIsHidden);
 		}
 
 		void InitializeTable()
 		{
 			Table.RemoveAllViews();
-			var header = GetHeader();
+			var header = GetTableHeader();
 			Table.AddView(header);
-			for (int row = 0; row < SharedController.Requests.Length; row++) {
+			for (int row = 0; row < Manager.Requests.Length; row++) {
 				var tableRow = GetTableRow(row);
 				Table.AddViewWithUnderline(tableRow, this);
 			}
@@ -162,7 +162,7 @@ namespace Commercially.Droid
 
 		void FieldTextChanged(object sender, TextChangedEventArgs e)
 		{
-			SaveButton.Hidden(!SharedController.FieldsChanged(NameField.Text, UsernameField.Text, EmailField.Text,
+			SaveButton.Hidden(!Manager.FieldsAreChanged(NameField.Text, UsernameField.Text, EmailField.Text,
 															  PhoneField.Text, NewPasswordField.Text,
 															  RepeatNewPasswordField.Text));
 		}
@@ -170,11 +170,11 @@ namespace Commercially.Droid
 		void SaveButtonClick(object sender, EventArgs e)
 		{
 			try {
-				SharedController.SaveButtonPress(NameField.Text, UsernameField.Text, EmailField.Text,
+				Manager.OnSaveButtonPressHandler(NameField.Text, UsernameField.Text, EmailField.Text,
 												 PhoneField.Text, OldPasswordField.Text,
 												 NewPasswordField.Text, RepeatNewPasswordField.Text);
 			} catch (Exception) {
-				if (UserDetails.PasswordsChanged(NewPasswordField.Text, RepeatNewPasswordField.Text)) {
+				if (UserDetailsManager.PasswordsAreChanged(NewPasswordField.Text, RepeatNewPasswordField.Text)) {
 					this.ShowPrompt(Localizable.PromptMessages.InvalidPassword);
 				} else {
 					this.ShowPrompt(Localizable.PromptMessages.ChangesSaveError);
@@ -190,7 +190,7 @@ namespace Commercially.Droid
 			} else {
 				this.ShowPrompt(Localizable.PromptMessages.SaveSuccess);
 				Session.User = UserApi.GetCurrentUser();
-				SharedController.User = Session.User;
+				Manager.User = Session.User;
 			}
 		}
 
@@ -201,27 +201,27 @@ namespace Commercially.Droid
 			RepeatNewPasswordField.Hidden(RepeatNewPasswordField.Visibility == ViewStates.Visible);
 		}
 
-		View GetHeader()
+		View GetTableHeader()
 		{
-			string label = UserDetails.HeaderTitle;
-			if (SharedController.Requests != null) {
-				label += " (" + SharedController.Requests.Length + ")";
+			string label = UserDetailsManager.TableHeaderTitle;
+			if (Manager.Requests != null) {
+				label += " (" + Manager.Requests.Length + ")";
 			}
-			var header = this.GetSectionHeader(label);
-			header.SetBackgroundColor(UserDetails.TableHeaderColor.GetAndroidColor());
+			var header = this.GetTableSectionHeader(label);
+			header.SetBackgroundColor(UserDetailsManager.TableHeaderColor.GetAndroidColor());
 			return header;
 		}
 
 		TableRow GetTableRow(int row)
 		{
-			var rowView = this.GetTableRow(SharedController.Requests[row]);
-			rowView.SetBackgroundColor(UserDetails.TableHeaderColor.ColorWithAlpha(RequestList.RowAlphaByte));
+			var rowView = this.GetTableRow(Manager.Requests[row]);
+			rowView.SetBackgroundColor(UserDetailsManager.TableHeaderColor.ColorWithAlpha(RequestListManager.TableRowAlphaByte));
 			return rowView;
 		}
 
 		public void GetRequests()
 		{
-			SharedController.GetRequests(
+			Manager.GetRequests(
 				delegate { RunOnUiThread(delegate { InitializeTable(); }); },
 				(Exception e) => { RunOnUiThread(delegate { this.ShowPrompt(Localizable.PromptMessages.RequestsError); }); }
 			);

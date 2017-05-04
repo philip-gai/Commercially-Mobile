@@ -1,13 +1,17 @@
-﻿using System;
+// Created by Philip Gai
 
+using System;
 using Foundation;
 using UIKit;
 
 namespace Commercially.iOS
 {
+	/// <summary>
+	/// Button cell.
+	/// </summary>
 	public partial class ButtonCell : UITableViewCell
 	{
-		ButtonTableRow SharedRow;
+		ButtonTableRowManager Manager;
 
 		public static readonly NSString Key = new NSString("ButtonCell");
 		public static readonly UINib Nib;
@@ -21,15 +25,15 @@ namespace Commercially.iOS
 
 		public FlicButton Button {
 			get {
-				return SharedRow.Button;
+				return Manager.Button;
 			}
 			set {
-				SharedRow = new ButtonTableRow(value);
-				ButtonLabel.Text = SharedRow.ButtonText;
-				ClientLabel.Text = SharedRow.ClientText;
-				ClientLabel.Hidden = SharedRow.ClientLabelIsHidden;
-				DescriptionLabel.Text = SharedRow.DescriptionText;
-				LocationLabel.Text = SharedRow.LocationText;
+				Manager = new ButtonTableRowManager(value);
+				ButtonLabel.Text = Manager.ButtonText;
+				ClientLabel.Text = Manager.ClientText;
+				ClientLabel.Hidden = Manager.ClientLabelIsHidden;
+				DescriptionLabel.Text = Manager.DescriptionText;
+				LocationLabel.Text = Manager.LocationText;
 			}
 		}
 	}

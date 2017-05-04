@@ -1,8 +1,15 @@
-﻿using System;
+﻿// Created by Philip Gai
+
+using System;
 using UIKit;
 
-namespace Commercially.iOS {
-	public abstract class UnderlineViewController : UIViewController {
+namespace Commercially.iOS
+{
+	/// <summary>
+	/// Underline view controller.
+	/// </summary>
+	public abstract class UnderlineViewController : UIViewController
+	{
 		public abstract UIView[] UnderlineViews { get; }
 		public abstract UIView ViewForUnderlines { get; }
 		public abstract bool ShowNavigationBar { get; }
@@ -13,17 +20,20 @@ namespace Commercially.iOS {
 
 		public UnderlineViewController(IntPtr handle) : base(handle) { }
 
-		public override void ViewWillAppear(bool animated) {
+		public override void ViewWillAppear(bool animated)
+		{
 			base.ViewWillAppear(animated);
 			NavigationController.SetNavigationBarHidden(!ShowNavigationBar, false);
 		}
 
-		public override void ViewWillDisappear(bool animated) {
+		public override void ViewWillDisappear(bool animated)
+		{
 			base.ViewWillDisappear(animated);
 			NavigationController.SetNavigationBarHidden(false, false);
 		}
 
-		public override void ViewDidLayoutSubviews() {
+		public override void ViewDidLayoutSubviews()
+		{
 			base.ViewDidLayoutSubviews();
 			if (LayoutCount == IsDoneLayoutSubviews) {
 				SetLines();
@@ -31,7 +41,8 @@ namespace Commercially.iOS {
 			LayoutCount++;
 		}
 
-		void SetLines() {
+		void SetLines()
+		{
 			if (UnderlineViews == null) return;
 			foreach (UIView view in UnderlineViews) {
 				UIView lineView = ViewForUnderlines.AddUnderlineView(view, UnderlineColor);
@@ -51,7 +62,8 @@ namespace Commercially.iOS {
 			}
 		}
 
-		public void SetLineColors(object sender, EventArgs events) {
+		public void SetLineColors(object sender, EventArgs events)
+		{
 			if (UnderlineViews == null) return;
 			foreach (UIView view in UnderlineViews) {
 				if (view is UnderlineButton) {

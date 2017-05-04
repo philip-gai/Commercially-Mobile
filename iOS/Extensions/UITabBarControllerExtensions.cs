@@ -1,10 +1,20 @@
-﻿using System;
+﻿// Created by Philip Gai
+
+using System;
 using UIKit;
 
 namespace Commercially.iOS
 {
+	/// <summary>
+	/// UITabBar controller extensions.
+	/// </summary>
 	public static class UITabBarControllerExtensions
 	{
+		/// <summary>
+		/// Removes the view controllers.
+		/// </summary>
+		/// <param name="tabBarController">Tab bar controller.</param>
+		/// <param name="controllerTypes">Controller types.</param>
 		public static void RemoveViewControllers(this UITabBarController tabBarController, Type[] controllerTypes)
 		{
 			var viewControllers = tabBarController.ViewControllers;

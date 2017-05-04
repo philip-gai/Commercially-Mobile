@@ -1,9 +1,15 @@
-using Foundation;
+// Created by Philip Gai
+
 using System;
 using UIKit;
 
-namespace Commercially.iOS {
-	public abstract class AbstractField : UITextField {
+namespace Commercially.iOS
+{
+	/// <summary>
+	/// Abstract field.
+	/// </summary>
+	public abstract class AbstractField : UITextField
+	{
 		AbstractField _NextField;
 		public AbstractField NextField {
 			set {
@@ -14,13 +20,15 @@ namespace Commercially.iOS {
 
 		public AbstractField(IntPtr handle) : base(handle) { }
 
-		public override void AwakeFromNib() {
+		public override void AwakeFromNib()
+		{
 			base.AwakeFromNib();
 			Delegate = FieldDelegate;
 			this.SetPlaceholderColor(this.TextColor);
 		}
 
-		public virtual bool IsValidInput() {
+		public virtual bool IsValidInput()
+		{
 			return !string.IsNullOrWhiteSpace(Text);
 		}
 
@@ -42,7 +50,8 @@ namespace Commercially.iOS {
 			}
 		}
 
-		public virtual void SetNextField(AbstractField nextResponder) {
+		public virtual void SetNextField(AbstractField nextResponder)
+		{
 			_NextField = nextResponder;
 			Delegate = new AbstractFieldDelegate(this, nextResponder);
 		}

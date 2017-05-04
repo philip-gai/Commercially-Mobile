@@ -1,23 +1,28 @@
+// Created by Philip Gai
+
 using System;
 using UIKit;
 
 namespace Commercially.iOS
 {
+	/// <summary>
+	/// Button details controller.
+	/// </summary>
 	public partial class ButtonDetailsController : KeyboardController
 	{
-		readonly ButtonDetails SharedController = new ButtonDetails();
+		readonly ButtonDetailsManager Manager = new ButtonDetailsManager();
 
 		public ButtonDetailsController(IntPtr handle) : base(handle) { }
 
 		public FlicButton Button {
 			set {
-				SharedController.Button = value;
+				Manager.Button = value;
 			}
 		}
 
-		bool IsChanged {
+		bool DetailsAreChanged {
 			get {
-				return SharedController.PickerChanged(ClientPickerView.Model.GetTitle(ClientPickerView, 0, 0)) || SharedController.DescriptionChanged(DescriptionField.Text) || SharedController.LocationChanged(LocationField.Text);
+				return Manager.PickerDidChange(ClientPickerView.Model.GetTitle(ClientPickerView, 0, 0)) || Manager.DescriptionIsEdited(DescriptionField.Text) || Manager.LocationIsEdited(LocationField.Text);
 			}
 		}
 
@@ -36,9 +41,9 @@ namespace Commercially.iOS
 		partial void SaveButtonPress(UIButton sender)
 		{
 			try {
-				if (SharedController.SaveButtonPress(LocationField.Text, DescriptionField.Text,
+				if (Manager.OnSaveButtonPressHandler(LocationField.Text, DescriptionField.Text,
 													ClientPickerView.Model.GetTitle(ClientPickerView, 0, 0)) == true) {
- 					NavigationController.ShowPrompt(Localizable.PromptMessages.PressAndHoldButton);	
+					NavigationController.ShowPrompt(Localizable.PromptMessages.PressAndHoldButton);
 				}
 			} catch (Exception) {
 				NavigationController.ShowPrompt(Localizable.PromptMessages.ChangesSaveError);
@@ -51,37 +56,37 @@ namespace Commercially.iOS
 
 		void InitializeView()
 		{
-			if (SharedController.Button == null) return;
+			if (Manager.Button == null) return;
 
-			LocationField.Text = SharedController.LocationFieldText;
-			DescriptionField.Text = SharedController.DescriptionFieldText;
-			BluetoothIdLabel.Text = SharedController.BluetoothIdText;
+			LocationField.Text = Manager.LocationFieldText;
+			DescriptionField.Text = Manager.DescriptionFieldText;
+			BluetoothIdLabel.Text = Manager.BluetoothIdText;
 
 			LocationField.ResignOnReturn();
 			DescriptionField.ResignOnReturn();
 			LocationField.EditingDidEnd += FieldEditingDidEnd;
 			DescriptionField.EditingDidEnd += FieldEditingDidEnd;
 
-			ClientStack.Hidden = SharedController.ClientStackIsHidden;
-			PairStack.Hidden = SharedController.PairStackIsHidden;
+			ClientStack.Hidden = Manager.ClientStackIsHidden;
+			PairStack.Hidden = Manager.PairStackIsHidden;
 
-			ClientPickerView.Model = new ClientPickerViewModel(SharedController.Button, OnPickerChange);
-			ClientIdLabel.Text = SharedController.ClientIdText;
+			ClientPickerView.Model = new ClientPickerViewModel(Manager.Button, PickerSelected);
+			ClientIdLabel.Text = Manager.ClientIdText;
 			SaveButton.Hidden = true;
 		}
 
-		void OnPickerChange(UIPickerView pickerView, nint row, nint component)
+		void PickerSelected(UIPickerView pickerView, nint row, nint component)
 		{
-			SharedController.SelectedClient = pickerView.Model.GetTitle(pickerView, row, component);
-			UIView.AnimateAsync(ButtonDetails.AnimationDuration, delegate {
-				SaveButton.Hidden = !IsChanged;
+			Manager.SelectedClient = pickerView.Model.GetTitle(pickerView, row, component);
+			UIView.AnimateAsync(ButtonDetailsManager.AnimationDuration, delegate {
+				SaveButton.Hidden = !DetailsAreChanged;
 			});
 		}
 
 		void FieldEditingDidEnd(object sender, EventArgs e)
 		{
-			UIView.AnimateAsync(ButtonDetails.AnimationDuration, delegate {
-				SaveButton.Hidden = !IsChanged;
+			UIView.AnimateAsync(ButtonDetailsManager.AnimationDuration, delegate {
+				SaveButton.Hidden = !DetailsAreChanged;
 			});
 		}
 	}

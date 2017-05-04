@@ -1,18 +1,22 @@
-using Foundation;
+// Created by Philip Gai
+
 using System;
 using UIKit;
 
 namespace Commercially.iOS
 {
+	/// <summary>
+	/// Client details controller.
+	/// </summary>
 	public partial class ClientDetailsController : KeyboardController
 	{
-		readonly ClientDetails SharedController = new ClientDetails();
+		readonly ClientDetailsManager Manager = new ClientDetailsManager();
 
 		public ClientDetailsController(IntPtr handle) : base(handle) { }
 
 		public Client Client {
 			set {
-				SharedController.Client = value;
+				Manager.Client = value;
 			}
 		}
 
@@ -30,13 +34,13 @@ namespace Commercially.iOS
 
 		void InitializeView()
 		{
-			if (SharedController.Client == null) return;
-			IdLabel.Text = SharedController.IdText;
-			FriendlyNameField.Text = SharedController.FriendlyNameText;
-			FriendlyNameField.Placeholder = SharedController.FriendlyNameFieldPlaceholder;
+			if (Manager.Client == null) return;
+			IdLabel.Text = Manager.IdText;
+			FriendlyNameField.Text = Manager.FriendlyNameText;
+			FriendlyNameField.Placeholder = Manager.FriendlyNameFieldPlaceholder;
 
 			SaveButton.Hidden = true;
-			AuthorizeButton.Hidden = SharedController.AuthorizeButtonIsHidden;
+			AuthorizeButton.Hidden = Manager.AuthorizeButtonIsHidden;
 
 			FriendlyNameField.ResignOnReturn();
 			FriendlyNameField.EditingDidEnd += FieldEditingDidEnd;
@@ -47,8 +51,8 @@ namespace Commercially.iOS
 
 		void FieldEditingDidEnd(object sender, EventArgs e)
 		{
-			SaveButton.Hidden = !SharedController.FriendlyNameChanged(FriendlyNameField.Text);
-			UIView.AnimateAsync(ClientDetails.AnimationDuration, delegate {
+			SaveButton.Hidden = !Manager.FriendlyNameIsChanged(FriendlyNameField.Text);
+			UIView.AnimateAsync(ClientDetailsManager.AnimationDuration, delegate {
 				ButtonStack.Hidden = SaveButton.Hidden && AuthorizeButton.Hidden;
 			});
 		}
@@ -56,7 +60,7 @@ namespace Commercially.iOS
 		void SaveButtonTouchUpInside(object sender, EventArgs e)
 		{
 			try {
-				SharedController.SaveButtonPress(FriendlyNameField.Text);
+				Manager.OnSaveButtonPressHandler(FriendlyNameField.Text);
 			} catch (Exception) {
 				NavigationController.ShowPrompt(Localizable.PromptMessages.ChangesSaveError);
 				return;
@@ -69,13 +73,13 @@ namespace Commercially.iOS
 		void AuthorizeButtonTouchUpInside(object sender, EventArgs e)
 		{
 			try {
-				SharedController.AuthorizeButtonPress();
+				Manager.OnAuthorizeButtonPressHandler();
 			} catch (Exception) {
 				NavigationController.ShowPrompt(Localizable.PromptMessages.AuthorizeError);
 				return;
 			}
 			AuthorizeButton.Hidden = true;
-			UIView.AnimateAsync(ClientDetails.AnimationDuration, delegate {
+			UIView.AnimateAsync(ClientDetailsManager.AnimationDuration, delegate {
 				ButtonStack.Hidden = SaveButton.Hidden;
 			});
 			NavigationController.PopViewController(true);

@@ -1,8 +1,13 @@
+// Created by Philip Gai
+
 using System;
 using UIKit;
 
 namespace Commercially.iOS
 {
+	/// <summary>
+	/// Login controller.
+	/// </summary>
 	public partial class LoginController : FieldListController
 	{
 		public LoginController(IntPtr handle) : base(handle) { }

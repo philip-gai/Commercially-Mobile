@@ -1,14 +1,16 @@
-using Foundation;
+// Created by Philip Gai
+
 using System;
 using UIKit;
 
 namespace Commercially.iOS
 {
+	/// <summary>
+	/// User create controller.
+	/// </summary>
 	public partial class UserCreateController : KeyboardController
 	{
-		public UserCreateController(IntPtr handle) : base(handle)
-		{
-		}
+		public UserCreateController(IntPtr handle) : base(handle) { }
 
 		public override UIScrollView ScrollView {
 			get {
@@ -42,7 +44,7 @@ namespace Commercially.iOS
 		void CreateButtonTouchUpInside(object sender, EventArgs e)
 		{
 			try {
-				UserCreate.CreateButtonPress(NameField.Text, UsernameField.Text,
+				UserCreateManager.OnCreateButtonPressHandler(NameField.Text, UsernameField.Text,
 											 UserRoleTypePicker.Model.GetTitle(UserRoleTypePicker, UserRoleTypePicker.SelectedRowInComponent(0), 0),
 											 EmailField.Text, PhoneField.Text, PasswordField.Text, VerifyPasswordField.Text);
 			} catch (Exception) {

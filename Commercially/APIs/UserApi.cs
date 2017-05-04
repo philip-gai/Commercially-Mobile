@@ -1,22 +1,32 @@
-﻿using System;
+﻿// Create by Philip Gai
+
+using System;
 using System.Collections.Generic;
 using System.Net;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace Commercially
 {
+	/// <summary>
+	/// Represents the User API for users from the web server.
+	/// </summary>
 	public static class UserApi
 	{
+		// Endpoint for authorizing / logging in a user
 		readonly static string AuthUrl = HttpRequest.GetRequestUrl("/user/token");
-		readonly static string CurrUserUrl = HttpRequest.GetRequestUrl("/api/currentuser");
-		readonly static string UserUrl = HttpRequest.GetRequestUrl("/api/users/");
-		static string AuthHeader {
-			get {
-				return "Bearer " + Session.OAuth.access_token;
-			}
-		}
 
+		// Endpoint for getting the current logged in user
+		readonly static string CurrUserUrl = HttpRequest.GetRequestUrl("/api/currentuser");
+
+		// Endpoint for general user services
+		readonly static string UserUrl = HttpRequest.GetRequestUrl("/api/users/");
+
+		/// <summary>
+		/// Logs the user in.
+		/// </summary>
+		/// <returns>The status code response.</returns>
+		/// <param name="email">The user's email.</param>
+		/// <param name="password">The user's password.</param>
 		public static string LoginUser(string email, string password)
 		{
 			const string grantType = "grant_type=password";
@@ -31,18 +41,31 @@ namespace Commercially
 				contentType);
 		}
 
+		/// <summary>
+		/// Gets the current user.
+		/// </summary>
+		/// <returns>The current user.</returns>
 		public static User GetCurrentUser()
 		{
-			var resp = HttpRequest.MakeRequest(HttpRequestMethodType.GET, CurrUserUrl, "", AuthHeader);
+			var resp = HttpRequest.MakeRequest(HttpRequestMethodType.GET, CurrUserUrl, "", HttpRequest.AuthHeader);
 			return JsonConvert.DeserializeObject<User>(resp);
 		}
 
+		/// <summary>
+		/// Gets all users from the web server.
+		/// </summary>
+		/// <returns>The users.</returns>
 		public static User[] GetUsers()
 		{
-			var resp = HttpRequest.MakeRequest(HttpRequestMethodType.GET, UserUrl, "", AuthHeader);
+			var resp = HttpRequest.MakeRequest(HttpRequestMethodType.GET, UserUrl, "", HttpRequest.AuthHeader);
 			return JsonConvert.DeserializeObject<List<User>>(resp).ToArray();
 		}
 
+		/// <summary>
+		/// Gets the users based on user role.
+		/// </summary>
+		/// <returns>The users that have a certain role, sorted alphabetically by username.</returns>
+		/// <param name="type">The type of user.</param>
 		public static User[] GetUsers(UserRoleType type)
 		{
 			var users = GetUsers();
@@ -56,27 +79,49 @@ namespace Commercially
 			return list;
 		}
 
+		/// <summary>
+		/// Patches the user.
+		/// </summary>
+		/// <returns>The status code string.</returns>
+		/// <param name="id">The user's id.</param>
+		/// <param name="body">The body of fields to change.</param>
 		public static string PatchUser(string id, string body)
 		{
-			var resp = HttpRequest.MakeRequest(HttpRequestMethodType.PATCH, UserUrl + id, body, AuthHeader);
+			var resp = HttpRequest.MakeRequest(HttpRequestMethodType.PATCH, UserUrl + id, body, HttpRequest.AuthHeader);
 			return resp;
 		}
 
+		/// <summary>
+		/// Posts the user.
+		/// </summary>
+		/// <returns>The status code.</returns>
+		/// <param name="body">The body of the user to create.</param>
 		public static string PostUser(string body)
 		{
-			var resp = HttpRequest.MakeRequest(HttpRequestMethodType.POST, UserUrl, body, AuthHeader);
+			var resp = HttpRequest.MakeRequest(HttpRequestMethodType.POST, UserUrl, body, HttpRequest.AuthHeader);
 			return resp;
 		}
 
+		/// <summary>
+		/// Deletes the user.
+		/// </summary>
+		/// <returns>The user.</returns>
+		/// <param name="id">The user's id.</param>
 		public static string DeleteUser(string id)
 		{
-			var resp = HttpRequest.MakeRequest(HttpRequestMethodType.DELETE, UserUrl + id, "", AuthHeader);
+			var resp = HttpRequest.MakeRequest(HttpRequestMethodType.DELETE, UserUrl + id, "", HttpRequest.AuthHeader);
 			return resp;
 		}
 
+		/// <summary>
+		/// Changes the user's password.
+		/// </summary>
+		/// <returns>The status code.</returns>
+		/// <param name="id">The user's id.</param>
+		/// <param name="body">The body containing the new password.</param>
 		public static string ChangePassword(string id, string body)
 		{
-			var resp = HttpRequest.MakeRequest(HttpRequestMethodType.POST, UserUrl + id + "/changePassword", body, AuthHeader);
+			var resp = HttpRequest.MakeRequest(HttpRequestMethodType.POST, UserUrl + id + "/changePassword", body, HttpRequest.AuthHeader);
 			return resp;
 		}
 	}

@@ -1,7 +1,15 @@
+// Created by Philip Gai
+
 namespace Commercially
 {
+	/// <summary>
+	/// Localizable strings.
+	/// </summary>
 	public struct Localizable
 	{
+		/// <summary>
+		/// Messages which appear as prompts to the user.
+		/// </summary>
 		public struct PromptMessages
 		{
 			public const string Oops = "Oops! ";
@@ -22,11 +30,19 @@ namespace Commercially
 			public const string UserCreateSuccess = Success + "You have created a new user.";
 			public const string DeleteError = Oops + "Deletion failed.";
 		}
+
+		/// <summary>
+		/// Messages thrown in exceptions.
+		/// </summary>
 		public struct ExceptionMessages
 		{
 			public const string CannotConnectServer = "Cannot connect to server";
 			public const string NoConstraint = "No Constraint Matches the given attribute";
 		}
+
+		/// <summary>
+		/// Labels used in application views.
+		/// </summary>
 		public struct Labels
 		{
 			public const string ToDo = "To Do";

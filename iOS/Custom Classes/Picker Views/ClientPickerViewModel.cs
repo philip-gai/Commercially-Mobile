@@ -1,17 +1,22 @@
+// Created by Philip Gai
+
 using System;
 using UIKit;
 
 namespace Commercially.iOS
 {
+	/// <summary>
+	/// Client picker view model.
+	/// </summary>
 	public class ClientPickerViewModel : UIPickerViewModel
 	{
 		readonly string[] DiscoveredBy;
-		readonly Action<UIPickerView, nint, nint> OnSelect;
+		readonly Action<UIPickerView, nint, nint> PickerSelected;
 
-		public ClientPickerViewModel(FlicButton button, Action<UIPickerView, nint, nint> OnSelect)
+		public ClientPickerViewModel(FlicButton button, Action<UIPickerView, nint, nint> PickerSelected)
 		{
-			DiscoveredBy = ButtonDetails.GetPickerOptions(button);
-			this.OnSelect = OnSelect;
+			DiscoveredBy = ButtonDetailsManager.GetPickerOptions(button);
+			this.PickerSelected = PickerSelected;
 		}
 
 		public override nint GetComponentCount(UIPickerView pickerView)
@@ -31,7 +36,7 @@ namespace Commercially.iOS
 
 		public override void Selected(UIPickerView pickerView, nint row, nint component)
 		{
-			OnSelect(pickerView, row, component);
+			PickerSelected(pickerView, row, component);
 		}
 	}
 }

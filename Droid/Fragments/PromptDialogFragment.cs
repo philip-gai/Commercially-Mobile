@@ -1,24 +1,20 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿// Created by Philip Gai
 
 using Android.App;
-using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Util;
 using Android.Views;
 using Android.Widget;
 
 namespace Commercially.Droid
 {
+	/// <summary>
+	/// Prompt dialog fragment.
+	/// </summary>
 	public class PromptDialogFragment : DialogFragment
 	{
 		readonly string Title;
 
-		public PromptDialogFragment (string title)
+		public PromptDialogFragment(string title)
 		{
 			Title = title;
 		}

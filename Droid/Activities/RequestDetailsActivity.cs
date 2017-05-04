@@ -1,20 +1,23 @@
+// Created by Philip Gai
+
+using System;
 using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
-using Android.Animation;
 using Newtonsoft.Json;
-using System;
-using Android.Support.V4.App;
 
 namespace Commercially.Droid
 {
+	/// <summary>
+	/// Request details activity.
+	/// </summary>
 	[Activity(Label = "RequestDetailsActivity")]
 	public class RequestDetailsActivity : AppCompatActivity
 	{
-		readonly RequestDetails SharedController = new RequestDetails();
+		readonly RequestDetailsManager Manager = new RequestDetailsManager();
 
 		TextView DescriptionText { get { return FindViewById<TextView>(Resource.Id.descriptionText); } }
 		TextView LocationText { get { return FindViewById<TextView>(Resource.Id.locationText); } }
@@ -40,7 +43,7 @@ namespace Commercially.Droid
 			this.ShowBackArrow();
 
 			var request = JsonConvert.DeserializeObject<Request>(Intent.GetStringExtra(typeof(Request).Name));
-			SharedController.Request = request;
+			Manager.Request = request;
 			InitializeView();
 		}
 
@@ -52,7 +55,7 @@ namespace Commercially.Droid
 
 		void InitializeView()
 		{
-			if (SharedController.Request == null) return;
+			if (Manager.Request == null) return;
 			InitializeText();
 			InitializeSpinners();
 			InitializeVisibility();
@@ -61,38 +64,38 @@ namespace Commercially.Droid
 
 		void InitializeText()
 		{
-			DescriptionText.Text = SharedController.DescriptionText;
-			LocationText.Text = SharedController.LocationText;
-			StatusText.Text = SharedController.StatusText;
-			AssignedToText.Text = SharedController.AssignedToText;
-			ReceivedTimeText.Text = SharedController.ReceivedTimeText;
-			AcceptedTimeText.Text = SharedController.AcceptedTimeText;
-			CompletedTimeText.Text = SharedController.CompletedTimeText;
-			StaticUserText.SetTextColor(RequestDetails.EditTextColor.GetAndroidColor());
+			DescriptionText.Text = Manager.DescriptionText;
+			LocationText.Text = Manager.LocationText;
+			StatusText.Text = Manager.StatusText;
+			AssignedToText.Text = Manager.AssignedToText;
+			ReceivedTimeText.Text = Manager.ReceivedTimeText;
+			AcceptedTimeText.Text = Manager.AcceptedTimeText;
+			CompletedTimeText.Text = Manager.CompletedTimeText;
+			StaticUserText.SetTextColor(RequestDetailsManager.EditTextColor.GetAndroidColor());
 		}
 
 		void InitializeSpinners()
 		{
 			StatusSpinner = this.GetStatusSpinner();
-			StatusSpinner.SetSelection(SharedController.StatusText);
-			StaticStatusText.SetTextColor(SharedController.StatusInputIsHidden ? RequestDetails.DefaultTextColor.GetAndroidColor() : RequestDetails.EditTextColor.GetAndroidColor());
+			StatusSpinner.SetSelection(Manager.StatusText);
+			StaticStatusText.SetTextColor(Manager.StatusInputIsHidden ? RequestDetailsManager.DefaultTextColor.GetAndroidColor() : RequestDetailsManager.EditTextColor.GetAndroidColor());
 			StatusSpinner.ItemSelected += OnSpinnerItemSelected;
 
 			UserSpinner = this.GetUserSpinner();
-			SharedController.SelectedUser = SharedController.StartingUser;
-			UserSpinner.SetSelection(SharedController.StartingUser);
+			Manager.SelectedUser = Manager.StartingUser;
+			UserSpinner.SetSelection(Manager.StartingUser);
 			UserSpinner.ItemSelected += OnSpinnerItemSelected;
 		}
 
 		void InitializeVisibility()
 		{
-			UrgentIndicator.Hidden(SharedController.UrgentIndicatorIsHidden);
-			AssignedToText.Hidden(SharedController.AssignedToIsHidden);
-			AssignButton.Hidden(SharedController.AssignButtonIsHidden);
-			SaveButton.Hidden(SharedController.SaveButtonIsHidden);
-			StatusSpinner.Hidden(SharedController.StatusInputIsHidden);
-			StatusText.Hidden(SharedController.StatusLabelIsHidden);
-			UserSpinnerLayout.Hidden(SharedController.UserPickerStackIsHidden);
+			UrgentIndicator.Hidden(Manager.UrgentIndicatorIsHidden);
+			AssignedToText.Hidden(Manager.AssignedToTextIsHidden);
+			AssignButton.Hidden(Manager.AssignButtonIsHidden);
+			SaveButton.Hidden(Manager.SaveButtonIsHidden);
+			StatusSpinner.Hidden(Manager.StatusInputIsHidden);
+			StatusText.Hidden(Manager.StatusLabelIsHidden);
+			UserSpinnerLayout.Hidden(Manager.UserPickerStackIsHidden);
 		}
 
 		void InitializeActions()
@@ -104,8 +107,8 @@ namespace Commercially.Droid
 		void SaveButtonClick(object sender, EventArgs e)
 		{
 			try {
-				SharedController.SaveStatusChanges();
-				SharedController.SaveUserChanges();
+				Manager.SaveStatusChanges();
+				Manager.SaveUserChanges();
 			} catch (Exception) {
 				this.ShowPrompt(Localizable.PromptMessages.ChangesSaveError);
 				return;
@@ -116,9 +119,8 @@ namespace Commercially.Droid
 
 		void AssignButtonClick(object sender, EventArgs e)
 		{
-			// Call Post to change button ownedBy value to this user's email in DB
 			try {
-				SharedController.AssignButtonPress();
+				Manager.OnAssignButtonPressHandler();
 			} catch (Exception) {
 				this.ShowPrompt(Localizable.PromptMessages.AssignError);
 				return;
@@ -132,12 +134,12 @@ namespace Commercially.Droid
 		{
 			var adapter = (sender as Spinner).Adapter;
 			if (sender == StatusSpinner) {
-				SharedController.SelectedStatus = adapter.GetItem(e.Position).ToString();
+				Manager.SelectedStatus = adapter.GetItem(e.Position).ToString();
 			} else if (sender == UserSpinner) {
-				SharedController.SelectedUser = adapter.GetItem(e.Position).ToString();
+				Manager.SelectedUser = adapter.GetItem(e.Position).ToString();
 			}
-			SaveButton.Hidden(SharedController.SaveButtonIsHidden);
-			AssignButton.Hidden(SharedController.AssignButtonIsHidden);
+			SaveButton.Hidden(Manager.SaveButtonIsHidden);
+			AssignButton.Hidden(Manager.AssignButtonIsHidden);
 		}
 	}
 }

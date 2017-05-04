@@ -1,4 +1,6 @@
-﻿using System;
+// Created by Philip Gai
+
+using System;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -10,10 +12,13 @@ using Newtonsoft.Json;
 
 namespace Commercially.Droid
 {
+	/// <summary>
+	/// Button details activity.
+	/// </summary>
 	[Activity(Label = "ButtonDetailsActivity")]
 	public class ButtonDetailsActivity : AppCompatActivity
 	{
-		readonly ButtonDetails SharedController = new ButtonDetails();
+		readonly ButtonDetailsManager Manager = new ButtonDetailsManager();
 
 		EditText LocationField { get { return FindViewById<EditText>(Resource.Id.locationField); } }
 		EditText DescriptionField { get { return FindViewById<EditText>(Resource.Id.descriptionField); } }
@@ -24,9 +29,10 @@ namespace Commercially.Droid
 		LinearLayout ClientLayout { get { return FindViewById<LinearLayout>(Resource.Id.clientLayout); } }
 		Spinner ClientSpinner;
 
-		bool IsChanged {
+		// Determines if the buttons details have changed
+		bool DetailsAreChanged {
 			get {
-				return SharedController.PickerChanged(ClientSpinner.GetItemAtPosition(0).ToString()) || SharedController.DescriptionChanged(DescriptionField.Text) || SharedController.LocationChanged(LocationField.Text);
+				return Manager.PickerDidChange(ClientSpinner.GetItemAtPosition(0).ToString()) || Manager.DescriptionIsEdited(DescriptionField.Text) || Manager.LocationIsEdited(LocationField.Text);
 			}
 		}
 
@@ -37,8 +43,9 @@ namespace Commercially.Droid
 			Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
 			this.ShowBackArrow();
 
+			// Get the passed button
 			var button = JsonConvert.DeserializeObject<FlicButton>(Intent.GetStringExtra(typeof(FlicButton).Name));
-			SharedController.Button = button;
+			Manager.Button = button;
 			InitializeView();
 		}
 
@@ -50,41 +57,41 @@ namespace Commercially.Droid
 
 		void InitializeView()
 		{
-			if (SharedController.Button == null) return;
+			if (Manager.Button == null) return;
 
-			LocationField.Text = SharedController.LocationFieldText;
-			DescriptionField.Text = SharedController.DescriptionFieldText;
-			BluetoothIdText.Text = SharedController.BluetoothIdText;
-			ClientIdText.Text = SharedController.ClientIdText;
+			LocationField.Text = Manager.LocationFieldText;
+			DescriptionField.Text = Manager.DescriptionFieldText;
+			BluetoothIdText.Text = Manager.BluetoothIdText;
+			ClientIdText.Text = Manager.ClientIdText;
 
-			ClientLayout.Hidden(SharedController.ClientStackIsHidden);
-			PairLayout.Hidden(SharedController.PairStackIsHidden);
+			ClientLayout.Hidden(Manager.ClientStackIsHidden);
+			PairLayout.Hidden(Manager.PairStackIsHidden);
 			SaveButton.Hidden(true);
 
-			LocationField.TextChanged += OnTextChanged;
-			DescriptionField.TextChanged += OnTextChanged;
+			LocationField.TextChanged += FieldTextChanged;
+			DescriptionField.TextChanged += FieldTextChanged;
 			SaveButton.Click += SaveButtonClick;
 
-			ClientSpinner = this.GetClientSpinner(SharedController.Button);
+			ClientSpinner = this.GetClientSpinner(Manager.Button);
 			ClientSpinner.ItemSelected += ClientSpinnerItemSelected;
 		}
 
 		void ClientSpinnerItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
 		{
 			var adapter = (sender as Spinner).Adapter;
-			SharedController.SelectedClient = adapter.GetItem(e.Position).ToString();
-			SaveButton.Hidden(!IsChanged);
+			Manager.SelectedClient = adapter.GetItem(e.Position).ToString();
+			SaveButton.Hidden(!DetailsAreChanged);
 		}
 
-		void OnTextChanged(object sender, TextChangedEventArgs e)
+		void FieldTextChanged(object sender, TextChangedEventArgs e)
 		{
-			SaveButton.Hidden(!IsChanged);
+			SaveButton.Hidden(!DetailsAreChanged);
 		}
 
 		void SaveButtonClick(object sender, EventArgs e)
 		{
 			try {
-				if (SharedController.SaveButtonPress(LocationField.Text, DescriptionField.Text,
+				if (Manager.OnSaveButtonPressHandler(LocationField.Text, DescriptionField.Text,
 													ClientSpinner.GetItemAtPosition(0).ToString()) == true) {
 					this.ShowPrompt(Localizable.PromptMessages.PressAndHoldButton);
 				}

@@ -1,6 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+// Created by Philip Gai
 
+using System;
+using System.Collections.Generic;
 using Android.App;
 using Android.OS;
 using Android.Support.V7.App;
@@ -9,10 +10,13 @@ using Android.Widget;
 
 namespace Commercially.Droid
 {
+	/// <summary>
+	/// User list activity.
+	/// </summary>
 	[Activity(Label = "UserListActivity")]
 	public class UserListActivity : AppCompatActivity
 	{
-		readonly UserList SharedController = new UserList();
+		readonly UserListManager Manager = new UserListManager();
 
 		TableLayout Table { get { return FindViewById<TableLayout>(Resource.Id.tableLayout); } }
 		LinearLayout Layout { get { return FindViewById<LinearLayout>(Resource.Id.mainLayout); } }
@@ -21,7 +25,7 @@ namespace Commercially.Droid
 		HorizontalScrollView HeaderScrollView {
 			get {
 				if (_HeaderScrollView != null) return _HeaderScrollView;
-				_HeaderScrollView = this.GetTopButtons(UserList.UserRoleTypes);
+				_HeaderScrollView = this.GetTopButtons(UserListManager.UserRoleTypes);
 				return _HeaderScrollView;
 			}
 		}
@@ -48,9 +52,9 @@ namespace Commercially.Droid
 			}
 		}
 
-		UserRoleType CurrentType {
+		UserRoleType CurrentListType {
 			set {
-				SharedController.CurrentType = value;
+				Manager.CurrentListType = value;
 				GetUsers();
 			}
 		}
@@ -68,7 +72,7 @@ namespace Commercially.Droid
 		protected override void OnResume()
 		{
 			base.OnResume();
-            InvalidateOptionsMenu();
+			InvalidateOptionsMenu();
 			GetUsers();
 		}
 
@@ -87,9 +91,9 @@ namespace Commercially.Droid
 		void InitializeTable()
 		{
 			Table.RemoveAllViews();
-			var header = GetHeader();
+			var header = GetTableHeader();
 			Table.AddView(header);
-			for (int row = 0; row < SharedController.Users.Length; row++) {
+			for (int row = 0; row < Manager.Users.Length; row++) {
 				var tableRow = GetTableRow(row);
 				Table.AddViewWithUnderline(tableRow, this);
 			}
@@ -106,26 +110,27 @@ namespace Commercially.Droid
 
 		void TopButtonClick(object sender, EventArgs e)
 		{
-			CurrentType = GetUserRoleType(sender);
+			CurrentListType = GetUserListType(sender);
 			SetButtons(sender as Button);
 		}
 
 		void SetButtons(Button activeButton)
 		{
 			foreach (var button in TopButtons) {
-				button.SetTextColor(UserList.InactiveTextColor.GetAndroidColor());
-				button.BackgroundTintList = Android.Content.Res.ColorStateList.ValueOf(UserList.GetTypeColor(GetUserRoleType(button)).GetAndroidColor());
+				button.SetTextColor(UserListManager.InactiveTextColor.GetAndroidColor());
+				button.BackgroundTintList = Android.Content.Res.ColorStateList.ValueOf(UserListManager.GetListTypeColor(GetUserListType(button)).GetAndroidColor());
 				button.Enabled = true;
 			}
-			activeButton.SetTextColor(SharedController.CurrentTypeColor.GetAndroidColor());
-			activeButton.BackgroundTintList = Android.Content.Res.ColorStateList.ValueOf(UserList.ActiveBackgroundColor.GetAndroidColor());
+			activeButton.SetTextColor(Manager.CurrentListTypeColor.GetAndroidColor());
+			activeButton.BackgroundTintList = Android.Content.Res.ColorStateList.ValueOf(UserListManager.ActiveBackgroundColor.GetAndroidColor());
 			activeButton.Enabled = false;
 		}
 
-		UserRoleType GetUserRoleType(object sender)
+		// Gets the user list type based on the button that was pressed.
+		UserRoleType GetUserListType(object sender)
 		{
 			var button = sender as Button;
-			foreach (var type in UserList.UserRoleTypes) {
+			foreach (var type in UserListManager.UserRoleTypes) {
 				if (type.ToString().Equals(button.Text.Substring(0, button.Text.Length - 1), StringComparison.CurrentCultureIgnoreCase)) {
 					return type;
 				}
@@ -133,27 +138,27 @@ namespace Commercially.Droid
 			return UserRoleType.Worker;
 		}
 
-		View GetHeader()
+		View GetTableHeader()
 		{
-			string label = SharedController.CurrentTypeTitle;
-			if (SharedController.Users != null) {
-				label += " (" + SharedController.Users.Length + ")";
+			string label = Manager.CurrentListTypeTitle;
+			if (Manager.Users != null) {
+				label += " (" + Manager.Users.Length + ")";
 			}
-			var header = this.GetSectionHeader(label);
-			header.SetBackgroundColor(SharedController.CurrentTypeColor.GetAndroidColor());
+			var header = this.GetTableSectionHeader(label);
+			header.SetBackgroundColor(Manager.CurrentListTypeColor.GetAndroidColor());
 			return header;
 		}
 
 		TableRow GetTableRow(int row)
 		{
-			var rowView = this.GetTableRow(SharedController.Users[row]);
-			rowView.SetBackgroundColor(SharedController.CurrentTypeColor.ColorWithAlpha(UserList.RowAlphaByte));
+			var rowView = this.GetTableRow(Manager.Users[row]);
+			rowView.SetBackgroundColor(Manager.CurrentListTypeColor.ColorWithAlpha(UserListManager.TableRowAlphaByte));
 			return rowView;
 		}
 
 		public void GetUsers()
 		{
-			SharedController.GetUsers(
+			Manager.GetUsers(
 				delegate { RunOnUiThread(delegate { InitializeTable(); }); },
 				(Exception e) => { RunOnUiThread(delegate { this.ShowPrompt(Localizable.PromptMessages.UsersError); }); }
 			);

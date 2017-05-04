@@ -1,3 +1,5 @@
+// Created by Philip Gai
+
 using System;
 using Android.App;
 using Android.Content;
@@ -10,10 +12,13 @@ using Newtonsoft.Json;
 
 namespace Commercially.Droid
 {
+	/// <summary>
+	/// Client details activity.
+	/// </summary>
 	[Activity(Label = "ClientDetailsActivity")]
 	public class ClientDetailsActivity : AppCompatActivity
 	{
-		readonly ClientDetails SharedController = new ClientDetails();
+		readonly ClientDetailsManager Manager = new ClientDetailsManager();
 
 		TextView IdText { get { return FindViewById<TextView>(Resource.Id.clientIdText); } }
 		EditText FriendlyNameField { get { return FindViewById<EditText>(Resource.Id.friendlyNameField); } }
@@ -28,7 +33,7 @@ namespace Commercially.Droid
 			this.ShowBackArrow();
 
 			var client = JsonConvert.DeserializeObject<Client>(Intent.GetStringExtra(typeof(Client).Name));
-			SharedController.Client = client;
+			Manager.Client = client;
 			InitializeView();
 		}
 
@@ -40,29 +45,29 @@ namespace Commercially.Droid
 
 		void InitializeView()
 		{
-			if (SharedController.Client == null) return;
+			if (Manager.Client == null) return;
 
-			IdText.Text = SharedController.IdText;
-			FriendlyNameField.Text = SharedController.FriendlyNameText;
-			FriendlyNameField.Hint = SharedController.FriendlyNameFieldPlaceholder;
+			IdText.Text = Manager.IdText;
+			FriendlyNameField.Text = Manager.FriendlyNameText;
+			FriendlyNameField.Hint = Manager.FriendlyNameFieldPlaceholder;
 
 			SaveButton.Hidden(true);
-			AuthorizeButton.Hidden(SharedController.AuthorizeButtonIsHidden);
+			AuthorizeButton.Hidden(Manager.AuthorizeButtonIsHidden);
 
-			FriendlyNameField.TextChanged += OnTextChanged;
+			FriendlyNameField.TextChanged += FieldTextChanged;
 			SaveButton.Click += SaveButtonClick;
 			AuthorizeButton.Click += AuthorizeButtonClick;
 		}
 
-		void OnTextChanged(object sender, TextChangedEventArgs e)
+		void FieldTextChanged(object sender, TextChangedEventArgs e)
 		{
-			SaveButton.Hidden(!SharedController.FriendlyNameChanged(FriendlyNameField.Text));
+			SaveButton.Hidden(!Manager.FriendlyNameIsChanged(FriendlyNameField.Text));
 		}
 
 		void SaveButtonClick(object sender, EventArgs e)
 		{
 			try {
-				SharedController.SaveButtonPress(FriendlyNameField.Text);
+				Manager.OnSaveButtonPressHandler(FriendlyNameField.Text);
 			} catch (Exception) {
 				this.ShowPrompt(Localizable.PromptMessages.ChangesSaveError);
 				return;
@@ -74,7 +79,7 @@ namespace Commercially.Droid
 		void AuthorizeButtonClick(object sender, EventArgs e)
 		{
 			try {
-				SharedController.AuthorizeButtonPress();
+				Manager.OnAuthorizeButtonPressHandler();
 			} catch (Exception) {
 				this.ShowPrompt(Localizable.PromptMessages.AuthorizeError);
 				return;

@@ -1,4 +1,6 @@
-﻿using System;
+// Created by Philip Gai
+
+using System;
 using System.Collections.Generic;
 using Android.App;
 using Android.OS;
@@ -8,19 +10,23 @@ using Android.Widget;
 
 namespace Commercially.Droid
 {
+	/// <summary>
+	/// Button list activity.
+	/// </summary>
 	[Activity(Label = "ButtonListActivity")]
 	public class ButtonListActivity : AppCompatActivity
 	{
-		readonly ButtonList SharedController = new ButtonList();
+		readonly ButtonListManager Manager = new ButtonListManager();
 
 		TableLayout Table { get { return FindViewById<TableLayout>(Resource.Id.tableLayout); } }
 		LinearLayout Layout { get { return FindViewById<LinearLayout>(Resource.Id.mainLayout); } }
 
+		// The scroll view for the top button bar
 		HorizontalScrollView _HeaderScrollView;
 		HorizontalScrollView HeaderScrollView {
 			get {
 				if (_HeaderScrollView != null) return _HeaderScrollView;
-				_HeaderScrollView = this.GetTopButtons(ButtonList.ButtonTypes);
+				_HeaderScrollView = this.GetTopButtons(ButtonListManager.ButtonListTypes);
 				return _HeaderScrollView;
 			}
 		}
@@ -29,7 +35,6 @@ namespace Commercially.Droid
 				return HeaderScrollView.FindViewById<LinearLayout>(Resource.Id.buttonLayout);
 			}
 		}
-
 		Button[] _TopButtons;
 		Button[] TopButtons {
 			get {
@@ -46,9 +51,9 @@ namespace Commercially.Droid
 			}
 		}
 
-		ButtonType CurrentType {
+		ButtonType CurrentListType {
 			set {
-				SharedController.CurrentType = value;
+				Manager.CurrentListType = value;
 				GetButtons();
 			}
 		}
@@ -66,7 +71,7 @@ namespace Commercially.Droid
 		protected override void OnResume()
 		{
 			base.OnResume();
-            InvalidateOptionsMenu();
+			InvalidateOptionsMenu();
 			GetButtons();
 		}
 
@@ -85,9 +90,9 @@ namespace Commercially.Droid
 		void InitializeTable()
 		{
 			Table.RemoveAllViews();
-			var header = GetHeader();
+			var header = GetTableHeader();
 			Table.AddView(header);
-			for (int row = 0; row < SharedController.Buttons.Length; row++) {
+			for (int row = 0; row < Manager.Buttons.Length; row++) {
 				var tableRow = GetTableRow(row);
 				Table.AddViewWithUnderline(tableRow, this);
 			}
@@ -104,26 +109,27 @@ namespace Commercially.Droid
 
 		void TopButtonClick(object sender, EventArgs e)
 		{
-			CurrentType = GetButtonType(sender);
+			CurrentListType = GetButtonListType(sender);
 			SetButtons(sender as Button);
 		}
 
 		void SetButtons(Button activeButton)
 		{
 			foreach (var button in TopButtons) {
-				button.SetTextColor(ButtonList.InactiveTextColor.GetAndroidColor());
-				button.BackgroundTintList = Android.Content.Res.ColorStateList.ValueOf(ButtonList.GetTypeColor(GetButtonType(button)).GetAndroidColor());
+				button.SetTextColor(ButtonListManager.InactiveTextColor.GetAndroidColor());
+				button.BackgroundTintList = Android.Content.Res.ColorStateList.ValueOf(ButtonListManager.GetListTypeColor(GetButtonListType(button)).GetAndroidColor());
 				button.Enabled = true;
 			}
-			activeButton.SetTextColor(SharedController.CurrentTypeColor.GetAndroidColor());
-			activeButton.BackgroundTintList = Android.Content.Res.ColorStateList.ValueOf(ButtonList.ActiveBackgroundColor.GetAndroidColor());
+			activeButton.SetTextColor(Manager.CurrentListTypeColor.GetAndroidColor());
+			activeButton.BackgroundTintList = Android.Content.Res.ColorStateList.ValueOf(ButtonListManager.ActiveBackgroundColor.GetAndroidColor());
 			activeButton.Enabled = false;
 		}
 
-		ButtonType GetButtonType(object sender)
+		// Gets the type of the button list based on the button that was clicked
+		ButtonType GetButtonListType(object sender)
 		{
 			var button = sender as Button;
-			foreach (var type in ButtonList.ButtonTypes) {
+			foreach (var type in ButtonListManager.ButtonListTypes) {
 				if (type.ToString().Equals(button.Text, StringComparison.CurrentCultureIgnoreCase)) {
 					return type;
 				}
@@ -131,27 +137,27 @@ namespace Commercially.Droid
 			return ButtonType.Paired;
 		}
 
-		View GetHeader()
+		View GetTableHeader()
 		{
-			string label = SharedController.CurrentTypeTitle;
-			if (SharedController.Buttons != null) {
-				label += " (" + SharedController.Buttons.Length + ")";
+			string label = Manager.CurrentListTypeTitle;
+			if (Manager.Buttons != null) {
+				label += " (" + Manager.Buttons.Length + ")";
 			}
-			var header = this.GetSectionHeader(label);
-			header.SetBackgroundColor(SharedController.CurrentTypeColor.GetAndroidColor());
+			var header = this.GetTableSectionHeader(label);
+			header.SetBackgroundColor(Manager.CurrentListTypeColor.GetAndroidColor());
 			return header;
 		}
 
 		TableRow GetTableRow(int row)
 		{
-			var rowView = this.GetTableRow(SharedController.Buttons[row]);
-			rowView.SetBackgroundColor(SharedController.CurrentTypeColor.ColorWithAlpha(ButtonList.RowAlphaByte));
+			var rowView = this.GetTableRow(Manager.Buttons[row]);
+			rowView.SetBackgroundColor(Manager.CurrentListTypeColor.ColorWithAlpha(ButtonListManager.TableRowAlphaByte));
 			return rowView;
 		}
 
 		public void GetButtons()
 		{
-			SharedController.GetButtons(
+			Manager.GetButtons(
 				delegate { RunOnUiThread(delegate { InitializeTable(); }); },
 				(Exception e) => { RunOnUiThread(delegate { this.ShowPrompt(Localizable.PromptMessages.ButtonsError); }); }
 			);

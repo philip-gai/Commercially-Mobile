@@ -1,6 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+// Created by Philip Gai
 
+using System;
+using System.Collections.Generic;
 using Android.App;
 using Android.OS;
 using Android.Support.V7.App;
@@ -9,10 +10,13 @@ using Android.Widget;
 
 namespace Commercially.Droid
 {
+	/// <summary>
+	/// Client list activity.
+	/// </summary>
 	[Activity(Label = "ClientListActivity")]
 	public class ClientListActivity : AppCompatActivity
 	{
-		readonly ClientList SharedController = new ClientList();
+		readonly ClientListManager Manager = new ClientListManager();
 
 		TableLayout Table { get { return FindViewById<TableLayout>(Resource.Id.tableLayout); } }
 		LinearLayout Layout { get { return FindViewById<LinearLayout>(Resource.Id.mainLayout); } }
@@ -21,7 +25,7 @@ namespace Commercially.Droid
 		HorizontalScrollView HeaderScrollView {
 			get {
 				if (_HeaderScrollView != null) return _HeaderScrollView;
-				_HeaderScrollView = this.GetTopButtons(ClientList.ButtonLabels);
+				_HeaderScrollView = this.GetTopButtons(ClientListManager.ButtonLabels);
 				return _HeaderScrollView;
 			}
 		}
@@ -47,9 +51,9 @@ namespace Commercially.Droid
 			}
 		}
 
-		bool CurrentType {
+		bool CurrentListType {
 			set {
-				SharedController.AuthorizedType = value;
+				Manager.AuthorizedListType = value;
 				GetClients();
 			}
 		}
@@ -67,7 +71,7 @@ namespace Commercially.Droid
 		protected override void OnResume()
 		{
 			base.OnResume();
-            InvalidateOptionsMenu();
+			InvalidateOptionsMenu();
 			GetClients();
 		}
 
@@ -86,9 +90,9 @@ namespace Commercially.Droid
 		void InitializeTable()
 		{
 			Table.RemoveAllViews();
-			var header = GetHeader();
+			var header = GetTableHeader();
 			Table.AddView(header);
-			for (int row = 0; row < SharedController.Clients.Length; row++) {
+			for (int row = 0; row < Manager.Clients.Length; row++) {
 				var tableRow = GetTableRow(row);
 				Table.AddViewWithUnderline(tableRow, this);
 			}
@@ -105,48 +109,48 @@ namespace Commercially.Droid
 
 		void TopButtonClick(object sender, EventArgs e)
 		{
-			CurrentType = GetClientType(sender);
+			CurrentListType = GetClientListType(sender);
 			SetButtons(sender as Button);
 		}
 
 		void SetButtons(Button activeButton)
 		{
 			foreach (var button in TopButtons) {
-				button.SetTextColor(ClientList.InactiveTextColor.GetAndroidColor());
-				button.BackgroundTintList = Android.Content.Res.ColorStateList.ValueOf(ClientList.GetTypeColor(GetClientType(button)).GetAndroidColor());
+				button.SetTextColor(ClientListManager.InactiveTextColor.GetAndroidColor());
+				button.BackgroundTintList = Android.Content.Res.ColorStateList.ValueOf(ClientListManager.GetListTypeColor(GetClientListType(button)).GetAndroidColor());
 				button.Enabled = true;
 			}
-			activeButton.SetTextColor(SharedController.CurrentTypeColor.GetAndroidColor());
-			activeButton.BackgroundTintList = Android.Content.Res.ColorStateList.ValueOf(ClientList.ActiveBackgroundColor.GetAndroidColor());
+			activeButton.SetTextColor(Manager.CurrentListTypeColor.GetAndroidColor());
+			activeButton.BackgroundTintList = Android.Content.Res.ColorStateList.ValueOf(ClientListManager.ActiveBackgroundColor.GetAndroidColor());
 			activeButton.Enabled = false;
 		}
 
-		bool GetClientType(object sender)
+		bool GetClientListType(object sender)
 		{
 			return sender == TopButtons[0];
 		}
 
-		View GetHeader()
+		View GetTableHeader()
 		{
-			string label = SharedController.CurrentTypeTitle;
-			if (SharedController.Clients != null) {
-				label += " (" + SharedController.Clients.Length + ")";
+			string label = Manager.CurrentListTypeTitle;
+			if (Manager.Clients != null) {
+				label += " (" + Manager.Clients.Length + ")";
 			}
-			var header = this.GetSectionHeader(label);
-			header.SetBackgroundColor(SharedController.CurrentTypeColor.GetAndroidColor());
+			var header = this.GetTableSectionHeader(label);
+			header.SetBackgroundColor(Manager.CurrentListTypeColor.GetAndroidColor());
 			return header;
 		}
 
 		TableRow GetTableRow(int row)
 		{
-			var rowView = this.GetTableRow(SharedController.Clients[row]);
-			rowView.SetBackgroundColor(SharedController.CurrentTypeColor.ColorWithAlpha(ClientList.RowAlphaByte));
+			var rowView = this.GetTableRow(Manager.Clients[row]);
+			rowView.SetBackgroundColor(Manager.CurrentListTypeColor.ColorWithAlpha(ClientListManager.TableRowAlphaByte));
 			return rowView;
 		}
 
 		public void GetClients()
 		{
-			SharedController.GetClients(
+			Manager.GetClients(
 				delegate { RunOnUiThread(delegate { InitializeTable(); }); },
 				(Exception e) => { RunOnUiThread(delegate { this.ShowPrompt(Localizable.PromptMessages.ClientsError); }); }
 			);

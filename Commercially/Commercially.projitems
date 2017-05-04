@@ -15,12 +15,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)APIs\UserApi.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\HttpRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\Validator.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Utilities\Emailer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Exceptions\ConnectionException.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Exceptions\EmailAlreadySentException.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Exceptions\EmailSendingException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Exceptions\ErrorResponseException.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Exceptions\ObjectExistsException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\OAuthResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Session.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\Color.cs" />
@@ -34,24 +30,24 @@
     <Compile Include="$(MSBuildThisFileDirectory)APIs\FlicButtonApi.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\Client.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)APIs\ClientApi.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Shared\RequestList.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Main.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Shared\ButtonList.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Shared\RequestDetails.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Shared\StatusPicker.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Managers\RequestListManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Managers\ButtonListManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Managers\RequestDetailsManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Managers\StatusPickerManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enumerations\ButtonType.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Shared\UserList.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Shared\UserTableRow.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Shared\ButtonTableRow.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Shared\RequestTableRow.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Shared\UserDetails.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Shared\ClientList.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Shared\ClientTableRow.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Shared\ButtonDetails.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Shared\ClientDetails.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Managers\UserListManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Managers\UserTableRowManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Managers\ButtonTableRowManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Managers\RequestTableRowManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Managers\UserDetailsManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Managers\ClientListManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Managers\ClientTableRowManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Managers\ButtonDetailsManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Managers\ClientDetailsManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\StringExtensions.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Shared\UserRolePicker.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Shared\UserCreate.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Managers\UserRolePickerManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Managers\UserCreateManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Managers\MainManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Entities\" />
@@ -61,6 +57,6 @@
     <Folder Include="$(MSBuildThisFileDirectory)Enumerations\" />
     <Folder Include="$(MSBuildThisFileDirectory)Extensions\" />
     <Folder Include="$(MSBuildThisFileDirectory)Constants\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Shared\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Managers\" />
   </ItemGroup>
 </Project>

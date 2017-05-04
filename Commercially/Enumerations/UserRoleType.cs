@@ -1,6 +1,10 @@
-﻿using System;
+﻿// Created by Philip Gai
+
 namespace Commercially
 {
+	/// <summary>
+	/// User role type.
+	/// </summary>
 	public enum UserRoleType
 	{
 		Admin,

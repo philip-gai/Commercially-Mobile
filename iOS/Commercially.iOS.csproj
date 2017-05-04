@@ -205,7 +205,6 @@
     <Folder Include="Utilities\" />
     <Folder Include="Custom Classes\Buttons\" />
     <Folder Include="Assets.xcassets\error.imageset\" />
-    <Folder Include="Custom Classes\Navigation\" />
     <Folder Include="Assets.xcassets\list-TabBar.imageset\" />
     <Folder Include="Assets.xcassets\list.imageset\" />
     <Folder Include="Assets.xcassets\blurredBg-1.imageset\" />
@@ -265,19 +264,15 @@
     <Compile Include="Custom Classes\Fields\EmailField.designer.cs" />
     <Compile Include="Custom Classes\Fields\PasswordField.cs" />
     <Compile Include="Custom Classes\Fields\PasswordField.designer.cs" />
-    <Compile Include="Custom Classes\Controllers\NavigationBarTableViewController.cs" />
-    <Compile Include="Custom Classes\Controllers\NavigationBarViewController.cs" />
     <Compile Include="Custom Classes\Controllers\FieldListController.cs" />
     <Compile Include="Custom Classes\Delegates\UnderlineFieldDelegate.cs" />
     <Compile Include="Custom Classes\Controllers\UnderlineViewController.cs" />
     <Compile Include="Extensions\UIActivityIndicatorViewExtensions.cs" />
     <Compile Include="Extensions\UINavigationControllerExtensions.cs" />
     <Compile Include="Extensions\UINavigationItemExtensions.cs" />
-    <Compile Include="Extensions\UITableViewControllerExtensions.cs" />
     <Compile Include="Extensions\UIViewControllerExtensions.cs" />
     <Compile Include="Extensions\UIViewExtensions.cs" />
     <Compile Include="Utilities\LocalConstants.cs" />
-    <Compile Include="Utilities\LocalValidator.cs" />
     <Compile Include="Utilities\NoConstraintFoundException.cs" />
     <Compile Include="Utilities\NotificationHelper.cs" />
     <Compile Include="Custom Classes\Fields\UnderlineField.cs" />
@@ -297,10 +292,6 @@
     <Compile Include="Custom Classes\Cells\RequestCell.designer.cs">
       <DependentUpon>RequestCell.cs</DependentUpon>
     </Compile>
-    <Compile Include="Custom Classes\Navigation\BackBarItem.cs" />
-    <Compile Include="Custom Classes\Navigation\BackBarItem.designer.cs" />
-    <Compile Include="Custom Classes\Navigation\ClearNavigationBar.cs" />
-    <Compile Include="Custom Classes\Navigation\ClearNavigationBar.designer.cs" />
     <Compile Include="Controllers\HomeTabBarController.cs" />
     <Compile Include="Controllers\HomeTabBarController.designer.cs">
       <DependentUpon>HomeTabBarController.cs</DependentUpon>
@@ -316,7 +307,6 @@
     </Compile>
     <Compile Include="Custom Classes\Picker Views\StatusPickerModel.cs" />
     <Compile Include="Extensions\UIPickerViewExtensions.cs" />
-    <Compile Include="Custom Classes\Delegates\PickerDelegate.cs" />
     <Compile Include="Custom Classes\Cells\ButtonCell.cs" />
     <Compile Include="Custom Classes\Cells\ButtonCell.designer.cs">
       <DependentUpon>ButtonCell.cs</DependentUpon>
@@ -356,7 +346,6 @@
       <DependentUpon>ClientDetailsController.cs</DependentUpon>
     </Compile>
     <Compile Include="Custom Classes\Picker Views\UserPickerViewModel.cs" />
-    <Compile Include="Custom Classes\Controllers\KeyboardTableController.cs" />
     <Compile Include="Controllers\UserCreateController.cs" />
     <Compile Include="Controllers\UserCreateController.designer.cs">
       <DependentUpon>UserCreateController.cs</DependentUpon>

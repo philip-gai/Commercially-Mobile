@@ -1,9 +1,15 @@
-using Foundation;
+// Created by Philip Gai
+
 using System;
 using UIKit;
 
-namespace Commercially.iOS {
-	public partial class UnderlineButton : UIButton {
+namespace Commercially.iOS
+{
+	/// <summary>
+	/// Underline button.
+	/// </summary>
+	public partial class UnderlineButton : UIButton
+	{
 		UIView UnderlineView;
 		UIColor UnderlineColor;
 
@@ -16,25 +22,30 @@ namespace Commercially.iOS {
 
 		public UnderlineButton(IntPtr handle) : base(handle) { }
 
-		public override void AwakeFromNib() {
+		public override void AwakeFromNib()
+		{
 			base.AwakeFromNib();
 			_OriginalText = TitleLabel.Text;
 		}
 
-		public void SetUnderlineView(UIView view, UIColor UnderlineColor) {
+		public void SetUnderlineView(UIView view, UIColor UnderlineColor)
+		{
 			UnderlineView = view;
 			this.UnderlineColor = UnderlineColor;
 		}
 
-		public UIView GetUnderlineView() {
+		public UIView GetUnderlineView()
+		{
 			return UnderlineView;
 		}
 
-		public void ClearUnderlineView() {
+		public void ClearUnderlineView()
+		{
 			UnderlineView = null;
 		}
 
-		public void SetLineColor(bool valid) {
+		public void SetLineColor(bool valid)
+		{
 			if (valid) {
 				UnderlineView.BackgroundColor = UnderlineColor;
 			} else {
@@ -42,7 +53,8 @@ namespace Commercially.iOS {
 			}
 		}
 
-		public virtual bool IsValid() {
+		public virtual bool IsValid()
+		{
 			return !TitleLabel.Text.Equals(OriginalText, StringComparison.CurrentCultureIgnoreCase);
 		}
 	}

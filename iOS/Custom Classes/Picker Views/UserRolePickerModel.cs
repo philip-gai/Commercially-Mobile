@@ -1,3 +1,5 @@
+// Created by Philip Gai
+
 using System;
 using UIKit;
 
@@ -12,12 +14,12 @@ namespace Commercially.iOS
 
 		public override nint GetRowsInComponent(UIPickerView pickerView, nint component)
 		{
-			return UserRolePicker.Roles.Length;
+			return UserRolePickerManager.Roles.Length;
 		}
 
 		public override string GetTitle(UIPickerView pickerView, nint row, nint component)
 		{
-			return UserRolePicker.Roles[row];
+			return UserRolePickerManager.Roles[row];
 		}
 	}
 }

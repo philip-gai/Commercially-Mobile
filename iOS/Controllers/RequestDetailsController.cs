@@ -1,15 +1,20 @@
+// Created by Philip Gai
+
 using System;
 using UIKit;
 
 namespace Commercially.iOS
 {
+	/// <summary>
+	/// Request details controller.
+	/// </summary>
 	public partial class RequestDetailsController : UIViewController
 	{
-		private readonly RequestDetails SharedController = new RequestDetails();
+		readonly RequestDetailsManager Manager = new RequestDetailsManager();
 
 		public Request Request {
 			set {
-				SharedController.Request = value;
+				Manager.Request = value;
 			}
 		}
 
@@ -23,7 +28,7 @@ namespace Commercially.iOS
 
 		void InitializeView()
 		{
-			if (SharedController.Request == null) return;
+			if (Manager.Request == null) return;
 			InitializeText();
 			InitializeVisibility();
 			InitializeStatusPickers();
@@ -31,37 +36,37 @@ namespace Commercially.iOS
 
 		void InitializeText()
 		{
-			DescriptionLabel.Text = SharedController.DescriptionText;
-			RoomLabel.Text = SharedController.LocationText;
-			StatusLabel.Text = SharedController.StatusText;
-			AssignedToLabel.Text = SharedController.AssignedToText;
-			ReceivedTimeLabel.Text = SharedController.ReceivedTimeText;
-			AcceptedTimeLabel.Text = SharedController.AcceptedTimeText;
-			CompletedTimeLabel.Text = SharedController.CompletedTimeText;
-			StaticAssignLabel.TextColor = RequestDetails.EditTextColor.GetUIColor();
+			DescriptionLabel.Text = Manager.DescriptionText;
+			RoomLabel.Text = Manager.LocationText;
+			StatusLabel.Text = Manager.StatusText;
+			AssignedToLabel.Text = Manager.AssignedToText;
+			ReceivedTimeLabel.Text = Manager.ReceivedTimeText;
+			AcceptedTimeLabel.Text = Manager.AcceptedTimeText;
+			CompletedTimeLabel.Text = Manager.CompletedTimeText;
+			StaticAssignLabel.TextColor = RequestDetailsManager.EditTextColor.GetUIColor();
 		}
 
 		void InitializeVisibility()
 		{
-			UrgentIndicator.Hidden = SharedController.UrgentIndicatorIsHidden;
-			AssignedToLabel.Hidden = SharedController.AssignedToIsHidden;
-			AssignButton.Hidden = SharedController.AssignButtonIsHidden;
-			SaveButton.Hidden = SharedController.SaveButtonIsHidden;
-			ButtonStackView.Hidden = SharedController.ButtonStackIsHidden;
-			StatusPickerView.Hidden = SharedController.StatusInputIsHidden;
-			StatusLabel.Hidden = SharedController.StatusLabelIsHidden;
-			AssignPickerStack.Hidden = SharedController.UserPickerStackIsHidden;
+			UrgentIndicator.Hidden = Manager.UrgentIndicatorIsHidden;
+			AssignedToLabel.Hidden = Manager.AssignedToTextIsHidden;
+			AssignButton.Hidden = Manager.AssignButtonIsHidden;
+			SaveButton.Hidden = Manager.SaveButtonIsHidden;
+			ButtonStackView.Hidden = Manager.ButtonStackIsHidden;
+			StatusPickerView.Hidden = Manager.StatusInputIsHidden;
+			StatusLabel.Hidden = Manager.StatusLabelIsHidden;
+			AssignPickerStack.Hidden = Manager.UserPickerStackIsHidden;
 		}
 
 		void InitializeStatusPickers()
 		{
-			StatusPickerView.Model = new StatusPickerModel(OnPickerChange);
-			StatusPickerView.ScrollToTitle(SharedController.Request.Type.ToString());
-			StaticStatusLabel.TextColor = SharedController.StatusInputIsHidden ? RequestDetails.DefaultTextColor.GetUIColor() : RequestDetails.EditTextColor.GetUIColor();
+			StatusPickerView.Model = new StatusPickerModel(PickerSelected);
+			StatusPickerView.ScrollToTitle(Manager.Request.Type.ToString());
+			StaticStatusLabel.TextColor = Manager.StatusInputIsHidden ? RequestDetailsManager.DefaultTextColor.GetUIColor() : RequestDetailsManager.EditTextColor.GetUIColor();
 
-			UserPicker.Model = new UserPickerViewModel(OnPickerChange);
-			SharedController.SelectedUser = SharedController.StartingUser;
-			UserPicker.ScrollToTitle(SharedController.SelectedUser);
+			UserPicker.Model = new UserPickerViewModel(PickerSelected);
+			Manager.SelectedUser = Manager.StartingUser;
+			UserPicker.ScrollToTitle(Manager.SelectedUser);
 		}
 
 		partial void SaveButtonPress(UIButton sender)
@@ -69,8 +74,8 @@ namespace Commercially.iOS
 			// Call Post to change request status string
 			// Post for time that status was changed
 			try {
-				SharedController.SaveStatusChanges();
-				SharedController.SaveUserChanges();
+				Manager.SaveStatusChanges();
+				Manager.SaveUserChanges();
 			} catch (Exception) {
 				NavigationController.ShowPrompt(Localizable.PromptMessages.ChangesSaveError);
 				return;
@@ -84,30 +89,30 @@ namespace Commercially.iOS
 		partial void AssignButtonPress(UIButton sender)
 		{
 			try {
-				SharedController.AssignButtonPress();
+				Manager.OnAssignButtonPressHandler();
 			} catch (Exception) {
 				NavigationController.ShowPrompt(Localizable.PromptMessages.AssignError);
 				return;
 			}
 
-			UIView.AnimateAsync(RequestDetails.AnimationDuration, delegate {
+			UIView.AnimateAsync(RequestDetailsManager.AnimationDuration, delegate {
 				ButtonStackView.Hidden = SaveButton.Hidden;
 			});
 			AssignButton.Hidden = true;
 			NavigationController.PopViewController(true);
 		}
 
-		void OnPickerChange(UIPickerView pickerView, nint row, nint component)
+		void PickerSelected(UIPickerView pickerView, nint row, nint component)
 		{
 			if (pickerView == StatusPickerView) {
-				SharedController.SelectedStatus = pickerView.Model.GetTitle(pickerView, row, component);
+				Manager.SelectedStatus = pickerView.Model.GetTitle(pickerView, row, component);
 			} else if (pickerView == UserPicker) {
-				SharedController.SelectedUser = pickerView.Model.GetTitle(pickerView, row, component);
+				Manager.SelectedUser = pickerView.Model.GetTitle(pickerView, row, component);
 			}
-			SaveButton.Hidden = SharedController.SaveButtonIsHidden;
-			AssignButton.Hidden = SharedController.AssignButtonIsHidden;
-			UIView.AnimateAsync(RequestDetails.AnimationDuration, delegate {
-				ButtonStackView.Hidden = SharedController.ButtonStackIsHidden;
+			SaveButton.Hidden = Manager.SaveButtonIsHidden;
+			AssignButton.Hidden = Manager.AssignButtonIsHidden;
+			UIView.AnimateAsync(RequestDetailsManager.AnimationDuration, delegate {
+				ButtonStackView.Hidden = Manager.ButtonStackIsHidden;
 			});
 		}
 	}

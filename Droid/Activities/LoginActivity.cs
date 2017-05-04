@@ -1,3 +1,5 @@
+// Created by Philip Gai
+
 using System;
 using Android.App;
 using Android.Widget;
@@ -8,6 +10,9 @@ using Android.Views;
 
 namespace Commercially.Droid
 {
+	/// <summary>
+	/// Login activity.
+	/// </summary>
 	[Activity(Label = "LoginActivity", NoHistory = true)]
 	public class LoginActivity : AppCompatActivity
 	{

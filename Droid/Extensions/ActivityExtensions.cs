@@ -1,3 +1,5 @@
+// Created by Philip Gai
+
 using System;
 using Android.App;
 using Android.Content;
@@ -8,9 +10,18 @@ using Newtonsoft.Json;
 
 namespace Commercially.Droid
 {
+	/// <summary>
+	/// Activity extensions.
+	/// </summary>
 	public static class ActivityExtensions
 	{
 
+		/// <summary>
+		/// Creates the main options menu.
+		/// </summary>
+		/// <param name="activity">Activity.</param>
+		/// <param name="menu">Menu.</param>
+		/// <param name="currItem">Curr item.</param>
 		public static void CreateMainOptionsMenu(this Activity activity, IMenu menu, int currItem)
 		{
 			activity.MenuInflater.Inflate(Resource.Menu.TopMenu, menu);
@@ -34,6 +45,11 @@ namespace Commercially.Droid
 			}
 		}
 
+		/// <summary>
+		/// Resets the menu items.
+		/// </summary>
+		/// <param name="menu">Menu.</param>
+		/// <param name="currItem">Curr item.</param>
 		static void ResetMenuItems(IMenu menu, int currItem)
 		{
 			var rIds = new int[] { Resource.Id.DashboardIcon, Resource.Id.ButtonIcon, Resource.Id.UserIcon, Resource.Id.ClientIcon, Resource.Id.CreateUser };
@@ -49,6 +65,11 @@ namespace Commercially.Droid
 			}
 		}
 
+		/// <summary>
+		/// Starts the activity menu item.
+		/// </summary>
+		/// <param name="activity">Activity.</param>
+		/// <param name="item">Item.</param>
 		public static void StartActivityMenuItem(this Activity activity, IMenuItem item)
 		{
 			int[] icons = { Resource.Id.DashboardIcon, Resource.Id.ButtonIcon, Resource.Id.UserIcon, Resource.Id.ClientIcon, Resource.Id.CreateUser };
@@ -70,18 +91,35 @@ namespace Commercially.Droid
 			}
 		}
 
+		/// <summary>
+		/// Shows the prompt.
+		/// </summary>
+		/// <param name="activity">Activity.</param>
+		/// <param name="message">Message.</param>
 		public static void ShowPrompt(this Activity activity, string message)
 		{
 			var newFragment = new PromptDialogFragment(message);
 			newFragment.Show(activity.FragmentManager, message);
 		}
 
+		/// <summary>
+		/// Gets the horizontal line.
+		/// </summary>
+		/// <returns>The horizontal line.</returns>
+		/// <param name="activity">Activity.</param>
 		public static View GetHorizontalLine(this Activity activity)
 		{
 			var inflater = (LayoutInflater)activity.GetSystemService(Context.LayoutInflaterService);
 			return inflater.Inflate(Resource.Layout.HorizontalLine, null);
 		}
 
+		/// <summary>
+		/// Gets the top buttons.
+		/// </summary>
+		/// <returns>The top buttons.</returns>
+		/// <param name="activity">Activity.</param>
+		/// <param name="array">Array.</param>
+		/// <typeparam name="T">The 1st type parameter.</typeparam>
 		public static HorizontalScrollView GetTopButtons<T>(this Activity activity, T[] array)
 		{
 			var inflater = (LayoutInflater)activity.GetSystemService(Context.LayoutInflaterService);
@@ -96,7 +134,13 @@ namespace Commercially.Droid
 			return headerView;
 		}
 
-		public static TableRow GetSectionHeader(this Activity activity, string label)
+		/// <summary>
+		/// Gets the table section header.
+		/// </summary>
+		/// <returns>The table section header.</returns>
+		/// <param name="activity">Activity.</param>
+		/// <param name="label">Label.</param>
+		public static TableRow GetTableSectionHeader(this Activity activity, string label)
 		{
 			var inflater = (LayoutInflater)activity.GetSystemService(Context.LayoutInflaterService);
 			var headerView = (TableRow)inflater.Inflate(Resource.Layout.TableSectionHeader, null);
@@ -105,6 +149,12 @@ namespace Commercially.Droid
 			return headerView;
 		}
 
+		/// <summary>
+		/// Gets the table row.
+		/// </summary>
+		/// <returns>The table row.</returns>
+		/// <param name="activity">Activity.</param>
+		/// <param name="request">Request.</param>
 		public static TableRow GetTableRow(this Activity activity, Request request)
 		{
 			var inflater = (LayoutInflater)activity.GetSystemService(Context.LayoutInflaterService);
@@ -116,9 +166,9 @@ namespace Commercially.Droid
 			var urgentIndicator = rowView.FindViewById(Resource.Id.urgentIndicator);
 			var deleteButton = rowView.FindViewById<Button>(Resource.Id.deleteButton);
 
-			var SharedRow = new RequestTableRow(request);
+			var SharedRow = new RequestTableRowManager(request);
 			locationLabel.Text = SharedRow.LocationText;
-			timeLabel.Text = SharedRow.TimeText;
+			timeLabel.Text = SharedRow.ReceivedTimeText;
 			statusLabel.Text = SharedRow.StatusText;
 			statusLabel.Hidden(SharedRow.StatusLabelIsHidden);
 			urgentIndicator.Hidden(SharedRow.UrgentIndicatorIsHidden);
@@ -152,6 +202,12 @@ namespace Commercially.Droid
 			return rowView;
 		}
 
+		/// <summary>
+		/// Gets the table row.
+		/// </summary>
+		/// <returns>The table row.</returns>
+		/// <param name="activity">Activity.</param>
+		/// <param name="button">Button.</param>
 		public static TableRow GetTableRow(this Activity activity, FlicButton button)
 		{
 			var inflater = (LayoutInflater)activity.GetSystemService(Context.LayoutInflaterService);
@@ -161,7 +217,7 @@ namespace Commercially.Droid
 			var descriptionLabel = rowView.FindViewById<TextView>(Resource.Id.descriptionText);
 			var locationLabel = rowView.FindViewById<TextView>(Resource.Id.locationText);
 
-			var sharedRow = new ButtonTableRow(button);
+			var sharedRow = new ButtonTableRowManager(button);
 			buttonLabel.Text = sharedRow.ButtonText;
 			clientLabel.Text = sharedRow.ClientText;
 			descriptionLabel.Text = sharedRow.DescriptionText;
@@ -175,6 +231,12 @@ namespace Commercially.Droid
 			return rowView;
 		}
 
+		/// <summary>
+		/// Gets the table row.
+		/// </summary>
+		/// <returns>The table row.</returns>
+		/// <param name="activity">Activity.</param>
+		/// <param name="user">User.</param>
 		public static TableRow GetTableRow(this Activity activity, User user)
 		{
 			var inflater = (LayoutInflater)activity.GetSystemService(Context.LayoutInflaterService);
@@ -183,9 +245,9 @@ namespace Commercially.Droid
 			var emailLabel = rowView.FindViewById<TextView>(Resource.Id.emailText);
 			var deleteButton = rowView.FindViewById<Button>(Resource.Id.deleteButton);
 
-			var sharedRow = new UserTableRow(user);
-			lastFirstLabel.Hidden(sharedRow.LastFirstNameLabelIsHidden);
-			lastFirstLabel.Text = sharedRow.LastFirstNameText;
+			var sharedRow = new UserTableRowManager(user);
+			lastFirstLabel.Hidden(sharedRow.NameLabelIsHidden);
+			lastFirstLabel.Text = sharedRow.NameText;
 			emailLabel.Text = sharedRow.EmailText;
 
 			deleteButton.Hidden(true);
@@ -202,7 +264,7 @@ namespace Commercially.Droid
 				intent.SetFlags(ActivityFlags.ReorderToFront);
 				activity.StartActivityIfNeeded(intent, 0);
 			};
-			if (UserList.CanEditRow(user)) {
+			if (UserListManager.CanEditRow(user)) {
 				rowView.LongClick += (object sender, View.LongClickEventArgs e) => {
 					deleteButton.ToggleVisibility();
 				};
@@ -216,6 +278,12 @@ namespace Commercially.Droid
 			return rowView;
 		}
 
+		/// <summary>
+		/// Gets the table row.
+		/// </summary>
+		/// <returns>The table row.</returns>
+		/// <param name="activity">Activity.</param>
+		/// <param name="client">Client.</param>
 		public static TableRow GetTableRow(this Activity activity, Client client)
 		{
 			var inflater = (LayoutInflater)activity.GetSystemService(Context.LayoutInflaterService);
@@ -223,7 +291,7 @@ namespace Commercially.Droid
 			var clientIdLabel = rowView.FindViewById<TextView>(Resource.Id.clientIdText);
 			var friendlyNameLabel = rowView.FindViewById<TextView>(Resource.Id.friendlyNameText);
 
-			var sharedRow = new ClientTableRow(client);
+			var sharedRow = new ClientTableRowManager(client);
 			clientIdLabel.Text = sharedRow.IdText;
 			friendlyNameLabel.Text = sharedRow.FriendlyNameText;
 			friendlyNameLabel.Hidden(sharedRow.FriendlyNameLabelIsHidden);
@@ -236,38 +304,58 @@ namespace Commercially.Droid
 			return rowView;
 		}
 
+		/// <summary>
+		/// Gets the status spinner.
+		/// </summary>
+		/// <returns>The status spinner.</returns>
+		/// <param name="activity">Activity.</param>
 		public static Spinner GetStatusSpinner(this Activity activity)
 		{
 			Spinner spinner = activity.FindViewById<Spinner>(Resource.Id.statusSpinner);
-			var adapter = new ArrayAdapter(activity, Android.Resource.Layout.SimpleSpinnerDropDownItem, StatusPicker.Statuses);
+			var adapter = new ArrayAdapter(activity, Android.Resource.Layout.SimpleSpinnerDropDownItem, StatusPickerManager.Statuses);
 			adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
 			spinner.Adapter = adapter;
 			return spinner;
 		}
 
+		/// <summary>
+		/// Gets the client spinner.
+		/// </summary>
+		/// <returns>The client spinner.</returns>
+		/// <param name="activity">Activity.</param>
+		/// <param name="button">Button.</param>
 		public static Spinner GetClientSpinner(this Activity activity, FlicButton button)
 		{
 			Spinner spinner = activity.FindViewById<Spinner>(Resource.Id.clientSpinner);
-			var adapter = new ArrayAdapter(activity, Android.Resource.Layout.SimpleSpinnerDropDownItem, ButtonDetails.GetPickerOptions(button));
+			var adapter = new ArrayAdapter(activity, Android.Resource.Layout.SimpleSpinnerDropDownItem, ButtonDetailsManager.GetPickerOptions(button));
 			adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
 			spinner.Adapter = adapter;
 			return spinner;
 		}
 
+		/// <summary>
+		/// Gets the user spinner.
+		/// </summary>
+		/// <returns>The user spinner.</returns>
+		/// <param name="activity">Activity.</param>
 		public static Spinner GetUserSpinner(this Activity activity)
 		{
 			Spinner spinner = activity.FindViewById<Spinner>(Resource.Id.userSpinner);
-			var adapter = new ArrayAdapter(activity, Android.Resource.Layout.SimpleSpinnerDropDownItem, RequestDetails.GetUserPickerOptions());
+			var adapter = new ArrayAdapter(activity, Android.Resource.Layout.SimpleSpinnerDropDownItem, RequestDetailsManager.GetUserPickerOptions());
 			adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
 			spinner.Adapter = adapter;
 			return spinner;
 		}
 
-
+		/// <summary>
+		/// Gets the user role spinner.
+		/// </summary>
+		/// <returns>The user role spinner.</returns>
+		/// <param name="activity">Activity.</param>
 		public static Spinner GetUserRoleSpinner(this Activity activity)
 		{
 			Spinner spinner = activity.FindViewById<Spinner>(Resource.Id.userRoleSpinner);
-			var adapter = new ArrayAdapter(activity, Android.Resource.Layout.SimpleSpinnerDropDownItem, UserRolePicker.Roles);
+			var adapter = new ArrayAdapter(activity, Android.Resource.Layout.SimpleSpinnerDropDownItem, UserRolePickerManager.Roles);
 			adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
 			spinner.Adapter = adapter;
 			return spinner;

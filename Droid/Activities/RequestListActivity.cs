@@ -1,3 +1,5 @@
+// Created by Philip Gai
+
 using System;
 using System.Collections.Generic;
 using Android.App;
@@ -8,10 +10,13 @@ using Android.Widget;
 
 namespace Commercially.Droid
 {
+	/// <summary>
+	/// Request list activity.
+	/// </summary>
 	[Activity(Label = "RequestListActivity")]
 	public class RequestListActivity : AppCompatActivity
 	{
-		readonly RequestList SharedController = new RequestList();
+		readonly RequestListManager Manager = new RequestListManager();
 
 		TableLayout Table { get { return FindViewById<TableLayout>(Resource.Id.tableLayout); } }
 		LinearLayout Layout { get { return FindViewById<LinearLayout>(Resource.Id.mainLayout); } }
@@ -20,7 +25,7 @@ namespace Commercially.Droid
 		HorizontalScrollView HeaderScrollView {
 			get {
 				if (_HeaderScrollView != null) return _HeaderScrollView;
-				_HeaderScrollView = this.GetTopButtons(RequestList.RequestTypes);
+				_HeaderScrollView = this.GetTopButtons(RequestListManager.RequestTypes);
 				return _HeaderScrollView;
 			}
 		}
@@ -46,9 +51,9 @@ namespace Commercially.Droid
 			}
 		}
 
-		RequestStatusType CurrentType {
+		RequestStatusType CurrentListType {
 			set {
-				SharedController.CurrentType = value;
+				Manager.CurrentListType = value;
 				GetRequests();
 			}
 		}
@@ -85,9 +90,9 @@ namespace Commercially.Droid
 		void InitializeTable()
 		{
 			Table.RemoveAllViews();
-			var header = GetHeader();
+			var header = GetTableHeader();
 			Table.AddView(header);
-			for (int row = 0; row < SharedController.Requests.Length; row++) {
+			for (int row = 0; row < Manager.Requests.Length; row++) {
 				var tableRow = GetTableRow(row);
 				Table.AddViewWithUnderline(tableRow, this);
 			}
@@ -104,26 +109,27 @@ namespace Commercially.Droid
 
 		void TopButtonClick(object sender, EventArgs e)
 		{
-			CurrentType = GetRequestStatusType(sender);
+			CurrentListType = GetRequestListType(sender);
 			SetButtons(sender as Button);
 		}
 
 		void SetButtons(Button activeButton)
 		{
 			foreach (var button in TopButtons) {
-				button.SetTextColor(RequestList.InactiveTextColor.GetAndroidColor());
-				button.BackgroundTintList = Android.Content.Res.ColorStateList.ValueOf(RequestList.GetTypeColor(GetRequestStatusType(button)).GetAndroidColor());
+				button.SetTextColor(RequestListManager.InactiveTextColor.GetAndroidColor());
+				button.BackgroundTintList = Android.Content.Res.ColorStateList.ValueOf(RequestListManager.GetListTypeColor(GetRequestListType(button)).GetAndroidColor());
 				button.Enabled = true;
 			}
-			activeButton.SetTextColor(SharedController.CurrentTypeColor.GetAndroidColor());
-			activeButton.BackgroundTintList = Android.Content.Res.ColorStateList.ValueOf(RequestList.ActiveBackgroundColor.GetAndroidColor());
+			activeButton.SetTextColor(Manager.CurrentListTypeColor.GetAndroidColor());
+			activeButton.BackgroundTintList = Android.Content.Res.ColorStateList.ValueOf(RequestListManager.ActiveBackgroundColor.GetAndroidColor());
 			activeButton.Enabled = false;
 		}
 
-		RequestStatusType GetRequestStatusType(object sender)
+		// Gets request list type based on the button text
+		RequestStatusType GetRequestListType(object sender)
 		{
 			var button = sender as Button;
-			foreach (var type in RequestList.RequestTypes) {
+			foreach (var type in RequestListManager.RequestTypes) {
 				if (type.ToString().Equals(button.Text, StringComparison.CurrentCultureIgnoreCase)) {
 					return type;
 				}
@@ -131,27 +137,27 @@ namespace Commercially.Droid
 			return RequestStatusType.New;
 		}
 
-		View GetHeader()
+		View GetTableHeader()
 		{
-			string label = SharedController.CurrentTypeTitle;
-			if (SharedController.Requests != null) {
-				label += " (" + SharedController.Requests.Length + ")";
+			string label = Manager.CurrentListTypeTitle;
+			if (Manager.Requests != null) {
+				label += " (" + Manager.Requests.Length + ")";
 			}
-			var header = this.GetSectionHeader(label);
-			header.SetBackgroundColor(SharedController.CurrentTypeColor.GetAndroidColor());
+			var header = this.GetTableSectionHeader(label);
+			header.SetBackgroundColor(Manager.CurrentListTypeColor.GetAndroidColor());
 			return header;
 		}
 
 		TableRow GetTableRow(int row)
 		{
-			var rowView = this.GetTableRow(SharedController.Requests[row]);
-			rowView.SetBackgroundColor(SharedController.CurrentTypeColor.ColorWithAlpha(RequestList.RowAlphaByte));
+			var rowView = this.GetTableRow(Manager.Requests[row]);
+			rowView.SetBackgroundColor(Manager.CurrentListTypeColor.ColorWithAlpha(RequestListManager.TableRowAlphaByte));
 			return rowView;
 		}
 
 		public void GetRequests()
 		{
-			SharedController.GetRequests(
+			Manager.GetRequests(
 				delegate { RunOnUiThread(delegate { InitializeTable(); }); },
 				(Exception e) => { RunOnUiThread(delegate { this.ShowPrompt(Localizable.PromptMessages.RequestsError); }); }
 			);
