@@ -100,6 +100,7 @@ namespace Commercially
 			Session.TaskFactory.StartNew(delegate {
 				try {
 					Requests = RequestApi.GetRequests(CurrentListType);
+					if(Requests == null) Requests = new Request[0];
 					OnSuccess.Invoke();
 				} catch (Exception e) {
 					IfException.Invoke(e);

@@ -98,6 +98,7 @@ namespace Commercially
 			Session.TaskFactory.StartNew(delegate {
 				try {
 					Clients = ClientApi.GetClients(AuthorizedListType);
+					if (Clients == null) Clients = new Client[0];
 					OnSuccess.Invoke();
 				} catch (Exception e) {
 					IfException.Invoke(e);

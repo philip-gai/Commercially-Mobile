@@ -119,6 +119,7 @@ namespace Commercially
 			Session.TaskFactory.StartNew(delegate {
 				try {
 					Users = UserApi.GetUsers(CurrentListType);
+					if (Users == null) Users = new User[0];
 					OnSuccess.Invoke();
 				} catch (Exception e) {
 					IfException.Invoke(e);

@@ -99,6 +99,7 @@ namespace Commercially
 			Session.TaskFactory.StartNew(delegate {
 				try {
 					Buttons = FlicButtonApi.GetButtons(CurrentListType);
+					if (Buttons == null) Buttons = new FlicButton[0];
 					OnSuccess.Invoke();
 				} catch (Exception e) {
 					IfException.Invoke(e);
