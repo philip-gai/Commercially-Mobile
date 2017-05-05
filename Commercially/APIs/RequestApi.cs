@@ -36,7 +36,7 @@ namespace Commercially
 		public static Request[] GetRequests(RequestStatusType type)
 		{
 			var requests = GetRequests();
-			if (requests == null || requests.Length <= 0) return null;
+			if (requests == null) return null;
 			var list = Array.FindAll(requests, (Request request) => {
 				return request.Type == type;
 			});
@@ -51,7 +51,7 @@ namespace Commercially
 		public static Request[] GetRequests(User user)
 		{
 			var requests = GetRequests();
-			if (requests == null || requests.Length <= 0) return null;
+			if (requests == null) return null;
 			var list = Array.FindAll(requests, (Request request) => {
 				return request.assignedTo == user.username && request.Type == RequestStatusType.Assigned;
 			});
